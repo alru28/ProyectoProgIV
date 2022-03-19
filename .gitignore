@@ -1,4 +1,7 @@
+# Ignorar archivos de IDE
+.vscode/
+.vs/
 
-.vs/ProjectSettings.json
-.vs/ProyectoProgIV/v17/.suo
-.vs/slnx.sqlite
+# Ignorar logs
+logs
+*.log
