@@ -8,4 +8,8 @@ typedef struct {
 
 // Funciones login, etc ... ?
 
+int login(char* usuario, char* contrasenya);
+
+int registrar(char* usuario, char* contrasenya, char* mail, char* tlf);
+
 #endif
