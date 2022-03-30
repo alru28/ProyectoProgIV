@@ -13,6 +13,6 @@ int logError(char* mensajeError);
 * @param mensajeEstadi : string con el mensaje de estado
 *
 */
-int logError(char* mensajeEstado);
+int logEstado(char* mensajeEstado);
 
 #endif
