@@ -1,0 +1,4 @@
+[Thu Mar 31 19:12:33 2022][TAG: ERROR]: Mensaje de error de prueba
+[Thu Mar 31 19:12:33 2022][TAG: ESTADO]: Mensaje de estado de prueba
+[Thu Mar 31 19:12:42 2022][TAG: ERROR]: Mensaje de error de prueba
+[Thu Mar 31 19:12:42 2022][TAG: ESTADO]: Mensaje de estado de prueba

@@ -1,18 +1,11 @@
 #ifndef _LOGGER_H_
 #define _LOGGER_H_
 
-/** Funcion que recibe un mensaje de error y lo saca por consola 
-*
-* @param mensajeError : string con el mensaje de error
-*
+/** Funcion que recibe un mensaje de error/estado y lo escribe a un fichero txt
+* @param tag es el string que indica el tipo de log
+* @param mensaje es el string con el mensaje de error/estado
+* @see testLogger.c
 */
-int logError(char* mensajeError);
-
-/** Funcion que recibe un mensaje de estado y lo saca por consola
-*
-* @param mensajeEstadi : string con el mensaje de estado
-*
-*/
-int logEstado(char* mensajeEstado);
+void logear(char* tag, char* mensaje);
 
 #endif
