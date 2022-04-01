@@ -1,0 +1,74 @@
+-- COMANDOS SQLITE CREACIÓN DE LA BASE DE DATOS
+-- Describe CARTERA
+CREATE TABLE "Cartera" (
+	"ID_Cartera" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"Saldo" REAL,
+	"ID_Usuario" INTEGER NOT NULL,
+	FOREIGN KEY (ID_Usuario) REFERENCES usuario (ID_Usuario)
+)
+-- Describe DIRECCION
+CREATE TABLE "Direccion" (
+    "Pais" TEXT NOT NULL,
+    "Ciudad" TEXT NOT NULL,
+    "Calle" TEXT NOT NULL,
+    "CP" TEXT,
+    "PisoPuerta" TEXT NOT NULL,
+    PRIMARY KEY(Pais, Ciudad, Calle, PisoPuerta)
+)
+-- Describe LOTE
+CREATE TABLE "Lote" (
+    "ID_Lote" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "FechaCom" INTEGER,
+    "FechaFin" INTEGER,
+    "Estado" TEXT,
+    "AvgPrecio" REAL
+)
+-- Describe OBJETO
+CREATE TABLE "Objeto" (
+    "ID_Objeto" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "Categoria" TEXT,
+    "Estado" TEXT,
+    "Descripcion" TEXT,
+    "PrecioSalida" REAL,
+    "ID_Subastador" INTEGER,
+    "ID_Lote" INTEGER,
+    FOREIGN KEY (ID_Lote) REFERENCES lote (ID_Lote) ON DELETE CASCADE,
+    FOREIGN KEY (ID_Subastador) REFERENCES usuario (ID_Usuario) ON DELETE CASCADE
+)
+-- Describe PUJA
+CREATE TABLE "Puja" (
+    "Cantidad" INTEGER,
+    "ID_Usuario" INTEGER NOT NULL,
+    "ID_Objeto" INTEGER NOT NULL,
+    FOREIGN KEY (ID_Usuario) REFERENCES usuario (ID_Usuario),
+    FOREIGN KEY (ID_Objeto) REFERENCES objeto (ID_Objeto),
+    PRIMARY KEY (Cantidad, ID_Usuario, ID_Objeto)
+)
+-- Describe TRANSACCION
+CREATE TABLE "Transaccion" (
+    "ID_Transaccion" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "Cantidad" REAL,
+    "Fecha" INTEGER,
+    "ID_Objeto" INTEGER,
+    "ID_Cartera_Recibe" INTEGER NOT NULL,
+    "ID_Cartera_Envia" INTEGER NOT NULL,
+    FOREIGN KEY (ID_Cartera_Recibe) REFERENCES cartera (ID_Cartera) ON DELETE CASCADE,
+    FOREIGN KEY (ID_Cartera_Envia) REFERENCES cartera (ID_Cartera) ON DELETE CASCADE,
+    FOREIGN KEY (ID_Objeto) REFERENCES objeto (ID_Objeto) ON DELETE CASCADE
+)
+-- Describe USUARIO
+CREATE TABLE "Usuario" (
+    "ID_Usuario" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "Contraseña" TEXT,
+    "Nombre" TEXT,
+    "Tlf" INTEGER,
+    "Mail" TEXT,
+    "Puntos" INTEGER,
+    "ID_Cartera" INTEGER,
+    "Pais" TEXT,
+    "Ciudad" TEXT,
+    "Calle" TEXT,
+    "PisoPuerta" TEXT,
+    FOREIGN KEY (ID_Cartera) REFERENCES cartera (ID_Cartera) ON DELETE CASCADE,
+    FOREIGN KEY (Pais, Ciudad, Calle, PisoPuerta) REFERENCES direccion (Pais, Ciudad, Calle, PisoPuerta) ON DELETE CASCADE
+)
