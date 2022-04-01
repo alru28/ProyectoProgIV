@@ -1,4 +1,6 @@
 -- COMANDOS SQLITE CREACIÓN DE LA BASE DE DATOS
+-- ----------------------------------------------
+
 -- Describe CARTERA
 CREATE TABLE "Cartera" (
 	"ID_Cartera" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -72,3 +74,21 @@ CREATE TABLE "Usuario" (
     FOREIGN KEY (ID_Cartera) REFERENCES cartera (ID_Cartera) ON DELETE CASCADE,
     FOREIGN KEY (Pais, Ciudad, Calle, PisoPuerta) REFERENCES direccion (Pais, Ciudad, Calle, PisoPuerta) ON DELETE CASCADE
 )
+
+
+-- COMANDOS POBLACION BBDD
+-- --------------------------------
+
+-- POBLACION TABLA DIRECCION
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES ("España","Bilbao","Lehendakari Aguirre", "48014","11 3E");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España","Bilbao","Lehendakari Aguirre", "48014","23 2A");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Bilbao", "Madariaga", "48014","49 2B");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Bilbao", "Gran Via", "48009", "72 5E");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Vitoria", "Beato Tomas de Zumarraga", "01008", "15 5E");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Vitoria", "Reyes Catolicos", "01013", "8 6A");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Vitoria", "Reyes Catolicos", "01013", "43 2D");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Vitoria", "Santiago", "01003", "23 1B");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "San Sebastian", "Urbieta", "20006", "13 2A");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "San Sebastian", "Merkezabal", "20009", "7");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "San Sebastian", "Zabaleta", "20002", "12 5C");
+INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "San Sebastian", "Navarra", "20013", "3 2B");
