@@ -35,9 +35,7 @@ void showLogin(void){
     scanf("%s", name);
     printf("Password:");
     scanf("%s", password);
-    printf("1. Login your account\n");
-    printf("2. Register new account\n");
-    scanf("%i", option);
+    
 }
 
 void menuPrincipal(void);
