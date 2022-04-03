@@ -11,5 +11,6 @@ typedef struct {
     int ID_Lote;
 } Objeto;
 
+void mostrarListaObjetos(Objeto* listaObjetos, int cantidad);
 
 #endif
