@@ -20,8 +20,10 @@ void menuInicial(void){
     
     case 2:
         break;
+    
+    default: 
+        menuInicial();
     }
-
 }
 
 void showLogin(void){
@@ -32,10 +34,36 @@ void showLogin(void){
     printf(" Login;;\n");
     printf(" --------------------\n");
     printf("Username:");
-    scanf("%s", name);
+    scanf("%s\n", name);
     printf("Password:");
-    scanf("%s", password);
+    scanf("%s\n", password);
     
 }
 
-void menuPrincipal(void);
+void menuPrincipal(void){
+
+    int option = -1;
+    printf("Choose an option:\n");
+    printf(" --------------------\n");
+    printf("1. Lotes\n");
+    printf("2. Vender producto\n");
+    printf("2. Transacciones\n");
+    printf("2. Perfil de usuario\n");
+    scanf("%i", option);
+
+    switch (option)
+    {
+    case 1:
+        break;
+    
+    case 2:
+        break;
+
+    case 3:
+        break;
+
+    case 4 ;
+        break;
+    }
+
+};
