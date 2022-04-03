@@ -4,6 +4,9 @@
 /** Funcion que visualiza en consola el menu del programa
 * 
 */
-void imprimirMenu(void);
+void menuInicial(void);
+void menuPrincipal(void);
+
+
 
 #endif
