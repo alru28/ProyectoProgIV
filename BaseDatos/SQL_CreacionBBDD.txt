@@ -1,5 +1,12 @@
 -- COMANDOS SQLITE CREACIÓN DE LA BASE DE DATOS
 -- ----------------------------------------------
+DROP TABLE IF EXISTS cartera;
+DROP TABLE IF EXISTS direccion;
+DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS lote;
+DROP TABLE IF EXISTS objeto;
+DROP TABLE IF EXISTS puja;
+DROP TABLE IF EXISTS transaccion;
 
 -- Describe CARTERA
 CREATE TABLE "Cartera" (
@@ -7,7 +14,7 @@ CREATE TABLE "Cartera" (
 	"Saldo" REAL,
 	"ID_Usuario" INTEGER NOT NULL,
 	FOREIGN KEY (ID_Usuario) REFERENCES usuario (ID_Usuario)
-)
+);
 -- Describe DIRECCION
 CREATE TABLE "Direccion" (
     "Pais" TEXT NOT NULL,
@@ -16,7 +23,7 @@ CREATE TABLE "Direccion" (
     "CP" TEXT,
     "PisoPuerta" TEXT NOT NULL,
     PRIMARY KEY(Pais, Ciudad, Calle, PisoPuerta)
-)
+);
 -- Describe LOTE
 CREATE TABLE "Lote" (
     "ID_Lote" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -24,7 +31,7 @@ CREATE TABLE "Lote" (
     "FechaFin" INTEGER,
     "Estado" TEXT,
     "AvgPrecio" REAL
-)
+);
 -- Describe OBJETO
 CREATE TABLE "Objeto" (
     "ID_Objeto" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -36,7 +43,7 @@ CREATE TABLE "Objeto" (
     "ID_Lote" INTEGER,
     FOREIGN KEY (ID_Lote) REFERENCES lote (ID_Lote) ON DELETE CASCADE,
     FOREIGN KEY (ID_Subastador) REFERENCES usuario (ID_Usuario) ON DELETE CASCADE
-)
+);
 -- Describe PUJA
 CREATE TABLE "Puja" (
     "Cantidad" INTEGER,
@@ -45,7 +52,7 @@ CREATE TABLE "Puja" (
     FOREIGN KEY (ID_Usuario) REFERENCES usuario (ID_Usuario),
     FOREIGN KEY (ID_Objeto) REFERENCES objeto (ID_Objeto),
     PRIMARY KEY (Cantidad, ID_Usuario, ID_Objeto)
-)
+);
 -- Describe TRANSACCION
 CREATE TABLE "Transaccion" (
     "ID_Transaccion" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -57,7 +64,7 @@ CREATE TABLE "Transaccion" (
     FOREIGN KEY (ID_Cartera_Recibe) REFERENCES cartera (ID_Cartera) ON DELETE CASCADE,
     FOREIGN KEY (ID_Cartera_Envia) REFERENCES cartera (ID_Cartera) ON DELETE CASCADE,
     FOREIGN KEY (ID_Objeto) REFERENCES objeto (ID_Objeto) ON DELETE CASCADE
-)
+);
 -- Describe USUARIO
 CREATE TABLE "Usuario" (
     "ID_Usuario" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -73,13 +80,13 @@ CREATE TABLE "Usuario" (
     "PisoPuerta" TEXT,
     FOREIGN KEY (ID_Cartera) REFERENCES cartera (ID_Cartera) ON DELETE CASCADE,
     FOREIGN KEY (Pais, Ciudad, Calle, PisoPuerta) REFERENCES direccion (Pais, Ciudad, Calle, PisoPuerta) ON DELETE CASCADE
-)
+);
 
 
 -- COMANDOS POBLACION BBDD
 -- --------------------------------
 
-1 -- CARTERA
+-- CARTERA 1
 INSERT INTO cartera(ID_Cartera, Saldo, ID_Usuario) VALUES (1, 120, 1);
 INSERT INTO cartera(ID_Cartera, Saldo, ID_Usuario) VALUES (2, 232, 2);
 INSERT INTO cartera(ID_Cartera, Saldo, ID_Usuario) VALUES (3, 20, 3);
@@ -98,7 +105,7 @@ INSERT INTO cartera(ID_Cartera, Saldo, ID_Usuario) VALUES (15, 156, 15);
 INSERT INTO cartera(ID_Cartera, Saldo, ID_Usuario) VALUES (16, 180, 16);
 
 
-2 -- POBLACION TABLA DIRECCION
+-- POBLACION TABLA DIRECCION 2
 INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España","Bilbao","Lehendakari Aguirre", "48014","11 3E");
 INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España","Bilbao","Lehendakari Aguirre", "48014","23 2A");
 INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Bilbao", "Madariaga", "48014","49 2B");
@@ -116,25 +123,25 @@ INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", 
 INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Logroño", "Portales", "26001","12 2D");
 INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Logroño", "Ciriaco Garrido", "26003", "22 6E");
 
-3 -- LOTE
-INSERT INTO lote (ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio) VALUES (1, "03/31/2022", "En curso", 57) #Por que es fecha integerrrrrr aaa
-INSERT INTO lote (ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio) VALUES (1, "04/01/2022", "En curso", 31)
+-- LOTE 3
+INSERT INTO lote (ID_Lote, FechaCom, Estado, AvgPrecio) VALUES (1, 20220331, "En curso", 57);
+INSERT INTO lote (ID_Lote, FechaCom, Estado, AvgPrecio) VALUES (2, 20220104, "En curso", 31);
 
-4 -- OBJETO
+-- OBJETO 4
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (1, "Casi nuevo", "Casa y jardin", "Mecedora negra", 20, 4, 1);
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (2, "Nuevo", "Casa y jardin", "Mesita de cristal", 200, 3, 1);
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (3, "Deplorable", "Casa y jardin", "Gnomo de jardin", 5, 1, 1);
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (4, "Usado", "Casa y jardin", "4x Silla plegable de madera", 30, 14, 1);
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (5, "Muy usado", "Casa y jardin", "Espejo enmarcado", 30, 14, 1);
 
-INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (6, "Casi nuevo", "Deporte", Raqueta tenis Babolat", 40, 7, 2);
+INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (6, "Casi nuevo", "Deporte", "Raqueta tenis Babolat", 40, 7, 2);
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (7, "Deplorable", "Deporte", "Bicicleta Orbea", 60, 9, 2);
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (8, "Nuevo", "Deporte", "3x Pelota padel", 10, 1, 2);
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (9, "Nuevo", "Deporte", "Patines en linea Decathlon", 40, 12, 2);
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (10, "Usado", "Deporte", "Frisbee naranja", 5, 8, 2);
 
 
-7 -- USUARIO
+-- USUARIO 7
 INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta) VALUES (1,"palencia998", "jaime_col", 728946372, "jaimecol@gmail.com", 335, 1, "España", "Bilbao","Lehendakari Aguirre", "11 3E");
 INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta) VALUES (2,"aasaf55", "pedro.gg", 654233423, "pedrogg@gmail.com", 2354, 2, "España", "Bilbao","Lehendakari Aguirre", "23 2A");
 INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta) VALUES (3,"ngfdhmf3", "mariacaldo", 553212456, "mariacaldo@gmail.com", 32, 3, "España", "Bilbao", "Madariaga", "49 2B");
@@ -151,26 +158,4 @@ INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cart
 INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta) VALUES (14,"sfhsfh23", "asierjusticia", 092364112, "asierjusti442@gmail.com", 998, 14, "España", "Logroño","Torremuña","2 5A");
 INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta) VALUES (15,"sgf6364dd", "ander.ortiz", 909876456, "anderorti426@gmail.com", 2317, 15, "España", "Logroño", "Portales", "12 2D");
 INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta) VALUES (16,"jjg22223", "laura_rep", 345567867, "repelaura7@gmail.com", 1345, 16, "España", "Logroño", "Ciriaco Garrido", "22 6E");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
