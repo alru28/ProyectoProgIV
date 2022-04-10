@@ -5,6 +5,7 @@
 * 
 */
 void menuInicial(void);
+void showLogin(void);
 void menuPrincipal(void);
 
 
