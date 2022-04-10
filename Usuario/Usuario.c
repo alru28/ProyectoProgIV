@@ -9,7 +9,8 @@ int registrar(char* name,char* password,char* pais, char* ciudad, int telf, char
     newUser.Pais = pais;
     newUser.Nombre = name;
     newUser.Pais = pais;
-    newUser.Ciudad
+    newUser.Ciudad = ciudad;
+    
 
 
 

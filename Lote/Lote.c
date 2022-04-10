@@ -41,5 +41,8 @@ void mostrarDia(Dia dia){
              break;
         }
     }
+    printf("Introduce el numero de lote elegido\n");
+    printf("Introduce 's' para ver lotes del siguiente dia, introduce 'a' para ver loter sel dia anterior.\n");
+    scanf("%s", &option);
 
 }
