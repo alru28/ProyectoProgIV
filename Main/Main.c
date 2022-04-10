@@ -3,6 +3,6 @@
 
 int main(void)
 {
-    imprimirMenu();
+    menuPrincipal();
     return 0;
 }

@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "Menu.h"
 
 #include <stdio.h>
 
@@ -45,7 +45,7 @@ void showRegister(){
     printf("\nEmail:");
     scanf("%s", email);
     printf("\nPhone number:");
-    scanf("%i", telf);
+    scanf("%i", &telf);
 
 
 
@@ -78,7 +78,7 @@ void menuPrincipal(void){
     printf("2. Vender producto\n");
     printf("2. Transacciones\n");
     printf("2. Perfil de usuario\n");
-    scanf("%i", option);
+    scanf("%i", &option);
 
     switch (option)
     {
