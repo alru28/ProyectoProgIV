@@ -19,6 +19,6 @@ sqlite3 *cargarBaseDatos(char* rutaBaseDatos);
 void cerrarBaseDatos(sqlite3 *db);
 
 
-void mostrarDia(sqlite3 *db , char *dia);
+int mostrarDia(sqlite3 *db , char *dia);
 
 #endif
