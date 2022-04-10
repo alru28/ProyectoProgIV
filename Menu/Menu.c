@@ -34,18 +34,34 @@ void showRegister(){
     char name[10];
     char password[10];
     char email[25];
+    char pais[25];
+    char ciudad[25];
+    char calle[25];
+    char pisoPuerta[10];
+    int telf [9];
+
     int telf;
 
     printf(" Register new .\n");
     printf(" --------------------\n");
     printf("Username: (10 characters maximum)");
-    scanf("%s", name);
+    scanf("%s", &name);
     printf("\nPassword:");
-    scanf("%s", password);
+    scanf("%s", &password);
     printf("\nEmail:");
-    scanf("%s", email);
+    scanf("%s", &email);
+    printf("\nPais:");
+    scanf("%i", &pais);
+    printf("\nCiudad:");
+    scanf("%i", &ciudad);
+    printf("\nCalle:");
+    scanf("%i", &calle);
+    printf("\nPuerta / piso:");
+    scanf("%i", &pisoPuerta);    
     printf("\nPhone number:");
     scanf("%i", &telf);
+
+    registrar(name, password, pais, ciudad, telf, pisoPuerta, email, telf);
 
 
 
@@ -76,8 +92,9 @@ void menuPrincipal(void){
     printf(" --------------------\n");
     printf("1. Lotes\n");
     printf("2. Vender producto\n");
-    printf("2. Transacciones\n");
-    printf("2. Perfil de usuario\n");
+    printf("3. Transacciones\n");
+    printf("4. Perfil de usuario\n");
+    printf("5. Cerrar sesion")
     scanf("%i", &option);
 
     switch (option)
@@ -93,6 +110,16 @@ void menuPrincipal(void){
 
     case 4:
         break;
+    case 5
     }
 
 };
+
+void verLotes(){
+
+    //cargarLotes
+
+    //mostrarDia(dia)
+
+
+}

@@ -2,8 +2,9 @@
 #include "../Objeto/Objeto.h"
 #include <stdio.h>
 
-void mostrarLote(Lote* lote)
+void mostrarLote(Lote lote)
 {
+
     int option = 0;
     printf("ID_Lote: %d\n", lote->ID_Lote);
     printf("FechaCom: %d\n", lote->FechaCom);
@@ -19,4 +20,26 @@ void mostrarLote(Lote* lote)
     {
         mostrarObjeto(lote->listaObjetos[option-1]);
     }
+}
+
+void mostrarDia(Dia dia){
+
+    printf("%s\n", dia.fecha());
+    printf("Lotes del dia : \n")
+    int i;
+    for( i =0; i<dia.numero; i++){
+        printf("Lote %i :  %i productos. \n Estado: %s Calidad :", dia.lotes[i].ID_lote, dia.lotes[i].Estado);
+
+        swich(dia.lotes[i].avgP){
+            case 1: printf("$\n");
+             break;
+            case 2: printf("$$\n");
+             break;
+            case 3: printf("$$$\n");
+             break;
+            case 4: printf("$$$$\n");
+             break;
+        }
+    }
+
 }

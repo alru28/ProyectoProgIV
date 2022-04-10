@@ -2,6 +2,11 @@
 #include <stdio.h>
 
 
+void mostarObjeto(Objeto objeto){
+    printf("%s,\nEstado : %s\n", objeto.Descripcion, objeto.Estado);
+    printf("Valoracion estimada de %i$\n", objeto.PrecioSalida);
+}
+
 void mostrarListaObjetos(Objeto* listaObjetos, int cantidad){
     int i;
     for(i=0; i<cantidad; i++){

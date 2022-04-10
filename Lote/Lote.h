@@ -4,16 +4,27 @@
 
 typedef struct Lote
 {
-    int ID_Lote;
-    int FechaCom;
-    int FechaFin;
-    char* Estado;
-    float AvgPrecio;
+    int id_Lote;
+    int fechaCom;
+    int fechaFin;
+    char* estado;
+    float avgPrecio;
     int cantidadObjetos;
     Objeto* listaObjetos;
 } Lote;
 
-void mostrarLote(Lote* lote);
+typedef struct Dia
+{
+    
+    Lote * lotes;
+    int numero;
+    int fecha;
+    int precioMedio;
+
+}
+
+void mostrarLote(Lote lote);
+void mostarDia(Dia dia);
 
 
 #endif
