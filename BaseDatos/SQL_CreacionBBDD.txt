@@ -27,8 +27,8 @@ CREATE TABLE "Direccion" (
 -- Describe LOTE
 CREATE TABLE "Lote" (
     "ID_Lote" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    "FechaCom" TEXT,
-    "FechaFin" TEXT,
+    "FechaCom" DATE,
+    "FechaFin" DATE,
     "Estado" TEXT,
     "AvgPrecio" REAL
 );
@@ -57,7 +57,7 @@ CREATE TABLE "Puja" (
 CREATE TABLE "Transaccion" (
     "ID_Transaccion" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     "Cantidad" REAL,
-    "Fecha" TEXT,
+    "Fecha" DATE,
     "ID_Cartera_Recibe" INTEGER NOT NULL,
     "ID_Cartera_Envia" INTEGER NOT NULL,
     FOREIGN KEY (ID_Cartera_Recibe) REFERENCES cartera (ID_Cartera) ON DELETE CASCADE,
