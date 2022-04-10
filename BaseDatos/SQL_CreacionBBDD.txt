@@ -27,8 +27,8 @@ CREATE TABLE "Direccion" (
 -- Describe LOTE
 CREATE TABLE "Lote" (
     "ID_Lote" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    "FechaCom" INTEGER,
-    "FechaFin" INTEGER,
+    "FechaCom" TEXT,
+    "FechaFin" TEXT,
     "Estado" TEXT,
     "AvgPrecio" REAL
 );
@@ -57,7 +57,7 @@ CREATE TABLE "Puja" (
 CREATE TABLE "Transaccion" (
     "ID_Transaccion" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     "Cantidad" REAL,
-    "Fecha" INTEGER,
+    "Fecha" TEXT,
     "ID_Objeto" INTEGER,
     "ID_Cartera_Recibe" INTEGER NOT NULL,
     "ID_Cartera_Envia" INTEGER NOT NULL,
@@ -124,8 +124,8 @@ INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", 
 INSERT INTO direccion (Pais, Ciudad, Calle, CP, PisoPuerta) VALUES  ("España", "Logroño", "Ciriaco Garrido", "26003", "22 6E");
 
 -- LOTE 3
-INSERT INTO lote (ID_Lote, FechaCom, Estado, AvgPrecio) VALUES (1, 20220331, "En curso", 57);
-INSERT INTO lote (ID_Lote, FechaCom, Estado, AvgPrecio) VALUES (2, 20220104, "En curso", 31);
+INSERT INTO lote (ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio) VALUES (1, "2022/03/31", "2022/04/31","En curso", 57);
+INSERT INTO lote (ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio) VALUES (2, "2022/01/04", "2022/02/04" ,"En curso", 31);
 
 -- OBJETO 4
 INSERT INTO objeto (ID_Objeto, Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES (1, "Casi nuevo", "Casa y jardin", "Mecedora negra", 20, 4, 1);
@@ -159,3 +159,19 @@ INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cart
 INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta) VALUES (15,"sgf6364dd", "ander.ortiz", 909876456, "anderorti426@gmail.com", 2317, 15, "España", "Logroño", "Portales", "12 2D");
 INSERT INTO Usuario (ID_Usuario, Contraseña, Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta) VALUES (16,"jjg22223", "laura_rep", 345567867, "repelaura7@gmail.com", 1345, 16, "España", "Logroño", "Ciriaco Garrido", "22 6E");
 
+-- PUJA 7
+INSERT INTO puja (Cantidad, ID_Usuario, ID_Objeto) VALUES (250, 15,2);
+INSERT INTO puja (Cantidad, ID_Usuario, ID_Objeto) VALUES (20, 1,1);
+INSERT INTO puja (Cantidad, ID_Usuario, ID_Objeto) VALUES (25, 3,1);
+INSERT INTO puja (Cantidad, ID_Usuario, ID_Objeto) VALUES (45, 7,6);
+INSERT INTO puja (Cantidad, ID_Usuario, ID_Objeto) VALUES (7, 12,10);
+INSERT INTO puja (Cantidad, ID_Usuario, ID_Objeto) VALUES (12, 16,8);
+INSERT INTO puja (Cantidad, ID_Usuario, ID_Objeto) VALUES (38, 5,5);
+INSERT INTO puja (Cantidad, ID_Usuario, ID_Objeto) VALUES (10, 10,3);
+
+-- TRANSACCION 7
+INSERT INTO transaccion (ID_Transaccion, Cantidad, Fecha, ID_Objeto, ID_Cartera_Recibe, ID_Cartera_Envia) VALUES (1, 20, "2022/03/23", 2, 1, 8);
+INSERT INTO transaccion (ID_Transaccion, Cantidad, Fecha, ID_Objeto, ID_Cartera_Recibe, ID_Cartera_Envia) VALUES (2, 17, "2021/12/26", 7, 12, 16);
+INSERT INTO transaccion (ID_Transaccion, Cantidad, Fecha, ID_Objeto, ID_Cartera_Recibe, ID_Cartera_Envia) VALUES (3, 90, "2022/01/05" , 3, 9, 12);
+INSERT INTO transaccion (ID_Transaccion, Cantidad, Fecha, ID_Objeto, ID_Cartera_Recibe, ID_Cartera_Envia) VALUES (4, 200, "2022/01/18", 4, 6, 1);
+INSERT INTO transaccion (ID_Transaccion, Cantidad, Fecha, ID_Objeto, ID_Cartera_Recibe, ID_Cartera_Envia) VALUES (5, 46, "2021/11/20", 10, 3, 5);
