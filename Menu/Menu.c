@@ -94,7 +94,7 @@ void menuPrincipal(void){
     printf("2. Vender producto\n");
     printf("3. Transacciones\n");
     printf("4. Perfil de usuario\n");
-    printf("5. Cerrar sesion")
+    printf("5. Cerrar sesion");
     scanf("%i", &option);
 
     switch (option)
@@ -110,7 +110,8 @@ void menuPrincipal(void){
 
     case 4:
         break;
-    case 5
+    case 5:
+        break;
     }
 
 };

@@ -6,29 +6,29 @@ void mostrarLote(Lote lote)
 {
 
     int option = 0;
-    printf("ID_Lote: %d\n", lote.ID_Lote);
-    printf("FechaCom: %d\n", lote.FechaCom);
-    printf("FechaFin: %d\n", lote.FechaFin);
-    printf("Estado: %s\n", lote.Estado);
-    printf("AvgPrecio: %f\n", lote.AvgPrecio);
+    printf("ID_Lote: %d\n", lote.idLote);
+    printf("FechaCom: %d\n", lote.fechaCom);
+    printf("FechaFin: %d\n", lote.fechaFin);
+    printf("Estado: %s\n", lote.estado);
+    printf("AvgPrecio: %f\n", lote.avgPrecio);
     printf("cantidadObjetos: %d\n", lote.cantidadObjetos);
-    mostrarListaObjetos(lote->listaObjetos, lote.cantidadObjetos);
+    mostrarListaObjetos(lote.listaObjetos, lote.cantidadObjetos);
 
     printf("Elije un artículo: \n");
     scanf("%i", &option);
-    if(option > 0 && option <= lote->cantidadObjetos)
+    if(option > 0 && option <= lote.cantidadObjetos)
     {
-        mostrarObjeto(lote->listaObjetos[option-1]);
+        mostrarObjeto(lote.listaObjetos[option-1]);
     }
 }
 
 void mostrarDia(Dia dia){
-
+    int option = 0;
     printf("%s\n", dia.fecha());
-    printf("Lotes del dia : \n")
+    printf("Lotes del dia : \n");
     int i;
     for( i =0; i<dia.numero; i++){
-        printf("Lote %i :  %i productos. \n Estado: %s Calidad :", dia.lotes[i].ID_lote, dia.lotes[i].Estado);
+        printf("Lote %i :  %i productos. \n Estado: %s Calidad :",i, dia.lotes[i].ID_lote, dia.lotes[i].Estado);
 
         swich(dia.lotes[i].avgP){
             case 1: printf("$\n");

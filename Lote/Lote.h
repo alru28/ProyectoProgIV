@@ -4,7 +4,7 @@
 
 typedef struct Lote
 {
-    int id_Lote;
+    int idLote;
     int fechaCom;
     int fechaFin;
     char* estado;
