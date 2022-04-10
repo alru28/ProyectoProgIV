@@ -20,26 +20,28 @@ int mostrarDia(sqlite3 *db , char *dia){
     
     sqlite3_stmt *stmt;
     
-    char sql[] = "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where( ?  >= FechaCom and ? <= FechaFin)";
+    char sql[100];
+    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where '%s' >= FechaCom", dia, dia);
+
+    printf("%s", sql);
 
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
-
     printf("Lotes del dia : %s\n", dia);
+
 	do {
 		result = sqlite3_step(stmt) ;
 		if (result == SQLITE_ROW) {
 			int id= sqlite3_column_int(stmt, 0);
-            char* fechaInicio;
+            char fechaInicio[20];
 			strcpy(fechaInicio, (char *) sqlite3_column_text(stmt, 1));
-            char* fechaFinal;
+            char fechaFinal[20];
 			strcpy(fechaFinal, (char *) sqlite3_column_text(stmt, 2));
-            char * estado;
+            char estado[20];
             strcpy(estado, (char *) sqlite3_column_text(stmt, 3));
             float avgPrecio = (float) sqlite3_column_double(stmt, 4);
             printf("\n");
