@@ -21,30 +21,3 @@ void mostrarLote(Lote lote)
         mostrarObjeto(lote.listaObjetos[option-1]);
     }
 }
-
-void mostrarDia(sqlite3 *bd , chat *dia){
-    
-    Dia day;
-
-    printf("%s\n", dia.fecha());
-    printf("Lotes del dia : \n");
-    int i;
-    for( i =0; i<dia.numero; i++){
-        printf("Lote %i :  %i productos. \n Estado: %s Calidad :",i, dia.lotes[i].ID_lote, dia.lotes[i].Estado);
-
-        swich(dia.lotes[i].avgP){
-            case 1: printf("$\n");
-             break;
-            case 2: printf("$$\n");
-             break;
-            case 3: printf("$$$\n");
-             break;
-            case 4: printf("$$$$\n");
-             break;
-        }
-    }
-    printf("Introduce el numero de lote elegido\n");
-    printf("Introduce 's' para ver lotes del siguiente dia, introduce 'a' para ver loter sel dia anterior.\n");
-    scanf("%s", &option);
-
-}

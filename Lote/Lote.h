@@ -8,7 +8,7 @@ typedef struct Lote
     int fechaCom;
     int fechaFin;
     char* estado;
-    float avgPrecio;
+    int avgPrecio; // del 1 al 4 dependiendo del precio medio [$, $$, $$$, $$$$]
     int cantidadObjetos;
     Objeto* listaObjetos;
 } Lote;
