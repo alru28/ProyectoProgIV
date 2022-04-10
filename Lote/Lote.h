@@ -13,18 +13,9 @@ typedef struct Lote
     Objeto* listaObjetos;
 } Lote;
 
-typedef struct Dia
-{
-    
-    Lote * lotes;
-    int numero;
-    int fecha;
-    int precioMedio;
-
-}
 
 void mostrarLote(Lote lote);
-void mostarDia(Dia dia);
+
 
 
 #endif
