@@ -20,6 +20,6 @@ typedef struct {
 
 int login(char* usuario, char* contrasenya);
 
-int registrar(char* usuario, char* contrasenya, char* mail, char* tlf);
+int registrar(char* name,char* password,char* pais, char* ciudad, int telf, char* pisoPuerta, email, telf);
 
 #endif
