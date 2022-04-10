@@ -22,8 +22,10 @@ void mostrarLote(Lote lote)
     }
 }
 
-void mostrarDia(Dia dia){
-    int option = 0;
+void mostrarDia(sqlite3 *bd , chat *dia){
+    
+    Dia day;
+
     printf("%s\n", dia.fecha());
     printf("Lotes del dia : \n");
     int i;
