@@ -6,6 +6,7 @@
 * @param mensaje es el string con el mensaje de error/estado
 * @see testLogger.c
 */
-void logear(char* tag, char* mensaje);
+void logTxt(char* tag, char* mensaje);
+void logConsola(char* tag, char* mensaje);
 
 #endif
