@@ -4,5 +4,5 @@
 
 void main() {
 	sqlite3 *baseDatos = cargarBaseDatos("basedatos");
-	printf("%i", mostrarDia(baseDatos, "2022/01/05"));
+	mostrarLote(baseDatos, 31);
 }
