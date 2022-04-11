@@ -4,10 +4,10 @@
 /** Funcion que visualiza en consola el menu del programa
 * 
 */
-void menuInicial(void);
-void showLogin(void);
-void menuPrincipal(void);
-void showRegister();
+void menuInicial(sqlite3 *db);
+void showLogin(sqlite3 *db);
+void menuPrincipal(sqlite3 *db);
+void showRegister(sqlite3 *db);
 
 
 
