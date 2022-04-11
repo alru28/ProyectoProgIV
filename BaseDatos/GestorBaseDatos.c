@@ -22,8 +22,10 @@ sqlite3* cargarBaseDatos(char* rutaBaseDatos) {
 
 int mostrarObjeto(sqlite3 *db, int id){
 
+    sqlite3_stmt *stmt;
+
     char sql[100];
-    sprintf(sql, "select ID_Objeto, Categoria, Estado, Descripcion, PrecioSalida from Objeto where %i = ID_Objeto", id);
+    sprintf(sql, "select ID_Objeto, Categoria, Estado, Descripcion, PrecioSalida, ID_Lote from Objeto where %i = ID_Objeto", id);
     
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
     
@@ -33,6 +35,7 @@ int mostrarObjeto(sqlite3 *db, int id){
 		return 0;
 	}
 
+    int idLote;
     result = sqlite3_step(stmt) ;
     if(result == SQLITE_ROW){
         int id= sqlite3_column_int(stmt, 0);
@@ -44,6 +47,7 @@ int mostrarObjeto(sqlite3 *db, int id){
 		strcpy(Descripcion, (char *) sqlite3_column_text(stmt, 3));
         char Precio[50];
 		strcpy(Precio, (char *) sqlite3_column_text(stmt, 4));
+        idLote= sqlite3_column_int(stmt, 5);
 
         printf("\n");
         printf("Producto %i (%s): %s en un estado %s\nPrecio de salida de %.2f$\n", id, Categoria, Descripcion, Estado, Precio );
@@ -52,13 +56,17 @@ int mostrarObjeto(sqlite3 *db, int id){
         return 0;
     }
 
+    int option;
     printf("Introduce la cantidad que desea pujar por este producto.");
-    printf("En caso de no querer pujar, introduce 0 para ver lo demas productos de este lote.\n  ");   
+    printf("En caso de no querer pujar, introduce 0 para ver lo demas productos de este lote.\n  ");  
+    scanf("%i", &option);  
+    if(option == 0) {        
+        mostrarLote (db,idLote);
+    }else if(option > 0){
+        // crearpuja
+    }       
 
-
-
-
-
+    }
 }
 
 int mostrarLote(sqlite3 *db, int id){
@@ -183,7 +191,7 @@ int mostrarDia(sqlite3 *db , char *dia){
     
     do{
        printf("Introduce el numero de lote elegido\n");
-       printf("Introduce '0' para ver lotes del siguiente dia, introduce '-1' para ver loter sel dia anterior.\n");
+       printf("Introduce '0' para ver lotes del siguiente dia, introduce '-1' para ver lotes del dia anterior.\n");
        scanf("%i", &val);             // SANEAR ENTRADA -----------------------------------------------------------------------
        if(val == -1 | val == 0) break;
 
