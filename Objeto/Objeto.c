@@ -4,7 +4,7 @@
 
 void mostarObjeto(Objeto objeto){
     printf("%s,\nEstado : %s\n", objeto.Descripcion, objeto.Estado);
-    printf("Valoracion estimada de %i$\n", objeto.PrecioSalida);
+    printf("Valoracion estimada de %f$\n", objeto.PrecioSalida);
 }
 
 void mostrarListaObjetos(Objeto* listaObjetos, int cantidad){
@@ -64,7 +64,7 @@ Objeto crearObjeto(){
     case 5:
         o.Categoria = "Moda";
         break;
-   
+
     default:
         break;
     }
@@ -97,7 +97,7 @@ Objeto crearObjeto(){
     case 5:
         o.Estado = "Deplorable";
        break;
-   
+
    default:
        break;
    }
@@ -108,7 +108,7 @@ Objeto crearObjeto(){
     char descripcion[100];
     fgets(descripcion, 100, stdin);
     //Ajustar length del string al que hayamos puesto en SQL
-    sscanf(descripcion, "%d", &o.Descripcion);
+    sscanf(descripcion, "%s", o.Descripcion);
 
     //PRECIO SALIDA
     printf("INTRODUCE PRECIO DE SALIDA: ");
@@ -116,12 +116,10 @@ Objeto crearObjeto(){
     char precioInput[10];
     int precioSalida;
     fgets(precioInput, 10, stdin);
-    sscanf(precioInput, "%d", &o.PrecioSalida);
+    sscanf(precioInput, "%f", &o.PrecioSalida);
 
     //ID LOTE e ID SUBASTADOR se saben?? o se tienen que introducir?
     o.ID_Lote = -1;
     o.ID_Subastador = -1;
     return o;
 }
-
-

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "sqlite3.h"
+#include "../Objeto/Objeto.h"
 
 sqlite3* cargarBaseDatos(char* rutaBaseDatos) {
     sqlite3* db;
@@ -124,3 +125,37 @@ int mostrarDia(sqlite3 *db , char *dia){
       
 }
 
+// Introduce un objeto pasado como argumento a la base de datos db
+int introducirObjeto(sqlite3* db, Objeto* objeto){
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "INSERT INTO objeto ( Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES ('%s', '%s', '%s', %.2f, %i, %i);", objeto->Estado, objeto->Categoria, objeto->Descripcion, objeto->PrecioSalida, objeto->ID_Subastador, objeto->ID_Lote);
+
+    int result = sqlite3_prepare_v2(db, sql, strlen(sql) +1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    printf("SQL query prepared (INSERT)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error inserting new data into country table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (INSERT)\n");
+
+	return SQLITE_OK;
+
+}
