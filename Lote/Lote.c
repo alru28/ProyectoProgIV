@@ -18,6 +18,6 @@ void imprimirLote(Lote lote)
     scanf("%i", &option);
     if(option > 0 && option <= lote.cantidadObjetos)
     {
-        mostrarObjeto(lote.listaObjetos[option-1]);
+        imprimirObjeto(lote.listaObjetos[option-1]);
     }
 }
