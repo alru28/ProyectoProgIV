@@ -5,6 +5,7 @@
 
 #include "sqlite3.h"
 #include "../Objeto/Objeto.h"
+#include "../Lote/Lote.h"
 
 sqlite3* cargarBaseDatos(char* rutaBaseDatos) {
     sqlite3* db;
@@ -92,7 +93,7 @@ int mostrarDia(sqlite3 *db , char *dia){
     sqlite3_stmt *stmt;
     
     char sql[100];
-    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where '%s' >= FechaCom", dia, dia);
+    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where '%s' >= FechaCom", dia);
 
     printf("%s", sql);
 
@@ -160,7 +161,7 @@ int mostrarDia(sqlite3 *db , char *dia){
 int introducirObjeto(sqlite3* db, Objeto* objeto){
 
     sqlite3_stmt *stmt;
-    char sql[100];
+    char sql[200];
     sprintf(sql, "INSERT INTO objeto ( Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES ('%s', '%s', '%s', %.2f, %i, %i);", objeto->Estado, objeto->Categoria, objeto->Descripcion, objeto->PrecioSalida, objeto->ID_Subastador, objeto->ID_Lote);
 
     int result = sqlite3_prepare_v2(db, sql, strlen(sql) +1, &stmt, NULL) ;

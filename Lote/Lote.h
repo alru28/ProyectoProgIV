@@ -2,7 +2,7 @@
 #define _LOTE_H_
 #include "../Objeto/Objeto.h"
 
-typedef struct Lote
+typedef struct
 {
     int idLote;
     int fechaCom;
@@ -14,7 +14,7 @@ typedef struct Lote
 } Lote;
 
 
-void mostrarLote(Lote lote);
+void imprimirLote(Lote lote);
 
 
 
