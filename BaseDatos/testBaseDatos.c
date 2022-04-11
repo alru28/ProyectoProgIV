@@ -4,5 +4,6 @@
 
 void main() {
 	sqlite3 *baseDatos = cargarBaseDatos("basedatos");
-	mostrarLote(baseDatos, 1);
+	mostrarDia(baseDatos, "2022/03/31");
+	//mostrarLote(baseDatos, 2);
 }

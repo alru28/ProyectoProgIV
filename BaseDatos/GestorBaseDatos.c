@@ -1,6 +1,8 @@
 #include "GestorBaseDatos.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "sqlite3.h"
 #include "../Objeto/Objeto.h"
 
@@ -45,6 +47,7 @@ int mostrarLote(sqlite3 *db, int id){
         printf("\n");
         printf("Lote %i: (%s - %s) \n", id, fechaInicio, fechaFinal);
     }else{
+        printf("Error, no existe lote con ese codigo");
         return 0;
     }
     
@@ -80,6 +83,7 @@ int mostrarLote(sqlite3 *db, int id){
             printf("Articulo %i: %s\t Estado: %s precio: %s\n", id, Estado, Descripcion, precio);                       
 		}
 	} while (result == SQLITE_ROW);
+    return 1;
 
 }
 
@@ -133,16 +137,18 @@ int mostrarDia(sqlite3 *db , char *dia){
 		return 0;
 	}
     
-    char option; 
-
+    char *option; 
+    int val;
+    int check;
     
     do{
-        printf("Introduce el numero de lote elegido\n");
-        printf("Introduce 's' para ver lotes del siguiente dia, introduce 'a' para ver loter sel dia anterior.\n");
-        scanf("%c", &option);
-        getchar();
-
-    } while(option != 'a'& option != 's');
+       printf("Introduce el numero de lote elegido\n");
+       printf("Introduce '0' para ver lotes del siguiente dia, introduce '-1' para ver loter sel dia anterior.\n");
+       scanf("%i", &val);
+            
+       check = mostrarLote(db, val);
+        
+    } while(check!=1 | val != -1 | val != 0);
     
     return 1;
     
