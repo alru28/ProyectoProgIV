@@ -4,5 +4,5 @@
 
 void main() {
 	sqlite3 *baseDatos = cargarBaseDatos("basedatos");
-	mostrarLote(baseDatos, 31);
+	mostrarLote(baseDatos, 1);
 }

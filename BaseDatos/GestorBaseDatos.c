@@ -45,10 +45,8 @@ int mostrarLote(sqlite3 *db, int id){
         printf("\n");
         printf("Lote %i: (%s - %s) \n", id, fechaInicio, fechaFinal);
     }else{
-        printf("test");
         return 0;
     }
-
     
 
     result = sqlite3_finalize(stmt);
@@ -57,6 +55,32 @@ int mostrarLote(sqlite3 *db, int id){
 		printf("%s\n", sqlite3_errmsg(db));
 		return 0;
 	}
+
+    sprintf(sql, "select ID_Objeto, Estado, Categoria, PrecioSalida from objeto where %i = ID_Lote", id);
+
+    result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    do {
+		result = sqlite3_step(stmt) ;
+		if (result == SQLITE_ROW) {
+			int id= sqlite3_column_int(stmt, 0);
+            char Estado[20];
+			strcpy(Estado, (char *) sqlite3_column_text(stmt, 1));
+            char Descripcion[50];
+            strcpy(Descripcion, (char*) sqlite3_column_text(stmt, 2));
+            char Categoria[20];
+			strcpy(Categoria, (char *) sqlite3_column_text(stmt, 3));
+            float precio = (float) sqlite3_column_double(stmt, 4);
+            printf("Articulo %i: %s\t Estado: %s precio: %s\n", id, Estado, Descripcion, precio);                       
+		}
+	} while (result == SQLITE_ROW);
+
 }
 
 int mostrarDia(sqlite3 *db , char *dia){
