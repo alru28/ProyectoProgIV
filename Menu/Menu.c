@@ -1,12 +1,13 @@
 #include "Menu.h"
-
+#include "../BaseDatos/GestorBaseDatos.h"
+#include "../BaseDatos/sqlite3.h"
 #include <stdio.h>
 
 
 
 
 
-void menuInicial(){
+void menuInicial(sqlite3 *db){
     
     int option = -1;
     printf(" BIENVENIDO A CSU BASTA\n");
@@ -29,7 +30,7 @@ void menuInicial(){
     
 }
 
-void showRegister(){
+void showRegister(sqlite3 *db){
 
     char name[10];
     char password[10];
@@ -67,25 +68,29 @@ void showRegister(){
 
 }
 
-void showLogin(){
+void showLogin(sqlite3 *db){
+    i
     int option = -1;
     char name[10];
     char password[10];
 
     
+    do{
+        printf(" Iniciar sesion.\n");
+        printf(" --------------------\n");
+        printf("Nombre de usuario:");
+        scanf("%s", name); // Funcion que compruebe que existe el usuario
+        printf("Contrasenya:");
+        scanf("%s", password); // Funcion que compruebe que la contraseña es correcta para el usuario elegido
 
-    printf(" Iniciar sesion.\n");
-    printf(" --------------------\n");
-    printf("Nombre de usuario:");
-    scanf("%s", name); // Funcion que compruebe que existe el usuario
-    printf("Contrasenya:");
-    scanf("%s", password); // Funcion que compruebe que la contraseña es correcta para el usuario elegido
+    }while(login(name, password)!= 0);
 
-    //login()
+    menuPrincipal(db);
+
     
 }
 
-void menuPrincipal(void){
+void menuPrincipal(sqlite3 *db){
 
     int option = -1;
     printf("Elige una opcion:\n");
@@ -100,6 +105,7 @@ void menuPrincipal(void){
     switch (option)
     {
     case 1:
+        mostrarDia(db, "2022/03/31");
         break;
     case 2:
         break;

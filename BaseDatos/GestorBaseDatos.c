@@ -33,7 +33,8 @@ int login(sqlite3 *db, char* username, char* password ){
         idUser= sqlite3_column_int(stmt, 1);
         
     }else{
-        printf("Error");
+        printf("Error, Username not found");
+        return 0;
     }
 
     if(Contrasenya == password){
