@@ -78,7 +78,7 @@ void showLogin(){
     printf(" --------------------\n");
     printf("Nombre de usuario:");
     scanf("%s", name); // Funcion que compruebe que existe el usuario
-    printf("\Contrasena:");
+    printf("Contrasenya:");
     scanf("%s", password); // Funcion que compruebe que la contraseña es correcta para el usuario elegido
 
     //login()

@@ -6,6 +6,47 @@
 #include "sqlite3.h"
 #include "GestorBaseDatos.h"
 
+int idUsing = -1;
+
+int login(sqlite3 *db, char* username, char* password ){
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "select Contraseña, ID_Usuario from Usuario where %i = Nombre", username);
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+
+    char Contrasenya [20];
+    int idUser;
+
+    if(result == SQLITE_ROW){
+        
+		strcpy(Contrasenya, (char *) sqlite3_column_text(stmt, 0));
+        idUser= sqlite3_column_int(stmt, 1);
+        
+    }else{
+        printf("Error");
+    }
+
+    if(Contrasenya == password){
+        idUsing = idUser;
+        return 1;
+    }else {
+        printf("contrasenyas no coinciden");
+        return 0;
+    }
+}
+
+
+
 
 sqlite3* cargarBaseDatos(char* rutaBaseDatos) {
     sqlite3* db;
@@ -205,8 +246,8 @@ int mostrarDia(sqlite3 *db , char *dia){
 }
 
 // Introduce un objeto pasado como argumento a la base de datos db
-int introducirObjeto(Objeto* objeto){
-    sqlite3 *db = cargarBaseDatos("basedatos.db");
+int introducirObjeto(sqlite3 *db, Objeto* objeto){
+    
     sqlite3_stmt *stmt;
     char sql[200];
     sprintf(sql, "INSERT INTO objeto ( Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES ('%s', '%s', '%s', %.2f, %i, %i);", objeto->Estado, objeto->Categoria, objeto->Descripcion, objeto->PrecioSalida, objeto->ID_Subastador, objeto->ID_Lote);
