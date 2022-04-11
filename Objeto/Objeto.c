@@ -69,7 +69,7 @@ Objeto crearObjeto(){
         break;
     }
 
-    //ESTASDO
+    //ESTADO
     int option = -1;
     printf(" --------------------\n");
     printf("Elige el estado del objeto: \n");
@@ -117,8 +117,10 @@ Objeto crearObjeto(){
     int precioSalida;
     fgets(precioInput, 10, stdin);
     sscanf(precioInput, "%d", &o.PrecioSalida);
-    //ID LOTE e ID SUBASTADOR se saben?? o se tienen que introducir?
 
+    //ID LOTE e ID SUBASTADOR se saben?? o se tienen que introducir?
+    o.ID_Lote = -1;
+    o.ID_Subastador = -1;
     return o;
 }
 
