@@ -130,11 +130,15 @@ Objeto crearObjeto(sqlite3 *db){
     fflush(stdin);
 
 
-     //Sacar Lotes que esten sin empezar y elegir entre esos
+    //Sacar Lotes que esten sin empezar y elegir entre esos
     mostrarLotesActivos(db);
     
     //Falta variable global IDUsing
     o.ID_Subastador = -1;
     introducirObjeto(db, &o);
+    
+    
+    
+    //introducirObjeto(&o);
     return o;
 }

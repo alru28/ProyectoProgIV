@@ -1,10 +1,15 @@
 #include "GestorBaseDatos.h"
 #include "sqlite3.h"
+#include "GestorBaseDatos.h"
 #include <stdio.h>
 
+//gcc GestorBaseDatos.c testBaseDatos.c sqlite3.c -o testBaseDatos.exe
 
-void main() {
-	sqlite3 *baseDatos = cargarBaseDatos("basedatos");
-	mostrarDia(baseDatos, "2022/03/31");
+int main(void) {
+	sqlite3 *baseDatos = cargarBaseDatos("basedatos.db");
+	//mostrarDia(baseDatos, "2022/03/31");
+	mostrarLotesActivos(baseDatos);
 	//mostrarLote(baseDatos, 2);
+
+	return 0;
 }
