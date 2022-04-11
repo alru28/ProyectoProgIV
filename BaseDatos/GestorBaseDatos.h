@@ -1,6 +1,7 @@
 #ifndef _GESTOR_BASE_DATOS_H_
 #define _GESTOR_BASE_DATOS_H_
 #include "sqlite3.h"
+#include "../Objeto/Objeto.h"
 
 /** Funcion que recibe la ruta de la base de datos y la carga como fichero ?
 * En ese caso tendr�a que devolver un puntero a FILE -> FILE*
@@ -21,5 +22,6 @@ void cerrarBaseDatos(sqlite3 *db);
 
 int mostrarDia(sqlite3 *db , char *dia);
 int mostrarLote(sqlite3 *db, int id);
+int introducirObjeto(sqlite3* db, Objeto* objeto);
 
 #endif

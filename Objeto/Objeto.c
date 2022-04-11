@@ -4,7 +4,7 @@
 
 void mostarObjeto(Objeto objeto){
     printf("%s,\nEstado : %s\n", objeto.Descripcion, objeto.Estado);
-    printf("Valoracion estimada de %i$\n", objeto.PrecioSalida);
+    printf("Valoracion estimada de %f$\n", objeto.PrecioSalida);
 }
 
 void mostrarListaObjetos(Objeto* listaObjetos, int cantidad){
@@ -34,7 +34,7 @@ void mostrarObjeto(Objeto objeto){
 Objeto crearObjeto(){
     //HABRIA QUE HACER MALLOC??????
     Objeto o;
-    o.ID_Objeto = NULL;
+    o.ID_Objeto = 0;
 
     //CATEGORIA
     int option = -1;
@@ -70,7 +70,7 @@ Objeto crearObjeto(){
     }
 
     //ESTADO
-    int option = -1;
+    option = 0;
     printf(" --------------------\n");
     printf("Elige el estado del objeto: \n");
     printf("1. Nuevo\n");
@@ -108,7 +108,7 @@ Objeto crearObjeto(){
     char descripcion[100];
     fgets(descripcion, 100, stdin);
     //Ajustar length del string al que hayamos puesto en SQL
-    sscanf(descripcion, "%d", &o.Descripcion);
+    sscanf(descripcion, "%s", o.Descripcion);
 
     //PRECIO SALIDA
     printf("INTRODUCE PRECIO DE SALIDA: ");
@@ -116,7 +116,7 @@ Objeto crearObjeto(){
     char precioInput[10];
     int precioSalida;
     fgets(precioInput, 10, stdin);
-    sscanf(precioInput, "%d", &o.PrecioSalida);
+    sscanf(precioInput, "%f", &o.PrecioSalida);
 
     //ID LOTE e ID SUBASTADOR se saben?? o se tienen que introducir?
     o.ID_Lote = -1;
