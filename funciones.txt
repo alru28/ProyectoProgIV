@@ -1,0 +1,58 @@
+9*91 Login login()
+2 Register register()
+
+[menuPrincipal() muestra el menu]
+MENU
+1 Lotes
+2 Vender producto
+3 Transacciones
+4 Perfil de usuario
+5 Cerrar sesion
+
+1 Ver lotes[verLotesPorDia() pantalla donde se ven los lotes de un dia, se puede pasar de dia para ver lotes futuros] 
+[mostrarLote() seleccionas un lotepare ver los articulos que constiene]
+[mostrarArticulo() seleccionas un articulo, se muestra descripccion y existe opcion para pujar]
+[creaPuja() pantalla erstandar de puja, modificar dinero, mostar saldo diponible]
+[pujar() la puja ya hecha se sube a la base de datos]
+
+1 Se registra un producto nuevo
+[crearProducto() pantalla dondese introdiucen la descripcion percio y demas caracteristicas],
+[insertarEnLote() e,l producto se inserta en un lote, lista con todos los lotes disponibles]
+subastar()
+
+1 [resumen() se muestran el saldo disponibleopcion de ver detalle de transacciones, ingresar dinero , retirar dinero]
+
+	1[verTransaciones()se muestran todas las transaciones del usuario]
+	2[ingresar() pantalla donde se introduce el numero de cuenta ya la cantidad, y se aumenta el saldo del usuario]
+	3[retirar() pantalla donde se intoduce el numero de cvuenta y cantidad a retirar]
+
+1 [mostrarDatos(), se muestra el perfil del usuario y una opcion donde pueda editarlos]
+	1[EditarPerfil(), Pantalla donde se crea la vesion alternativa del perfil del usuario]
+	 [CambiarPerfil() se reemplaza el perfil antiguo por otro nuevo]
+1 cerrar()
+	
+pantallaInicio() muestra una pantala donde puedes introducir tu numbre y contrasenya para hacer login, o te da la opcion de registrate nuevo
+login(username, contrasenya) con parametros recibidos de pantallInicio(). Establece un hipotetico parametro userActive con el id del usuario que esta usando la sesion para poder identificarle
+registerScreen() mustra una pantalla donde se pueda introducir, username constrasenya, email y telefono o demas datos necesarios.
+register(usuario, coinstrasenya etc) crea el usario en la base de datos 
+menuPrincipal() muestra el menu del principio
+verLotesPorDia(dia) muestra en pantalla los lotes del parametro dia. Tambien mustra una opcion para avanzar de dia, retroceder para ver loters pasados o opcion para seleccionar un lote)
+mostrarLote(lote) muestra los latos dl lote recibido(fecha de inicio acabar etc)  yuna lista de los articulos quer hay. Da opcion a seleccionar un articulo 
+mostarArticulo(articulo)mustra el articulo descripcion y opcion a pujar
+creaPuja(articulo, usuario) en funcion del saldo del usuario y el precio actual del articulo te deja pujar o no. Crea una instancia de puja
+puja(puja) sube la puja a la BD(o no, no se si se almacenan) actuaiza el precio del articulio y el estado de la subasta y asi
+crearProducto()muestra una pantalla con los datos a introducir del producto y valida los datos
+insertarEnLote() muetsra una lista de todos los lotes donde hay aespacio o disponibles, y deja que el usuario elija uno
+SubastarArticulo(articulo, lote) sube el articulo a la base de datos y al lote y asi
+resumen(IDusuario) muestra el saldo disponible al usuario y deja ver transacc, meter y sacar dinero 
+verTransacc(IDusuario) mustra un listado
+IngresarDienro() muestra una pantalla donde te permita seleccionar cuenta y cantidad
+ingresar(Cuenta, idUser, cantidad) reealiza el ingreso (en principio que el numero de cuyenta tenga que tener una cierta estructura pero que valga con cualquier numero)
+retirarDinero(), retirar(cuenta, idUser, Cantidad)
+mostrarDatos(idUser) muestra en la pantalla el perfil del usuario con sus datos, da opcion a editar perfil
+editarPerfil() pantalla donde se introducen los datos del usuario de nuevo? ver a ver si se pueden escribir los datos en los campos de manerta que no haga falta reescribirlos todos, pero se puedan editar)
+guardarCambios(idUser, Perfil ) o lo que sea, guarda el nuevo perfil
+[El cambio de perfil se puede hacer creando un nuevo usuario identico al anterior y sustituyndolo, o haceindo una funcion para cambiar nombre, otra para el correo otra para la contrasenya etc]
+cerarSesion() pantalla con una confirmacion para salir de la sesion
+salir() cierra sesio y vuelve a mostrar pantallaInicio()
+

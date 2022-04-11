@@ -29,7 +29,7 @@ int mostrarDia(sqlite3 *db , char *dia){
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return result;
+		return 0;
 	}
     printf("Lotes del dia : %s\n", dia);
 
@@ -45,7 +45,7 @@ int mostrarDia(sqlite3 *db , char *dia){
             strcpy(estado, (char *) sqlite3_column_text(stmt, 3));
             float avgPrecio = (float) sqlite3_column_double(stmt, 4);
             printf("\n");
-            printf("Lote %i: (%s - %s) \nEstado: %s, Precio: ", id, fechaInicio, fechaFinal);
+            printf("Lote %i: (%s - %s) \nEstado: %s, Precio: ", id, fechaInicio, fechaFinal, estado);
             if(avgPrecio<10.00){
                 printf("$");
             } else if(avgPrecio <30.00){
@@ -63,12 +63,29 @@ int mostrarDia(sqlite3 *db , char *dia){
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return result;
+		return 0;
 	}
     
-    printf("Introduce el numero de lote elegido\n");
-    printf("Introduce 's' para ver lotes del siguiente dia, introduce 'a' para ver loter sel dia anterior.\n");
-    //scanf("%s", &option);
+    char option;
+    
+
+
+
+    
+
+    
+    while(option != 'a'& option != 's'){
+        printf("Introduce el numero de lote elegido\n");
+        printf("Introduce 's' para ver lotes del siguiente dia, introduce 'a' para ver loter sel dia anterior.\n");
+        scanf("%c", &option);
+        getchar();
+
+        
+
+    }
+    
+    return 1
+    
       
 }
 
