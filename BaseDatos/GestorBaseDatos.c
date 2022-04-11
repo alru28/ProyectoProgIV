@@ -59,7 +59,7 @@ int mostrarLote(sqlite3 *db, int id){
 		return 0;
 	}
 
-    sprintf(sql, "select ID_Objeto, Estado, Categoria, PrecioSalida from objeto where %i = ID_Lote", id);
+    sprintf(sql, "select ID_Objeto, Estado, Descripcion,  Categoria, PrecioSalida from objeto where %i = ID_Lote", id);
 
     result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
     
@@ -80,12 +80,11 @@ int mostrarLote(sqlite3 *db, int id){
             char Categoria[20];
 			strcpy(Categoria, (char *) sqlite3_column_text(stmt, 3));
             float precio = (float) sqlite3_column_double(stmt, 4);
-            printf("Articulo %i: %s\t Estado: %s precio: %f\n", id, Estado, Descripcion, precio);                       
+            printf("Articulo %i: %s\t Estado: %s Precio: %.2f\n", id, Descripcion, Estado, precio);                       
 		}
 	} while (result == SQLITE_ROW);
     return 1;
 
-    return 1;
 }
 
 int mostrarDia(sqlite3 *db , char *dia){
@@ -93,7 +92,7 @@ int mostrarDia(sqlite3 *db , char *dia){
     sqlite3_stmt *stmt;
     
     char sql[100];
-    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where '%s' >= FechaCom", dia);
+    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where '%s' >= FechaCom", dia, dia);
 
     printf("%s", sql);
 
@@ -161,8 +160,8 @@ int mostrarDia(sqlite3 *db , char *dia){
 int introducirObjeto(sqlite3* db, Objeto* objeto){
 
     sqlite3_stmt *stmt;
-    char sql[200];
-    sprintf(sql, "INSERT INTO objeto (Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES ('%s', '%s', '%s', %.2f, %i, %i);", objeto->Estado, objeto->Categoria, objeto->Descripcion, objeto->PrecioSalida, objeto->ID_Subastador, objeto->ID_Lote);
+    char sql[100];
+    sprintf(sql, "INSERT INTO objeto ( Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES ('%s', '%s', '%s', %.2f, %i, %i);", objeto->Estado, objeto->Categoria, objeto->Descripcion, objeto->PrecioSalida, objeto->ID_Subastador, objeto->ID_Lote);
 
     int result = sqlite3_prepare_v2(db, sql, strlen(sql) +1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -191,3 +190,5 @@ int introducirObjeto(sqlite3* db, Objeto* objeto){
 	return SQLITE_OK;
 
 }
+
+
