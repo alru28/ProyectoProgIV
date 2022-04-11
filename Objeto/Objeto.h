@@ -14,6 +14,6 @@ typedef struct {
 void mostrarListaObjetos(Objeto* listaObjetos, int cantidad);
 void imprimirObjeto(Objeto Objeto);
 
-Objeto crearObjeto();
+Objeto crearObjeto(sqlite3 *db );
 
 #endif
