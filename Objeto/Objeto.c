@@ -31,11 +31,12 @@ void mostrarObjeto(Objeto objeto){
 }
 
 // CREACION DE OBJETOS
-void crearObjeto(){
+Objeto crearObjeto(){
+    //HABRIA QUE HACER MALLOC??????
     Objeto o;
     o.ID_Objeto = NULL;
 
-    ///////// PLAGIO
+    //CATEGORIA
     int option = -1;
     printf(" --------------------\n");
     printf("Elige una categoría: \n");
@@ -49,37 +50,76 @@ void crearObjeto(){
    switch (option)
    {
     case 1:
-       o.Categoria = "Coleccionismo";
-       break;
+        o.Categoria = "Coleccionismo";
+        break;
     case 2:
         o.Categoria = "Electrónica";
         break;
     case 3:
-       o.Categoria = "Coleccionismo";
-       break;
+        o.Categoria = "Deporte";
+        break;
     case 4:
-        o.Categoria = "Electrónica";
+        o.Categoria = "Casa y jardin";
         break;
     case 5:
-       o.Categoria = "Coleccionismo";
+        o.Categoria = "Moda";
+        break;
+   
+    default:
+        break;
+    }
+
+    //ESTASDO
+    int option = -1;
+    printf(" --------------------\n");
+    printf("Elige el estado del objeto: \n");
+    printf("1. Nuevo\n");
+    printf("2. Casi nuevo\n");
+    printf("3. Usado\n");
+    printf("4. Muy usado\n");
+    printf("5. Deplorable\n");
+    scanf("%i", & option);
+
+   switch (option)
+   {
+    case 1:
+        o.Estado = "Nuevo";
+       break;
+    case 2:
+        o.Estado = "Casi nuevo";
+        break;
+    case 3:
+        o.Estado = "Usado";
+       break;
+    case 4:
+        o.Estado = "Muy usado";
+        break;
+    case 5:
+        o.Estado = "Deplorable";
        break;
    
    default:
        break;
    }
 
-    ///////// PLAGIO
-
-    printf("INTRODUCE ESTADO: ");
-    scanf("%d", o.Estado);
-
+    //DESCRIPCION
     printf("INTRODUCE DESCRIPCION: ");
-    scanf("%s", o.Descripcion);
 
+    char descripcion[100];
+    fgets(descripcion, 100, stdin);
+    //Ajustar length del string al que hayamos puesto en SQL
+    sscanf(descripcion, "%d", &o.Descripcion);
+
+    //PRECIO SALIDA
     printf("INTRODUCE PRECIO DE SALIDA: ");
-    scanf("%i", o.PrecioSalida);
 
+    char precioInput[10];
+    int precioSalida;
+    fgets(precioInput, 10, stdin);
+    sscanf(precioInput, "%d", &o.PrecioSalida);
     //ID LOTE e ID SUBASTADOR se saben?? o se tienen que introducir?
+
+    return o;
 }
 
 

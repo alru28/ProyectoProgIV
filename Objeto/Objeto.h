@@ -14,6 +14,6 @@ typedef struct {
 void mostrarListaObjetos(Objeto* listaObjetos, int cantidad);
 void mostrarObjeto(Objeto Objeto);
 
-void crearObjeto();
+Objeto crearObjeto();
 
 #endif
