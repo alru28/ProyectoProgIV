@@ -84,7 +84,7 @@ int mostrarDia(sqlite3 *db , char *dia){
 
     }
     
-    return 1
+    return 1;
     
       
 }
