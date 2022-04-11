@@ -2,7 +2,7 @@
 #include "../Objeto/Objeto.h"
 #include <stdio.h>
 
-void mostrarLote(Lote lote)
+void imprimirLote(Lote lote)
 {
 
     int option = 0;
@@ -10,11 +10,11 @@ void mostrarLote(Lote lote)
     printf("FechaCom: %d\n", lote.fechaCom);
     printf("FechaFin: %d\n", lote.fechaFin);
     printf("Estado: %s\n", lote.estado);
-    printf("AvgPrecio: %f\n", lote.avgPrecio);
+    printf("AvgPrecio: %d\n", lote.avgPrecio);
     printf("cantidadObjetos: %d\n", lote.cantidadObjetos);
     mostrarListaObjetos(lote.listaObjetos, lote.cantidadObjetos);
 
-    printf("Elije un artículo: \n");
+    printf("Elige un artículo: \n");
     scanf("%i", &option);
     if(option > 0 && option <= lote.cantidadObjetos)
     {
