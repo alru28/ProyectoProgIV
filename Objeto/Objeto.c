@@ -34,16 +34,16 @@ void mostrarObjeto(Objeto objeto){
 Objeto crearObjeto(){
     //HABRIA QUE HACER MALLOC??????
     Objeto o;
-    o.ID_Objeto = NULL;
+    o.ID_Objeto = 0;
 
     //CATEGORIA
     int option = -1;
     printf(" --------------------\n");
-    printf("Elige una categoría: \n");
+    printf("Elige una categoria: \n");
     printf("1. Coleccionismo\n");
-    printf("2. Electrónica\n");
+    printf("2. Electronica\n");
     printf("3. Deporte\n");
-    printf("4. Casa y jardín\n");
+    printf("4. Casa y jardin\n");
     printf("5. Moda\n");
     scanf("%i", & option);
 
@@ -53,7 +53,7 @@ Objeto crearObjeto(){
         o.Categoria = "Coleccionismo";
         break;
     case 2:
-        o.Categoria = "Electrónica";
+        o.Categoria = "Electronica";
         break;
     case 3:
         o.Categoria = "Deporte";
@@ -70,7 +70,7 @@ Objeto crearObjeto(){
     }
 
     //ESTADO
-    int option = -1;
+    int option2 = -1;
     printf(" --------------------\n");
     printf("Elige el estado del objeto: \n");
     printf("1. Nuevo\n");
@@ -80,7 +80,7 @@ Objeto crearObjeto(){
     printf("5. Deplorable\n");
     scanf("%i", & option);
 
-   switch (option)
+   switch (option2)
    {
     case 1:
         o.Estado = "Nuevo";
