@@ -35,7 +35,7 @@ void imprimirObjeto(Objeto objeto){
 }
 
 // CREACION DE OBJETOS
-Objeto crearObjeto(){
+Objeto crearObjeto(sqlite3 *db){
     //HABRIA QUE HACER MALLOC??????
     Objeto o;
     o.ID_Objeto = 0;
@@ -130,9 +130,11 @@ Objeto crearObjeto(){
     fflush(stdin);
 
 
-    //ID LOTE e ID SUBASTADOR se saben?? o se tienen que introducir?
-    o.ID_Lote = -1;
+     //Sacar Lotes que esten sin empezar y elegir entre esos
+    mostrarLotesActivos(db);
+    
+    //Falta variable global IDUsing
     o.ID_Subastador = -1;
-    introducirObjeto(&o);
+    introducirObjeto(db, &o);
     return o;
 }
