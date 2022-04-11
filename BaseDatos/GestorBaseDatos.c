@@ -1,11 +1,11 @@
-#include "GestorBaseDatos.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "sqlite3.h"
 #include "../Objeto/Objeto.h"
 #include "../Lote/Lote.h"
+#include "sqlite3.h"
+#include "GestorBaseDatos.h"
+
 
 sqlite3* cargarBaseDatos(char* rutaBaseDatos) {
     sqlite3* db;
@@ -66,8 +66,8 @@ int mostrarObjeto(sqlite3 *db, int id){
         // crearpuja
     }       
 
-    }
 }
+
 
 int mostrarLote(sqlite3 *db, int id){
 
@@ -164,7 +164,7 @@ int mostrarDia(sqlite3 *db , char *dia){
             strcpy(estado, (char *) sqlite3_column_text(stmt, 3));
             float avgPrecio = (float) sqlite3_column_double(stmt, 4);
             printf("\n");
-            printf("Lote %i: (%s - %s) \nEstado: %s, Precio: ", id, fechaInicio, fechaFinal, estado);
+            //printf("Lote %i: (%s - %s) \nEstado: %s, Precio: ", id, fechaInicio, fechaFinal, estado);
             if(avgPrecio<10.00){
                 printf("$");
             } else if(avgPrecio <30.00){
@@ -205,8 +205,8 @@ int mostrarDia(sqlite3 *db , char *dia){
 }
 
 // Introduce un objeto pasado como argumento a la base de datos db
-int introducirObjeto(sqlite3* db, Objeto* objeto){
-
+int introducirObjeto(Objeto* objeto){
+    sqlite3 *db = cargarBaseDatos("basedatos.db");
     sqlite3_stmt *stmt;
     char sql[200];
     sprintf(sql, "INSERT INTO objeto ( Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES ('%s', '%s', '%s', %.2f, %i, %i);", objeto->Estado, objeto->Categoria, objeto->Descripcion, objeto->PrecioSalida, objeto->ID_Subastador, objeto->ID_Lote);

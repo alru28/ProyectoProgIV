@@ -1,5 +1,7 @@
 #include "Objeto.h"
 #include <stdio.h>
+#include "../BaseDatos/GestorBaseDatos.h"
+#include "../BaseDatos/sqlite3.h"
 
 /*
 void mostarObjeto(Objeto objeto){
@@ -131,5 +133,6 @@ Objeto crearObjeto(){
     //ID LOTE e ID SUBASTADOR se saben?? o se tienen que introducir?
     o.ID_Lote = -1;
     o.ID_Subastador = -1;
+    introducirObjeto(&o);
     return o;
 }
