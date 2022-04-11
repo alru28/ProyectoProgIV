@@ -12,7 +12,7 @@ MENU
 1 Ver lotes[verLotesPorDia() pantalla donde se ven los lotes de un dia, se puede pasar de dia para ver lotes futuros] 
 [mostrarLote() seleccionas un lotepare ver los articulos que constiene]
 [mostrarArticulo() seleccionas un articulo, se muestra descripccion y existe opcion para pujar]
-[creaPuja() pantalla erstandar de puja, modificar dinero, mostar saldo diponible]
+[creaPuja() pantalla estandar de puja, modificar dinero, mostar saldo diponible]
 [pujar() la puja ya hecha se sube a la base de datos]
 
 1 Se registra un producto nuevo

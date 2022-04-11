@@ -20,7 +20,46 @@ sqlite3* cargarBaseDatos(char* rutaBaseDatos) {
     return db;
 }
 
+int mostrarObjeto(sqlite3 *db, int id){
 
+    char sql[100];
+    sprintf(sql, "select ID_Objeto, Categoria, Estado, Descripcion, PrecioSalida from Objeto where %i = ID_Objeto", id);
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    if(result == SQLITE_ROW){
+        int id= sqlite3_column_int(stmt, 0);
+        char Categoria [20];
+		strcpy(Categoria, (char *) sqlite3_column_text(stmt, 1));
+        char Estado[20];
+		strcpy(Estado, (char *) sqlite3_column_text(stmt, 2));
+        char Descripcion[100];
+		strcpy(Descripcion, (char *) sqlite3_column_text(stmt, 3));
+        char Precio[50];
+		strcpy(Precio, (char *) sqlite3_column_text(stmt, 4));
+
+        printf("\n");
+        printf("Producto %i (%s): %s en un estado %s\nPrecio de salida de %.2f$\n", id, Categoria, Descripcion, Estado, Precio );
+    }else{
+        printf("Error, no existe producto con ese codigo");
+        return 0;
+    }
+
+    printf("Introduce la cantidad que desea pujar por este producto.");
+    printf("En caso de no querer pujar, introduce 0 para ver lo demas productos de este lote.\n  ");   
+
+
+
+
+
+}
 
 int mostrarLote(sqlite3 *db, int id){
 
