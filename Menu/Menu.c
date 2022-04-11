@@ -9,15 +9,15 @@
 void menuInicial(){
     
     int option = -1;
-    printf(" WELCOME TO CSU BASTA\n");
+    printf(" BIENVENIDO A CSU BASTA\n");
     printf(" --------------------\n");
-    printf("Choose an option:\n");
-    printf("1. Login your account\n");
-    printf("2. Register new account\n");
+    printf("Elige una opción:\n");
+    printf("1. Iniciar sesión\n");
+    printf("2. Registrarse\n");
     scanf("%i", & option);
    switch (option)
    {
-   case 1:
+    case 1:
        showLogin();
        break;
     case 2:
@@ -42,11 +42,11 @@ void showRegister(){
 
     int telf;
 
-    printf(" Register new .\n");
+    printf(" Registrar nuevo .\n");
     printf(" --------------------\n");
-    printf("Username: (10 characters maximum)");
+    printf("Nombre de usuario: (10 caracteres maximo)");
     scanf("%s", &name);
-    printf("\nPassword:");
+    printf("\nContrasena:");
     scanf("%s", &password);
     printf("\nEmail:");
     scanf("%s", &email);
@@ -58,7 +58,7 @@ void showRegister(){
     scanf("%i", &calle);
     printf("\nPuerta / piso:");
     scanf("%i", &pisoPuerta);    
-    printf("\nPhone number:");
+    printf("\nNumero de telefono:");
     scanf("%i", &telf);
 
     registrar(name, password, pais, ciudad, telf, pisoPuerta, email, telf);
@@ -74,11 +74,11 @@ void showLogin(){
 
     
 
-    printf(" Login.\n");
+    printf(" Iniciar sesion.\n");
     printf(" --------------------\n");
-    printf("Username:");
+    printf("Nombre de usuario:");
     scanf("%s", name); // Funcion que compruebe que existe el usuario
-    printf("\nPassword:");
+    printf("\Contrasena:");
     scanf("%s", password); // Funcion que compruebe que la contraseña es correcta para el usuario elegido
 
     //login()
@@ -88,7 +88,7 @@ void showLogin(){
 void menuPrincipal(void){
 
     int option = -1;
-    printf("Choose an option:\n");
+    printf("Elige una opcion:\n");
     printf(" --------------------\n");
     printf("1. Lotes\n");
     printf("2. Vender producto\n");
@@ -101,13 +101,10 @@ void menuPrincipal(void){
     {
     case 1:
         break;
-    
     case 2:
         break;
-
     case 3:
         break;
-
     case 4:
         break;
     case 5:
