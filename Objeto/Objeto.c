@@ -1,11 +1,12 @@
 #include "Objeto.h"
 #include <stdio.h>
 
-
+/*
 void mostarObjeto(Objeto objeto){
     printf("%s,\nEstado : %s\n", objeto.Descripcion, objeto.Estado);
     printf("Valoracion estimada de %f$\n", objeto.PrecioSalida);
 }
+*/
 
 void mostrarListaObjetos(Objeto* listaObjetos, int cantidad){
     int i;
@@ -14,13 +15,14 @@ void mostrarListaObjetos(Objeto* listaObjetos, int cantidad){
     }
 }
 
-void mostrarObjeto(Objeto objeto){
+void imprimirObjeto(Objeto objeto){
+    printf(" --------------------\n");
     int opcion = 2;
     printf("ID_Objeto: %d\n", objeto.ID_Objeto);
     printf("Categoria: %s\n", objeto.Categoria);
     printf("Estado: %s\n", objeto.Estado);
     printf("Descripcion: %s\n", objeto.Descripcion);
-    printf("PrecioSalida: %f\n", objeto.PrecioSalida);
+    printf("PrecioSalida: %.2f\n", objeto.PrecioSalida);
     printf("ID_Subastador: %d\n", objeto.ID_Subastador);
     printf("ID_Lote: %d\n", objeto.ID_Lote);
 
@@ -45,7 +47,7 @@ Objeto crearObjeto(){
     printf("3. Deporte\n");
     printf("4. Casa y jardin\n");
     printf("5. Moda\n");
-    scanf("%i", & option);
+    scanf("%i", &option);
 
    switch (option)
    {
@@ -69,6 +71,8 @@ Objeto crearObjeto(){
         break;
     }
 
+    fflush(stdin);
+
     //ESTADO
     int option2 = -1;
     printf(" --------------------\n");
@@ -78,7 +82,7 @@ Objeto crearObjeto(){
     printf("3. Usado\n");
     printf("4. Muy usado\n");
     printf("5. Deplorable\n");
-    scanf("%i", & option);
+    scanf("%i", &option2);
 
    switch (option2)
    {
@@ -102,13 +106,17 @@ Objeto crearObjeto(){
        break;
    }
 
+    fflush(stdin);
+
+
     //DESCRIPCION
     printf("INTRODUCE DESCRIPCION: ");
 
     char descripcion[100];
     fgets(descripcion, 100, stdin);
     //Ajustar length del string al que hayamos puesto en SQL
-    sscanf(descripcion, "%s", o.Descripcion);
+    sscanf(descripcion, "%s", &o.Descripcion);
+    fflush(stdin);
 
     //PRECIO SALIDA
     printf("INTRODUCE PRECIO DE SALIDA: ");
@@ -117,6 +125,8 @@ Objeto crearObjeto(){
     int precioSalida;
     fgets(precioInput, 10, stdin);
     sscanf(precioInput, "%f", &o.PrecioSalida);
+    fflush(stdin);
+
 
     //ID LOTE e ID SUBASTADOR se saben?? o se tienen que introducir?
     o.ID_Lote = -1;

@@ -12,7 +12,7 @@ typedef struct {
 } Objeto;
 
 void mostrarListaObjetos(Objeto* listaObjetos, int cantidad);
-void mostrarObjeto(Objeto Objeto);
+void imprimirObjeto(Objeto Objeto);
 
 Objeto crearObjeto();
 
