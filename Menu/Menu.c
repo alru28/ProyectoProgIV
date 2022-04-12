@@ -219,6 +219,9 @@ Usuario menuRegistrarse(sqlite3 *db){
 
     introducirCartera(db);
 
+    
+    actualizarIdCarteraDeUsuario(db, obtenerIdCartera(db));
+
     return usuario;
 
 }

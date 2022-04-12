@@ -34,6 +34,7 @@ int login(sqlite3 *db, char* username, char* password);
 int introducirUsuario(sqlite3 *db, Usuario* usuario);
 int introducirCartera(sqlite3 *db);
 int obtenerIdUsuario(sqlite3 *db, char* username);
-
+int obtenerIdCartera(sqlite3 *db);
+int actualizarIdCarteraDeUsuario(sqlite3 *db, int idCartera);
 
 #endif

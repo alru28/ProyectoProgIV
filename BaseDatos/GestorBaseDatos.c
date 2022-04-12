@@ -516,3 +516,53 @@ int obtenerIdUsuario(sqlite3 *db, char* username){
 
     return 1;
 }
+
+int obtenerIdCartera(sqlite3 *db){
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "select ID_Cartera from Cartera where ID_Usuario= %i ", idUsing);
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    int idCartera;
+
+    if(result == SQLITE_ROW){
+        
+        idCartera= sqlite3_column_int(stmt, 0);
+        
+    }else{
+        printf("Error, usuario no encontrado");
+        return 0;
+    }
+
+    return idCartera;
+}
+
+int actualizarIdCarteraDeUsuario(sqlite3 *db, int idCartera){
+    
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "UPDATE Usuario SET ID_Cartera= %i WHERE ID_Usuario= %i", idCartera, idUsing);
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+    if (result != SQLITE_OK) {
+        printf("Error preparing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    result = sqlite3_step(stmt) ;
+
+    return 1;
+
+
+}
