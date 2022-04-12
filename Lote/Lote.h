@@ -1,6 +1,7 @@
 #ifndef _LOTE_H_
 #define _LOTE_H_
 #include "../Objeto/Objeto.h"
+#include "../BaseDatos/sqlite3.h"
 
 typedef struct
 {

@@ -4,6 +4,7 @@
 
 #ifndef _OBJETO_H_
 #define _OBJETO_H_
+#include "../BaseDatos/sqlite3.h"
 
 typedef struct {
     int ID_Objeto;
