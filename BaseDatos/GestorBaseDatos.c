@@ -268,15 +268,17 @@ int mostrarLotesActivos(sqlite3 *db){
 		if (result == SQLITE_ROW) {
 			int id= sqlite3_column_int(stmt, 0);
             printf("%i. ", id);
+
             char fechaInicio[20];
 			strcpy(fechaInicio, (char *) sqlite3_column_text(stmt, 1));
             printf("%s - ",fechaInicio);
+
             char fechaFinal[20];
 			strcpy(fechaFinal, (char *) sqlite3_column_text(stmt, 2));
             printf("%s - ",fechaFinal);
+
             float avgPrecio = (float) sqlite3_column_double(stmt, 3);
             printf("%.2f - ",avgPrecio);
-            printf("\n");
 
             if(avgPrecio<10.00){
                 printf("$");
