@@ -96,15 +96,15 @@ int mostrarObjeto(sqlite3 *db, int id){
         idLote= sqlite3_column_int(stmt, 5);
 
         printf("\n");
-        printf("Producto %i (%s): %s en un estado %s\nPrecio de salida de %.2f$\n", id, Categoria, Descripcion, Estado, Precio );
+        printf("Producto %i (%s): %s en un estado %s\nPrecio de salida de %.2f$\n\n", id, Categoria, Descripcion, Estado, Precio );
     }else{
         printf("Error, no existe producto con ese codigo");
         return 0;
     }
 
     int option;
-    printf("Introduce la cantidad que desea pujar por este producto.");
-    printf("En caso de no querer pujar, introduce 0 para ver lo demas productos de este lote.\n  ");  
+    printf("Introduzca 1 en caso de que desee pujar por este producto.\n");
+    printf("En caso de no querer pujar, introduzca 0 para ver lo demas productos de este lote.\n  ");  
     scanf("%i", &option);  
     if(option == 0) {        
         mostrarLote (db,idLote);
@@ -113,6 +113,119 @@ int mostrarObjeto(sqlite3 *db, int id){
     }       
 
 }
+
+
+float getSaldo(sqlite3 *db){
+
+    float saldo = -1;
+    char sql[100];
+    sprintf(sql, "select Saldo from cartera where %i = ID_Usuario", idUsing);
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    if(result == SQLITE_ROW){
+        saldo = sqlite3_column_double(stmt, 0);
+    }else{
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    return saldo;
+}
+
+
+int crearPuja (sqlite3*db, int idObjeto){
+
+    float saldo = getSaldo(db);
+    float precio;
+    
+    char sql[100];
+    sprintf(sql, "select max(Cantidad) from puja where %i = ID_Objeto", idObjeto);
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    if(result == SQLITE_ROW){
+        precio= sqlite3_column_double(stmt, 0);
+        
+    }else{
+        printf("Error");
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+   
+
+    float puja=0;
+    int check = -1;
+    do{
+        printf("Saldo disponible es de %.2f \n", saldo);
+        printf("La puja mas alta para esteproducto es de%.2f\n", precio);
+        printf("Introduce la cantidad que deseas pujar\n")
+        scanf(&puja);
+        if(puja<saldo & puja > precio) check =0;
+        else printf("Error\n");
+    }while(chech ==0);
+    
+    pujar(db, idObjeto, puja);
+}
+
+int pujar(sqlite3 *db, int idObjeto, float precio){
+
+    sqlite3_stmt *stmt;
+    
+    char sql[100];
+    sprintf(sql, "insert into puja(Cantidad, ID_Usuario, ID_Objeto) values (%f , %i , %i)", precio, idUsing, idObjeto);
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error inserting new data into puja\n");
+		return result;
+	}
+    
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+		printf("Error finalizing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+    }
+    
+
+
+}
+
+
 
 
 int mostrarLote(sqlite3 *db, int id){
