@@ -206,7 +206,7 @@ int mostrarDia(sqlite3 *db , char *dia){
             strcpy(estado, (char *) sqlite3_column_text(stmt, 3));
             float avgPrecio = (float) sqlite3_column_double(stmt, 4);
             printf("\n");
-            printf("Lote %i: (%s - %s) \nEstado: %s, Precio: ", id, fechaInicio, fechaFinal, estado);
+            //printf("Lote %i: (%s - %s) \nEstado: %s, Precio: ", id, fechaInicio, fechaFinal, estado);
             if(avgPrecio<10.00){
                 printf("$");
             } else if(avgPrecio <30.00){
@@ -244,6 +244,42 @@ int mostrarDia(sqlite3 *db , char *dia){
     return 1;
     
       
+}
+
+int contarLotesActivos(sqlite3 *db){
+    sqlite3_stmt *stmt;
+
+    char sql[] = "SELECT COUNT(*) FROM LOTE WHERE ESTADO = 'En curso'";
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt);
+    int count = 0;
+    
+    if(result == SQLITE_ROW){
+        count = sqlite3_column_int(stmt, 0);
+    }else{
+        printf("Error, no existe lote con ese codigo");
+        return 0;
+    }
+    
+
+    
+    
+    
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    return count;
 }
 
 int mostrarLotesActivos(sqlite3 *db){
