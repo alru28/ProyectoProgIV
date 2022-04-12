@@ -1,5 +1,6 @@
 #include "Objeto.h"
 #include <stdio.h>
+#include <string.h>
 #include "../BaseDatos/GestorBaseDatos.h"
 #include "../BaseDatos/sqlite3.h"
 
@@ -117,7 +118,7 @@ Objeto crearObjeto(sqlite3 *db){
     char descripcion[100];
     fgets(descripcion, 100, stdin);
     //Ajustar length del string al que hayamos puesto en SQL
-    sscanf(descripcion, "%s", &o.Descripcion);
+    sscanf(descripcion, "%s", o.Descripcion);
     fflush(stdin);
 
     //PRECIO SALIDA
