@@ -134,14 +134,12 @@ Objeto crearObjeto(sqlite3 *db){
     printf("Elige el lote al que pertenece: ");
     mostrarLotesActivos(db);
 
-    int option3 = -1;
-    scanf("%i", &option3);
-
-    
+    char loteInput[10];
+    int lote;
+    fgets(loteInput, 10, stdin);
+    sscanf(loteInput, "%i", &o.ID_Lote);
 
     fflush(stdin);
-
-
 
     //Falta variable global IDUsing
     o.ID_Subastador = -1;
