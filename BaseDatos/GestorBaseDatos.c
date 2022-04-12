@@ -417,33 +417,6 @@ int existeUsuario(sqlite3 *db, char *usuario){
 
 }
 
-/*int ID_Usuario;
-    char* Contrasenia;
-    char* Nombre;
-    int Tlf;
-    char* Mail;
-    int Puntos;
-    int ID_Cartera;
-    char* Pais;
-    char* Ciudad;
-    char* Calle;
-    char* PisoPuerta;
-    
-    "ID_Usuario" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    "Contraseña" TEXT,
-    "Nombre" TEXT,
-    "Tlf" INTEGER,
-    "Mail" TEXT,
-    "Puntos" INTEGER,
-    "ID_Cartera" INTEGER,
-    "Pais" TEXT,
-    "Ciudad" TEXT,
-    "Calle" TEXT,
-    "PisoPuerta" TEXT,
-    
-*/
-
-
 
 int introducirUsuario(sqlite3 *db, Usuario* usuario){
     
@@ -477,4 +450,69 @@ int introducirUsuario(sqlite3 *db, Usuario* usuario){
 
 	return SQLITE_OK;
 
+}
+
+int introducirCartera(sqlite3 *db){
+
+
+    sqlite3_stmt *stmt;
+    char sql[200];
+    printf("idUsing: %i\n", idUsing);
+    sprintf(sql, "INSERT INTO Cartera (Saldo, ID_Usuario) VALUES (0, %i);", idUsing);
+
+    int result = sqlite3_prepare_v2(db, sql, strlen(sql) +1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    printf("SQL query prepared (INSERT)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error inserting new data into Cartera table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (INSERT)\n");
+
+	return SQLITE_OK;
+
+}
+
+int obtenerIdUsuario(sqlite3 *db, char* username){
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "select ID_Usuario from Usuario where Nombre= '%s' ", username);
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    int idUser;
+
+    if(result == SQLITE_ROW){
+        
+        idUsing= sqlite3_column_int(stmt, 0);
+        
+    }else{
+        printf("Error, usuario no encontrado");
+        return 0;
+    }
+
+    return 1;
 }

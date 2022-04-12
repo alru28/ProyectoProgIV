@@ -32,6 +32,8 @@ int introducirObjeto(sqlite3 *db, Objeto* objeto);
 int existeUsuario(sqlite3 *db, char *usuario);
 int login(sqlite3 *db, char* username, char* password);
 int introducirUsuario(sqlite3 *db, Usuario* usuario);
+int introducirCartera(sqlite3 *db);
+int obtenerIdUsuario(sqlite3 *db, char* username);
 
 
 #endif

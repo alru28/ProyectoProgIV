@@ -211,7 +211,13 @@ Usuario menuRegistrarse(sqlite3 *db){
     
     usuario.Puntos=0;
 
+    
+
     introducirUsuario(db, &usuario);
+
+    obtenerIdUsuario( db,  usuario.Nombre);
+
+    introducirCartera(db);
 
     return usuario;
 
