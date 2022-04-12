@@ -206,7 +206,7 @@ int mostrarDia(sqlite3 *db , char *dia){
             strcpy(estado, (char *) sqlite3_column_text(stmt, 3));
             float avgPrecio = (float) sqlite3_column_double(stmt, 4);
             printf("\n");
-            //printf("Lote %i: (%s - %s) \nEstado: %s, Precio: ", id, fechaInicio, fechaFinal, estado);
+            printf("Lote %i: (%s - %s) \nEstado: %s, Precio: ", id, fechaInicio, fechaFinal, estado);
             if(avgPrecio<10.00){
                 printf("$");
             } else if(avgPrecio <30.00){

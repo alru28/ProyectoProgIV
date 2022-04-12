@@ -1,6 +1,7 @@
 #include "Lote.h"
 #include "../Objeto/Objeto.h"
 #include <stdio.h>
+#include "../BaseDatos/sqlite3.h"
 
 void imprimirLote(Lote lote)
 {

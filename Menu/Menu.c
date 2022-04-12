@@ -19,10 +19,10 @@ void menuInicial(sqlite3 *db){
    switch (option)
    {
     case 1:
-       showLogin();
+       showLogin(db);
        break;
     case 2:
-        showRegister();
+        showRegister(db);
    
    default:
        break;
@@ -39,8 +39,6 @@ void showRegister(sqlite3 *db){
     char ciudad[25];
     char calle[25];
     char pisoPuerta[10];
-    int telf [9];
-
     int telf;
 
     printf(" Registrar nuevo .\n");
@@ -62,14 +60,13 @@ void showRegister(sqlite3 *db){
     printf("\nNumero de telefono:");
     scanf("%i", &telf);
 
-    registrar(name, password, pais, ciudad, telf, pisoPuerta, email, telf);
+    //registrar(name, password, pais, ciudad, telf, pisoPuerta, email, telf);
 
 
 
 }
 
 void showLogin(sqlite3 *db){
-    i
     int option = -1;
     char name[10];
     char password[10];
@@ -82,8 +79,8 @@ void showLogin(sqlite3 *db){
         scanf("%s", name); // Funcion que compruebe que existe el usuario
         printf("Contrasenya:");
         scanf("%s", password); // Funcion que compruebe que la contraseña es correcta para el usuario elegido
-
-    }while(login(name, password)!= 0);
+        option = login(db, name, password);
+    }while(option!= 1);
 
     menuPrincipal(db);
 
