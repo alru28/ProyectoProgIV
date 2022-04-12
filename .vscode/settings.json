@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "duplicado.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "usuario.h": "c",
+        "string.h": "c",
+        "sqlite3.h": "c",
+        "gestorbasedatos.h": "c"
     }
 }
