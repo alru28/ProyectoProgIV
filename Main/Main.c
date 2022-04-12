@@ -7,7 +7,7 @@
 
 int main(void)
 {
-    sqlite3 *db = cargarBaseDatos("basedatos");
+    sqlite3 *db = cargarBaseDatos("basedatos.db");
     sqlite3_stmt *stmt;
 
     menuRegistrarse(db);

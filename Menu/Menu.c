@@ -150,7 +150,7 @@ Usuario menuRegistrarse(sqlite3 *db){
     while(existeU != 0){
         printf("Introduce Nombre de usuario: \n");
         
-        fgets(nombre, 20, stdin);
+        fgets(nombre, 100, stdin);
         //Ajustar length del string al que hayamos puesto en SQL
         sscanf(nombre, "%s", nombre);
         fflush(stdin);
@@ -161,40 +161,43 @@ Usuario menuRegistrarse(sqlite3 *db){
 
     char contrasenia[200];
     printf("Introduce contraseña: \n");
-    fgets(contrasenia, 15, stdin);
-    sscanf(contrasenia, "%s", usuario.Contrasenia );
+    fgets(contrasenia, 100, stdin);
+    sscanf(contrasenia, "%s", contrasenia);
+    usuario.Contrasenia = contrasenia;
     fflush(stdin);
    
     char tlf[100];
+    int telefono;
     printf("Introduce numero de telefono: \n");
-    fgets(tlf, 10, stdin);
-    sscanf(tlf, "%i", &usuario.Tlf);
+    fgets(tlf, 100, stdin);
+    sscanf(tlf, "%i", &telefono);
+    usuario.Tlf = telefono;
     fflush(stdin);
 
     char mail[100];
     printf("Introduce email: \n");
-    fgets(mail, 30, stdin);
+    fgets(mail, 100, stdin);
     sscanf(mail, "%s", mail);
     usuario.Mail = mail;
     fflush(stdin);
 
     char pais[100];
     printf("Introduce pais: \n");
-    fgets(pais, 20, stdin);
+    fgets(pais, 100, stdin);
     sscanf(pais, "%s", pais);
     usuario.Pais = pais;
     fflush(stdin);
 
     char ciudad[100];
     printf("Introduce ciudad: \n");
-    fgets(ciudad, 20, stdin);
+    fgets(ciudad, 100, stdin);
     sscanf(ciudad, "%s", ciudad);
     usuario.Ciudad = ciudad;
     fflush(stdin);
 
     char calle[100];
     printf("Introduce calle: \n");
-    fgets(calle, 25, stdin);
+    fgets(calle, 100, stdin);
     sscanf(calle, "%s", calle);
     usuario.Calle = calle;
     fflush(stdin);
@@ -205,7 +208,7 @@ Usuario menuRegistrarse(sqlite3 *db){
     printf("prueba0.1\n");
     printf("Introduce piso/puerta: \n");
     printf("prueba0.2\n");
-    fgets(pisoPuerta, 10, stdin);
+    fgets(pisoPuerta, 100, stdin);
     printf("prueba0.3\n");
     sscanf(pisoPuerta, "%s", pisoPuerta);
     usuario.PisoPuerta = pisoPuerta;

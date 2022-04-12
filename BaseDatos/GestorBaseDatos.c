@@ -449,7 +449,7 @@ int introducirUsuario(sqlite3 *db, Usuario* usuario){
     
     sqlite3_stmt *stmt;
     char sql[200];
-    sprintf(sql, "INSERT INTO Usuario ( Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta) VALUES ('%s', '%s', %i, '%s', %i, '%s', '%s', '%s', '%s');", usuario->Contrasenia, usuario->Nombre, usuario->Tlf, usuario->Mail, usuario->Puntos, usuario->ID_Cartera, usuario->Pais, usuario->Ciudad, usuario->Calle, usuario->PisoPuerta);
+    sprintf(sql, "INSERT INTO Usuario ( Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta) VALUES ('%s', '%s', %i, '%s', %i, '%s', '%s', '%s', '%s');", usuario->Contrasenia, usuario->Nombre, usuario->Tlf, usuario->Mail, usuario->Puntos, usuario->Pais, usuario->Ciudad, usuario->Calle, usuario->PisoPuerta);
 
     int result = sqlite3_prepare_v2(db, sql, strlen(sql) +1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
