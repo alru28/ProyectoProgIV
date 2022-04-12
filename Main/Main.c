@@ -11,6 +11,8 @@ int main(void)
     sqlite3_stmt *stmt;
 
     menuInicial(db);
+    menuRegistrarse(db);
+    //existeUsuario(db, "pedro");
 
     return 0;
 

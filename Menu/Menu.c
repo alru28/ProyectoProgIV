@@ -133,3 +133,23 @@ void verLotes(){
 
 
 }
+
+void menuRegistrarse(sqlite3 *db){
+    //CATEGORIA
+    int option = -1;
+    printf("Registrar nuevo Usuario\n");
+    printf("--------------------\n");
+    printf("Introduce Nombre de usuario: \n");
+    
+    int existeU = 0;
+
+    while(existeU != 1){
+        char nombre[20];
+        fgets(nombre, 20, stdin);
+        //Ajustar length del string al que hayamos puesto en SQL
+        sscanf(nombre, "%s", &nombre);
+        fflush(stdin);
+        existeU = existeUsuario(db, nombre);
+    }
+
+}
