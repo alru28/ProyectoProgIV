@@ -103,10 +103,102 @@ int imprimirUsuario(sqlite3 *db){
 		return 0;
 	}
 
+    printf("\n\n 1-10: Editar valor correspondiente");
+    printf("\n 0: Salir\n");
+
+    int option = -1;
+    while(option<0 || option>10){
+        printf("Introduce un digito valido: ");
+        scanf("%i", &option);
+        printf("\n");
+    }
+
+    if(option == 0){
+        menuPrincipal(db);
+    }else{
+        editarUsuario(db, option);
+    }
+    
+
 
 }
 
 void editarUsuario(sqlite3 *db, int aEditar){
+
+    switch (aEditar)
+    {
+
+    case 1:
+        printf("Editar contrasena\n");
+        break;
+
+    case 2:
+        printf("Editar nombre\n");
+        break;
+
+    case 3:
+        printf("Editar telefono\n");
+        break;
+
+    case 4:
+        printf("Editar mail\n");
+        break;
+
+    case 5:
+        printf("Editar puntos\n");
+
+    case 6:
+        printf("Editar ID Cartera");
+        break;
+
+    case 7:
+        printf("Editar pais\n");
+        break;
+
+    case 8:
+        printf("Editar ciudad\n");
+        break;
+
+    case 9:
+        printf("Editar calle\n");
+        break;
+
+    case 10:
+        printf("Editar piso/puerta\n");
+        break;
+
+    default:
+        break;
+    }
+
+    //Queda asignar un valor a una variable dependiendo del case, esa variable tomara valor id, contrasena etc. y se metera en el set value
+    //Meter verificacion de contrasena, meter verificacion de usuario
+    //Se puede cambiar id cartera?
+
+    sqlite3_stmt *stmt;
+
+
+
+
+
+
+
+
+
+    int idUsing = 1;
+
+
+
+
+
+
+
+
+
+
+
+    char sql[150];
+    sprintf(sql, "SELECT Contraseña,  Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta FROM Usuario WHERE ID_Usuario = %i", idUsing);
 
 }
 
