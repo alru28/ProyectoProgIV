@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../Objeto/Objeto.h"
 #include "../Lote/Lote.h"
 #include "sqlite3.h"
@@ -12,7 +13,7 @@ int login(sqlite3 *db, char* username, char* password ){
 
     sqlite3_stmt *stmt;
     char sql[100];
-    sprintf(sql, "select Contraseña, ID_Usuario from Usuario where %i = Nombre", username);
+    sprintf(sql, "select Contraseña, ID_Usuario from Usuario where Nombre= '%s' ", username);
     
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
     
@@ -33,15 +34,16 @@ int login(sqlite3 *db, char* username, char* password ){
         idUser= sqlite3_column_int(stmt, 1);
         
     }else{
-        printf("Error, Username not found");
+        printf("Error, usuario no encontrado");
         return 0;
     }
 
-    if(Contrasenya == password){
+    if(strcmp(Contrasenya,password) ==0){
         idUsing = idUser;
         return 1;
     }else {
-        printf("contrasenyas no coinciden");
+        printf("Error, la contrasenya no es correcta");
+
         return 0;
     }
 }

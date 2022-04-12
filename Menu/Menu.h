@@ -8,8 +8,10 @@
 */
 void menuInicial(sqlite3 *db);
 void showLogin(sqlite3 *db);
+void menuRegistrarse(sqlite3 *db);
 void menuPrincipal(sqlite3 *db);
 void showRegister(sqlite3 *db);
+
 
 
 

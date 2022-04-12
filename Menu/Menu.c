@@ -2,6 +2,7 @@
 #include "../BaseDatos/GestorBaseDatos.h"
 #include "../BaseDatos/sqlite3.h"
 #include <stdio.h>
+#include <string.h>
 
 
 
@@ -16,6 +17,7 @@ void menuInicial(sqlite3 *db){
     printf("1. Iniciar sesión\n");
     printf("2. Registrarse\n");
     scanf("%i", & option);
+    fflush(stdin);
    switch (option)
    {
     case 1:
@@ -70,6 +72,7 @@ void showLogin(sqlite3 *db){
     int option = -1;
     char name[10];
     char password[10];
+    int auxiliar;
 
     
     do{
@@ -77,9 +80,15 @@ void showLogin(sqlite3 *db){
         printf(" --------------------\n");
         printf("Nombre de usuario:");
         scanf("%s", name); // Funcion que compruebe que existe el usuario
+        fflush(stdin);
         printf("Contrasenya:");
         scanf("%s", password); // Funcion que compruebe que la contraseña es correcta para el usuario elegido
-        option = login(db, name, password);
+        fflush(stdin);
+        auxiliar = strcmp(name, "jaime_col");
+        printf("Comparacion de nombres es = .%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.\n" , name[0],name[1],name[2],name[3],name[4],name[5],name[6],name[7],name[8], name[9], name[10]) ;
+        printf("Comparacion de nombres es = .%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.\n" , name[0],name[1],name[2],name[3],name[4],name[5],name[6],name[7],name[8], name[9], name[10]) ;
+        option = login(db, "jaime_col", password);
+
     }while(option!= 1);
 
     menuPrincipal(db);
@@ -122,5 +131,25 @@ void verLotes(){
 
     //mostrarDia(dia)
 
+
+}
+
+void menuRegistrarse(sqlite3 *db){
+    //CATEGORIA
+    int option = -1;
+    printf("Registrar nuevo Usuario\n");
+    printf("--------------------\n");
+    printf("Introduce Nombre de usuario: \n");
+    
+    int existeU = 0;
+
+    while(existeU != 1){
+        char nombre[20];
+        fgets(nombre, 20, stdin);
+        //Ajustar length del string al que hayamos puesto en SQL
+        sscanf(nombre, "%s", &nombre);
+        fflush(stdin);
+        existeU = existeUsuario(db, nombre);
+    }
 
 }
