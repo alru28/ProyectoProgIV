@@ -27,5 +27,6 @@ int mostrarLotesActivos(sqlite3 *db);
 int mostrarLote(sqlite3 *db, int id);
 int mostrarObjeto(sqlite3 *db, int id);
 int introducirObjeto(sqlite3 *db, Objeto* objeto);
+int existeUsuario(sqlite3 *db, char *usuario);
 
 #endif

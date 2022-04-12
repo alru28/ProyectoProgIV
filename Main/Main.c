@@ -12,7 +12,10 @@ int main(void)
     login(db, "jaime_col", "palencia998");
     printf("%i", idUsing);
 
-    
+    existeUsuario(db, "pedro");
+
+    printf("Existe jaime_col: %i\n",existeUsuario(db, "jaime_col"));
+    printf("Existe admin: %i\n",existeUsuario(db, "admin"));
     
     return 0;
 
