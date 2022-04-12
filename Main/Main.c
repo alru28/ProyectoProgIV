@@ -7,10 +7,10 @@
 
 int main(void)
 {
-    sqlite3 *db = cargarBaseDatos("basedatos.db");
+    sqlite3 *db = cargarBaseDatos("basedatos");
     sqlite3_stmt *stmt;
 
-    menuInicial(db);
+    menuRegistrarse(db);
     return 0;
 
 

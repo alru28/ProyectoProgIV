@@ -6,6 +6,7 @@
 #include "../Lote/Lote.h"
 #include "sqlite3.h"
 #include "GestorBaseDatos.h"
+#include "../Usuario/Usuario.h"
 
 int idUsing = -1;
 
@@ -413,5 +414,67 @@ int existeUsuario(sqlite3 *db, char *usuario){
     printf("Prepared statement finalized (SELECT)\n");
 
     return 0;
+
+}
+
+/*int ID_Usuario;
+    char* Contrasenia;
+    char* Nombre;
+    int Tlf;
+    char* Mail;
+    int Puntos;
+    int ID_Cartera;
+    char* Pais;
+    char* Ciudad;
+    char* Calle;
+    char* PisoPuerta;
+    
+    "ID_Usuario" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "Contraseña" TEXT,
+    "Nombre" TEXT,
+    "Tlf" INTEGER,
+    "Mail" TEXT,
+    "Puntos" INTEGER,
+    "ID_Cartera" INTEGER,
+    "Pais" TEXT,
+    "Ciudad" TEXT,
+    "Calle" TEXT,
+    "PisoPuerta" TEXT,
+    
+*/
+
+
+
+int introducirUsuario(sqlite3 *db, Usuario* usuario){
+    
+    sqlite3_stmt *stmt;
+    char sql[200];
+    sprintf(sql, "INSERT INTO Usuario ( Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta) VALUES ('%s', '%s', %i, '%s', %i, '%s', '%s', '%s', '%s');", usuario->Contrasenia, usuario->Nombre, usuario->Tlf, usuario->Mail, usuario->Puntos, usuario->ID_Cartera, usuario->Pais, usuario->Ciudad, usuario->Calle, usuario->PisoPuerta);
+
+    int result = sqlite3_prepare_v2(db, sql, strlen(sql) +1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    printf("SQL query prepared (INSERT)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error inserting new data into country table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (INSERT)\n");
+
+	return SQLITE_OK;
 
 }

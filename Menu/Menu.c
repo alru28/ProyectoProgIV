@@ -137,7 +137,7 @@ void verLotes(){
 
 }
 
-void menuRegistrarse(sqlite3 *db){
+Usuario menuRegistrarse(sqlite3 *db){
     //CATEGORIA
     Usuario usuario;
     int option = -1;
@@ -145,60 +145,78 @@ void menuRegistrarse(sqlite3 *db){
     printf("--------------------\n");
     
     
-    int existeU = 0;
-    char nombre[20];
-    while(existeU != 1){
+    int existeU = 1;
+    char nombre[100];
+    while(existeU != 0){
         printf("Introduce Nombre de usuario: \n");
         
         fgets(nombre, 20, stdin);
         //Ajustar length del string al que hayamos puesto en SQL
-        sscanf(nombre, "%s", &nombre);
+        sscanf(nombre, "%s", nombre);
         fflush(stdin);
         existeU = existeUsuario(db, nombre);
     }
+
     usuario.Nombre = nombre;
-    char contrasenia[10];
+
+    char contrasenia[200];
     printf("Introduce contraseña: \n");
-    fgets(contrasenia, 10, stdin);
-    sscanf(contrasenia, "%s", &usuario.Contrasenia );
+    fgets(contrasenia, 15, stdin);
+    sscanf(contrasenia, "%s", usuario.Contrasenia );
     fflush(stdin);
    
-    char tlf[9];
+    char tlf[100];
     printf("Introduce numero de telefono: \n");
-    fgets(tlf, 9, stdin);
+    fgets(tlf, 10, stdin);
     sscanf(tlf, "%i", &usuario.Tlf);
     fflush(stdin);
 
-    char mail[25];
+    char mail[100];
     printf("Introduce email: \n");
-    fgets(mail, 25, stdin);
-    sscanf(mail, "%s", &usuario.Mail);
+    fgets(mail, 30, stdin);
+    sscanf(mail, "%s", mail);
+    usuario.Mail = mail;
     fflush(stdin);
 
-    char pais[25];
+    char pais[100];
     printf("Introduce pais: \n");
-    fgets(pais, 25, stdin);
-    sscanf(pais, "%s", &usuario.Pais);
+    fgets(pais, 20, stdin);
+    sscanf(pais, "%s", pais);
+    usuario.Pais = pais;
     fflush(stdin);
 
-    char ciudad[25];
+    char ciudad[100];
     printf("Introduce ciudad: \n");
-    fgets(ciudad, 25, stdin);
-    sscanf(ciudad, "%s", &usuario.Ciudad);
+    fgets(ciudad, 20, stdin);
+    sscanf(ciudad, "%s", ciudad);
+    usuario.Ciudad = ciudad;
     fflush(stdin);
 
-    char calle[25];
+    char calle[100];
     printf("Introduce calle: \n");
     fgets(calle, 25, stdin);
-    sscanf(calle, "%s", &usuario.Calle);
+    sscanf(calle, "%s", calle);
+    usuario.Calle = calle;
     fflush(stdin);
 
-    char pisoPuerta[25];
+    printf("prueba0\n");
+
+    char pisoPuerta[100];
+    printf("prueba0.1\n");
     printf("Introduce piso/puerta: \n");
-    fgets(pisoPuerta, 25, stdin);
-    sscanf(pisoPuerta, "%s", &usuario.PisoPuerta);
-    fflush(stdin);
-
+    printf("prueba0.2\n");
+    fgets(pisoPuerta, 10, stdin);
+    printf("prueba0.3\n");
+    sscanf(pisoPuerta, "%s", pisoPuerta);
+    usuario.PisoPuerta = pisoPuerta;
+    printf("prueba0.4\n");
+    
+    printf("prueba1");
     usuario.Puntos=0;
+
+    printf("prueba2");
+    introducirUsuario(db, &usuario);
+
+    return usuario;
 
 }

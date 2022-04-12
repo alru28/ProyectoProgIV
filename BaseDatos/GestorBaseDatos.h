@@ -2,6 +2,7 @@
 #define _GESTOR_BASE_DATOS_H_
 #include "sqlite3.h"
 #include "../Objeto/Objeto.h"
+#include "../Usuario/Usuario.h"
 
 extern int idUsing;
 
@@ -30,6 +31,7 @@ int mostrarObjeto(sqlite3 *db, int id);
 int introducirObjeto(sqlite3 *db, Objeto* objeto);
 int existeUsuario(sqlite3 *db, char *usuario);
 int login(sqlite3 *db, char* username, char* password);
+int introducirUsuario(sqlite3 *db, Usuario* usuario);
 
 
 #endif
