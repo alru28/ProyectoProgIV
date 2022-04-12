@@ -40,6 +40,7 @@ int login(sqlite3 *db, char* username, char* password ){
 
     if(strcmp(Contrasenya,password) ==0){
         idUsing = idUser;
+        printf("Login succesful");
         return 1;
     }else {
         printf("Error, la contrasenya no es correcta");

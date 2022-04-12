@@ -79,6 +79,7 @@ void showLogin(sqlite3 *db){
         printf(" Iniciar sesion.\n");
         printf(" --------------------\n");
         printf("Nombre de usuario:");
+        fflush(stdin);
         scanf("%s", name); // Funcion que compruebe que existe el usuario
         fflush(stdin);
         printf("Contrasenya:");
