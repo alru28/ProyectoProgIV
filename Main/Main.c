@@ -11,7 +11,7 @@ int main(void)
     sqlite3_stmt *stmt;
 
     menuInicial(db);
-     return 0;
+    return 0;
 
 
 

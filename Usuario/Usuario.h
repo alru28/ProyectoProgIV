@@ -4,7 +4,7 @@
 // Estructura usuario ?
 typedef struct {
     int ID_Usuario;
-    char* Contraseña;
+    char* Contrasenia;
     char* Nombre;
     int Tlf;
     char* Mail;
@@ -18,8 +18,7 @@ typedef struct {
 
 // Funciones login, etc ... ?
 
-int login(char* usuario, char* contrasenya);
 
-int registrar(char* name,char* password,char* pais, char* ciudad, int telf, char* pisoPuerta, email, telf);
+int registrar(char* name,char* password,char* pais, char* ciudad, int telf, char* pisoPuerta, char* email);
 
 #endif
