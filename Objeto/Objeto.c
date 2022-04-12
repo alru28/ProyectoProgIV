@@ -131,7 +131,7 @@ Objeto crearObjeto(sqlite3 *db){
     fflush(stdin);
 
 
-    //Sacar Lotes que esten en curso y elegir entre esos
+    //LOTE
     printf("Elige el lote al que pertenece: ");
     mostrarLotesActivos(db);
 
@@ -143,11 +143,9 @@ Objeto crearObjeto(sqlite3 *db){
     fflush(stdin);
 
     //Falta variable global IDUsing
-    o.ID_Subastador = -1;
+    o.ID_Subastador = idUsing;
+    
     //introducirObjeto(db, &o);
-
-
-
     //introducirObjeto(&o);
     return o;
 }
