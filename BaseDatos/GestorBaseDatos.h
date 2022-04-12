@@ -34,6 +34,9 @@ int login(sqlite3 *db, char* username, char* password);
 int introducirUsuario(sqlite3 *db, Usuario* usuario);
 int introducirCartera(sqlite3 *db);
 int obtenerIdUsuario(sqlite3 *db, char* username);
+float getSaldo(sqlite3 *db);
+int crearPuja (sqlite3*db, int idObjeto);
+int pujar(sqlite3 *db, int idObjeto, float precio);
 
 
 #endif

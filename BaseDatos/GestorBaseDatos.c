@@ -221,8 +221,6 @@ int pujar(sqlite3 *db, int idObjeto, float precio){
 		return result;
     }
     
-
-
 }
 
 
