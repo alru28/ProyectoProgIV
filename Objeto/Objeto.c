@@ -112,7 +112,7 @@ Objeto crearObjeto(sqlite3 *db){
 
 
     //DESCRIPCION
-    printf("INTRODUCE DESCRIPCION: ");
+    printf("Introduce descripcion: ");
 
     char descripcion[100];
     fgets(descripcion, 100, stdin);
@@ -121,7 +121,7 @@ Objeto crearObjeto(sqlite3 *db){
     fflush(stdin);
 
     //PRECIO SALIDA
-    printf("INTRODUCE PRECIO DE SALIDA: ");
+    printf("Introduce precio de salida: ");
 
     char precioInput[10];
     int precioSalida;
@@ -130,8 +130,18 @@ Objeto crearObjeto(sqlite3 *db){
     fflush(stdin);
 
 
-    //Sacar Lotes que esten sin empezar y elegir entre esos
+    //Sacar Lotes que esten en curso y elegir entre esos
+    printf("Elige el lote al que pertenece: ");
     mostrarLotesActivos(db);
+
+    int option3 = -1;
+    scanf("%i", &option3);
+
+    
+
+    fflush(stdin);
+
+
 
     //Falta variable global IDUsing
     o.ID_Subastador = -1;

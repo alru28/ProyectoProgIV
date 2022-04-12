@@ -23,6 +23,7 @@ void cerrarBaseDatos(sqlite3 *db);
 
 
 int mostrarDia(sqlite3 *db , char *dia);
+int contarLotesActivos(sqlite3 *db);
 int mostrarLotesActivos(sqlite3 *db);
 int mostrarLote(sqlite3 *db, int id);
 int mostrarObjeto(sqlite3 *db, int id);

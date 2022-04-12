@@ -246,6 +246,39 @@ int mostrarDia(sqlite3 *db , char *dia){
       
 }
 
+int contarLotesActivos(sqlite3 *db){
+    sqlite3_stmt *stmt;
+
+    char sql[] = "SELECT COUNT(*) FROM LOTE WHERE ESTADO = 'En curso'";
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    int count=0;
+
+    if(result == SQLITE_ROW){
+        result = sqlite3_step(stmt) ;
+        count = sqlite3_column_int(stmt, 0);
+        printf("Numero de lotes en curso: %i\n", count);
+    } else {
+        printf("Error, no existen lotes en curso actualmente.");
+    }
+     
+    
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    return count;
+}
+
 int mostrarLotesActivos(sqlite3 *db){
     
     sqlite3_stmt *stmt;
