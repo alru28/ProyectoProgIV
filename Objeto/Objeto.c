@@ -117,7 +117,7 @@ Objeto crearObjeto(sqlite3 *db){
     char descripcion[100];
     fgets(descripcion, 100, stdin);
     //Ajustar length del string al que hayamos puesto en SQL
-    sscanf(descripcion, "%s", o.Descripcion);
+    sscanf(descripcion, "%s", &o.Descripcion);
     fflush(stdin);
 
     //PRECIO SALIDA
@@ -143,7 +143,7 @@ Objeto crearObjeto(sqlite3 *db){
 
     //Falta variable global IDUsing
     o.ID_Subastador = -1;
-    introducirObjeto(db, &o);
+    //introducirObjeto(db, &o);
 
 
 
