@@ -9,15 +9,9 @@ int main(void)
 {
     sqlite3 *db = cargarBaseDatos("basedatos.db");
     sqlite3_stmt *stmt;
-    
 
-    //existeUsuario(db, "pedro");
+    menuInicial(db);
 
-    //login(db, "jaime_col", "palencia998");
-    //printf("%i", idUsing);
-    printf("Existe jaime_col: %i\n",existeUsuario(db, "jaime_col"));
-    printf("Existe admin: %i\n",existeUsuario(db, "admin"));
-    
     return 0;
 
 
