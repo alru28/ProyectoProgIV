@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include "../BaseDatos/GestorBaseDatos.h"
 #include "../BaseDatos/sqlite3.h"
+#include "../Usuario/Usuario.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -13,8 +14,8 @@ void menuInicial(sqlite3 *db){
     int option = -1;
     printf(" BIENVENIDO A CSU BASTA\n");
     printf(" --------------------\n");
-    printf("Elige una opción:\n");
-    printf("1. Iniciar sesión\n");
+    printf("Elige una opcion:\n");
+    printf("1. Iniciar sesion\n");
     printf("2. Registrarse\n");
     scanf("%i", & option);
     fflush(stdin);
@@ -138,6 +139,7 @@ void verLotes(){
 
 void menuRegistrarse(sqlite3 *db){
     //CATEGORIA
+    Usuario usuario;
     int option = -1;
     printf("Registrar nuevo Usuario\n");
     printf("--------------------\n");
@@ -154,5 +156,49 @@ void menuRegistrarse(sqlite3 *db){
         fflush(stdin);
         existeU = existeUsuario(db, nombre);
     }
+    usuario.Nombre = nombre;
+    char contrasenia[10];
+    printf("Introduce contraseña: \n");
+    fgets(contrasenia, 10, stdin);
+    sscanf(contrasenia, "%s", &usuario.Contrasenia );
+    fflush(stdin);
+   
+    char tlf[9];
+    printf("Introduce numero de telefono: \n");
+    fgets(tlf, 9, stdin);
+    sscanf(tlf, "%i", &usuario.Tlf);
+    fflush(stdin);
+
+    char mail[25];
+    printf("Introduce email: \n");
+    fgets(mail, 25, stdin);
+    sscanf(mail, "%s", &usuario.Mail);
+    fflush(stdin);
+
+    char pais[25];
+    printf("Introduce pais: \n");
+    fgets(pais, 25, stdin);
+    sscanf(pais, "%s", &usuario.Pais);
+    fflush(stdin);
+
+    char ciudad[25];
+    printf("Introduce ciudad: \n");
+    fgets(ciudad, 25, stdin);
+    sscanf(ciudad, "%s", &usuario.Ciudad);
+    fflush(stdin);
+
+    char calle[25];
+    printf("Introduce calle: \n");
+    fgets(calle, 25, stdin);
+    sscanf(calle, "%s", &usuario.Calle);
+    fflush(stdin);
+
+    char pisoPuerta[25];
+    printf("Introduce piso/puerta: \n");
+    fgets(pisoPuerta, 25, stdin);
+    sscanf(pisoPuerta, "%s", &usuario.PisoPuerta);
+    fflush(stdin);
+
+    usuario.Puntos=0;
 
 }
