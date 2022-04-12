@@ -70,8 +70,8 @@ void showRegister(sqlite3 *db){
 
 void showLogin(sqlite3 *db){
     int option = -1;
-    char name[10];
-    char password[10];
+    char name[20];
+    char password[20];
     int auxiliar;
 
     
@@ -80,15 +80,16 @@ void showLogin(sqlite3 *db){
         printf(" --------------------\n");
         printf("Nombre de usuario:");
         fflush(stdin);
-        scanf("%s", name); // Funcion que compruebe que existe el usuario
+        fgets(name, 20, stdin);
+        sscanf(name, "%s", &name);
         fflush(stdin);
         printf("Contrasenya:");
         scanf("%s", password); // Funcion que compruebe que la contraseña es correcta para el usuario elegido
         fflush(stdin);
         auxiliar = strcmp(name, "jaime_col");
+        printf("Comparacion de nombres es = %s\n", name) ;
         printf("Comparacion de nombres es = .%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.\n" , name[0],name[1],name[2],name[3],name[4],name[5],name[6],name[7],name[8], name[9], name[10]) ;
-        printf("Comparacion de nombres es = .%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.\n" , name[0],name[1],name[2],name[3],name[4],name[5],name[6],name[7],name[8], name[9], name[10]) ;
-        option = login(db, "jaime_col", password);
+        option = login(db, name , password);
 
     }while(option!= 1);
 
