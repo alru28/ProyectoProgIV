@@ -10,8 +10,9 @@ int main(void)
     sqlite3 *db = cargarBaseDatos("basedatos.db");
     sqlite3_stmt *stmt;
 
-    menuInicial(db);
     menuRegistrarse(db);
+    //menuInicial(db);
+    
     //existeUsuario(db, "pedro");
 
     return 0;

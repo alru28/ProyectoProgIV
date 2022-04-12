@@ -378,3 +378,39 @@ int introducirObjeto(sqlite3 *db, Objeto* objeto){
 }
 
 
+int existeUsuario(sqlite3 *db, char *usuario){
+
+    sqlite3_stmt *stmt;
+    char sql[200];
+    sprintf(sql, "SELECT * FROM Usuario WHERE Nombre = '%s'", usuario);    
+
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    if (result != SQLITE_OK) {
+        printf("Error preparing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    printf("SQL query prepared (SELECT)\n");
+
+    do {
+        result = sqlite3_step(stmt) ;
+        if (result == SQLITE_ROW) {
+            printf("Usuario existe\n");
+            return 1;
+        }
+    } while (result == SQLITE_ROW);
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+        printf("Error finalizing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    printf("Prepared statement finalized (SELECT)\n");
+
+    return 0;
+
+}

@@ -139,12 +139,13 @@ void menuRegistrarse(sqlite3 *db){
     int option = -1;
     printf("Registrar nuevo Usuario\n");
     printf("--------------------\n");
-    printf("Introduce Nombre de usuario: \n");
+    
     
     int existeU = 0;
-
+    char nombre[20];
     while(existeU != 1){
-        char nombre[20];
+        printf("Introduce Nombre de usuario: \n");
+        
         fgets(nombre, 20, stdin);
         //Ajustar length del string al que hayamos puesto en SQL
         sscanf(nombre, "%s", &nombre);
