@@ -25,7 +25,7 @@ void menuInicial(sqlite3 *db){
        showLogin(db);
        break;
     case 2:
-        showRegister(db);
+        menuRegistrarse(db);
    
    default:
        break;
@@ -33,41 +33,6 @@ void menuInicial(sqlite3 *db){
     
 }
 
-void showRegister(sqlite3 *db){
-
-    char name[10];
-    char password[10];
-    char email[25];
-    char pais[25];
-    char ciudad[25];
-    char calle[25];
-    char pisoPuerta[10];
-    int telf;
-
-    printf(" Registrar nuevo .\n");
-    printf(" --------------------\n");
-    printf("Nombre de usuario: (10 caracteres maximo)");
-    scanf("%s", &name);
-    printf("\nContrasena:");
-    scanf("%s", &password);
-    printf("\nEmail:");
-    scanf("%s", &email);
-    printf("\nPais:");
-    scanf("%i", &pais);
-    printf("\nCiudad:");
-    scanf("%i", &ciudad);
-    printf("\nCalle:");
-    scanf("%i", &calle);
-    printf("\nPuerta / piso:");
-    scanf("%i", &pisoPuerta);    
-    printf("\nNumero de telefono:");
-    scanf("%i", &telf);
-
-    //registrar(name, password, pais, ciudad, telf, pisoPuerta, email, telf);
-
-
-
-}
 
 void showLogin(sqlite3 *db){
     int option = -1;
@@ -100,30 +65,40 @@ void showLogin(sqlite3 *db){
 }
 
 void menuPrincipal(sqlite3 *db){
+    int repetir = 1;
 
+    while (repetir = 1){
     int option = -1;
-    printf("Elige una opcion:\n");
-    printf(" --------------------\n");
-    printf("1. Lotes\n");
-    printf("2. Vender producto\n");
-    printf("3. Transacciones\n");
-    printf("4. Perfil de usuario\n");
-    printf("5. Cerrar sesion");
-    scanf("%i", &option);
+        printf("Elige una opcion:\n");
+        printf(" --------------------\n");
+        printf("1. Lotes\n");
+        printf("2. Vender producto\n");
+        printf("3. Transacciones\n");
+        printf("4. Perfil de usuario\n");
+        printf("5. Añadir saldo\n");
+        printf("5. Cerrar sesion\n");
+        scanf("%i", &option);
 
-    switch (option)
-    {
-    case 1:
-        mostrarDia(db, "2022/03/31");
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    case 5:
-        break;
+        switch (option)
+        {
+        case 1:
+            mostrarDia(db, "2022/03/31");
+            break;
+        case 2:
+            venderProducto(db);
+            break;
+        case 3:
+            break;
+        case 4:
+            imprimirUsuario(db);
+            break;
+        case 5:
+            saldo(db);
+            break;
+        case 6:
+            repetir = 0;
+            break;
+        }
     }
 
 };
@@ -220,9 +195,10 @@ Usuario menuRegistrarse(sqlite3 *db){
     obtenerIdUsuario( db,  usuario.Nombre);
 
     introducirCartera(db);
-
     
     actualizarIdCarteraDeUsuario(db, obtenerIdCartera(db));
+
+    menuPrincipal(db);
 
     return usuario;
 
