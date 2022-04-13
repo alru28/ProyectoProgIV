@@ -9,26 +9,6 @@ int imprimirUsuario(sqlite3 *db){
 
     sqlite3_stmt *stmt;
 
-
-
-
-
-
-
-
-
-    int idUsing = 1;
-
-
-
-
-
-
-
-
-
-
-
     char sql[150];
     sprintf(sql, "SELECT Contraseña,  Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta FROM Usuario WHERE ID_Usuario = %i", idUsing);
 
@@ -125,45 +105,57 @@ int imprimirUsuario(sqlite3 *db){
 
 void editarUsuario(sqlite3 *db, int aEditar){
 
+    char* strRequest = "";
+
     switch (aEditar)
     {
 
     case 1:
+        strRequest = "";
         printf("Editar contrasena\n");
         break;
 
     case 2:
+        strRequest = "";
         printf("Editar nombre\n");
         break;
 
     case 3:
+        strRequest = "";
         printf("Editar telefono\n");
         break;
 
     case 4:
+        strRequest = "";
         printf("Editar mail\n");
         break;
 
     case 5:
+        strRequest = "";
         printf("Editar puntos\n");
 
     case 6:
+        strRequest = "";
         printf("Editar ID Cartera");
         break;
 
     case 7:
+        strRequest = "";
         printf("Editar pais\n");
         break;
 
     case 8:
+        strRequest = "";
         printf("Editar ciudad\n");
         break;
 
     case 9:
+        strRequest = "";
         printf("Editar calle\n");
         break;
 
     case 10:
+        strRequest = "";
         printf("Editar piso/puerta\n");
         break;
 
