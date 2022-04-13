@@ -10,7 +10,7 @@ int main(void)
     sqlite3 *db = cargarBaseDatos("basedatos.db");
     sqlite3_stmt *stmt;
 
-    menuInicial(db);
+    mostrarObjeto(db, 3);
     return 0;
 
 }
