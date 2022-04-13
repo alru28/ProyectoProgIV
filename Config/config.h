@@ -10,8 +10,6 @@
 */
 char **cargarConfig(char* rutaConfig);
 
-void escribirConfig(char* rutaConfig);
-
 // void escribirConfig(char* rutaConfig);  OPCIONAL
 
 #endif

@@ -3,27 +3,11 @@
 
 #include "Usuario.h"
 #include "../BaseDatos/GestorBaseDatos.h"
-#include "../Menu/Menu.h"
 #include "../BaseDatos/sqlite3.h"
-#include "../Menu/Menu.h"
 #include <stdio.h>
 #include <string.h>
 
-typedef struct {
-    int ID_Usuario;
-    char* Contrasenia;
-    char* Nombre;
-    int Tlf;
-    char* Mail;
-    int Puntos;
-    int ID_Cartera;
-    char* Pais;
-    char* Ciudad;
-    char* Calle;
-    char* PisoPuerta;
-} Usuario;
-
 int imprimirUsuario(sqlite3 *db);
-int editarUsuario(sqlite3 *db, int aEditar);
+void editarUsuario(sqlite3 *db, int aEditar);
 
 #endif
