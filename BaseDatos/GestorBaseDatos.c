@@ -52,7 +52,7 @@ int login(sqlite3 *db, char* username, char* password ){
         idUser= sqlite3_column_int(stmt, 1);
         
     }else{
-        printf("ERROR", "Usuario no encontrado");
+        logConsola("ERROR", "Usuario no encontrado");
         logTxt("ERROR", "Usuario no encontrado");
         return 0;
     }
