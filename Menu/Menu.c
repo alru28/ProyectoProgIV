@@ -26,7 +26,8 @@ void menuInicial(sqlite3 *db){
        showLogin(db);
        break;
     case 2:
-        menuRegistrarse(db);
+        //menuRegistrarse(db);
+        break;
    
    default:
        break;
@@ -106,8 +107,8 @@ void menuPrincipal(sqlite3 *db){
 };
 
 
-
-Usuario menuRegistrarse(sqlite3 *db){
+/*
+void menuRegistrarse(sqlite3 *db){
     //CATEGORIA
     Usuario usuario;
     int option = -1;
@@ -196,3 +197,4 @@ Usuario menuRegistrarse(sqlite3 *db){
     return usuario;
 
 }
+*/
