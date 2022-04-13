@@ -131,8 +131,11 @@ int mostrarDia(sqlite3 *db , char *dia){
        printf("Introduce el numero de lote elegido\n");
        printf("0. Ver lotes del siguiente dia.\n-1. Ver lotes del dia anterior.\n -2. Regresar al menu principal.");
        scanf("%i", &val);             // SANEAR ENTRADA -----------------------------------------------------------------------
-       if(val == -1 | val == 0) break;
-       else if(val == -2) menuPrincipal;
+       if(val == -1 | val == 0) {
+           break;
+       }else if(val == -2){
+        menuPrincipal(db);
+       } 
 
        check = mostrarLote(db, val);
         
