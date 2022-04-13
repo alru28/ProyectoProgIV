@@ -36,7 +36,7 @@ int login(sqlite3 *db, char* username, char* password ){
     logTxt("Consulta sql: %s.\n", sql);
     
 	if (result != SQLITE_OK) {
-		logTxt("Error durante la consulta\n");
+		logTxt("ERROR", "Error durante la consulta");
 		logTxt("%s\n", sqlite3_errmsg(db));
 		return 0;
 	}
@@ -52,15 +52,15 @@ int login(sqlite3 *db, char* username, char* password ){
         idUser= sqlite3_column_int(stmt, 1);
         
     }else{
-        printf("Error, usuario no encontrado");
-        logTxt("Error, usuario no encontrado");
+        printf("ERROR", "Usuario no encontrado");
+        logTxt("ERROR", "Usuario no encontrado");
         return 0;
     }
 
     if(strcmp(Contrasenya,password) ==0){
         idUsing = idUser;
-        printf("Login sucessful");
-        logTxt("Login sucessful");
+        printf("LOGIN", "Login con exito");
+        logTxt("LOGIN", "Login con exito");
         return 1;
     }else {
         printf("Error, la contrasenya no es correcta");
@@ -267,7 +267,7 @@ int mostrarObjeto(sqlite3 *db, int id){
         }else if(option == 1){
             crearPuja(db, id);
         }       
-    }while(option!=1|option !=0)
+    }while(option!=1|option !=0);
 }
 
 
