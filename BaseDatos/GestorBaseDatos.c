@@ -37,7 +37,7 @@ int login(sqlite3 *db, char* username, char* password ){
     
 	if (result != SQLITE_OK) {
 		logTxt("ERROR", "Error durante la consulta");
-		logTxt("%s\n", sqlite3_errmsg(db));
+		logTxt("ERROR", "Error durante la consulta");
 		return 0;
 	}
 
