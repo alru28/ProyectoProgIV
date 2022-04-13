@@ -4,4 +4,4 @@ rutaTrans=Ficheros/transacciones.csv
 rutaUsuarios=Ficheros/usuarios.csv
 [CONFIG-ADMIN]
 usuario=admin
-password=1234
+usuario=1234

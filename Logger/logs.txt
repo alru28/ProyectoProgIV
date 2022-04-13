@@ -230,3 +230,7 @@
 [Wed Apr 13 19:00:44 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
 [Wed Apr 13 19:00:44 2022][TAG: TRANSACCIONES]: Transaccion impresa en CSV
 [Wed Apr 13 19:00:44 2022][TAG: TRANSACCIONES]: Transaccion impresa en CSV
+[Wed Apr 13 22:21:10 2022][TAG: CONFIGURACION]: Archivo de configuracion editado con exito
+[Wed Apr 13 22:21:10 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Wed Apr 13 22:21:43 2022][TAG: CONFIGURACION]: Archivo de configuracion editado con exito
+[Wed Apr 13 22:21:43 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
