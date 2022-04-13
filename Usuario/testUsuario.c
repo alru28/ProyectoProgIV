@@ -11,6 +11,6 @@ int main(void){
     sqlite3 *baseDatos = cargarBaseDatos("../BaseDatos/basedatos.db");
 
     idUsing = 1;
-    imprimirUsuario(baseDatos);
+    saldo(baseDatos);
     
 }

@@ -9,5 +9,7 @@
 
 int imprimirUsuario(sqlite3 *db);
 void editarUsuario(sqlite3 *db, int aEditar);
+int saldo(sqlite3 *db);
+int aumentarSaldo(sqlite3 *db, float saldo);
 
 #endif

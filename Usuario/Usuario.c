@@ -194,6 +194,109 @@ void editarUsuario(sqlite3 *db, int aEditar){
 
 }
 
+int saldo(sqlite3 *db){
+
+    sqlite3_stmt *stmt;
+
+    char sql[200];
+    float saldo;
+
+    int idCartera = obtenerIdCartera(db);
+
+    sprintf(sql, "SELECT Saldo FROM Cartera WHERE ID_Cartera = %i", idCartera);
+
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    
+    if (result != SQLITE_OK) {
+        printf("Error preparing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    result = sqlite3_step(stmt);
+
+    if(result == SQLITE_ROW){
+
+        saldo = sqlite3_column_int(stmt, 0);
+
+        printf("Saldo disponible: %.2f\n", saldo);
+
+    }else{
+        printf("Error, no existe cartera con ese identificador.\n");
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+        printf("Error finalizing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    printf("\n\n1: Aumentar saldo\n");
+    printf("0: Salir\n");
+
+
+
+    int option = scanf("%i", &option);
+    fflush(stdin);
+    while(option<0 || option>1){
+        printf("Introduce un digito valido: ");
+        scanf("%i", &option);
+        fflush(stdin);
+        printf("\n");
+        
+    }
+
+    if(option == 0){
+        printf("salida");
+    }else{
+        aumentarSaldo(db, saldo);
+    }
+
+}
+
+int aumentarSaldo(sqlite3 *db, float saldo){
+
+    sqlite3_stmt *stmt;
+
+    char sql[200];
+    float dinero;
+
+    printf("Introduce cuanto dinero quieres meter: ");
+    scanf("%f", &dinero);
+    fflush(stdin);
+    printf("\n");
+
+    if(dinero > 0){
+        saldo = saldo + dinero;
+        printf("Saldo actualizado: %.2f\n", saldo);
+    }else{
+        printf("No se puede aumentar saldo negativo.\n");
+    }
+
+    sprintf(sql, "UPDATE Cartera SET Saldo = %f WHERE ID_Cartera = %i", saldo, obtenerIdCartera(db));
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    
+    if (result != SQLITE_OK) {
+        printf("Error preparing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    result = sqlite3_step(stmt);
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+        printf("Error finalizing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+}
+
 
 
 /*
