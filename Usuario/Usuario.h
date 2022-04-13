@@ -5,6 +5,7 @@
 #include "../BaseDatos/GestorBaseDatos.h"
 #include "../Menu/Menu.h"
 #include "../BaseDatos/sqlite3.h"
+#include "../Menu/Menu.h"
 #include <stdio.h>
 #include <string.h>
 
