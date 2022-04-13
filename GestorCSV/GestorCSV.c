@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../Logger/Logger.h"
+#include "../BaseDatos/GestorBaseDatos.h"
 
 void exportarTransacciones(char* rutaCSV) {
 	printf("A continuación se exportarán las transacciones que indique al fichero (.CSV) que aparece indicado en Config/config.txt\n");

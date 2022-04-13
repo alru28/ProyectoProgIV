@@ -40,5 +40,9 @@ int pujar(sqlite3 *db, int idObjeto, float precio);
 int obtenerIdCartera(sqlite3 *db);
 int actualizarIdCarteraDeUsuario(sqlite3 *db, int idCartera);
 
+// Funciones para exportar transacciones a CSV
+int exportTransFechas(sqlite3* db, char **fechas);
+int exportTransUsuario(sqlite3* db, char* usuario);
+
 
 #endif

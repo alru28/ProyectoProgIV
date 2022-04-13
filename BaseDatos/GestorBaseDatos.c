@@ -680,3 +680,10 @@ int actualizarIdCarteraDeUsuario(sqlite3 *db, int idCartera){
 
 
 }
+
+int exportTransFechas(sqlite3* db, char** fechas) {
+
+}
+int exportTransUsuario(sqlite3* db, char* usuario) {
+
+}
