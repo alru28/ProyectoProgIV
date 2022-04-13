@@ -77,7 +77,7 @@ void menuPrincipal(sqlite3 *db){
         printf("3. Transacciones\n");
         printf("4. Perfil de usuario\n");
         printf("5. Añadir saldo\n");
-        printf("5. Cerrar sesion\n");
+        printf("6. Cerrar sesion\n");
         scanf("%i", &option);
 
         switch (option)
@@ -98,6 +98,7 @@ void menuPrincipal(sqlite3 *db){
             break;
         case 6:
             repetir = 0;
+            idUsing = -1;
             break;
         }
     }
