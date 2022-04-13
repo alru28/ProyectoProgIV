@@ -105,15 +105,6 @@ void menuPrincipal(sqlite3 *db){
 
 };
 
-void verLotes(){
-
-    //cargarLotes
-
-    //mostrarDia(dia)
-
-
-
-}
 
 
 Usuario menuRegistrarse(sqlite3 *db){
