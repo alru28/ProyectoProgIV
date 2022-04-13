@@ -12,7 +12,7 @@ void logTxt(char* tag, char* mensaje) {
 	char* stringTiempo = asctime(infoTiempo);
 	stringTiempo[strlen(stringTiempo) - 1] = '\0';
 
-	FILE* logs = fopen("logs.txt", "a");
+	FILE* logs = fopen("../Logger/logs.txt", "a");
 	fprintf(logs, "[%s][TAG: %s]: %s\n", stringTiempo, tag, mensaje);
 }
 
