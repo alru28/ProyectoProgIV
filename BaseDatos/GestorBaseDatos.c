@@ -117,6 +117,7 @@ int mostrarObjeto(sqlite3 *db, int id){
 
 float getSaldo(sqlite3 *db){
 
+    sqlite3_stmt *stmt;
     float saldo = -1;
     char sql[100];
     sprintf(sql, "select Saldo from cartera where %i = ID_Usuario", idUsing);
@@ -147,7 +148,7 @@ float getSaldo(sqlite3 *db){
 
 
 int crearPuja (sqlite3*db, int idObjeto){
-
+    sqlite3_stmt *stmt;
     float saldo = getSaldo(db);
     float precio;
     
@@ -184,11 +185,11 @@ int crearPuja (sqlite3*db, int idObjeto){
     do{
         printf("Saldo disponible es de %.2f \n", saldo);
         printf("La puja mas alta para esteproducto es de%.2f\n", precio);
-        printf("Introduce la cantidad que deseas pujar\n")
-        scanf(&puja);
+        printf("Introduce la cantidad que deseas pujar\n");
+        scanf("%s", &puja);
         if(puja<saldo & puja > precio) check =0;
         else printf("Error\n");
-    }while(chech ==0);
+    }while(check ==0);
     
     pujar(db, idObjeto, puja);
 }
@@ -528,6 +529,7 @@ int existeUsuario(sqlite3 *db, char *usuario){
 
 }
 
+/*
 
 int introducirUsuario(sqlite3 *db, Usuario* usuario){
     
@@ -562,6 +564,7 @@ int introducirUsuario(sqlite3 *db, Usuario* usuario){
 	return SQLITE_OK;
 
 }
+*/
 
 int introducirCartera(sqlite3 *db){
 

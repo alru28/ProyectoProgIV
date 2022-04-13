@@ -13,6 +13,4 @@ int main(void)
     menuInicial(db);
     return 0;
 
-
-
 }

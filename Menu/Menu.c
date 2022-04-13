@@ -135,8 +135,10 @@ void verLotes(){
     //mostrarDia(dia)
 
 
+
 }
 
+/*
 Usuario menuRegistrarse(sqlite3 *db){
     //CATEGORIA
     Usuario usuario;
@@ -225,3 +227,4 @@ Usuario menuRegistrarse(sqlite3 *db){
     return usuario;
 
 }
+*/

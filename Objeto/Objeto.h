@@ -1,9 +1,8 @@
-#include "../BaseDatos/sqlite3.h"
-#include "../BaseDatos/GestorBaseDatos.h"
-
 
 #ifndef _OBJETO_H_
 #define _OBJETO_H_
+#include "../BaseDatos/sqlite3.h"
+#include "../BaseDatos/GestorBaseDatos.h"
 #include "../BaseDatos/sqlite3.h"
 
 typedef struct {
