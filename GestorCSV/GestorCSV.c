@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "../Logger/Logger.h"
+#include "../BaseDatos/sqlite3.h"
+#include "../BaseDatos/GestorBaseDatos.h"
 
 void exportarTransacciones(char* rutaCSV) {
 	printf("A continuación se exportarán las transacciones que indique al fichero (.CSV) que aparece indicado en Config/config.txt\n");
@@ -20,6 +22,8 @@ void exportarTransacciones(char* rutaCSV) {
 		fflush(stdin);
 		// Hasta aquí pilla las fechas bien
 		// Consultar fechas en base de datos
+		sqlite3* baseDatos = cargarBaseDatos("../BaseDatos/basedatos.db");
+
 	}
 	else if (opcion == 2) {
 		fflush(stdin);
