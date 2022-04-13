@@ -1,6 +1,7 @@
 #include "Usuario.h"
 #include "../BaseDatos/GestorBaseDatos.h"
 #include "../BaseDatos/sqlite3.h"
+#include "../Menu/Menu.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -52,9 +53,11 @@ int imprimirUsuario(sqlite3 *db){
 
         //PRINTEOS
 
-        printf("1. Perfil de %s #%d:\n", nombre, idUsing);
+        printf("Perfil de %s #%d:\n", nombre, idUsing);
+        printf("ID de cartera: %i\n", idCartera);
+        printf("Numero de puntos: %i\n\n", puntos);
 
-        printf("2. Contrasena: ");
+        printf("1. Contrasena: ");
 
         for(int i=0; i<strlen(contrasena); i++){ //para imprimir tantos * como caracteres tenga la contrasena
         printf("*");
@@ -62,14 +65,12 @@ int imprimirUsuario(sqlite3 *db){
 
         printf("\n");
 
-        printf("3. Telefono: %i\n", tlf);
-        printf("4. Correo: %s\n", mail);
-        printf("5. Numero de puntos: %i\n", puntos);
-        printf("6. ID de cartera: %i\n", idCartera);
-        printf("7. Pais: %s\n", pais);
-        printf("8. Ciudad: %s\n", ciudad);
-        printf("9. Calle: %s\n", calle);
-        printf("10. Piso/puerta: %s\n", pisoPuerta);
+        printf("2. Telefono: %i\n", tlf);
+        printf("3. Correo: %s\n", mail);
+        printf("4. Pais: %s\n", pais);
+        printf("5. Ciudad: %s\n", ciudad);
+        printf("6. Calle: %s\n", calle);
+        printf("7. Piso/puerta: %s\n", pisoPuerta);
 
     }else{
         printf("Error, no existe usuario con ese identificador.\n");
@@ -83,18 +84,18 @@ int imprimirUsuario(sqlite3 *db){
 		return 0;
 	}
 
-    printf("\n\n 1-10: Editar valor correspondiente");
-    printf("\n 0: Salir\n");
+    printf("\n\n1-7: Editar valor correspondiente");
+    printf("\n0: Salir\n");
 
     int option = -1;
-    while(option<0 || option>10){
+    while(option<0 || option>7){
         printf("Introduce un digito valido: ");
         scanf("%i", &option);
         printf("\n");
     }
 
     if(option == 0){
-        menuPrincipal(db);
+        printf("salida");
     }else{
         editarUsuario(db, option);
     }
@@ -103,60 +104,81 @@ int imprimirUsuario(sqlite3 *db){
 
 }
 
-void editarUsuario(sqlite3 *db, int aEditar){
+int editarUsuario(sqlite3 *db, int aEditar){
 
     char* strRequest = "";
+    char valor[100];
+    char valorInput[100];
 
     switch (aEditar)
     {
 
     case 1:
-        strRequest = "";
-        printf("Editar contrasena\n");
+        strRequest = "Contraseña";
+
+        printf("Introduce nueva contrasena: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
+        
         break;
 
     case 2:
-        strRequest = "";
-        printf("Editar nombre\n");
+        strRequest = "Tlf";
+
+        do{
+            printf("Introduce nuevo numero de telefono: ");
+            fgets(valorInput, 100, stdin);
+
+        }while(strlen(valorInput) != 10);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
+        
         break;
 
     case 3:
-        strRequest = "";
-        printf("Editar telefono\n");
+        strRequest = "Mail";
+        printf("Introduce nueva direccion de correo electronico: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
+        
         break;
 
     case 4:
-        strRequest = "";
-        printf("Editar mail\n");
+        strRequest = "Pais";
+        printf("Introduce nuevo pais: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
+        
         break;
 
     case 5:
-        strRequest = "";
-        printf("Editar puntos\n");
+        strRequest = "Ciudad";
+        printf("Introduce nueva ciudad: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
+        
+        break;
 
     case 6:
-        strRequest = "";
-        printf("Editar ID Cartera");
+        strRequest = "Calle";
+        printf("Introduce nueva calle: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
+        
         break;
 
     case 7:
-        strRequest = "";
-        printf("Editar pais\n");
-        break;
+        strRequest = "PisoPuerta";
+        printf("Introduce nuevo piso/puerta: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
 
-    case 8:
-        strRequest = "";
-        printf("Editar ciudad\n");
-        break;
-
-    case 9:
-        strRequest = "";
-        printf("Editar calle\n");
-        break;
-
-    case 10:
-        strRequest = "";
-        printf("Editar piso/puerta\n");
         break;
 
     default:
@@ -169,28 +191,25 @@ void editarUsuario(sqlite3 *db, int aEditar){
 
     sqlite3_stmt *stmt;
 
+    char sql[200];
+    sprintf(sql, "UPDATE Usuario SET %s = '%s' WHERE ID_Usuario = %i", strRequest, valor, idUsing);
 
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
 
+    result = sqlite3_step(stmt);
 
-
-
-
-
-
-    int idUsing = 1;
-
-
-
-
-
-
-
-
-
-
-
-    char sql[150];
-    sprintf(sql, "SELECT Contraseña,  Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta FROM Usuario WHERE ID_Usuario = %i", idUsing);
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
 
 }
 

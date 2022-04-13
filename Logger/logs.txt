@@ -230,3 +230,16 @@
 [Wed Apr 13 19:00:44 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
 [Wed Apr 13 19:00:44 2022][TAG: TRANSACCIONES]: Transaccion impresa en CSV
 [Wed Apr 13 19:00:44 2022][TAG: TRANSACCIONES]: Transaccion impresa en CSV
+[Wed Apr 13 22:01:23 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Wed Apr 13 22:01:47 2022][TAG: CONFIGURACION]: Archivo de configuracion editado con exito
+[Wed Apr 13 22:01:47 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Wed Apr 13 22:02:04 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Wed Apr 13 22:02:35 2022][TAG: CONFIGURACION]: Archivo de configuracion editado con exito
+[Wed Apr 13 22:02:35 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Wed Apr 13 22:02:41 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Wed Apr 13 22:03:12 2022][TAG: CONFIGURACION]: Archivo de configuracion editado con exito
+[Wed Apr 13 22:03:12 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Wed Apr 13 22:08:41 2022][TAG: CONFIGURACION]: Archivo de configuracion editado con exito
+[Wed Apr 13 22:08:41 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Wed Apr 13 22:09:10 2022][TAG: CONFIGURACION]: Archivo de configuracion editado con exito
+[Wed Apr 13 22:09:10 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
