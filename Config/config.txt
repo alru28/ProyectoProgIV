@@ -1,5 +1,5 @@
 [CONFIG-RUTAS]
-rutaBBDD=Ficheros/basedatos.db
+rutaBBDD=BaseDatos/basedatos.db
 rutaTrans=Ficheros/transacciones.csv
 rutaUsuarios=Ficheros/usuarios.csv
 [CONFIG-ADMIN]

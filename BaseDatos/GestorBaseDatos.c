@@ -7,6 +7,7 @@
 #include "sqlite3.h"
 #include "GestorBaseDatos.h"
 #include "../Usuario/Usuario.h"
+#include "../Logger/Logger.h"
 
 int idUsing = -1;
 
@@ -62,7 +63,8 @@ sqlite3* cargarBaseDatos(char* rutaBaseDatos) {
         return NULL;
     }
 
-    printf("Database opened\n");
+    logTxt("BASE DE DATOS", "Se ha abierto la base de datos");
+    logConsola("BASE DE DATOS", "Se ha abierto la base de datos");
     return db;
 }
 
