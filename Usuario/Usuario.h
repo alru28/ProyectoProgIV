@@ -3,6 +3,7 @@
 
 #include "Usuario.h"
 #include "../BaseDatos/GestorBaseDatos.h"
+#include "../Menu/Menu.h"
 #include "../BaseDatos/sqlite3.h"
 #include <stdio.h>
 #include <string.h>
@@ -22,6 +23,6 @@ typedef struct {
 } Usuario;
 
 int imprimirUsuario(sqlite3 *db);
-void editarUsuario(sqlite3 *db, int aEditar);
+int editarUsuario(sqlite3 *db, int aEditar);
 
 #endif
