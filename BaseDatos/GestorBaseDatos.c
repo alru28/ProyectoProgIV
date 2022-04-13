@@ -542,7 +542,7 @@ int existeUsuario(sqlite3 *db, char *usuario){
 
 }
 
-/*
+
 
 int introducirUsuario(sqlite3 *db, Usuario* usuario){
     
@@ -577,7 +577,7 @@ int introducirUsuario(sqlite3 *db, Usuario* usuario){
 	return SQLITE_OK;
 
 }
-*/
+
 
 int introducirCartera(sqlite3 *db){
 
