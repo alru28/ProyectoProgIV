@@ -1,7 +1,8 @@
 #include "Menu.h"
+#include "../Usuario/Usuario.h"
 #include "../BaseDatos/GestorBaseDatos.h"
 #include "../BaseDatos/sqlite3.h"
-#include "../Usuario/Usuario.h"
+
 #include <stdio.h>
 #include <string.h>
 

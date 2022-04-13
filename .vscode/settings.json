@@ -5,6 +5,7 @@
         "usuario.h": "c",
         "string.h": "c",
         "sqlite3.h": "c",
-        "gestorbasedatos.h": "c"
+        "gestorbasedatos.h": "c",
+        "menu.h": "c"
     }
 }
