@@ -191,8 +191,8 @@ int editarUsuario(sqlite3 *db, int aEditar){
 
     sqlite3_stmt *stmt;
 
-    char sql[150];
-    sprintf(sql, "UPDATE Usuario SET %s = %s WHERE ID_Usuario = %i", strRequest, valor, idUsing);
+    char sql[200];
+    sprintf(sql, "UPDATE Usuario SET %s = '%s' WHERE ID_Usuario = %i", strRequest, valor, idUsing);
 
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
     
