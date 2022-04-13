@@ -235,3 +235,8 @@
 [Wed Apr 13 22:21:43 2022][TAG: CONFIGURACION]: Archivo de configuracion editado con exito
 [Wed Apr 13 22:21:43 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
 [Thu Apr 14 00:02:23 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Thu Apr 14 00:20:15 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Thu Apr 14 00:21:45 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Thu Apr 14 00:21:52 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Thu Apr 14 00:21:52 2022][TAG: LOGIN]: Login con exito

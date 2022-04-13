@@ -53,9 +53,11 @@ int imprimirUsuario(sqlite3 *db){
 
         //PRINTEOS
 
-        printf("1. Perfil de %s #%d:\n", nombre, idUsing);
+        printf("Perfil de %s #%d:\n", nombre, idUsing);
+        printf("ID de cartera: %i\n", idCartera);
+        printf("Numero de puntos: %i\n\n", puntos);
 
-        printf("2. Contrasena: ");
+        printf("1. Contrasena: ");
 
         for(int i=0; i<strlen(contrasena); i++){ //para imprimir tantos * como caracteres tenga la contrasena
         printf("*");
@@ -63,14 +65,12 @@ int imprimirUsuario(sqlite3 *db){
 
         printf("\n");
 
-        printf("3. Telefono: %i\n", tlf);
-        printf("4. Correo: %s\n", mail);
-        printf("5. Numero de puntos: %i\n", puntos);
-        printf("6. ID de cartera: %i\n", idCartera);
-        printf("7. Pais: %s\n", pais);
-        printf("8. Ciudad: %s\n", ciudad);
-        printf("9. Calle: %s\n", calle);
-        printf("10. Piso/puerta: %s\n", pisoPuerta);
+        printf("2. Telefono: %i\n", tlf);
+        printf("3. Correo: %s\n", mail);
+        printf("4. Pais: %s\n", pais);
+        printf("5. Ciudad: %s\n", ciudad);
+        printf("6. Calle: %s\n", calle);
+        printf("7. Piso/puerta: %s\n", pisoPuerta);
 
     }else{
         printf("Error, no existe usuario con ese identificador.\n");
@@ -84,18 +84,18 @@ int imprimirUsuario(sqlite3 *db){
 		return 0;
 	}
 
-    printf("\n\n 1-10: Editar valor correspondiente");
-    printf("\n 0: Salir\n");
+    printf("\n\n1-7: Editar valor correspondiente");
+    printf("\n0: Salir\n");
 
     int option = -1;
-    while(option<0 || option>10){
+    while(option<0 || option>7){
         printf("Introduce un digito valido: ");
         scanf("%i", &option);
         printf("\n");
     }
 
     if(option == 0){
-        menuPrincipal(db);
+        printf("salida");
     }else{
         editarUsuario(db, option);
     }
@@ -186,6 +186,7 @@ int editarUsuario(sqlite3 *db, int aEditar){
         break;
     }
 
+
     //Queda asignar un valor a una variable dependiendo del case, esa variable tomara valor id, contrasena etc. y se metera en el set value
     //Meter verificacion de contrasena, meter verificacion de usuario
     //Se puede cambiar id cartera?
@@ -213,7 +214,6 @@ int editarUsuario(sqlite3 *db, int aEditar){
 	}
 
 }
-
 
 int saldo(sqlite3 *db){
 
