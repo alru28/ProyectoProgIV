@@ -110,8 +110,8 @@ int mostrarObjeto(sqlite3 *db, int id){
     scanf("%i", &option);  
     if(option == 0) {        
         mostrarLote (db,idLote);
-    }else if(option > 0){
-        // crearpuja
+    }else if(option == 1){
+        crearPuja(db, id);
     }       
 
 }
@@ -291,7 +291,18 @@ int mostrarLote(sqlite3 *db, int id){
             printf("Articulo %i: %s\t Estado: %s Precio: %.2f\n", id, Descripcion, Estado, precio);                       
 		}
 	} while (result == SQLITE_ROW);
+    
+    
+    int idObj =0;
+    do{
+        printf("Introduce el id del objeto que desees ver o -1 en caso de querer volver");
+        scanf("%i", &idObj);
+        if(idObj==-1) mostrarDia(db, "2022/03/31");       
+
+    }while (mostrarObjeto(db ,idObj));
     return 1;
+     
+
 
 }
 
