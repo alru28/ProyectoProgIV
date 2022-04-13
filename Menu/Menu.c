@@ -67,7 +67,7 @@ void showLogin(sqlite3 *db){
 void menuPrincipal(sqlite3 *db){
     int repetir = 1;
 
-    while (repetir = 1){
+    while (repetir == 1){
     int option = -1;
         printf("Elige una opcion:\n");
         printf(" --------------------\n");
@@ -85,7 +85,7 @@ void menuPrincipal(sqlite3 *db){
             mostrarDia(db, "2022/03/31");
             break;
         case 2:
-            venderProducto(db);
+            crearObjeto(db);
             break;
         case 3:
             break;
