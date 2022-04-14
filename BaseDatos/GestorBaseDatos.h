@@ -40,6 +40,8 @@ int crearPuja (sqlite3*db, int idObjeto);
 int pujar(sqlite3 *db, int idObjeto, float precio);
 int obtenerIdCartera(sqlite3 *db);
 int actualizarIdCarteraDeUsuario(sqlite3 *db, int idCartera);
+char* obtenerNombre(sqlite3 *db, int idCartera);
+int showTransactions(sqlite3 * db);
 
 
 #endif

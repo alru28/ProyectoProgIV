@@ -702,3 +702,112 @@ int actualizarIdCarteraDeUsuario(sqlite3 *db, int idCartera){
 
 
 }
+
+
+int showTransactions(sqlite3 * db){
+
+sqlite3_stmt *stmt;
+
+    int idCart = obtenerIdCartera(db);
+    char sql[200];
+    sprintf(sql, "select Cantidad, Fecha, ID_Cartera_Recibe, ID_Cartera_Envia from Transaccion where ID_Cartera_Recibe = %i or ID_Cartera_Envia = %i", idCart, idCart);
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+
+    printf("\n Transacciones:\n");
+
+    do {
+		result = sqlite3_step(stmt) ;
+		if (result == SQLITE_ROW) {
+			float cant = sqlite3_column_double(stmt, 0);
+           
+            char fecha[20];
+			strcpy(fecha, (char *) sqlite3_column_text(stmt, 1));
+            
+            int idEnvia= sqlite3_column_int(stmt, 2);
+            int idRecibe= sqlite3_column_int(stmt,3);
+
+            printf("\nTransaccion de %.2f$ realizada en %s ", cant, fecha);
+
+
+            if(idCart == idEnvia){
+                char nombre[20];
+                strcpy(nombre, obtenerNombre(db, idRecibe));
+                printf("envida a %s.\n", nombre);
+            } else {
+                char nombre[20];
+                strcpy(nombre, obtenerNombre(db , idEnvia));
+                printf("recibida de %s.\n", nombre);
+
+            }
+                                  
+		}
+	} while (result == SQLITE_ROW);
+
+
+}
+
+
+char * obtenerNombre(sqlite3 *db, int idCartera){
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "select ID_Usuario from Cartera where ID_Cartera= %i ", idCartera);
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    int idUser;
+    if(result == SQLITE_ROW){
+        
+        idUser= sqlite3_column_int(stmt, 0);
+        
+    }else{
+        printf("Error, usuario no encontrado");
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    sprintf(sql, "select Nombre from Usuario where ID_Usuario = %i ", idUser);
+    result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+
+    if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    char nameUser[50];
+
+    if(result == SQLITE_ROW){        
+        strcpy(nameUser,sqlite3_column_text(stmt, 0));  
+    }else{
+        printf("Error, usuario no encontrado");
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    char * final = malloc (sizeof(char) * strlen(nameUser));
+    strcpy(final, nameUser);
+    
+    return final;
+}
