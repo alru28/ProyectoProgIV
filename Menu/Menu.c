@@ -2,7 +2,7 @@
 #include "../Usuario/Usuario.h"
 #include "../BaseDatos/GestorBaseDatos.h"
 #include "../BaseDatos/sqlite3.h"
-
+#include <time.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -69,6 +69,10 @@ void showLogin(sqlite3 *db){
 
 void menuPrincipal(sqlite3 *db){
     int repetir = 1;
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    char* fecha = malloc(sizeof(char)*20);
+    sprintf(fecha, "%d-%d-%d", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
 
     while (repetir == 1){
         int option = -1;
@@ -87,7 +91,7 @@ void menuPrincipal(sqlite3 *db){
         switch (option)
         {
         case 1:
-            mostrarDia(db, "2022/03/31");
+            mostrarDia(db, "2022-04-15");
             break;
         case 2:
             crearObjeto(db);

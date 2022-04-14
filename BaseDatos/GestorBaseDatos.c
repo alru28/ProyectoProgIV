@@ -77,7 +77,7 @@ int mostrarDia(sqlite3 *db , char *dia){
     sqlite3_stmt *stmt;
     
     char sql[300];
-    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where '%s' >= FechaCom and '%s' <= FechaFin", dia);
+    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where ('%s' >= FechaCom) and ('%s' <= FechaFin)", dia, dia);
 
     printf("\nLOTES DISPONIBLES (%s):\n------------------------\n", dia);
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
@@ -127,15 +127,15 @@ int mostrarDia(sqlite3 *db , char *dia){
     
     do{
         printf("Para seleccionar un lote introduce su número.\n");
-        printf("0. Ver lotes del siguiente dia.\n-1. Ver lotes del dia anterior.\n-2. Regresar al menu principal.\n");
+        printf("0. Ver lotes del siguiente dia.\n1. Ver lotes del dia anterior.\n2. Regresar al menu principal.\n");
         scanf("%i", &val);             // SANEAR ENTRADA -----------------------------------------------------------------------
         if(val == 0) {
             mostrarDia(db, sumarUnDia(dia));
             break;
-        }else if (val == -1){
+        }else if (val == 1){
             mostrarDia(db, restarUnDia(dia));
             break;
-        }else if(val == -2){
+        }else if(val == 2){
         menuPrincipal(db);
         } 
 
