@@ -13,14 +13,14 @@
 void menuInicial(sqlite3 *db){
     
     int option = -1;
-    printf(" BIENVENIDO A CSU BASTA\n");
+    printf("\n BIENVENIDO A CSU BASTA\n");
     printf(" --------------------\n");
     printf("Elige una opcion:\n");
     printf("1. Iniciar sesion\n");
     printf("2. Registrarse\n");
-    scanf("%i", & option);
-    fflush(stdin);
-   switch (option)
+    printf("3. Salir.\n");
+    scanf("%i\n", & option);
+    switch (option)
    {
     case 1:
        showLogin(db);
@@ -55,8 +55,6 @@ void showLogin(sqlite3 *db){
         scanf("%s", password); // Funcion que compruebe que la contraseña es correcta para el usuario elegido
         fflush(stdin);
         auxiliar = strcmp(name, "jaime_col");
-        printf("Comparacion de nombres es = %s\n", name) ;
-        printf("Comparacion de nombres es = .%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.%c.\n" , name[0],name[1],name[2],name[3],name[4],name[5],name[6],name[7],name[8], name[9], name[10]) ;
         option = login(db, name , password);
 
     }while(option!= 1);
@@ -77,7 +75,7 @@ void menuPrincipal(sqlite3 *db){
             printf("2. Vender producto\n");
             printf("3. Transacciones\n");
             printf("4. Perfil de usuario\n");
-            printf("5. Añadir saldo\n");
+            printf("5. Anydir saldo\n");
             printf("6. Cerrar sesion\n");
             scanf("%i", &option);
 
@@ -90,6 +88,7 @@ void menuPrincipal(sqlite3 *db){
                 crearObjeto(db);
                 break;
             case 3:
+                showTransactions(db);
                 break;
             case 4:
                 imprimirUsuario(db);
@@ -100,6 +99,7 @@ void menuPrincipal(sqlite3 *db){
             case 6:
                 repetir = 0;
                 idUsing = -1;
+                menuInicial(db);
                 break;
             }
     }
@@ -182,8 +182,6 @@ void menuRegistrarse(sqlite3 *db){
     
     usuario.Puntos=0;
 
-    
-
     introducirUsuario(db, &usuario);
 
     obtenerIdUsuario( db,  usuario.Nombre);
@@ -193,7 +191,4 @@ void menuRegistrarse(sqlite3 *db){
     actualizarIdCarteraDeUsuario(db, obtenerIdCartera(db));
 
     menuPrincipal(db);
-
-
-
 }

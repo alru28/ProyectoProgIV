@@ -63,7 +63,7 @@ int login(sqlite3 *db, char* username, char* password ){
         logTxt("LOGIN", "Login con exito");
         return 1;
     }else {
-        printf("Error, la contrasenya no es correcta");
+        printf("Error, la contrasenya no es correcta\n");
         return 0;
     }
 }
@@ -80,16 +80,14 @@ int mostrarDia(sqlite3 *db , char *dia){
     char sql[100];
     sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where '%s' >= FechaCom", dia);
 
-    printf("%s", sql);
-
+    printf("\nLOTES DISPONIBLES (%s):\n------------------------\n", dia);
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return 0;
 	}
-    printf("Lotes del dia : %s\n", dia);
-
+    
 	do {
 		result = sqlite3_step(stmt) ;
 		if (result == SQLITE_ROW) {
@@ -116,6 +114,7 @@ int mostrarDia(sqlite3 *db , char *dia){
 		}
 	} while (result == SQLITE_ROW);
 
+    printf("--------------------");
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
@@ -128,8 +127,8 @@ int mostrarDia(sqlite3 *db , char *dia){
     int check;
     
     do{
-       printf("Introduce el numero de lote elegido\n");
-       printf("0. Ver lotes del siguiente dia.\n-1. Ver lotes del dia anterior.\n -2. Regresar al menu principal.");
+       printf("Para seleccionar un lote introduce su número.\n");
+       printf("0. Ver lotes del siguiente dia.\n-1. Ver lotes del dia anterior.\n -2. Regresar al menu principal.\n");
        scanf("%i", &val);             // SANEAR ENTRADA -----------------------------------------------------------------------
        if(val == -1 | val == 0) {
            break;
@@ -171,7 +170,7 @@ int mostrarLote(sqlite3 *db, int id){
         printf("\n");
         printf("Lote %i: (%s - %s) \n", id, fechaInicio, fechaFinal);
     }else{
-        printf("Error, no existe lote con ese codigo");
+        printf("Error, no existe lote con ese codigo, introduce otro.\n");
         return 0;
     }
     
@@ -211,7 +210,7 @@ int mostrarLote(sqlite3 *db, int id){
     
     int idObj =0;
     do{
-        printf("Introduce el id del objeto que desees ver o -1 en caso de querer volver");
+        printf("\nIntroduce el id del objeto que desees ver.\n-1.  en caso de querer volver.");
         scanf("%i", &idObj);
         printf("ID objeto %i\n", idObj);
         if(idObj==-1) mostrarDia(db, "2022/03/31");       

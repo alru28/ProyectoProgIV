@@ -13,7 +13,6 @@ int main(void)
     sqlite3 *db = cargarBaseDatos("basedatos.db");
     sqlite3_stmt *stmt;
 
-    idUsing = 1;
-    showTransactions(db);
+    menuInicial(db);
     
 }
