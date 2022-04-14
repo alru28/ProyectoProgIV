@@ -12,9 +12,7 @@ int main(void) {
 
 	idUsing = 2;
 
-	for(int i=1; i<8; i++){
-		editarUsuario(baseDatos, i);
-	}
+	imprimirUsuario(baseDatos);
 
 	return 0;
 }

@@ -87,21 +87,23 @@ int imprimirUsuario(sqlite3 *db){
     printf("\n\n1-7: Editar valor correspondiente");
     printf("\n0: Salir\n");
 
-    int option = -1;
+    int option;
+    scanf("%i", &option);
+    printf("\n");
+
     while(option<0 || option>7){
         printf("Introduce un digito valido: ");
         scanf("%i", &option);
         printf("\n");
     }
+    fflush(stdin);
 
     if(option == 0){
-        printf("salida");
+        menuPrincipal(db);
     }else{
         editarUsuario(db, option);
+        
     }
-    
-
-
 }
 
 
@@ -184,6 +186,7 @@ int editarUsuario(sqlite3 *db, int aEditar){
 
     default:
         break;
+
     }
 
 
@@ -213,6 +216,7 @@ int editarUsuario(sqlite3 *db, int aEditar){
 		return 0;
 	}
 
+    menuPrincipal(db);
 }
 
 int saldo(sqlite3 *db){
