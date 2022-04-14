@@ -39,21 +39,21 @@ int imprimirUsuario(sqlite3 *db){
 
         int idCartera = sqlite3_column_int(stmt, 5);
 
-        char pais[50];
+        char pais[100];
         strcpy(pais, (char *) sqlite3_column_text(stmt, 6));
 
-        char ciudad[50];
+        char ciudad[100];
         strcpy(ciudad, (char *) sqlite3_column_text(stmt, 7));
 
-        char calle[50];
+        char calle[100];
         strcpy(calle, (char *) sqlite3_column_text(stmt, 8));
         
-        char pisoPuerta[50];
+        char pisoPuerta[100];
         strcpy(pisoPuerta, (char *) sqlite3_column_text(stmt, 9));
 
         //PRINTEOS
-
-        printf("Perfil de %s #%d:\n", nombre, idUsing);
+        printf("\n-------------------------------");
+        printf("\nPerfil de %s #%d:\n", nombre, idUsing);
         printf("ID de cartera: %i\n", idCartera);
         printf("Numero de puntos: %i\n\n", puntos);
 
