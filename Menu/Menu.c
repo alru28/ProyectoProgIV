@@ -52,7 +52,7 @@ void showLogin(sqlite3 *db){
         printf("Nombre de usuario:");
         fflush(stdin);
         fgets(name, 20, stdin);
-        sscanf(name, "%s", &name);
+        sscanf(name, "%s", name);
         fflush(stdin);
         printf("Contrasenya:");
         scanf("%s", password); // Funcion que compruebe que la contraseña es correcta para el usuario elegido
@@ -69,10 +69,19 @@ void showLogin(sqlite3 *db){
 
 void menuPrincipal(sqlite3 *db){
     int repetir = 1;
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
-    char* fecha = malloc(sizeof(char)*20);
-    sprintf(fecha, "%d-%d-%d", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
+
+    time_t rawtime;
+    struct tm *fechaRaw;
+    char fecha[20];
+
+    time( &rawtime );
+
+    fechaRaw = localtime( &rawtime );
+
+    //fechaRaw->tm_mday = fechaRaw->tm_mday - 1;
+
+    strftime(fecha,80,"%F", fechaRaw);
+    
 
     while (repetir == 1){
         int option = -1;
@@ -91,7 +100,7 @@ void menuPrincipal(sqlite3 *db){
         switch (option)
         {
         case 1:
-            mostrarDia(db, "2022-04-15");
+            mostrarDia(db, fecha);
             break;
         case 2:
             crearObjeto(db);

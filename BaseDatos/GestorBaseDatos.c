@@ -130,10 +130,12 @@ int mostrarDia(sqlite3 *db , char *dia){
         printf("0. Ver lotes del siguiente dia.\n1. Ver lotes del dia anterior.\n2. Regresar al menu principal.\n");
         scanf("%i", &val);             // SANEAR ENTRADA -----------------------------------------------------------------------
         if(val == 0) {
-            mostrarDia(db, sumarUnDia(dia));
+            dia = sumarUnDia(dia);
+            mostrarDia(db, dia);
             break;
         }else if (val == 1){
-            mostrarDia(db, restarUnDia(dia));
+            dia = restarUnDia(dia);
+            mostrarDia(db, dia);
             break;
         }else if(val == 2){
         menuPrincipal(db);

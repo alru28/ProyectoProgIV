@@ -104,6 +104,7 @@ int imprimirUsuario(sqlite3 *db){
         editarUsuario(db, option);
         
     }
+    return 1;
 }
 
 
