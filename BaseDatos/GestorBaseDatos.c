@@ -76,8 +76,8 @@ int mostrarDia(sqlite3 *db , char *dia){
     
     sqlite3_stmt *stmt;
     
-    char sql[100];
-    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where '%s' >= FechaCom", dia);
+    char sql[300];
+    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where '%s' >= FechaCom and '%s' <= FechaFin", dia);
 
     printf("\nLOTES DISPONIBLES (%s):\n------------------------\n", dia);
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
