@@ -126,16 +126,20 @@ int mostrarDia(sqlite3 *db , char *dia){
     int check;
     
     do{
-       printf("Para seleccionar un lote introduce su número.\n");
-       printf("0. Ver lotes del siguiente dia.\n-1. Ver lotes del dia anterior.\n-2. Regresar al menu principal.\n");
-       scanf("%i", &val);             // SANEAR ENTRADA -----------------------------------------------------------------------
-       if(val == -1 | val == 0) {
-           break;
-       }else if(val == -2){
+        printf("Para seleccionar un lote introduce su número.\n");
+        printf("0. Ver lotes del siguiente dia.\n-1. Ver lotes del dia anterior.\n-2. Regresar al menu principal.\n");
+        scanf("%i", &val);             // SANEAR ENTRADA -----------------------------------------------------------------------
+        if(val == 0) {
+            mostrarDia(db, sumarUnDia(dia));
+            break;
+        }else if (val == -1){
+            mostrarDia(db, restarUnDia(dia));
+            break;
+        }else if(val == -2){
         menuPrincipal(db);
-       } 
+        } 
 
-       check = mostrarLote(db, val);
+        check = mostrarLote(db, val);
         
     } while(check!=1);
     
@@ -808,4 +812,42 @@ char * obtenerNombre(sqlite3 *db, int idCartera){
     strcpy(final, nameUser);
     
     return final;
+}
+
+char* restarUnDia(char* fecha){
+
+    int year, month, day;
+    sscanf(fecha, "%d-%d-%d", &year, &month, &day);
+    day--;
+    if (day < 1){
+        month--;
+        if (month < 1)
+        {
+            year--;
+            month = 12;
+        }
+        day = 31;
+    }
+    char* nuevaFecha = malloc(sizeof(char) * 20);
+    sprintf(nuevaFecha, "%d-%d-%d", year, month, day);
+    return nuevaFecha;
+}
+
+char* sumarUnDia(char* fecha){
+
+    int year, month, day;
+    sscanf(fecha, "%d-%d-%d", &year, &month, &day);
+    day++;
+    if (day > 31){
+        month++;
+        if (month > 12)
+        {
+            year++;
+            month = 1;
+        }
+        day = 1;
+    }
+    char* nuevaFecha = malloc(sizeof(char) * 20);
+    sprintf(nuevaFecha, "%d-%d-%d", year, month, day);
+    return nuevaFecha;
 }

@@ -20,7 +20,8 @@ void menuInicial(sqlite3 *db){
     printf("1. Iniciar sesion\n");
     printf("2. Registrarse\n");
     printf("3. Salir.\n");
-    scanf("%i\n", & option);
+    scanf("%i", & option);
+    fflush(stdin);
     switch (option)
    {
     case 1:

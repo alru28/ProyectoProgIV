@@ -42,6 +42,8 @@ int obtenerIdCartera(sqlite3 *db);
 int actualizarIdCarteraDeUsuario(sqlite3 *db, int idCartera);
 char* obtenerNombre(sqlite3 *db, int idCartera);
 int showTransactions(sqlite3 * db);
+char* sumarUnDia(char* fecha);
+char* restarUnDia(char* fecha);
 
 
 #endif
