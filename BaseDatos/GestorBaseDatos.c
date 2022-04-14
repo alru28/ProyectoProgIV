@@ -59,7 +59,6 @@ int login(sqlite3 *db, char* username, char* password ){
 
     if(strcmp(Contrasenya,password) ==0){
         idUsing = idUser;
-        printf("LOGIN", "Login con exito");
         logTxt("LOGIN", "Login con exito");
         return 1;
     }else {
@@ -114,7 +113,7 @@ int mostrarDia(sqlite3 *db , char *dia){
 		}
 	} while (result == SQLITE_ROW);
 
-    printf("--------------------");
+    printf("--------------------\n");
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
@@ -128,7 +127,7 @@ int mostrarDia(sqlite3 *db , char *dia){
     
     do{
        printf("Para seleccionar un lote introduce su número.\n");
-       printf("0. Ver lotes del siguiente dia.\n-1. Ver lotes del dia anterior.\n -2. Regresar al menu principal.\n");
+       printf("0. Ver lotes del siguiente dia.\n-1. Ver lotes del dia anterior.\n-2. Regresar al menu principal.\n");
        scanf("%i", &val);             // SANEAR ENTRADA -----------------------------------------------------------------------
        if(val == -1 | val == 0) {
            break;
@@ -225,9 +224,7 @@ int mostrarObjeto(sqlite3 *db, int id){
 
     char sql[300];
     sprintf(sql, "select ID_Objeto, Categoria, Estado, Descripcion, PrecioSalida, ID_Lote from Objeto where %i = ID_Objeto", id);
-    printf("test1");
-    printf("%s\n", sql);
-    printf("test2");
+    
     
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
     
@@ -251,8 +248,9 @@ int mostrarObjeto(sqlite3 *db, int id){
 		strcpy(Precio, (char *) sqlite3_column_text(stmt, 4));
         idLote= sqlite3_column_int(stmt, 5);
 
-        printf("\n");
-        printf("Producto %i (%s): %s en un estado %s\nPrecio de salida de %.2f$\n\n", id, Categoria, Descripcion, Estado, Precio );
+        printf("\n__________________________________\n");
+        printf("Producto %i (%s): %s en un estado %s\nPrecio de salida de %.2f$", id, Categoria, Descripcion, Estado, Precio );
+        printf("\n__________________________________\n\n");
     }else{
         printf("Error, no existe producto con ese codigo");
         return 0;
@@ -339,9 +337,10 @@ int crearPuja (sqlite3*db, int idObjeto){
     float puja=0;
     int check = -1;
     do{
-        printf("Saldo disponible es de %.2f \n", saldo);
-        printf("La puja mas alta para esteproducto es de%.2f\n", precio);
-        printf("Introduce la cantidad que deseas pujar\n");
+        printf("\nPUJA:\n");
+        printf("Saldo total disponible es de %.2f \n", saldo);
+        printf("La puja mas alta para esteproducto es de %.2f\n", precio);
+        printf("Introduce la cantidad que deseas pujar:");
         scanf("%f", &puja);
         if(puja<=saldo && puja > precio) {
             check =0;

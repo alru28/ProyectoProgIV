@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 
 
@@ -30,7 +31,8 @@ void menuInicial(sqlite3 *db){
         break;
    
    default:
-       break;
+        exit(-1);
+        break;
    }
     
 }
@@ -69,39 +71,41 @@ void menuPrincipal(sqlite3 *db){
 
     while (repetir == 1){
         int option = -1;
-            printf("Elige una opcion:\n");
-            printf(" --------------------\n");
-            printf("1. Lotes\n");
-            printf("2. Vender producto\n");
-            printf("3. Transacciones\n");
-            printf("4. Perfil de usuario\n");
-            printf("5. Anydir saldo\n");
-            printf("6. Cerrar sesion\n");
-            scanf("%i", &option);
+        printf("\n\nMENU\n");
+        printf("Elige una opcion:\n");
+        printf(" --------------------\n");
+        printf("1. Lotes\n");
+        printf("2. Vender producto\n");
+        printf("3. Transacciones\n");
+        printf("4. Perfil de usuario\n");
+        printf("5. Anydir saldo\n");
+        printf("6. Cerrar sesion\n");
+        printf(" --------------------\n");
+        scanf("%i", &option);
 
-            switch (option)
-            {
-            case 1:
-                mostrarDia(db, "2022/03/31");
-                break;
-            case 2:
-                crearObjeto(db);
-                break;
-            case 3:
-                showTransactions(db);
-                break;
-            case 4:
-                imprimirUsuario(db);
-                break;
-            case 5:
-                saldo(db);
-                break;
-            case 6:
-                repetir = 0;
-                idUsing = -1;
-                menuInicial(db);
-                break;
-            }
+        switch (option)
+        {
+        case 1:
+            mostrarDia(db, "2022/03/31");
+            break;
+        case 2:
+            crearObjeto(db);
+            break;
+        case 3:
+            showTransactions(db);
+            break;
+        case 4:
+            imprimirUsuario(db);
+            break;
+        case 5:
+            saldo(db);
+            break;
+        case 6:
+            repetir = 0;
+            idUsing = -1;
+            menuInicial(db);
+            break;
+        }
     }
 
 };
