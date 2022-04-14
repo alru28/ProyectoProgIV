@@ -245,3 +245,9 @@
 [Thu Apr 14 17:46:07 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
 [Thu Apr 14 17:46:48 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
 [Thu Apr 14 17:51:35 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Thu Apr 14 18:09:01 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Thu Apr 14 18:09:17 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Thu Apr 14 18:12:32 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Thu Apr 14 18:12:37 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'admin' 
+[Thu Apr 14 18:12:37 2022][TAG: LOGIN]: Login con exito

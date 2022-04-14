@@ -26,7 +26,7 @@ void menuInicial(sqlite3 *db){
        showLogin(db);
        break;
     case 2:
-        //menuRegistrarse(db);
+        menuRegistrarse(db);
         break;
    
    default:
@@ -70,44 +70,44 @@ void menuPrincipal(sqlite3 *db){
     int repetir = 1;
 
     while (repetir == 1){
-    int option = -1;
-        printf("Elige una opcion:\n");
-        printf(" --------------------\n");
-        printf("1. Lotes\n");
-        printf("2. Vender producto\n");
-        printf("3. Transacciones\n");
-        printf("4. Perfil de usuario\n");
-        printf("5. Añadir saldo\n");
-        printf("6. Cerrar sesion\n");
-        scanf("%i", &option);
+        int option = -1;
+            printf("Elige una opcion:\n");
+            printf(" --------------------\n");
+            printf("1. Lotes\n");
+            printf("2. Vender producto\n");
+            printf("3. Transacciones\n");
+            printf("4. Perfil de usuario\n");
+            printf("5. Añadir saldo\n");
+            printf("6. Cerrar sesion\n");
+            scanf("%i", &option);
 
-        switch (option)
-        {
-        case 1:
-            mostrarDia(db, "2022/03/31");
-            break;
-        case 2:
-            crearObjeto(db);
-            break;
-        case 3:
-            break;
-        case 4:
-            imprimirUsuario(db);
-            break;
-        case 5:
-            saldo(db);
-            break;
-        case 6:
-            repetir = 0;
-            idUsing = -1;
-            break;
-        }
+            switch (option)
+            {
+            case 1:
+                mostrarDia(db, "2022/03/31");
+                break;
+            case 2:
+                crearObjeto(db);
+                break;
+            case 3:
+                break;
+            case 4:
+                imprimirUsuario(db);
+                break;
+            case 5:
+                saldo(db);
+                break;
+            case 6:
+                repetir = 0;
+                idUsing = -1;
+                break;
+            }
     }
 
 };
 
 
-/*
+
 void menuRegistrarse(sqlite3 *db){
     //CATEGORIA
     Usuario usuario;
@@ -194,7 +194,6 @@ void menuRegistrarse(sqlite3 *db){
 
     menuPrincipal(db);
 
-    return usuario;
+
 
 }
-*/

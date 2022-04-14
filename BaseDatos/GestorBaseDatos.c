@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../Usuario/Usuario.h"
 #include "../Objeto/Objeto.h"
 #include "../Lote/Lote.h"
 #include "sqlite3.h"
 #include "GestorBaseDatos.h"
-#include "../Usuario/Usuario.h"
 #include "../Logger/Logger.h"
 #include "../Menu/Menu.h"
 
@@ -551,7 +551,7 @@ int existeUsuario(sqlite3 *db, char *usuario){
 
 }
 
-/*
+
 
 int introducirUsuario(sqlite3 *db, Usuario* usuario){
     
@@ -586,7 +586,7 @@ int introducirUsuario(sqlite3 *db, Usuario* usuario){
 	return SQLITE_OK;
 
 }
-*/
+
 
 int introducirCartera(sqlite3 *db){
 
