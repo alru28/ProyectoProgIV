@@ -440,9 +440,7 @@ int mostrarLotesActivos(sqlite3 *db){
     
     char sql[100];
     sprintf(sql, "select ID_Lote, FechaCom, FechaFin, AvgPrecio from lote where Estado = 'En curso'");
-
-    printf("%s", sql);
-
+    
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
