@@ -147,5 +147,6 @@ Objeto crearObjeto(sqlite3 *db){
     
     //introducirObjeto(db, &o);
     //introducirObjeto(&o);
+    menuPrincipal(db);
     return o;
 }
