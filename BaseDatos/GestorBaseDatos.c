@@ -139,15 +139,15 @@ int mostrarDia(sqlite3 *db , int sumaResta){
     
     do{
         printf("Para seleccionar un lote introduce su número.\n");
-        printf("0. Ver lotes del siguiente dia.\n1. Ver lotes del dia anterior.\n2. Regresar al menu principal.\n");
+        printf("0. Ver lotes del siguiente dia.\n-1. Ver lotes del dia anterior.\n-2. Regresar al menu principal.\n");
         scanf("%i", &val);
         if(val == 0) {
             mostrarDia(db, sumaResta-1);
             break;
-        }else if (val == 1){
+        }else if (val == -1){
             mostrarDia(db, sumaResta+1);
             break;
-        }else if(val == 2){
+        }else if(val == -2){
         menuPrincipal(db);
         } 
 
