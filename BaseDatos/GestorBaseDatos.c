@@ -86,7 +86,7 @@ int mostrarDia(sqlite3 *db , int sumaResta){
     fechaRaw->tm_mday -= sumaResta;
     mktime(fechaRaw);
 
-    strftime(fecha,80,"%F", fechaRaw);
+    strftime(fecha,80,"%Y-%m-%d", fechaRaw);
     
     char sql[300];
     sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where ('%s' >= FechaCom) and ('%s' <= FechaFin)", fecha, fecha);
