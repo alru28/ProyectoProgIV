@@ -6,11 +6,11 @@
 #include <stdio.h>
 
 // Para ejecutar el main hacerlo desde la carpeta BaseDatos y usar el comando:
-// gcc ../Main/Main.c ../Usuario/Usuario.c GestorBaseDatos.c ../Objeto/Objeto.c ../Lote/Lote.c sqlite3.c   ../Menu/Menu.c ../Logger/Logger.c  -o main.exe
+// gcc Main.c ../Usuario/Usuario.c ../BaseDatos/GestorBaseDatos.c ../Objeto/Objeto.c ../Lote/Lote.c ../BaseDatos/sqlite3.c   ../Menu/Menu.c ../Logger/Logger.c  -o main.exe
 
 int main(void)
 {
-    sqlite3 *db = cargarBaseDatos("basedatos.db");
+    sqlite3 *db = cargarBaseDatos("../BaseDatos/basedatos.db");
     sqlite3_stmt *stmt;
 
     menuInicial(db);
