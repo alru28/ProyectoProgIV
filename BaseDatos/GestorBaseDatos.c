@@ -228,7 +228,7 @@ int mostrarLote(sqlite3 *db, int id){
         printf("\nIntroduce el id del objeto que desees ver.\n-1.  en caso de querer volver.");
         scanf("%i", &idObj);
         printf("ID objeto %i\n", idObj);
-        if(idObj==-1) mostrarDia(db, "2022/03/31");       
+        if(idObj==-1) mostrarDia(db, 0);       
 
     }while (mostrarObjeto(db ,idObj));
     return 1;
