@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "../Usuario/Usuario.h"
 #include "../Objeto/Objeto.h"
 #include "../Lote/Lote.h"
@@ -72,14 +73,25 @@ int login(sqlite3 *db, char* username, char* password ){
 
 
 
-int mostrarDia(sqlite3 *db , char *dia){
+int mostrarDia(sqlite3 *db , int sumaResta){
     
     sqlite3_stmt *stmt;
+
+    time_t rawtime;
+    struct tm *fechaRaw;
+    char fecha[20];
+    time( &rawtime );
+    fechaRaw = localtime( &rawtime );
+
+    fechaRaw->tm_mday -= sumaResta;
+    mktime(fechaRaw);
+
+    strftime(fecha,80,"%F", fechaRaw);
     
     char sql[300];
-    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where ('%s' >= FechaCom) and ('%s' <= FechaFin)", dia, dia);
+    sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote where ('%s' >= FechaCom) and ('%s' <= FechaFin)", fecha, fecha);
 
-    printf("\nLOTES DISPONIBLES (%s):\n------------------------\n", dia);
+    printf("\nLOTES DISPONIBLES (%s):\n------------------------\n", fecha);
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
@@ -128,14 +140,12 @@ int mostrarDia(sqlite3 *db , char *dia){
     do{
         printf("Para seleccionar un lote introduce su número.\n");
         printf("0. Ver lotes del siguiente dia.\n1. Ver lotes del dia anterior.\n2. Regresar al menu principal.\n");
-        scanf("%i", &val);             // SANEAR ENTRADA -----------------------------------------------------------------------
+        scanf("%i", &val);
         if(val == 0) {
-            dia = sumarUnDia(dia);
-            mostrarDia(db, dia);
+            mostrarDia(db, sumaResta-1);
             break;
         }else if (val == 1){
-            dia = restarUnDia(dia);
-            mostrarDia(db, dia);
+            mostrarDia(db, sumaResta+1);
             break;
         }else if(val == 2){
         menuPrincipal(db);
@@ -814,42 +824,4 @@ char * obtenerNombre(sqlite3 *db, int idCartera){
     strcpy(final, nameUser);
     
     return final;
-}
-
-char* restarUnDia(char* fecha){
-
-    int year, month, day;
-    sscanf(fecha, "%d-%d-%d", &year, &month, &day);
-    day--;
-    if (day < 1){
-        month--;
-        if (month < 1)
-        {
-            year--;
-            month = 12;
-        }
-        day = 31;
-    }
-    char* nuevaFecha = malloc(sizeof(char) * 20);
-    sprintf(nuevaFecha, "%d-%d-%d", year, month, day);
-    return nuevaFecha;
-}
-
-char* sumarUnDia(char* fecha){
-
-    int year, month, day;
-    sscanf(fecha, "%d-%d-%d", &year, &month, &day);
-    day++;
-    if (day > 31){
-        month++;
-        if (month > 12)
-        {
-            year++;
-            month = 1;
-        }
-        day = 1;
-    }
-    char* nuevaFecha = malloc(sizeof(char) * 20);
-    sprintf(nuevaFecha, "%d-%d-%d", year, month, day);
-    return nuevaFecha;
 }

@@ -24,7 +24,7 @@ sqlite3 *cargarBaseDatos(char* rutaBaseDatos);
 void cerrarBaseDatos(sqlite3 *db);
 
 
-int mostrarDia(sqlite3 *db , char *dia);
+int mostrarDia(sqlite3 *db , int sumaResta);
 int contarLotesActivos(sqlite3 *db);
 int mostrarLotesActivos(sqlite3 *db);
 int mostrarLote(sqlite3 *db, int id);

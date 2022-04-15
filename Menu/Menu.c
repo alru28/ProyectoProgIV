@@ -69,18 +69,14 @@ void showLogin(sqlite3 *db){
 
 void menuPrincipal(sqlite3 *db){
     int repetir = 1;
+    int sumarRestar = 0;
 
-    time_t rawtime;
+    /*time_t rawtime;
     struct tm *fechaRaw;
     char fecha[20];
-
     time( &rawtime );
-
     fechaRaw = localtime( &rawtime );
-
-    //fechaRaw->tm_mday = fechaRaw->tm_mday - 1;
-
-    strftime(fecha,80,"%F", fechaRaw);
+    strftime(fecha,80,"%F", fechaRaw);*/
     
 
     while (repetir == 1){
@@ -100,7 +96,7 @@ void menuPrincipal(sqlite3 *db){
         switch (option)
         {
         case 1:
-            mostrarDia(db, fecha);
+            mostrarDia(db, sumarRestar);
             break;
         case 2:
             crearObjeto(db);
