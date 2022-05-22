@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 // Para ejecutar el main hacerlo desde la carpeta BaseDatos y usar el comando:
-// gcc Main.c ../Usuario/Usuario.c ../BaseDatos/GestorBaseDatos.c ../Objeto/Objeto.c ../Lote/Lote.c ../BaseDatos/sqlite3.c   ../Menu/Menu.c ../Logger/Logger.c  -o main.exe
+// gcc Main.c ../Usuario/Usuario.c ../BaseDatos/GestorBaseDatos.c ../Objeto/Objeto.c ../Lote/Lote.c ../BaseDatos/sqlite3.c   ../Menu/Menu.c ../Logger/Logger.c  ../GestorCSV/GestorCSV.c ../Config/config.c -o main.exe
 
 int main(void)
 {

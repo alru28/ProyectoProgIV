@@ -212,7 +212,7 @@ void exportarUsuarios(char* rutaUsuarios) {
 
 }
 
-void main() {
+void menuExportar() {
 	char** configStrings = cargarConfig("../Config/config.txt");
 
 	printf("Desea exportar usuarios(1) o transacciones(2) ?: ");

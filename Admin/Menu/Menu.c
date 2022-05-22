@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "../GestorCSV/GestorCSV.h"
 #include "../Usuario/Usuario.h"
 #include "../BaseDatos/GestorBaseDatos.h"
 #include "../BaseDatos/sqlite3.h"
@@ -90,6 +91,7 @@ void menuPrincipal(sqlite3 *db){
         printf("4. Perfil de usuario\n");
         printf("5. Anydir saldo\n");
         printf("6. Cerrar sesion\n");
+        printf("7. Exportar CSVs\n");
         printf(" --------------------\n");
         scanf("%i", &option);
 
@@ -114,6 +116,9 @@ void menuPrincipal(sqlite3 *db){
             repetir = 0;
             idUsing = -1;
             menuInicial(db);
+            break;
+        case 7:
+            menuExportar();
             break;
         }
     }

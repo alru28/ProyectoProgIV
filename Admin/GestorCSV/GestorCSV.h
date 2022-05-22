@@ -3,6 +3,8 @@
 
 void exportarTransacciones(char* rutaCSV);
 
-// void cargarCSV(char* rutaCSV);
+void exportarUsuarios(char* rutaUsuarios);
+
+void menuExportar();
 
 #endif
