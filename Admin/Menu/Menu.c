@@ -3,6 +3,7 @@
 #include "../Usuario/Usuario.h"
 #include "../BaseDatos/GestorBaseDatos.h"
 #include "../BaseDatos/sqlite3.h"
+#include "../Config/config.h"
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
@@ -90,8 +91,9 @@ void menuPrincipal(sqlite3 *db){
         printf("3. Transacciones\n");
         printf("4. Perfil de usuario\n");
         printf("5. Anydir saldo\n");
-        printf("6. Cerrar sesion\n");
+        printf("6. Cambiar configuracion\n");
         printf("7. Exportar CSVs\n");
+        printf("8. Cerrar sesion\n");
         printf(" --------------------\n");
         scanf("%i", &option);
 
@@ -113,12 +115,15 @@ void menuPrincipal(sqlite3 *db){
             saldo(db);
             break;
         case 6:
-            repetir = 0;
-            idUsing = -1;
-            menuInicial(db);
+            escribirConfig("../Config/config.txt");
             break;
         case 7:
             menuExportar();
+            break;
+        case 8:
+            repetir = 0;
+            idUsing = -1;
+            menuInicial(db);
             break;
         }
     }
