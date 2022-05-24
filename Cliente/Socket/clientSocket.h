@@ -1,20 +1,18 @@
 #ifndef _SOCKET_H_
 #define _SOCKET_H_
 
-extern C{
-    #include "winsock2.h"
-}
+#include "winsock2.h"
 
-class Socket {
+class ClientSocket {
 private:
     WSADATA wsaData;
     SOCKET s;
     sockaddr_in server;
     char sendBuff[512];
     char recvBuff[512];
-    // CONSTRUCTOR PRIVADO ? si
 public:
     int startSocket();
+    int stopSocket();
     int sendMessage(char* message);
     int receiveMessage(char* message);
 };
