@@ -90,13 +90,13 @@ char* formatearLotes(sqlite3 *db)
 
 
             char Estado[20];
-            strcpy(Estado, (char *) sqlite3_column_text(stmt, 2));
+            strcpy(Estado, (char *) sqlite3_column_text(stmt, 3));
             strcat(formateado, Estado);
             strcat(formateado, ";");
 
 
 
-            char avgPrecio[10] = sqlite3_column_text(stmt, 3);
+            char avgPrecio[10] = sqlite3_column_text(stmt, 4);
             strcat(formateado, avgPrecio);
             strcat(formateado, ";");
       
