@@ -53,7 +53,7 @@ char* formatearObjetos(sqlite3 *db)
     } while (result == SQLITE_ROW);
 
     return formateado;
-
+}
 
 char* formatearLotes(sqlite3 *db)
 {
@@ -77,27 +77,16 @@ char* formatearLotes(sqlite3 *db)
             strcat(formateado, sqlite3_column_int(stmt, 0));
             strcat(formateado, ";");
 
-            char fechaInicio[20];
-			strcpy(fechaInicio, (char *) sqlite3_column_text(stmt, 1));
-            strcat(formateado, fechaInicio);
+            strcat(formateado, sqlite3_column_text(stmt, 1));
             strcat(formateado, ";");
 
-
-            char fechaFinal[20];
-			strcpy(fechaFinal, (char *) sqlite3_column_text(stmt, 2));
-            strcat(formateado, fechaFinal);
+            strcat(formateado, sqlite3_column_text(stmt, 2));
             strcat(formateado, ";");
 
-
-            char Estado[20];
-            strcpy(Estado, (char *) sqlite3_column_text(stmt, 3));
-            strcat(formateado, Estado);
+            strcat(formateado, sqlite3_column_text(stmt, 3));
             strcat(formateado, ";");
 
-
-
-            char avgPrecio[10] = sqlite3_column_text(stmt, 4);
-            strcat(formateado, avgPrecio);
+            strcat(formateado, sqlite3_column_text(stmt, 4));
             strcat(formateado, ";");
       
 		}
