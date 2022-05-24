@@ -76,3 +76,16 @@ int main(int argc, char *argv[]) {
 
 	return 0;
 }
+
+void menuInicial() {
+
+}
+void menuLogin() {
+
+}
+void menuRegistrarse() {
+
+}
+void menuPrincipal() {
+
+}

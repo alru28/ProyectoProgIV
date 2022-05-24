@@ -279,3 +279,28 @@
 [Sat May 14 19:35:21 2022][TAG: Consulta sql: %s.
 ]: select Contraseña, ID_Usuario from Usuario where Nombre= 'admin' 
 [Sat May 14 19:35:21 2022][TAG: LOGIN]: Login con exito
+[Tue May 24 10:43:13 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Tue May 24 10:43:27 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'admin' 
+[Tue May 24 10:43:27 2022][TAG: LOGIN]: Login con exito
+[Tue May 24 10:43:28 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Tue May 24 10:43:31 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:31 2022][TAG: USUARIOS]: Usuario impreso en CSV
+[Tue May 24 10:43:43 2022][TAG: CONFIGURACION]: El archivo de configuracion se ha cargado
+[Tue May 24 10:43:48 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
