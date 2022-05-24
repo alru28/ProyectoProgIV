@@ -26,25 +26,26 @@ char* formatearObjetos(sqlite3 *db)
     do {
         result = sqlite3_step(stmt) ;
         if (result == SQLITE_ROW) {
-            strcat(formateado,sqlite3_column_text(stmt, 0));
+
+            strcat(formateado,(char*) sqlite3_column_text(stmt, 0));
             strcat(formateado,";");
 
-            strcat(formateado,sqlite3_column_text(stmt, 1));
+            strcat(formateado,(char*) sqlite3_column_text(stmt, 1));
             strcat(formateado,";");
 
-            strcat(formateado,sqlite3_column_text(stmt, 2));
+            strcat(formateado,(char*) sqlite3_column_text(stmt, 2));
             strcat(formateado,";");
 
-            strcat(formateado,sqlite3_column_text(stmt, 3));
+            strcat(formateado,(char*) sqlite3_column_text(stmt, 3));
             strcat(formateado,";");
 
-            strcat(formateado,sqlite3_column_text(stmt, 4));
+            strcat(formateado,(char*) sqlite3_column_text(stmt, 4));
             strcat(formateado,";");
 
-            strcat(formateado,sqlite3_column_text(stmt, 5));
+            strcat(formateado,(char*) sqlite3_column_text(stmt, 5));
             strcat(formateado,";");
 
-            strcat(formateado,sqlite3_column_text(stmt, 6));
+            strcat(formateado,(char*) sqlite3_column_text(stmt, 6));
             strcat(formateado,"|");
 
             
@@ -74,19 +75,19 @@ char* formatearLotes(sqlite3 *db)
 		result = sqlite3_step(stmt) ;
 		if (result == SQLITE_ROW) {
 
-            strcat(formateado, sqlite3_column_int(stmt, 0));
+            strcat(formateado, (char*) sqlite3_column_int(stmt, 0));
             strcat(formateado, ";");
 
-            strcat(formateado, sqlite3_column_text(stmt, 1));
+            strcat(formateado, (char*) sqlite3_column_text(stmt, 1));
             strcat(formateado, ";");
 
-            strcat(formateado, sqlite3_column_text(stmt, 2));
+            strcat(formateado, (char*) sqlite3_column_text(stmt, 2));
             strcat(formateado, ";");
 
-            strcat(formateado, sqlite3_column_text(stmt, 3));
+            strcat(formateado, (char*) sqlite3_column_text(stmt, 3));
             strcat(formateado, ";");
 
-            strcat(formateado, sqlite3_column_text(stmt, 4));
+            strcat(formateado, (char*) sqlite3_column_text(stmt, 4));
             strcat(formateado, ";");
       
 		}
