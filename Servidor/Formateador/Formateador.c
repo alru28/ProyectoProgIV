@@ -87,7 +87,7 @@ char* formatearLotes(sqlite3 *db)
             strcat(formateado, ";");
 
             strcat(formateado, sqlite3_column_text(stmt, 4));
-            strcat(formateado, ";");
+            strcat(formateado, "|");
       
 		}
 	} while (result == SQLITE_ROW);
