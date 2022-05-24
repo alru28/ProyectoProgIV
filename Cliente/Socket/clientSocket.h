@@ -13,8 +13,10 @@ private:
 public:
     int startSocket();
     int stopSocket();
-    int sendMessage(char* message);
-    int receiveMessage(char* message);
+    int sendMessage(const char* message);
+    int receiveMessage();
+
+    char* getRecvBuff();
 };
 
 #endif
