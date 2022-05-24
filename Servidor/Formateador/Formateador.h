@@ -2,6 +2,8 @@
 #define FORMATEADOR_H_
 #include "../../Admin/BaseDatos/sqlite3.h"
 #include "../../Admin/Lote/Lote.h"
+#include "../../Admin/Objeto/Objeto.h"
+
 
 //Formateador convierte lo que hay en C en el formato con separadores
 

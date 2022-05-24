@@ -7,7 +7,7 @@
 char* formatearObjetos(sqlite3 *db)
 {
     sqlite3_stmt *stmt;
-    char formateado[99999];
+    char formateado[9999];
 
 
     char sql[300];
@@ -52,6 +52,7 @@ char* formatearObjetos(sqlite3 *db)
         }
     } while (result == SQLITE_ROW);
 
+    strcat(formateado, "¬"); //Fin del texto
     return formateado;
 }
 
@@ -87,7 +88,7 @@ char* formatearLotes(sqlite3 *db)
             strcat(formateado, ";");
 
             strcat(formateado, sqlite3_column_text(stmt, 4));
-            strcat(formateado, ";");
+            strcat(formateado, "|");
       
 		}
 	} while (result == SQLITE_ROW);
@@ -97,7 +98,8 @@ char* formatearLotes(sqlite3 *db)
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
 	}
-    
+
+    strcat(formateado, "¬"); //Fin del texto
     return formateado;
     
 }
