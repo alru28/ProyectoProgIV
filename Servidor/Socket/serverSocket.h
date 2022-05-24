@@ -6,7 +6,7 @@
 #define SERVER_PORT 6000
 
 
-class serverSocket {
+class ServerSocket {
     private:
         WSADATA wsaData;
         SOCKET conn_socket;

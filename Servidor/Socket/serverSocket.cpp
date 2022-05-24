@@ -3,7 +3,7 @@
 using namespace std;
 
 
-int serverSocket::startSocket(){
+int ServerSocket::startSocket(){
     
     cout<<"\nInitialising Winsock...\n"<<endl;
     if (WSAStartup(MAKEWORD(2, 2), &this->wsaData) != 0) {
@@ -63,13 +63,13 @@ int serverSocket::startSocket(){
 }
 
 
-void serverSocket::closeSocket(){
+void ServerSocket::closeSocket(){
     closesocket(comm_socket);
 	WSACleanup();
 }
 
         
-void serverSocket::communicate(){
+void ServerSocket::communicate(){
 
     do {
 		int bytes = recv(this->comm_socket, this->recvBuff, sizeof(this->recvBuff), 0);
