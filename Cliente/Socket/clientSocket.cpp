@@ -19,7 +19,7 @@ int ClientSocket::startSocket() {
 
 	// Creacion
 	if ((this->s = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-		cout << "Could not create socket: " << (double)WSAGetLastError() endl;
+		cout << "Could not create socket: " << (double) WSAGetLastError() << endl;
 		WSACleanup();
 		return -1;
 	}
@@ -47,17 +47,21 @@ int ClientSocket::stopSocket() {
 
 	return 0;
 }
-int ClientSocket::sendMessage(char* message) {
+int ClientSocket::sendMessage(const char* message) {
 	cout << "Enviando mensaje: " << message << endl;
 	strcpy(this->sendBuff, message);
 	send(this->s, this->sendBuff, sizeof(this->sendBuff), 0);
 
 	return 0;
 }
-int ClientSocket::receiveMessage(char* message) {
+int ClientSocket::receiveMessage() {
 	cout << "Recibiendo mensaje" << endl;
 	recv(this->s, this->recvBuff, sizeof(this->recvBuff), 0);
 	cout << "Mensaje recibido: " << this->recvBuff << endl;
 
 	return 0;
+}
+
+char* ClientSocket::getRecvBuff() {
+	return this->recvBuff;
 }
