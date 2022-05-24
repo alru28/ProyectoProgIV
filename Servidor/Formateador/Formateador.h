@@ -2,3 +2,5 @@
 #define FORMATEADOR_H_
 
 //Formateador convierte lo que hay en C en el formato con separadores
+
+#endif /* FORMATEADOR_H_ */
