@@ -1,0 +1,1 @@
+[Wed May 25 14:39:48 2022][TAG: TEST]: Probando log a fichero
