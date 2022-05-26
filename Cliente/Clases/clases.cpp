@@ -159,7 +159,17 @@ namespace clases {
 
 	// Metodos
 	void Objeto::imprimirObjeto() {
-		// TDB
+
+		cout << " --------------------\n";
+		cout << "ID_Objeto: " << this->ID_Objeto << endl;
+		cout << "Categoria: " << this->Categoria << endl;
+		cout << "Estado: " << this->Estado << endl;
+		cout << "Descripcion: " << this->Descripcion << endl;
+		cout << "PrecioSalida: " << this->PrecioSalida << endl;
+		cout << "ID_Subastador: " << this->ID_Subastador << endl;
+		cout << "ID_Lote: " << this->ID_Lote << endl;
+		cout << " --------------------\n";
+
 	}
 
 	// Constructores y destructores

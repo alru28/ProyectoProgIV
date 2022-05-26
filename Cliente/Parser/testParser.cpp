@@ -9,7 +9,7 @@ int main(void)
 
     Objeto* arrayObjetos = parseObjetos(texto);
 
-    imprimirObjeto(arrayObjetos[0]);
+    arrayObjetos[0].imprimirObjeto();
 
 	return 0;
 }
