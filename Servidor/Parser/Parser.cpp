@@ -1,8 +1,8 @@
 #include "Parser.h"
 
-Lote* parseLotes(char* bruto)
+Objeto* parseObjetos(char* bruto)
 {
-    char temp[100];
+    char atr[100];
     int i = 0;
     int cont = 0;
 
@@ -11,10 +11,11 @@ Lote* parseLotes(char* bruto)
         if(bruto[i] == '|') cont++; //Contar barras
         i++;
     }
-    Lote arrLotes[cont]; //Declaramos array de elementos
+
+    Objeto arrObjetos[cont]; //Declaramos array de elementos
 
     i = 0;
-    int cuentaLotes = 0;
+    int cuentaObjetos = 0;
 
     while(bruto[i] != '¬')
     {
@@ -27,6 +28,7 @@ Lote* parseLotes(char* bruto)
             do //Estamos dentro de un atributo
             {
                 //Meter caracter en atr
+                strcat(atr, (char*)bruto[i]);
                 i++;
             }while(bruto[i] != ';');
 
@@ -34,37 +36,39 @@ Lote* parseLotes(char* bruto)
             switch(cuentaAtributos)
             {
                 case(0):
-                    //Meter en atributo 1
+                    arrObjetos[cuentaObjetos].ID_Objeto = (int) atr;
                     break;
                 case(1):
-                    //Meter en atributo 2
+                    strcpy(arrObjetos[cuentaObjetos].Categoria, atr);
                     break;
                 case(2):
-                    //Meter en atributo 3
+                    strcpy(arrObjetos[cuentaObjetos].Estado, atr);
                     break;
                 case(3):
-                    //Meter en atributo 4
+                    strcpy(arrObjetos[cuentaObjetos].Descripcion, atr);
                     break;
                 case(4):
-                    //Meter en atributo 5
+                    arrObjetos[cuentaObjetos].PrecioSalida = (int) atr;
                     break;
                 case(5):
-                    //Meter en atributo 6
+                    arrObjetos[cuentaObjetos].ID_Subastador = (int) atr;
                     break;
                 case(6):
-                    //Meter en atributo 7
+                    arrObjetos[cuentaObjetos].ID_Lote = (int) atr;
+                    break;
             }
             cuentaAtributos++; //A por el siguiente atributoooo
             //Al llegar aqui, hemos metido el atributo. Si nos encontramos con una | va a salir y hacer i++, lo que lleva a encontrarse o | o ¬, cubiertos los dos casos.
             //Si nos encontramos con algo que no sea barra, va a ser un ;, vamos hacia arriba, reseteamos el atributo temporal. Con do while forzamos a hacer al menos un i++ para no toparnos de primeras con ;, lo que lo sacaria del bucle, jejej solucionado????
         }
-
+        cuentaObjetos++; //Siguiente objetoooo
         i++;
     }
 }
 
 
 
+//1;Casa y jardin;Casi nuevo;Mecedora negra;20;4;|12;Casa y jardin;Nuevo;Mesita de cristal;200;3;1;|
 
 
 
