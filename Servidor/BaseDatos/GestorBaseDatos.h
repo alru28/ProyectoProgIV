@@ -5,7 +5,7 @@
 
 class GestorBD {
 	public:
-		static sqlite3* cargarBaseDatos(char* rutaBaseDatos);
+		static sqlite3* cargarBaseDatos(const char* rutaBaseDatos);
 };
 
 #endif
