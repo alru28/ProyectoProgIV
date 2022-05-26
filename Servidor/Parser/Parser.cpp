@@ -1,5 +1,6 @@
 #include "Parser.h"
 
+
 Objeto* parseObjetos(char* bruto)
 {
     char atr[100];
@@ -64,6 +65,7 @@ Objeto* parseObjetos(char* bruto)
         cuentaObjetos++; //Siguiente objetoooo
         i++;
     }
+    return arrObjetos;
 }
 
 

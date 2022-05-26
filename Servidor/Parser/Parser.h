@@ -8,7 +8,7 @@
 
 //parse lote objeto transaccion y usuario
 
-Lote* parseLotes(char* bruto);
+Objeto* parseObjetos(char* bruto);
 
 #endif /* PARSER_H_*/
 
