@@ -4,19 +4,19 @@
 #include "winsock2.h"
 
 class ClientSocket {
-private:
-    WSADATA wsaData;
-    SOCKET s;
-    sockaddr_in server;
-    char sendBuff[512];
-    char recvBuff[512];
 public:
-    int startSocket();
-    int stopSocket();
-    int sendMessage(const char* message);
-    int receiveMessage();
+    static WSADATA wsaData;
+    static SOCKET s;
+    static sockaddr_in server;
+    static char sendBuff[512];
+    static char recvBuff[512];
+    static bool isStarted;
+    static int startSocket();
+    static int stopSocket();
+    static int sendMessage(const char* message);
+    static int receiveMessage();
 
-    char* getRecvBuff();
+    static char* getRecvBuff();
 };
 
 #endif

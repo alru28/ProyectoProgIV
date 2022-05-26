@@ -1,6 +1,8 @@
 #include "GestorBaseDatos.h"
 #include "../Logger/Logger.h"
 
+sqlite3* GestorBD::baseDatos;
+
 sqlite3* GestorBD::cargarBaseDatos(const char* rutaBaseDatos) {
     sqlite3* db;
 

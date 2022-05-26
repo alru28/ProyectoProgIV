@@ -3,8 +3,7 @@
 using namespace std;
 
 int main() {
-	ServerSocket socket;
-	socket.startSocket();
-	socket.communicate();
-	socket.closeSocket();
+	ServerSocket::startSocket();
+	ServerSocket::communicate();
+	ServerSocket::closeSocket();
 }

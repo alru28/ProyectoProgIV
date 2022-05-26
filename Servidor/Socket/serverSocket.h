@@ -7,19 +7,19 @@
 
 
 class ServerSocket {
-    private:
-        WSADATA wsaData;
-        SOCKET conn_socket;
-        SOCKET comm_socket;
-        struct sockaddr_in server;
-        struct sockaddr_in client;
-        char sendBuff[512]; 
-        char recvBuff[512];
-
     public:
-        int startSocket();
-        void communicate();
-        void closeSocket();
+        static WSADATA wsaData;
+        static SOCKET conn_socket;
+        static SOCKET comm_socket;
+        static struct sockaddr_in server;
+        static struct sockaddr_in client;
+        static char sendBuff[512];
+        static char recvBuff[512];
+        static bool isStarted;
+
+        static int startSocket();
+        static void communicate();
+        static void closeSocket();
 
 };
 

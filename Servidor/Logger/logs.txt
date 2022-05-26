@@ -1,2 +1,3 @@
 [Wed May 25 14:39:48 2022][TAG: TEST]: Probando log a fichero
 [Thu May 26 10:44:14 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Thu May 26 19:14:48 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos

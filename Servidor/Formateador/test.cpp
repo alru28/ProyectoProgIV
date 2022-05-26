@@ -10,9 +10,9 @@ int main(void)
 {
 	cout << "Hello World!" << endl;
 
-    sqlite3 *db = GestorBD::cargarBaseDatos("../BaseDatos/basedatos.db");
+    GestorBD::baseDatos = GestorBD::cargarBaseDatos("../BaseDatos/basedatos.db");
 
-    cout << formatearObjetos(db) << endl;
+    cout << formatearObjetos(GestorBD::baseDatos) << endl;
 
 	return 0;
 }

@@ -3,14 +3,13 @@
 using namespace std;
 
 int main() {
-	ClientSocket socket;
 
-	socket.startSocket();
+	ClientSocket::startSocket();
 
-	socket.sendMessage("Hola");
-	socket.receiveMessage();
-	cout << "Mensaje: " << socket.getRecvBuff() << endl;
+	ClientSocket::sendMessage("Hola");
+	ClientSocket::receiveMessage();
+	cout << "Mensaje: " << ClientSocket::getRecvBuff() << endl;
 
-	socket.stopSocket();
+	ClientSocket::stopSocket();
 	return 0;
 }
