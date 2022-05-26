@@ -1,8 +1,7 @@
 #ifndef PARSER_H_
 #define PARSER_H_
-#include "../../Admin/BaseDatos/sqlite3.h"
-#include "../../Admin/Lote/Lote.h"
-#include "../../Admin/Objeto/Objeto.h"
+#include "../Clases/clases.h"
+using namespace clases;
 
 //Parser son los que leen el string gordo con separadores y lo interpretan
 

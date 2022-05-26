@@ -56,6 +56,7 @@ namespace clases {
         int ID_Lote;
     public:
         // Constructores y destructores
+        Objeto();
         Objeto(int idObjeto, char* cat, char* estado, char* desc, float precioSal, int idSubastador, int idLote);
         Objeto(const Objeto& o);
         ~Objeto();
@@ -109,9 +110,9 @@ namespace clases {
         void setFechaCom(int fecha);
         void setFechaFin(int fecha);
         void setEstado(char* estado);
-        // setAvgPrecio no tiene sentido, se tiene que calcular en el constructor y al añadir/eliminar objetos
+        // setAvgPrecio no tiene sentido, se tiene que calcular en el constructor y al aï¿½adir/eliminar objetos
         void setCantidadObjetos(int cant);
-        void setListaObjetos(Objeto* listaObjetos);
+        void setListaObjetos(Objeto* listaObjetos, int cantidadObjetos);
 
         // Metodos
         void anadirObjeto(Objeto& o);

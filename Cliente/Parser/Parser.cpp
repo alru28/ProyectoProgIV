@@ -1,5 +1,5 @@
 #include "Parser.h"
-
+#include "string.h"
 
 Objeto* parseObjetos(char* bruto)
 {
@@ -37,35 +37,35 @@ Objeto* parseObjetos(char* bruto)
             switch(cuentaAtributos)
             {
                 case(0):
-                    arrObjetos[cuentaObjetos].ID_Objeto = (int) atr;
+                    arrObjetos[cuentaObjetos].setIDObjeto((int) atr);
                     break;
                 case(1):
-                    strcpy(arrObjetos[cuentaObjetos].Categoria, atr);
+                    arrObjetos[cuentaObjetos].setCategoria(atr);
                     break;
                 case(2):
-                    strcpy(arrObjetos[cuentaObjetos].Estado, atr);
+                    arrObjetos[cuentaObjetos].setEstado(atr);
                     break;
                 case(3):
-                    strcpy(arrObjetos[cuentaObjetos].Descripcion, atr);
+                    arrObjetos[cuentaObjetos].setDescripcion(atr);
                     break;
                 case(4):
-                    arrObjetos[cuentaObjetos].PrecioSalida = (int) atr;
+                    arrObjetos[cuentaObjetos].setPrecioSalida((int) atr);
                     break;
                 case(5):
-                    arrObjetos[cuentaObjetos].ID_Subastador = (int) atr;
+                    arrObjetos[cuentaObjetos].setIDSubastador((int) atr);
                     break;
                 case(6):
-                    arrObjetos[cuentaObjetos].ID_Lote = (int) atr;
+                    arrObjetos[cuentaObjetos].setIDLote((int) atr);
                     break;
             }
             cuentaAtributos++; //A por el siguiente atributoooo
             //Al llegar aqui, hemos metido el atributo. Si nos encontramos con una | va a salir y hacer i++, lo que lleva a encontrarse o | o ¬, cubiertos los dos casos.
             //Si nos encontramos con algo que no sea barra, va a ser un ;, vamos hacia arriba, reseteamos el atributo temporal. Con do while forzamos a hacer al menos un i++ para no toparnos de primeras con ;, lo que lo sacaria del bucle, jejej solucionado????
         }
+        
         cuentaObjetos++; //Siguiente objetoooo
         i++;
     }
-    return arrObjetos;
 }
 
 

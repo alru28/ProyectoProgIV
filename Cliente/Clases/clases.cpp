@@ -71,7 +71,7 @@ namespace clases {
 		this->ID_Cartera_Recibe = idCartera;
 	}
 	void Transaccion::setIDCarteraEnvia(int idCartera) {
-		this->getIDCarteraEnvia = idCartera;
+		this->ID_Cartera_Envia = idCartera;
 	}
 
 	// Constructores y destructores
@@ -170,7 +170,7 @@ namespace clases {
 		this->estado = new char[strlen(estado) + 1];
 		strcpy(this->estado, estado);
 		this->avgPrecio = avgPrecio;
-		this->cantidadObjetos = cantidadObj;
+		this->cantidadObjetos = cantObj;
 		this->listaObjetos = new Objeto[cantObj];
 		for (int i = 0; i < cantObj; i++) {
 			this->listaObjetos[i] = listaObjetos[i];
@@ -231,7 +231,7 @@ namespace clases {
 		this->estado = new char[strlen(estado) + 1];
 		strcpy(this->estado, estado);
 	}
-	// setAvgPrecio no tiene sentido, se tiene que calcular en el constructor y al añadir/eliminar objetos
+	// setAvgPrecio no tiene sentido, se tiene que calcular en el constructor y al aï¿½adir/eliminar objetos
 	void Lote::setCantidadObjetos(int cant) {
 		this->cantidadObjetos = cant;
 	}
@@ -245,7 +245,7 @@ namespace clases {
 
 	// Metodos
 	void Lote::anadirObjeto(Objeto& o) {
-		Objeto* aux[this->cantidadObjetos];
+		Objeto aux[this->cantidadObjetos];
 		for (int i = 0; i < this->cantidadObjetos; i++) {
 			aux[i] = this->listaObjetos[i];
 		}
@@ -268,7 +268,7 @@ namespace clases {
 		this->avgPrecio = sumaTotal / this->cantidadObjetos;
 	}
 	void Lote::eliminarObjeto(int idObjeto) {
-		// Tengo sueño ns como hacerlo ahora mismo :C ZzZzZ
+		// Tengo sueï¿½o ns como hacerlo ahora mismo :C ZzZzZ
 	}
 	void Lote::imprimirLote() {
 		// TBD
