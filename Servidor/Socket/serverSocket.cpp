@@ -15,11 +15,6 @@ char ServerSocket::sendBuff[512];
 char ServerSocket::recvBuff[512];
 bool ServerSocket::isStarted = false;
 
-
-<<<<<<< Updated upstream
-int ServerSocket::startSocket(){
-=======
-
 int serverSocket::startSocket(){
 >>>>>>> Stashed changes
     
@@ -90,84 +85,59 @@ void ServerSocket::closeSocket(){
     
 }
 
-<<<<<<< Updated upstream
-        
-void ServerSocket::communicate(){
-=======
-
-
-
 void serverSocket::communicate(){
->>>>>>> Stashed changes
 
-<<<<<<< Updated upstream
-    do {
-		int bytes = recv(this->comm_socket, this->recvBuff, sizeof(this->recvBuff), 0);
-		if (bytes > 0) {
-            
-            if (strcmp(this->recvBuff, "vuser") == 0){
-                strcpy(this->sendBuff, "ACK1");
-                send(this->comm_socket, this->sendBuff, sizeof(this->sendBuff), 0);
-                bytes = 0;
-                while ( bytes== 0){
-                    int bytes = recv(this->comm_socket, this->recvBuff, sizeof(this->recvBuff), 0);
-                }
-
-            }
-            else if (strcmp(this->recvBuff, "nuser") == 0){
-                
-
-            }
-            else if (strcmp(this->recvBuff, "sprod") == 0){
-                
-
-            }
-            else if (strcmp(this->recvBuff, "gprod") == 0){
-                
-
-            }
-            else if (strcmp(this->recvBuff, "spuja") == 0){
-                
-
-            }
-            else if (strcmp(this->recvBuff, "gpuja") == 0){
-                
-
-            }
-            else if (strcmp(this->recvBuff, "strans") == 0){
-                
-
-            }
-            else if (strcmp(this->recvBuff, "gtrans") == 0){
-                
-
-            }
-            else if (strcmp(this->recvBuff, "guser") == 0){
-                
-
-            }
-
-            else if (strcmp(this->recvBuff, "Bye") == 0)
-				break;
-
-
-			cout<<"Receiving message... "<<endl;
-			cout<<"Data received: %s "<<this->recvBuff<<endl;
-
-			cout<<"Sending reply... "<<endl;
-			strcpy(this->sendBuff, "ACK -> ");
-			strcat(this->sendBuff, this->recvBuff);
-			send(this->comm_socket, this->sendBuff, sizeof(this->sendBuff), 0);
-			cout<<"Data sent: "<< this->sendBuff <<endl;
-
-			
-		}
-	} while (1);
-=======
     if (ServerSocket::isStarted == true) {
         do {
             int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
             if (bytes > 0) {
+
+                if (strcmp(ServerSocket::recvBuff, "vuser") == 0) {
+                    strcpy(ServerSocket::sendBuff, "ACK1");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+                    bytes = 0;
+                    while (bytes == 0) {
+                        int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    }
+
+                }
+                else if (strcmp(ServerSocket::recvBuff, "nuser") == 0) {
+
+
+                }
+                else if (strcmp(ServerSocket::recvBuff, "sprod") == 0) {
+
+
+                }
+                else if (strcmp(ServerSocket::recvBuff, "gprod") == 0) {
+
+
+                }
+                else if (strcmp(ServerSocket::recvBuff, "spuja") == 0) {
+
+
+                }
+                else if (strcmp(ServerSocket::recvBuff, "gpuja") == 0) {
+
+
+                }
+                else if (strcmp(ServerSocket::recvBuff, "strans") == 0) {
+
+
+                }
+                else if (strcmp(ServerSocket::recvBuff, "gtrans") == 0) {
+
+
+                }
+                else if (strcmp(ServerSocket::recvBuff, "guser") == 0) {
+
+
+                }
+
+                else if (strcmp(ServerSocket::recvBuff, "Bye") == 0)
+                    break;
+
+
                 cout << "Receiving message... " << endl;
                 cout << "Data received: %s " << ServerSocket::recvBuff << endl;
 
@@ -177,14 +147,10 @@ void serverSocket::communicate(){
                 send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
                 cout << "Data sent: " << ServerSocket::sendBuff << endl;
 
-                if (strcmp(ServerSocket::recvBuff, "Bye") == 0)
-                    break;
+
             }
         } while (1);
     }
-    
->>>>>>> Stashed changes
-
 }
 
 
