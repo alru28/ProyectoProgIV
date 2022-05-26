@@ -2,6 +2,7 @@
 
 int main() {
 	ServerSocket socket;
+	
 
 	socket.startSocket();
 	socket.communicate();
