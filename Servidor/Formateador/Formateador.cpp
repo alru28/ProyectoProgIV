@@ -7,7 +7,7 @@
 char* formatearObjetos(sqlite3 *db)
 {
     sqlite3_stmt *stmt;
-    char formateado[99999];
+    char* formateado = new char[1000];
 
 
     char sql[300];
@@ -59,7 +59,7 @@ char* formatearObjetos(sqlite3 *db)
 char* formatearLotes(sqlite3 *db)
 {
     sqlite3_stmt *stmt;
-    char formateado[9999];
+    char* formateado = new char[1000];
 
     char sql[100];
     sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote");

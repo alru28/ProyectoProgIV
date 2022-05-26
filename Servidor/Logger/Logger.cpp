@@ -28,7 +28,7 @@ Logger::logTxt(const char* tag, const char* mensaje) {
 	stringTiempo[strlen(stringTiempo) - 1] = '\0';
 
 	ofstream fichero;
-	fichero.open("logs.txt", ios::app | ios::out);
+	fichero.open("../Logger/logs.txt", ios::app | ios::out);
 	fichero << "[" << stringTiempo << "][TAG: " << tag << "]: " << mensaje << endl;
 	fichero.close();
 }
