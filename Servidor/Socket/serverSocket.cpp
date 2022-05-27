@@ -1,9 +1,9 @@
 #include "serverSocket.h"
+#include "../BaseDatos/GestorBaseDatos.h"
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
-
 using namespace std;
 
 WSADATA ServerSocket::wsaData;
@@ -98,6 +98,16 @@ void serverSocket::communicate(){
                     while (bytes == 0) {
                         int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
                     }
+                    login(this->recvBuff)
+                }
+                else if (strcmp(ServerSocket::recvBuff, "exusr") == 0) {
+                    strcpy(ServerSocket::sendBuff, "exusr");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+                    bytes = 0;
+                    while (bytes == 0) {
+                        int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    }
+                    existeUsuario(this ->recvBuff);
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "nuser") == 0) {
