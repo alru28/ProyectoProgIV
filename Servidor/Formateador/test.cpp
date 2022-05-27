@@ -12,7 +12,7 @@ int main(void)
 
     GestorBD::baseDatos = GestorBD::cargarBaseDatos("../BaseDatos/basedatos.db");
 
-    cout << formatearObjetos(GestorBD::baseDatos) << endl;
+    cout << formatearObjetos() << endl;
 
 	return 0;
 }

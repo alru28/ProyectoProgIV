@@ -2,3 +2,4 @@
 .vs/
 Logger/logs.txt
 Config/config.txt
+*.txt

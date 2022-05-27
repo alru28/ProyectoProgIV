@@ -3,10 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "../BaseDatos/GestorBaseDatos.h"
 
-char* formatearObjetos(sqlite3 *db)
+char* formatearObjetos()
 {
     sqlite3_stmt *stmt;
+
     char* formateado = new char[1000];
 
 
@@ -14,11 +16,11 @@ char* formatearObjetos(sqlite3 *db)
     sprintf(sql, "SELECT * FROM Objeto");
     
     
-    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
+		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
 		return 0;
 	}
 
@@ -56,7 +58,7 @@ char* formatearObjetos(sqlite3 *db)
     return formateado;
 }
 
-char* formatearLotes(sqlite3 *db)
+char* formatearLotes()
 {
     sqlite3_stmt *stmt;
     char* formateado = new char[1000];
@@ -65,10 +67,10 @@ char* formatearLotes(sqlite3 *db)
     sprintf(sql, "select ID_Lote, FechaCom, FechaFin, Estado, AvgPrecio from lote");
 
     
-    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
+		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
 	}
 
     do {
@@ -96,7 +98,7 @@ char* formatearLotes(sqlite3 *db)
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
+		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
 	}
     
     return formateado;

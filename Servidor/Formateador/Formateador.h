@@ -7,7 +7,7 @@
 
 //Formateador convierte lo que hay en C en el formato con separadores
 
-char* formatearLotes(sqlite3 *db);
-char* formatearObjetos(sqlite3 *db);
+char* formatearLotes();
+char* formatearObjetos();
 
 #endif /* FORMATEADOR_H_ */
