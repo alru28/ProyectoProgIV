@@ -15,10 +15,9 @@ char ServerSocket::sendBuff[512];
 char ServerSocket::recvBuff[512];
 bool ServerSocket::isStarted = false;
 
-int serverSocket::startSocket(){
->>>>>>> Stashed changes
+int ServerSocket::startSocket(){
     
-    cout<<"\nInitialising Winsock...\n"<<endl;
+    cout<<"\nInitialising Winsock..."<<endl;
     if (WSAStartup(MAKEWORD(2, 2), &ServerSocket::wsaData) != 0) {
         cout<<"Failed. Error Code :" << (double)WSAGetLastError()<< endl;
         return -1;
