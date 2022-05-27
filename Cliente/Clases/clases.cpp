@@ -17,6 +17,13 @@ namespace clases {
 		this->ID_Usuario = c.ID_Usuario;
 		this->saldo = c.saldo;
 	}
+	Cartera::imprimirCartera() {
+		cout << "----------[CARTERA]----------\n";
+		cout << "ID_Cartera: " << this->ID_Cartera << endl;
+		cout << "ID_Usuario: " << this->ID_Usuario << endl;
+		cout << "Saldo: " << this->saldo << endl;
+		cout << "--------[FIN-CARTERA]--------\n";
+	}
 
 	Transaccion::Transaccion(int idTrans, float cantidad, int fecha, int idObjeto, int idCartEnvia, int idCartRec) {
 		this->ID_Transaccion = idTrans;
@@ -72,6 +79,24 @@ namespace clases {
 	}
 	void Transaccion::setIDCarteraEnvia(int idCartera) {
 		this->ID_Cartera_Envia = idCartera;
+	}
+	void Transaccion::imprimirTransaccion() {
+		this->ID_Transaccion = t.ID_Transaccion;
+		this->Cantidad = t.Cantidad;
+		this->Fecha = t.Fecha;
+		this->ID_Objeto = t.ID_Objeto;
+		this->ID_Cartera_Envia = t.ID_Cartera_Envia;
+		this->ID_Cartera_Recibe = t.ID_Cartera_Recibe;s
+
+
+		cout << "----------[TRANSACCION]----------\n";
+		cout << "ID_Transaccion: " << this->ID_Transaccion << endl;
+		cout << "Cantidad: " << this->Cantidad << endl;
+		cout << "Fecha: " << this->Fecha << endl;
+		cout << "ID_Objeto: " << this->ID_Objeto << endl;
+		cout << "ID_Cartera_Envia: " << this->ID_Cartera_Envia << endl;
+		cout << "ID_Cartera_Recibe: " << this->ID_Cartera_Recibe << endl;
+		cout << "--------[FIN-TRANSACCION]--------\n";
 	}
 
 	// Constructores y destructores
@@ -160,7 +185,7 @@ namespace clases {
 	// Metodos
 	void Objeto::imprimirObjeto() {
 
-		cout << " --------------------\n";
+		cout << "----------[OBJETO]----------\n";
 		cout << "ID_Objeto: " << this->ID_Objeto << endl;
 		cout << "Categoria: " << this->Categoria << endl;
 		cout << "Estado: " << this->Estado << endl;
@@ -168,7 +193,7 @@ namespace clases {
 		cout << "PrecioSalida: " << this->PrecioSalida << endl;
 		cout << "ID_Subastador: " << this->ID_Subastador << endl;
 		cout << "ID_Lote: " << this->ID_Lote << endl;
-		cout << " --------------------\n";
+		cout << "--------[FIN-OBJETO]--------\n";
 
 	}
 
@@ -281,7 +306,18 @@ namespace clases {
 		// Tengo sue�o ns como hacerlo ahora mismo :C ZzZzZ
 	}
 	void Lote::imprimirLote() {
-		// TBD
+		cout << "----------[LOTE]----------\n";
+		cout << "ID_Lote: " << this->idLote << endl;
+		cout << "Fecha_Comienzo: " << this->fechaCom << endl;
+		cout << "Fecha_Fin: " << this->fechaFin << endl;
+		cout << "Estado: " << this->estado << endl;
+		cout << "Avg_Precio: " << this->avgPrecio << endl;
+		cout << "Cantidad_Objetos: " << this->cantidadObjetos << endl;
+		cout << "ListaObjetos:\n";
+		for (int i = 0; i < this->cantidadObjetos; i++) {
+			listaObjetos[i].imprimirObjeto();
+		}
+		cout << "--------[FIN-LOTE]--------\n";
 	}
 
 
@@ -422,6 +458,17 @@ namespace clases {
 
 	// Metodos
 	void Usuario::imprimirUsuario() {
-		// TBD
+		cout << "----------[USUARIO]----------\n";
+		cout << "ID_Usuario: " << this->ID_Usuario << endl;
+		cout << "Contrasenya: " << this->Contrasenia << endl;
+		cout << "Nombre: " << this->Nombre << endl;
+		cout << "Tlf: " << this->Tlf << endl;
+		cout << "Puntos: " << this->Puntos << endl;
+		cout << "ID_Cartera: " << this->ID_Cartera << endl;
+		cout << "Pais: " << this->Pais << endl;
+		cout << "Ciudad: " << this->Ciudad << endl;
+		cout << "Calle: " << this->Calle << endl;
+		cout << "Piso_Puerta: " << this->PisoPuerta << endl;
+		cout << "--------[FIN-USUARIO]--------\n";
 	}
 }

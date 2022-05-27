@@ -11,7 +11,7 @@ namespace clases {
     public:
         Cartera(int idCartera, float saldo, int idUsuario);
         Cartera(const Cartera& c);
-
+        void imprimirCartera();
     };
 
     class Transaccion {
@@ -43,6 +43,7 @@ namespace clases {
         void setIDCarteraEnvia(int idCartera);
 
         // Metodos
+        void imprimirTransaccion();
     };
 
     class Objeto {
