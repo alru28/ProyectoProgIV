@@ -1,7 +1,11 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
 #include "GestorBaseDatos.h"
 #include "../Logger/Logger.h"
+
+using namespace std;
 
 sqlite3* GestorBD::baseDatos;
 
@@ -19,7 +23,7 @@ sqlite3* GestorBD::cargarBaseDatos(const char* rutaBaseDatos) {
     return db;
 }
 
-int login(sqlite3 *db, char* texto){    //devuelve el devuelve el id del usuario si se completa correctamente, 0 si falla, -1 si no existe, -2 si no se completa correctamente
+int login(char* texto){    //devuelve el devuelve el id del usuario si se completa correctamente, 0 si falla, -1 si no existe, -2 si no se completa correctamente
 
     // ejemplo del texto recivido: "jaime_col;palencia998"
     char* username = strtok(texto, ";");
@@ -28,7 +32,7 @@ int login(sqlite3 *db, char* texto){    //devuelve el devuelve el id del usuario
     sqlite3_stmt *stmt;
     char sql[100];
     sprintf(sql, "select Contraseña, ID_Usuario from Usuario where Nombre= '%s' ", username);
-    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     Logger::logTxt("Consulta sql: %s.\n", sql);
     
 	if (result != SQLITE_OK) {
@@ -60,4 +64,41 @@ int login(sqlite3 *db, char* texto){    //devuelve el devuelve el id del usuario
         Logger::logTxt("LOGIN", "Error en la contraseña");
         return -2;
     }
+}
+
+int existeUsuario(char *usuario){
+    // ejemplo del texto recivido: "jaime_col"
+    sqlite3_stmt *stmt;
+    char sql[200];
+    sprintf(sql, "SELECT * FROM Usuario WHERE Nombre = '%s'", usuario);    
+
+
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+    if (result != SQLITE_OK) {
+        cout << "Error preparing statement (SELECT)" << endl;
+        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        return 0;
+    }
+
+    cout << "SQL query prepared (SELECT)" << endl;
+
+    do {
+        result = sqlite3_step(stmt) ;
+        if (result == SQLITE_ROW) {
+            cout << "Usuario existe" << endl;
+            return 1;
+        }
+    } while (result == SQLITE_ROW);
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+        cout << "Error finalizing statement (SELECT)" << endl;
+        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        return 0;
+    }
+
+    cout << "Prepared statement finalized (SELECT)" << endl;
+
+    return 0;
+
 }
