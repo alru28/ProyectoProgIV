@@ -10,6 +10,7 @@ class GestorBD {
 
 		char* login(char* texto);
 		int existeUsuario(char *usuario);
+		int introducirUsuario(char* texto);
 };
 
 #endif
