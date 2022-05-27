@@ -25,7 +25,7 @@ sqlite3* GestorBD::cargarBaseDatos(const char* rutaBaseDatos) {
 
 int login(char* texto){    //devuelve el devuelve el id del usuario si se completa correctamente, 0 si falla, -1 si no existe, -2 si no se completa correctamente
 
-    // ejemplo del texto recivido: "jaime_col;palencia998"
+    // ejemplo del texto recivido: "jaime_col;palencia998;"
     char* username = strtok(texto, ";");
     char* password = strtok(NULL, ";");
 
@@ -100,5 +100,57 @@ int existeUsuario(char *usuario){
     cout << "Prepared statement finalized (SELECT)" << endl;
 
     return 0;
+
+}
+
+
+int introducirUsuario(char* texto){
+    // recibe un texto con atributos separados por ;
+    // ejemplo del texto recivido: "palencia998;jaime_col;728946372;jaimecol@gmail.com;335;España;Bilbao;Lehendakari Aguirre;11 3E;" 
+
+    // parsear el texto recivido a los atributos:Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta
+    char* Contraseña = strtok(texto, ";");
+    char* Nombre = strtok(NULL, ";");
+    char* Tlf = strtok(NULL, ";");
+    char* Mail = strtok(NULL, ";");
+    char* Puntos = strtok(NULL, ";");
+    char* Pais = strtok(NULL, ";");
+    char* Ciudad = strtok(NULL, ";");
+    char* Calle = strtok(NULL, ";");
+    char* PisoPuerta = strtok(NULL, ";");
+
+    int tlf = atoi(Tlf);
+    int puntos = atoi(Puntos);
+
+
+    sqlite3_stmt *stmt;
+    char sql[200];
+    sprintf(sql, "INSERT INTO Usuario ( Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta) VALUES ('%s', '%s', %i, '%s', %i, '%s', '%s', '%s', '%s');", Contraseña, Nombre, tlf, Mail, puntos, Pais, Ciudad, Calle, PisoPuerta);
+
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, strlen(sql) +1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		return 0;
+	}
+
+    cout << "SQL query prepared (INSERT)" << endl;
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		cout << "Error inserting new data into country table" << endl;
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		cout << "Error finalizing statement (INSERT)" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		return result;
+	}
+
+	cout << "Prepared statement finalized (INSERT)" << endl;
+
+	return SQLITE_OK;
 
 }
