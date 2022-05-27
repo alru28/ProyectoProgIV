@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
 	printf("Connection stablished with: %s (%d)\n", inet_ntoa(server.sin_addr),
 			ntohs(server.sin_port));
-
+/*
 	// SEND and RECEIVE data
 	printf("Sending message 1... \n");
 	strcpy(sendBuff, "Hello, server.");
@@ -71,6 +71,7 @@ int main(int argc, char *argv[]) {
 	printf("Data sent: %s \n", sendBuff);
 
 	// CLOSING the socket and cleaning Winsock...
+	*/
 	closesocket(s);
 	WSACleanup();
 
