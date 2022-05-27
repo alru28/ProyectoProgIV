@@ -8,6 +8,7 @@
         "sqlite3.h": "c",
         "gestorbasedatos.h": "c",
         "menu.h": "c",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "ostream": "cpp"
     }
 }

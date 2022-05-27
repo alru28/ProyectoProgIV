@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <winsock2.h>
+#include "../Menu/Menu.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
@@ -46,6 +47,20 @@ int main(int argc, char *argv[]) {
 
 	printf("Connection stablished with: %s (%d)\n", inet_ntoa(server.sin_addr),
 			ntohs(server.sin_port));
+
+
+
+//COMIENZ DEL MAIN -----------------------------
+
+	menuInicial();
+
+
+
+
+
+
+
+
 /*
 	// SEND and RECEIVE data
 	printf("Sending message 1... \n");
@@ -72,6 +87,9 @@ int main(int argc, char *argv[]) {
 
 	// CLOSING the socket and cleaning Winsock...
 	*/
+
+
+
 	closesocket(s);
 	WSACleanup();
 

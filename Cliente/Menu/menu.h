@@ -2,7 +2,7 @@
 #define _MENU_H_
 
 void menuInicial();
-void menuLogin();
+void showLogin();
 void menuRegistrarse();
 void menuPrincipal();
 
