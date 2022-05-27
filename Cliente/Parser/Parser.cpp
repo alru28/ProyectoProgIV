@@ -1,5 +1,6 @@
 #include "Parser.h"
 #include "string.h"
+#include <stdlib.h>
 
 Objeto* parseObjetos(char* bruto)
 {
@@ -7,7 +8,7 @@ Objeto* parseObjetos(char* bruto)
     int i = 0;
     int cont = 0;
 
-    while(bruto[i] != '¬') //Recorrer todo el string
+    while(bruto[i] != '#') //Recorrer todo el string
     {
         if(bruto[i] == '|') cont++; //Contar barras
         i++;
@@ -18,7 +19,7 @@ Objeto* parseObjetos(char* bruto)
     i = 0;
     int cuentaObjetos = 0;
 
-    while(bruto[i] != '¬')
+    while(bruto[i] != '#')
     {
         int cuentaAtributos = 0; //Empezamos desde el primer atributo
 
@@ -37,7 +38,7 @@ Objeto* parseObjetos(char* bruto)
             switch(cuentaAtributos)
             {
                 case(0):
-                    arrObjetos[cuentaObjetos].setIDObjeto((int) atr);
+                    arrObjetos[cuentaObjetos].setIDObjeto(atoi(atr));
                     break;
                 case(1):
                     arrObjetos[cuentaObjetos].setCategoria(atr);
@@ -49,13 +50,13 @@ Objeto* parseObjetos(char* bruto)
                     arrObjetos[cuentaObjetos].setDescripcion(atr);
                     break;
                 case(4):
-                    arrObjetos[cuentaObjetos].setPrecioSalida((int) atr);
+                    arrObjetos[cuentaObjetos].setPrecioSalida(atoi(atr));
                     break;
                 case(5):
-                    arrObjetos[cuentaObjetos].setIDSubastador((int) atr);
+                    arrObjetos[cuentaObjetos].setIDSubastador(atoi(atr));
                     break;
                 case(6):
-                    arrObjetos[cuentaObjetos].setIDLote((int) atr);
+                    arrObjetos[cuentaObjetos].setIDLote(atoi(atr));
                     break;
             }
             cuentaAtributos++; //A por el siguiente atributoooo
