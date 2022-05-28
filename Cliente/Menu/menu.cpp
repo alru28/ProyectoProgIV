@@ -137,18 +137,18 @@ void menuPrincipal(){
 
     while (repetir == 1){
         int option = -1;
-        cout << "\n\nMENU\n");
-        cout << "Elige una opcion:\n");
-        cout << " --------------------\n");
-        cout << "1. Lotes\n");
-        cout << "2. Vender producto\n");
-        cout << "3. Transacciones\n");
-        cout << "4. Perfil de usuario\n");
-        cout << "5. Anydir saldo\n");
-        cout << "6. Cambiar configuracion\n");
-        cout << "7. Exportar CSVs\n");
-        cout << "8. Cerrar sesion\n");
-        cout << " --------------------\n");
+        cout << "\n\nMENU\n" << endl;
+        cout << "Elige una opcion:\n" << endl;
+        cout << " --------------------\n" << endl;
+        cout << "1. Lotes\n" << endl;
+        cout << "2. Vender producto\n" << endl;
+        cout << "3. Transacciones\n" << endl;
+        cout << "4. Perfil de usuario\n" << endl;
+        cout << "5. Anydir saldo\n" << endl;
+        cout << "6. Cambiar configuracion\n" << endl;
+        cout << "7. Exportar CSVs\n" << endl;
+        cout << "8. Cerrar sesion\n" << endl;
+        cout << " --------------------\n" << endl;
         cin >> option;
 
         switch (option)
