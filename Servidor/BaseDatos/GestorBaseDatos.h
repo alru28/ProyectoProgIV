@@ -8,7 +8,7 @@ class GestorBD {
 		static sqlite3* baseDatos;
 		static sqlite3* cargarBaseDatos(const char* rutaBaseDatos);
 
-		static char* login(char* texto);
+		static int login(char* texto);
 		static int existeUsuario(char *usuario);
 		static int introducirUsuario(char* texto);
 };

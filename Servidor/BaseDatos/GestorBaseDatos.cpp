@@ -25,7 +25,7 @@ sqlite3* GestorBD::cargarBaseDatos(const char* rutaBaseDatos) {
 
 int GestorBD::login(char* texto){    //devuelve el devuelve el id del usuario si se completa correctamente, 0 si falla, -1 si no existe, -2 si no se completa correctamente
 
-    // ejemplo del texto recivido: "jaime_col;palencia998;"
+    // ejemplo del texto recibido: "jaime_col;palencia998;"
     char* username = strtok(texto, ";");
     char* password = strtok(NULL, ";");
 
@@ -67,7 +67,7 @@ int GestorBD::login(char* texto){    //devuelve el devuelve el id del usuario si
 }
 
 int GestorBD::existeUsuario(char *usuario){
-    // ejemplo del texto recivido: "jaime_col"
+    // ejemplo del texto recibido: "jaime_col"
     sqlite3_stmt *stmt;
     char sql[200];
     sprintf(sql, "SELECT * FROM Usuario WHERE Nombre = '%s'", usuario);    
@@ -106,9 +106,9 @@ int GestorBD::existeUsuario(char *usuario){
 
 int GestorBD::introducirUsuario(char* texto){
     // recibe un texto con atributos separados por ;
-    // ejemplo del texto recivido: "palencia998;jaime_col;728946372;jaimecol@gmail.com;335;España;Bilbao;Lehendakari Aguirre;11 3E;" 
+    // ejemplo del texto recibido: "palencia998;jaime_col;728946372;jaimecol@gmail.com;335;España;Bilbao;Lehendakari Aguirre;11 3E;" 
 
-    // parsear el texto recivido a los atributos:Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta
+    // parsear el texto recibido a los atributos:Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta
     char* Contraseña = strtok(texto, ";");
     char* Nombre = strtok(NULL, ";");
     char* Tlf = strtok(NULL, ";");
