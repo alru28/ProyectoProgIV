@@ -148,7 +148,6 @@ void menuRegistrarse(){
         menuInicial();
     }else{
         cout<<"Registrado y iniciado correctamente, id = "<<id<< endl;
-        menuPrincipal();
     }
 
 }

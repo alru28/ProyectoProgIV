@@ -106,7 +106,7 @@ int GestorBD::existeUsuario(char *usuario){
 
 }
 
-/*
+
 int GestorBD::introducirUsuario(char* texto){
     // recibe un texto con atributos separados por ;
     // ejemplo del texto recibido: "palencia998;jaime_col;728946372;jaimecol@gmail.com;335;España;Bilbao;Lehendakari Aguirre;11 3E;" 
@@ -264,7 +264,7 @@ int GestorBD::introducirUsuario(char* texto){
     
 }
 
-*/
+
 /*
 char* GestorBD::mostrarLotesActivos(){
     sqlite3_stmt *stmt;
