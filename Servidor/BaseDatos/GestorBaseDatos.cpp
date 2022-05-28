@@ -262,7 +262,7 @@ int GestorBD::introducirUsuario(char* texto){
 }
 
 */
-
+/*
 char* GestorBD::mostrarLotesActivos(){
     sqlite3_stmt *stmt;
     char bruto[1000];
@@ -315,3 +315,4 @@ char* GestorBD::mostrarLotesActivos(){
 	}
     
 }
+*/

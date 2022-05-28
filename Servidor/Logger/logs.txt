@@ -10,3 +10,7 @@
 ]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
 [Sat May 28 18:01:59 2022][TAG: ERROR]: Error durante la consulta
 [Sat May 28 18:01:59 2022][TAG: LOGIN]: Login satisfactorio
+[Sat May 28 23:24:04 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Sat May 28 23:24:04 2022][TAG: ERROR]: Error durante la consulta
+[Sat May 28 23:24:04 2022][TAG: LOGIN]: Login satisfactorio
