@@ -471,7 +471,9 @@ namespace clases {
 	}
 
 	char* Usuario::toString(){
-		
+		char* cadena = new char[500];
+		sprintf(cadena, "%d;%s;%s;%d;%d;%d;%s;%s;%s;%s;%s", this->ID_Usuario, this->Contrasenia, this->Nombre, this->Tlf, this->Puntos, this->ID_Cartera, this->Pais, this->Ciudad, this->Calle, this->PisoPuerta);
+		return cadena;	
 
 	}
 	// Constructores y destructores

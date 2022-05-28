@@ -170,7 +170,7 @@ namespace clases {
 
             // Metodos
             void imprimirUsuario();
-
+            char* toString();
        
        
     };
