@@ -52,7 +52,9 @@ void showLogin(){
 
         ClientSocket::sendMessage("vfusr");
         ClientSocket::receiveMessage();
-        if (strcmp(ClientSocket::recvBuff, "ACK1")){
+        char * trial;
+        strcpy(trial, ClientSocket::recvBuff);
+        if (strcmp(trial, "ACK1")){
             cout << "Recieved ack1"<<endl;
             strcat(name, ";");
             strcat(name, password);
