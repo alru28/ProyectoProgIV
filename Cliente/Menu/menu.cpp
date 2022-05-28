@@ -1,9 +1,11 @@
 #include "../Socket/clientSocket.h"
+#include "../Clases/clases.h"
 #include "menu.h"
 #include "string.h"
 #include <iostream>
 #include <stdlib.h>
 
+using namespace clases;
 using namespace std;
 
 void menuInicial(){
@@ -15,7 +17,7 @@ void menuInicial(){
     cout << "1. Iniciar sesion\n"<<endl;
     cout << "2. Registrarse\n"<<endl;
     cout << "3. Salir.\n"<<endl;
-    cin >> option; //------------
+    cin >> option;                 //------------
     
     switch (option)
    {
@@ -35,7 +37,7 @@ void menuInicial(){
 
 void showLogin(){
     int option = -1;
-    char name[20];
+    char name[50];
     char password[20];
     int auxiliar;
 
@@ -48,14 +50,24 @@ void showLogin(){
         cout <<"Contrasenya:"<<endl;
         cin >> password;
 
-        ClientSocket::startSocket();
         ClientSocket::sendMessage("vfusr");
         ClientSocket::receiveMessage();
         if (strcmp(ClientSocket::recvBuff, "ACK1")){
-            ClientSocket::sendMessage("vfusr");
+            strcat(name, ";");
+            strcat(name, password);
+            ClientSocket::sendMessage(name);
+            ClientSocket::receiveMessage();
+            int result = (int)ClientSocket::recvBuff ;
+            if(result == -1 | result == -2){
+                cout<<"Credenciales incorrectos"<<endl;
+            } else{
+                Usuario::idUsing = result;
+                option = 1;
+            }
+
         }
-        option = login(name , password); ////--------------------------------------------------
-        Client
+
+               
 
 
     }while(option!= 1);
