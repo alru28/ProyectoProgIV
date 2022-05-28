@@ -69,7 +69,7 @@ void showLogin(){
         } else{
             Usuario::idUsing = result;
             option = 1;
-            cout<<"Iniciado correctamente"<<endl;
+            cout<<"Iniciado correctamente. Id user "<< Usuario::idUsing <<endl;
         }
         
 
