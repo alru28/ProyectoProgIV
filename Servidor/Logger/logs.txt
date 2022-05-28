@@ -2,3 +2,11 @@
 [Thu May 26 10:44:14 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
 [Thu May 26 19:14:48 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
 [Fri May 27 11:39:33 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Sat May 28 17:56:43 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Sat May 28 17:56:43 2022][TAG: ERROR]: Error durante la consulta
+[Sat May 28 17:56:43 2022][TAG: LOGIN]: Login satisfactorio
+[Sat May 28 18:01:59 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Sat May 28 18:01:59 2022][TAG: ERROR]: Error durante la consulta
+[Sat May 28 18:01:59 2022][TAG: LOGIN]: Login satisfactorio

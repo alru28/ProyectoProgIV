@@ -63,7 +63,6 @@ void showLogin(){
         cout<<"Mando mensaje"<<endl;
         ClientSocket::receiveMessage();
         int result = (int)ClientSocket::recvBuff ;
-         cout<<"Recibo mensaje: "<< result <<endl;
         if(result == -1 | result == -2){
             cout<<"Credenciales incorrectos"<<endl;
         } else{

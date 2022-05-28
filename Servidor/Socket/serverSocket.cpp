@@ -95,12 +95,15 @@ void ServerSocket::communicate(){
                 if (strcmp(ServerSocket::recvBuff, "vfusr") == 0) {
                     strcpy(ServerSocket::sendBuff, "ACK1");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
-                    bytes = 0;
-                    while (bytes == 0) {
-                        int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
-                    }
-
+                    cout << "Mando ACK1" << endl;
+                    
+                    
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    cout << "Recibo usuario y contrasnya: " << ServerSocket::recvBuff << endl;
+                  
+                    cout << "He pasado y empiezo login" << endl;
                     int idUser = GestorBD::login(ServerSocket::recvBuff);
+                    cout << "Acabo login" << endl;
 
                     if (idUser == -1) {
                         Logger::logConsola("ERROR", "Usuario no encontrado en la base de datos");
@@ -169,18 +172,6 @@ void ServerSocket::communicate(){
 
                 else if (strcmp(ServerSocket::recvBuff, "Bye") == 0)
                     break;
-
-
-                cout << "Receiving message... " << endl;
-                cout << "Data received: %s " << ServerSocket::recvBuff << endl;
-
-                cout << "Sending reply... " << endl;
-                strcpy(ServerSocket::sendBuff, "ACK -> ");
-                strcat(ServerSocket::sendBuff, ServerSocket::recvBuff);
-                send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
-                cout << "Data sent: " << ServerSocket::sendBuff << endl;
-
-
             }
         } while (1);
     }
