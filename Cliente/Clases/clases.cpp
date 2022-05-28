@@ -92,6 +92,9 @@ namespace clases {
 	}
 
 	// Constructores y destructores
+	Objeto::Objeto() {
+
+	}
 	Objeto::Objeto(int idObjeto, char* cat, char* estado, char* desc, float precioSal, int idSubastador, int idLote) {
 		this->ID_Objeto = idObjeto;
 		this->Categoria = new char[strlen(cat) + 1];
