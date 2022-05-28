@@ -84,7 +84,7 @@ void ServerSocket::closeSocket(){
     
 }
 
-void serverSocket::communicate(){
+void ServerSocket::communicate(){
 
     if (ServerSocket::isStarted == true) {
         do {
@@ -98,7 +98,7 @@ void serverSocket::communicate(){
                     while (bytes == 0) {
                         int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
                     }
-                    login(this->recvBuff)
+                    GestorBD::login(ServerSocket::recvBuff);
                 }
                 else if (strcmp(ServerSocket::recvBuff, "exusr") == 0) {
                     strcpy(ServerSocket::sendBuff, "exusr");
@@ -107,7 +107,7 @@ void serverSocket::communicate(){
                     while (bytes == 0) {
                         int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
                     }
-                    existeUsuario(this ->recvBuff);
+                    GestorBD::existeUsuario(ServerSocket::recvBuff);
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "nwusr") == 0) {
