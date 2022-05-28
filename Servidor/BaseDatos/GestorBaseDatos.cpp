@@ -80,7 +80,7 @@ int GestorBD::existeUsuario(char *usuario){
     if (result != SQLITE_OK) {
         cout << "Error preparing statement (SELECT)" << endl;
         cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
-        return 0;
+        return -1;
     }
 
     cout << "SQL query prepared (SELECT)" << endl;
@@ -97,7 +97,7 @@ int GestorBD::existeUsuario(char *usuario){
     if (result != SQLITE_OK) {
         cout << "Error finalizing statement (SELECT)" << endl;
         cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
-        return 0;
+        return -2;
     }
 
     cout << "Prepared statement finalized (SELECT)" << endl;
@@ -112,7 +112,7 @@ int GestorBD::introducirUsuario(char* texto){
     // ejemplo del texto recibido: "palencia998;jaime_col;728946372;jaimecol@gmail.com;335;España;Bilbao;Lehendakari Aguirre;11 3E;" 
 
     // parsear el texto recibido a los atributos:Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta
-    char* Contraseña = strtok(texto, ";");
+    char* Contrasenia = strtok(texto, ";");
     char* Nombre = strtok(NULL, ";");
     char* Tlf = strtok(NULL, ";");
     char* Mail = strtok(NULL, ";");
@@ -128,7 +128,7 @@ int GestorBD::introducirUsuario(char* texto){
 
     sqlite3_stmt *stmt;
     char sql[200];
-    sprintf(sql, "INSERT INTO Usuario ( Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta) VALUES ('%s', '%s', %i, '%s', %i, '%s', '%s', '%s', '%s');", Contraseña, Nombre, tlf, Mail, puntos, Pais, Ciudad, Calle, PisoPuerta);
+    sprintf(sql, "INSERT INTO Usuario ( Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta) VALUES ('%s', '%s', %i, '%s', %i, '%s', '%s', '%s', '%s');", Contrasenia, Nombre, tlf, Mail, puntos, Pais, Ciudad, Calle, PisoPuerta);
 
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, strlen(sql) +1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -159,11 +159,9 @@ int GestorBD::introducirUsuario(char* texto){
 
     //--------------------------------------------- -> obtiene el id del usuario insertado
 
-    sqlite3_stmt *stmt;
-    char sql[100];
     sprintf(sql, "select ID_Usuario from Usuario where Nombre= '%s' ", Nombre);
     
-    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+    result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
 		cout << "Error preparing statement (SELECT)\n" << endl;
@@ -187,12 +185,11 @@ int GestorBD::introducirUsuario(char* texto){
 
     //--------------------------------------------- -> Crea una nueva cartera para el usuario
 
-    sqlite3_stmt *stmt;
-    char sql[200];
+    
     cout << "idUsing: " << idUser << endl;
     sprintf(sql, "INSERT INTO Cartera (Saldo, ID_Usuario) VALUES (0, %i);", idUser);
 
-    int result = sqlite3_prepare_v2(GestorBD::baseDatos , sql, strlen(sql) +1, &stmt, NULL) ;
+    result = sqlite3_prepare_v2(GestorBD::baseDatos , sql, strlen(sql) +1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		cout << "Error preparing statement (SELECT)\n" << endl;
 		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
@@ -220,11 +217,9 @@ int GestorBD::introducirUsuario(char* texto){
 
     //--------------------------------------------- -> obtiene el id de la cartera del usuario insertado
 
-    sqlite3_stmt *stmt;
-    char sql[100];
     sprintf(sql, "select ID_Cartera from Cartera where ID_Usuario= %i ", idUser);
     
-    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+    result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
 		cout << "Error preparing statement (SELECT)\n" << endl;
@@ -246,11 +241,10 @@ int GestorBD::introducirUsuario(char* texto){
 
     //--------------------------------------------- -> actualizar idCartera del Usuario en la tabla Usuario
 
-    sqlite3_stmt *stmt;
-    char sql[100];
+   
     sprintf(sql, "UPDATE Usuario SET ID_Cartera= %i WHERE ID_Usuario= %i", idCartera, idUser);
     
-    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+    result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
     if (result != SQLITE_OK) {
         cout << "Error preparing statement (SELECT)\n" << endl;
