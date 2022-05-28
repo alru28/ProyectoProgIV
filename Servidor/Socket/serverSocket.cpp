@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
+#include "../Logger/Logger.h"
 using namespace std;
 
 WSADATA ServerSocket::wsaData;
@@ -98,7 +99,25 @@ void ServerSocket::communicate(){
                     while (bytes == 0) {
                         int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
                     }
-                    GestorBD::login(ServerSocket::recvBuff);
+
+                    int idUser = GestorBD::login(ServerSocket::recvBuff);
+
+                    if (idUser == -1) {
+                        Logger::logConsola("ERROR", "Usuario no encontrado en la base de datos");
+                        Logger::logTxt("ERROR", "Usuario no encontrado en la base de datos");
+                    }
+                    else if (idUser == -2) {
+                        Logger::logConsola("ERROR", "Contrasenya de usuario incorrecta");
+                        Logger::logTxt("ERROR", "Contrasenya de usuario incorrecta");
+                    }
+
+                    char mensaje[10];
+                    std::sprintf(mensaje, "%d", idUser);
+                    strcpy(ServerSocket::sendBuff, mensaje);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff, 0);
+                    Logger::logConsola("LOGIN", "Login satisfactorio");
+                    Logger::logTxt("LOGIN", "Login satisfactorio");
+
                 }
                 else if (strcmp(ServerSocket::recvBuff, "exusr") == 0) {
                     strcpy(ServerSocket::sendBuff, "exusr");
