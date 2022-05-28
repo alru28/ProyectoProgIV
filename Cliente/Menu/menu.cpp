@@ -25,8 +25,8 @@ void menuInicial(){
        showLogin();
        break;
     case 2:
-       // menuRegistrarse();
-        break;
+       menuRegistrarse();
+       break;
    
    default:
         exit(-1);
@@ -53,9 +53,6 @@ void showLogin(){
         ClientSocket::sendMessage("vfusr");
         ClientSocket::receiveMessage();
         cout << "Llego"<< endl;
-        char trial[5];
-        strcpy(trial, ClientSocket::recvBuff);
-        cout << "Llego strcpy"<< endl;
         
         strcat(name, ";");
         strcat(name, password);
@@ -79,7 +76,7 @@ void showLogin(){
     
 }
 
-/*
+
 
 void menuRegistrarse(){
     //CATEGORIA
@@ -95,49 +92,53 @@ void menuRegistrarse(){
     while(existeU != 0){
         cout <<"Introduce Nombre de usuario: \n"<<endl;
         cin >> nombre;
-        existeU = existeUsuario(nombre); //----------------------------
+        ClientSocket::sendMessage("exusr");
+        ClientSocket::receiveMessage();
+        ClientSocket::sendMessage(nombre);
+        ClientSocket::receiveMessage();
+        existeU = atoi(ClientSocket::recvBuff );
     }
 
-    usuario.Nombre = nombre;
+    usuario.setNombre(nombre);
 
     char contrasenia[200];
     cout <<"Introduce contraseña: \n"<<endl;
     cin >> contrasenia;
-    usuario.Contrasenia = contrasenia;
+    usuario.setContrasenia(contrasenia);
        
     char tlf[100];
     int telefono;
     cout <<"Introduce numero de telefono: \n"<<endl;
     cin >> telefono;
-    usuario.Tlf = telefono;
+    usuario.setTlf(telefono);
  
     char mail[100];
     cout <<"Introduce email: \n"<<endl;
     cin >> mail;
-    usuario.Mail = mail;
+    usuario.setMail(mail);
     
     char pais[100];
     cout<<"Introduce pais: \n"<<endl;
     cin >> pais;
-    usuario.Pais = pais;
+    usuario.setPais( pais);
     
     char ciudad[100];
     cout << "Introduce ciudad: \n" << endl;
     cin >> ciudad;
-    usuario.Ciudad = ciudad;
+    usuario.setCiudad(ciudad);
     
     char calle[100];
     cout << "Introduce calle: \n" << endl;
     cin >> calle;
-    usuario.Calle = calle;
+    usuario.setCalle(calle);
     
 
     char pisoPuerta[100];
     cout << "Introduce piso/puerta: \n" << endl;
     cin >> pisoPuerta;
-    usuario.PisoPuerta = pisoPuerta;
+    usuario.setPisoPuerta(pisoPuerta);
     
-    usuario.Puntos=0;
+    usuario.setPuntos(0);
 
     introducirUsuario( &usuario) // -------------------
 
@@ -150,7 +151,7 @@ void menuRegistrarse(){
     menuPrincipal(db);
 }
 
-*/
+
 
 /*
 void menuPrincipal(){

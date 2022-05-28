@@ -14,3 +14,9 @@
 ]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
 [Sat May 28 23:24:04 2022][TAG: ERROR]: Error durante la consulta
 [Sat May 28 23:24:04 2022][TAG: LOGIN]: Login satisfactorio
+[Sat May 28 23:53:50 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Sat May 28 23:54:01 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'admin' 
+[Sat May 28 23:54:01 2022][TAG: LOGIN]: Login con exito
+[Sat May 28 23:54:01 2022][TAG: LOGIN]: Login satisfactorio
+[Sat May 28 23:59:00 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
