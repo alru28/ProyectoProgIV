@@ -114,7 +114,7 @@ void ServerSocket::communicate(){
                     char mensaje[10];
                     std::sprintf(mensaje, "%d", idUser);
                     strcpy(ServerSocket::sendBuff, mensaje);
-                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff, 0);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
                     Logger::logConsola("LOGIN", "Login satisfactorio");
                     Logger::logTxt("LOGIN", "Login satisfactorio");
 
