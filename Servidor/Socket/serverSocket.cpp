@@ -123,13 +123,14 @@ void ServerSocket::communicate(){
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "exusr") == 0) {
-                    strcpy(ServerSocket::sendBuff, "exusr");
+                    strcpy(ServerSocket::sendBuff, "ACKexusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
                     bytes = 0;
                     while (bytes == 0) {
                         int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
                     }
-                    GestorBD::existeUsuario(ServerSocket::recvBuff);
+                    strcpy(ServerSocket::sendBuff, GestorBD::existeUsuario(ServerSocket::recvBuff);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "nwusr") == 0) {
