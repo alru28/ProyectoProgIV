@@ -7,7 +7,7 @@
 
 int main() {
 	ServerSocket socket;
-	
+
 	GestorBD::baseDatos = GestorBD::cargarBaseDatos("../BaseDatos/basedatos.db");
 
 	socket.startSocket();
