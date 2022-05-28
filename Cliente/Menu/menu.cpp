@@ -67,6 +67,7 @@ void showLogin(){
                 cout<<"Iniciado correctamente"<<endl;
             }
         } else {
+            cout << "ACK1--"<< ClientSocket::recvBuff<<".."<<endl;
             cout << "falied ack1;"<<endl;
         }
 
