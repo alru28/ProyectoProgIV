@@ -123,51 +123,9 @@ namespace clases {
     };
 
     class Usuario {
-    private:
-        int ID_Usuario;
-        char* Contrasenia;
-        char* Nombre;
-        int Tlf;
-        char* Mail;
-        int Puntos;
-        int ID_Cartera;
-        char* Pais;
-        char* Ciudad;
-        char* Calle;
-        char* PisoPuerta;
     public:
-        // Constructores y destructores
-        Usuario(int idUsuario, char* contra, char* nombre, int tlf, char* mail, int puntos, int idCartera, char* pais, char* ciudad, char* calle, char* pisoPuerta);
-        Usuario(const Usuario& u);
-        ~Usuario();
-        // Getters y Setters
-
-        int getIDUsuario();
-        char* getContrasenia();
-        char* getNombre();
-        int getTlf();
-        char* getMail();
-        int getPuntos();
-        int getIDCartera();
-        char* getPais();
-        char* getCiudad();
-        char* getCalle();
-        char* getPisoPuerta();
-
-        void setIDUsuario(int id);
-        void setContrasenia(char* contrasenia);
-        void setNombre(char* nombre);
-        void setTlf(int tlf);
-        void setMail(char* mail);
-        void setPuntos(int puntos);
-        void setIDCartera(int id);
-        void setPais(char* pais);
-        void setCiudad(char* ciudad);
-        void setCalle(char* calle);
-        void setPisoPuerta(char* pisoPuerta);
-
-        // Metodos
-        void imprimirUsuario();
+        static int idUsing;
+       
     };
 }
 #endif

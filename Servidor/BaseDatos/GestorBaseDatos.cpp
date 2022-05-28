@@ -34,7 +34,7 @@ int GestorBD::login(char* texto){    //devuelve el devuelve el id del usuario si
     sprintf(sql, "select Contraseña, ID_Usuario from Usuario where Nombre= '%s' ", username);
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     Logger::logTxt("Consulta sql: %s.\n", sql);
-    
+
 	if (result != SQLITE_OK) {
 		Logger::logTxt("ERROR", "Error durante la consulta");
 		return 0;
@@ -46,10 +46,10 @@ int GestorBD::login(char* texto){    //devuelve el devuelve el id del usuario si
     int idUser;
 
     if(result == SQLITE_ROW){
-        
+
 		strcpy(Contrasenya, (char *) sqlite3_column_text(stmt, 0));
         idUser= sqlite3_column_int(stmt, 1);
-        
+
     }else{
 
         Logger::logTxt("ERROR", "Usuario no encontrado");
@@ -70,7 +70,7 @@ int GestorBD::existeUsuario(char *usuario){
     // ejemplo del texto recibido: "jaime_col"
     sqlite3_stmt *stmt;
     char sql[200];
-    sprintf(sql, "SELECT * FROM Usuario WHERE Nombre = '%s'", usuario);    
+    sprintf(sql, "SELECT * FROM Usuario WHERE Nombre = '%s'", usuario);
 
 
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
@@ -103,10 +103,10 @@ int GestorBD::existeUsuario(char *usuario){
 
 }
 
-
+/*
 int GestorBD::introducirUsuario(char* texto){
     // recibe un texto con atributos separados por ;
-    // ejemplo del texto recibido: "palencia998;jaime_col;728946372;jaimecol@gmail.com;335;España;Bilbao;Lehendakari Aguirre;11 3E;" 
+    // ejemplo del texto recibido: "palencia998;jaime_col;728946372;jaimecol@gmail.com;335;España;Bilbao;Lehendakari Aguirre;11 3E;"
 
     // parsear el texto recibido a los atributos:Contraseña, Nombre, Tlf, Mail, Puntos, Pais, Ciudad, Calle, PisoPuerta
     char* Contraseña = strtok(texto, ";");
@@ -159,9 +159,9 @@ int GestorBD::introducirUsuario(char* texto){
     sqlite3_stmt *stmt;
     char sql[100];
     sprintf(sql, "select ID_Usuario from Usuario where Nombre= '%s' ", Nombre);
-    
+
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
-    
+
 	if (result != SQLITE_OK) {
 		cout << "Error preparing statement (SELECT)\n" << endl;
 		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
@@ -172,9 +172,9 @@ int GestorBD::introducirUsuario(char* texto){
     int idUser;
 
     if(result == SQLITE_ROW){
-        
+
         int idUser= sqlite3_column_int(stmt, 0);
-        
+
     }else{
         cout << "Error, usuario no encontrado" << endl;
         return 0;
@@ -220,9 +220,9 @@ int GestorBD::introducirUsuario(char* texto){
     sqlite3_stmt *stmt;
     char sql[100];
     sprintf(sql, "select ID_Cartera from Cartera where ID_Usuario= %i ", idUser);
-    
+
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
-    
+
 	if (result != SQLITE_OK) {
 		cout << "Error preparing statement (SELECT)\n" << endl;
 		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
@@ -233,9 +233,9 @@ int GestorBD::introducirUsuario(char* texto){
     int idCartera;
 
     if(result == SQLITE_ROW){
-        
+
         idCartera= sqlite3_column_int(stmt, 0);
-        
+
     }else{
         cout << "Error, usuario no encontrado" << endl;
         return 0;
@@ -246,9 +246,9 @@ int GestorBD::introducirUsuario(char* texto){
     sqlite3_stmt *stmt;
     char sql[100];
     sprintf(sql, "UPDATE Usuario SET ID_Cartera= %i WHERE ID_Usuario= %i", idCartera, idUser);
-    
+
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
-    
+
     if (result != SQLITE_OK) {
         cout << "Error preparing statement (SELECT)\n" << endl;
         cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
@@ -258,16 +258,16 @@ int GestorBD::introducirUsuario(char* texto){
     result = sqlite3_step(stmt) ;
 
     return idUser;
-    
+
 }
 
 char* GestorBD::mostrarLotesActivos(){
     sqlite3_stmt *stmt;
     char bruto[1000];
-    
+
     char sql[100];
     sprintf(sql, "select ID_Lote, FechaCom, FechaFin, AvgPrecio from lote where Estado = 'En curso'");
-    
+
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
@@ -311,5 +311,5 @@ char* GestorBD::mostrarLotesActivos(){
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
 	}
-    
+
 }

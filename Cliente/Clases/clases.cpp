@@ -17,7 +17,7 @@ namespace clases {
 		this->ID_Usuario = c.ID_Usuario;
 		this->saldo = c.saldo;
 	}
-	Cartera::imprimirCartera() {
+	void Cartera::imprimirCartera() {
 		cout << "----------[CARTERA]----------\n";
 		cout << "ID_Cartera: " << this->ID_Cartera << endl;
 		cout << "ID_Usuario: " << this->ID_Usuario << endl;
@@ -81,14 +81,6 @@ namespace clases {
 		this->ID_Cartera_Envia = idCartera;
 	}
 	void Transaccion::imprimirTransaccion() {
-		this->ID_Transaccion = t.ID_Transaccion;
-		this->Cantidad = t.Cantidad;
-		this->Fecha = t.Fecha;
-		this->ID_Objeto = t.ID_Objeto;
-		this->ID_Cartera_Envia = t.ID_Cartera_Envia;
-		this->ID_Cartera_Recibe = t.ID_Cartera_Recibe;s
-
-
 		cout << "----------[TRANSACCION]----------\n";
 		cout << "ID_Transaccion: " << this->ID_Transaccion << endl;
 		cout << "Cantidad: " << this->Cantidad << endl;
@@ -100,6 +92,9 @@ namespace clases {
 	}
 
 	// Constructores y destructores
+	Objeto::Objeto() {
+
+	}
 	Objeto::Objeto(int idObjeto, char* cat, char* estado, char* desc, float precioSal, int idSubastador, int idLote) {
 		this->ID_Objeto = idObjeto;
 		this->Categoria = new char[strlen(cat) + 1];
@@ -322,153 +317,5 @@ namespace clases {
 
 
 	// Constructores y destructores
-	Usuario::Usuario(int idUsuario, char* contra, char* nombre, int tlf, char* mail, int puntos, int idCartera, char* pais, char* ciudad, char* calle, char* pisoPuerta) {
-		this->ID_Usuario = idUsuario;
-		this->Contrasenia = new char[strlen(contra) + 1];
-		strcpy(this->Contrasenia, contra);
-		this->Nombre = new char[strlen(nombre) + 1];
-		strcpy(this->Nombre, nombre);
-		this->Tlf = tlf;
-		this->Mail = new char[strlen(mail) + 1];
-		strcpy(this->Mail, mail);
-		this->Puntos = puntos;
-		this->ID_Cartera = idCartera;
-		this->Pais = new char[strlen(pais) + 1];
-		strcpy(this->Pais, pais);
-		this->Ciudad = new char[strlen(ciudad) + 1];
-		strcpy(this->Ciudad, ciudad);
-		this->Calle = new char[strlen(calle) + 1];
-		strcpy(this->Calle, calle);
-		this->PisoPuerta = new char[strlen(pisoPuerta) + 1];
-		strcpy(this->PisoPuerta, pisoPuerta);
-
-	}
-	Usuario::Usuario(const Usuario& u) {
-		this->ID_Usuario = u.ID_Usuario;
-		this->Contrasenia = new char[strlen(u.Contrasenia) + 1];
-		strcpy(this->Contrasenia, u.Contrasenia);
-		this->Nombre = new char[strlen(u.Nombre) + 1];
-		strcpy(this->Nombre, u.Nombre);
-		this->Tlf = u.Tlf;
-		this->Mail = new char[strlen(u.Mail) + 1];
-		strcpy(this->Mail, u.Mail);
-		this->Puntos = u.Puntos;
-		this->ID_Cartera = u.ID_Cartera;
-		this->Pais = new char[strlen(u.Pais) + 1];
-		strcpy(this->Pais, u.Pais);
-		this->Ciudad = new char[strlen(u.Ciudad) + 1];
-		strcpy(this->Ciudad, u.Ciudad);
-		this->Calle = new char[strlen(u.Calle) + 1];
-		strcpy(this->Calle, u.Calle);
-		this->PisoPuerta = new char[strlen(u.PisoPuerta) + 1];
-		strcpy(this->PisoPuerta, u.PisoPuerta);
-	}
-	Usuario::~Usuario() {
-		delete[] this->Contrasenia;
-		delete[] this->Nombre;
-		delete[] this->Mail;
-		delete[] this->Pais;
-		delete[] this->Ciudad;
-		delete[] this->Calle;
-		delete[] this->PisoPuerta;
-	}
-	// Getters y Setters
-
-	int Usuario::getIDUsuario() {
-		return this->ID_Usuario;
-	}
-	char* Usuario::getContrasenia() {
-		return this->Contrasenia;
-	}
-	char* Usuario::getNombre() {
-		return this->Nombre;
-	}
-	int Usuario::getTlf() {
-		return this->Tlf;
-	}
-	char* Usuario::getMail() {
-		return this->Mail;
-	}
-	int Usuario::getPuntos() {
-		return this->Puntos;
-	}
-	int Usuario::getIDCartera() {
-		return this->ID_Cartera;
-	}
-	char* Usuario::getPais() {
-		return this->Pais;
-	}
-	char* Usuario::getCiudad() {
-		return this->Ciudad;
-	}
-	char* Usuario::getCalle() {
-		return this->Calle;
-	}
-	char* Usuario::getPisoPuerta() {
-		return this->PisoPuerta;
-	}
-
-	void Usuario::setIDUsuario(int id) {
-		this->ID_Usuario = id;
-	}
-	void Usuario::setContrasenia(char* contrasenia) {
-		delete[] this->Contrasenia;
-		this->Contrasenia = new char[strlen(contrasenia) + 1];
-		strcpy(this->Contrasenia, contrasenia);
-	}
-	void Usuario::setNombre(char* nombre) {
-		delete[] this->Nombre;
-		this->Nombre = new char[strlen(nombre) + 1];
-		strcpy(this->Nombre, nombre);
-	}
-	void Usuario::setTlf(int tlf) {
-		this->Tlf = tlf;
-	}
-	void Usuario::setMail(char* mail) {
-		delete[] this->Mail;
-		this->Mail = new char[strlen(mail) + 1];
-		strcpy(this->Mail, mail);
-	}
-	void Usuario::setPuntos(int puntos) {
-		this->Puntos = puntos;
-	}
-	void Usuario::setIDCartera(int id) {
-		this->ID_Cartera = id;
-	}
-	void Usuario::setPais(char* pais) {
-		delete[] this->Pais;
-		this->Pais = new char[strlen(pais) + 1];
-		strcpy(this->Pais, pais);
-	}
-	void Usuario::setCiudad(char* ciudad) {
-		delete[] this->Ciudad;
-		this->Ciudad = new char[strlen(ciudad) + 1];
-		strcpy(this->Ciudad, ciudad);
-	}
-	void Usuario::setCalle(char* calle) {
-		delete[] this->Calle;
-		this->Calle = new char[strlen(calle) + 1];
-		strcpy(this->Calle, calle);
-	}
-	void Usuario::setPisoPuerta(char* pisoPuerta) {
-		delete[] this->PisoPuerta;
-		this->PisoPuerta = new char[strlen(pisoPuerta) + 1];
-		strcpy(this->PisoPuerta, pisoPuerta);
-	}
-
-	// Metodos
-	void Usuario::imprimirUsuario() {
-		cout << "----------[USUARIO]----------\n";
-		cout << "ID_Usuario: " << this->ID_Usuario << endl;
-		cout << "Contrasenya: " << this->Contrasenia << endl;
-		cout << "Nombre: " << this->Nombre << endl;
-		cout << "Tlf: " << this->Tlf << endl;
-		cout << "Puntos: " << this->Puntos << endl;
-		cout << "ID_Cartera: " << this->ID_Cartera << endl;
-		cout << "Pais: " << this->Pais << endl;
-		cout << "Ciudad: " << this->Ciudad << endl;
-		cout << "Calle: " << this->Calle << endl;
-		cout << "Piso_Puerta: " << this->PisoPuerta << endl;
-		cout << "--------[FIN-USUARIO]--------\n";
-	}
+	int Usuario::idUsing;
 }

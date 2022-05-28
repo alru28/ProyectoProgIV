@@ -1,9 +1,11 @@
 #include "../Socket/clientSocket.h"
+#include "../Clases/clases.h"
 #include "menu.h"
 #include "string.h"
 #include <iostream>
 #include <stdlib.h>
 
+using namespace clases;
 using namespace std;
 
 void menuInicial(){
@@ -15,7 +17,7 @@ void menuInicial(){
     cout << "1. Iniciar sesion\n"<<endl;
     cout << "2. Registrarse\n"<<endl;
     cout << "3. Salir.\n"<<endl;
-    cin >> option; //------------
+    cin >> option;                 //------------
     
     switch (option)
    {
@@ -23,7 +25,7 @@ void menuInicial(){
        showLogin();
        break;
     case 2:
-        menuRegistrarse();
+       // menuRegistrarse();
         break;
    
    default:
@@ -35,7 +37,7 @@ void menuInicial(){
 
 void showLogin(){
     int option = -1;
-    char name[20];
+    char name[50];
     char password[20];
     int auxiliar;
 
@@ -48,22 +50,39 @@ void showLogin(){
         cout <<"Contrasenya:"<<endl;
         cin >> password;
 
-        ClientSocket::startSocket();
         ClientSocket::sendMessage("vfusr");
         ClientSocket::receiveMessage();
-        if (strcmp(ClientSocket::recvBuff, "ACK1")){
-            ClientSocket::sendMessage("vfusr");
+        cout << "Llego"<< endl;
+        char trial[5];
+        strcpy(trial, ClientSocket::recvBuff);
+        cout << "Llego strcpy"<< endl;
+        if (strcmp(trial, "ACK1")){
+            cout << "Recieved ack1"<<endl;
+            strcat(name, ";");
+            strcat(name, password);
+            ClientSocket::sendMessage(name);
+            ClientSocket::receiveMessage();
+            int result = (int)ClientSocket::recvBuff ;
+            if(result == -1 | result == -2){
+                cout<<"Credenciales incorrectos"<<endl;
+            } else{
+                Usuario::idUsing = result;
+                option = 1;
+                cout<<"Iniciado correctamente"<<endl;
+            }
+        } else {
+            cout << "ACK1--"<< ClientSocket::recvBuff<<".."<<endl;
+            cout << "falied ack1;"<<endl;
         }
-        option = login(name , password); ////--------------------------------------------------
-        Client
 
 
     }while(option!= 1);
 
-    menuPrincipal();
+   // menuPrincipal();
     
 }
 
+/*
 
 void menuRegistrarse(){
     //CATEGORIA
@@ -134,7 +153,9 @@ void menuRegistrarse(){
     menuPrincipal(db);
 }
 
+*/
 
+/*
 void menuPrincipal(){
     int repetir = 1;
     int sumarRestar = 0;
@@ -146,7 +167,7 @@ void menuPrincipal(){
     fechaRaw = localtime( &rawtime );
     strftime(fecha,80,"%F", fechaRaw);*/
     
-
+/*
     while (repetir == 1){
         int option = -1;
         cout << "\n\nMENU\n" << endl;
@@ -195,3 +216,5 @@ void menuPrincipal(){
     }
 
 };
+
+*/
