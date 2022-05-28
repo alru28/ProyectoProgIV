@@ -95,7 +95,8 @@ void menuRegistrarse(){
         ClientSocket::sendMessage("exusr");
         ClientSocket::receiveMessage();
         ClientSocket::sendMessage(nombre);
-        ClientSocket::receiveMessage();
+        ClientSocket::receiveMessage();                           ///------------------------------- se queda atascado aqui
+        cout <<"buffer"<< ClientSocket::recvBuff <<endl;
         existeU = atoi(ClientSocket::recvBuff );
     }
 

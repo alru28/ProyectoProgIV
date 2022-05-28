@@ -1,7 +1,9 @@
 #include "serverSocket.h"
 #include "../BaseDatos/GestorBaseDatos.h"
 #include <iostream>
+#include <stdlib.h>
 #include <string.h>
+#include <string>
 #include <stdio.h>
 #include <stdint.h>
 #include "../Logger/Logger.h"
@@ -125,21 +127,29 @@ void ServerSocket::communicate(){
                 else if (strcmp(ServerSocket::recvBuff, "exusr") == 0) {
                     strcpy(ServerSocket::sendBuff, "ACKexusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
-                    bytes = 0;
-                    while (bytes == 0) {
-                        int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
-                    }
-                    strcpy(ServerSocket::sendBuff, GestorBD::existeUsuario(ServerSocket::recvBuff);
-                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
+                    
+                    
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                                        
 
+                    char mensaje[10];
+                    cout << "ver si exixte"<< endl;
+                    int numero = GestorBD::existeUsuario(ServerSocket::recvBuff);
+                    std::sprintf(mensaje, "%d", numero);
+                    cout << "exixsUser"<< mensaje << endl;
+                    strcpy(ServerSocket::sendBuff, mensaje);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
+                    
                 }
                 else if (strcmp(ServerSocket::recvBuff, "nwusr") == 0) {
-                    strcpy(ServerSocket::sendBuff, "exusr");
+                    strcpy(ServerSocket::sendBuff, "ACKnwusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
-                    bytes = 0;
-                    while (bytes == 0) {
-                        int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
-                    }
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    int numero = GestorBD::introducirUsuario(ServerSocket::recvBuff);
+                    char mensaje[10];
+                    std::sprintf(mensaje, "%d", numero);
+                    strcpy(ServerSocket::sendBuff, mensaje);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "sprod") == 0) {
