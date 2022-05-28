@@ -11,6 +11,8 @@ class GestorBD {
 		static int login(char* texto);
 		static int existeUsuario(char *usuario);
 		static int introducirUsuario(char* texto);
+
+		static char* mostrarLotesActivos();
 };
 
 #endif
