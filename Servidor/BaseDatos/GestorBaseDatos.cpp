@@ -23,7 +23,7 @@ sqlite3* GestorBD::cargarBaseDatos(const char* rutaBaseDatos) {
     return db;
 }
 
-int login(char* texto){    //devuelve el devuelve el id del usuario si se completa correctamente, 0 si falla, -1 si no existe, -2 si no se completa correctamente
+int GestorBD::login(char* texto){    //devuelve el devuelve el id del usuario si se completa correctamente, 0 si falla, -1 si no existe, -2 si no se completa correctamente
 
     // ejemplo del texto recivido: "jaime_col;palencia998;"
     char* username = strtok(texto, ";");
@@ -66,7 +66,7 @@ int login(char* texto){    //devuelve el devuelve el id del usuario si se comple
     }
 }
 
-int existeUsuario(char *usuario){
+int GestorBD::existeUsuario(char *usuario){
     // ejemplo del texto recivido: "jaime_col"
     sqlite3_stmt *stmt;
     char sql[200];
@@ -104,7 +104,7 @@ int existeUsuario(char *usuario){
 }
 
 
-int introducirUsuario(char* texto){
+int GestorBD::introducirUsuario(char* texto){
     // recibe un texto con atributos separados por ;
     // ejemplo del texto recivido: "palencia998;jaime_col;728946372;jaimecol@gmail.com;335;España;Bilbao;Lehendakari Aguirre;11 3E;" 
 
