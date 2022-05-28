@@ -25,7 +25,7 @@ void menuInicial(){
        showLogin();
        break;
     case 2:
-        menuRegistrarse();
+       // menuRegistrarse();
         break;
    
    default:
@@ -63,19 +63,18 @@ void showLogin(){
             } else{
                 Usuario::idUsing = result;
                 option = 1;
+                cout<<"Iniciado correctamente"<<endl;
             }
-
         }
-
-               
 
 
     }while(option!= 1);
 
-    menuPrincipal();
+   // menuPrincipal();
     
 }
 
+/*
 
 void menuRegistrarse(){
     //CATEGORIA
@@ -146,7 +145,9 @@ void menuRegistrarse(){
     menuPrincipal(db);
 }
 
+*/
 
+/*
 void menuPrincipal(){
     int repetir = 1;
     int sumarRestar = 0;
@@ -158,7 +159,7 @@ void menuPrincipal(){
     fechaRaw = localtime( &rawtime );
     strftime(fecha,80,"%F", fechaRaw);*/
     
-
+/*
     while (repetir == 1){
         int option = -1;
         cout << "\n\nMENU\n" << endl;
@@ -207,3 +208,5 @@ void menuPrincipal(){
     }
 
 };
+
+*/
