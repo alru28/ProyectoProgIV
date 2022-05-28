@@ -8,7 +8,7 @@
 int main() {
 	ServerSocket socket;
 	
-	GestorBaseDatos::cargarBaseDatos("../BaseDatos/basedatos.db");
+	GestorBD::baseDatos = GestorBD::cargarBaseDatos("../BaseDatos/basedatos.db");
 
 	socket.startSocket();
 	socket.communicate();
