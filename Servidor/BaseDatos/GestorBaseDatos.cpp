@@ -29,8 +29,11 @@ int GestorBD::login(char* texto){    //devuelve el devuelve el id del usuario si
     char* username = strtok(texto, ";");
     char* password = strtok(NULL, ";");
 
+    cout << "Username: " << username << endl;
+    cout << "Password: " << password << endl;
+
     sqlite3_stmt *stmt;
-    char sql[100];
+    char sql[200];
     sprintf(sql, "select Contraseña, ID_Usuario from Usuario where Nombre= '%s' ", username);
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     Logger::logTxt("Consulta sql: %s.\n", sql);
