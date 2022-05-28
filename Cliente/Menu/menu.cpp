@@ -53,6 +53,7 @@ void showLogin(){
         ClientSocket::sendMessage("vfusr");
         ClientSocket::receiveMessage();
         if (strcmp(ClientSocket::recvBuff, "ACK1")){
+            cout << "Recieved ack1"<<endl;
             strcat(name, ";");
             strcat(name, password);
             ClientSocket::sendMessage(name);
@@ -65,6 +66,8 @@ void showLogin(){
                 option = 1;
                 cout<<"Iniciado correctamente"<<endl;
             }
+        } else {
+            cout << "falied ack1;"<<endl;
         }
 
 
