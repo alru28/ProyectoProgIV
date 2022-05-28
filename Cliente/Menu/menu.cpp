@@ -52,22 +52,28 @@ void showLogin(){
 
         ClientSocket::sendMessage("vfusr");
         ClientSocket::receiveMessage();
-        //Comprobacion de que reciba ack1;
-        
-        cout << "Recieved ack1 (supestamente)"<<endl;
-        strcat(name, ";");
-        strcat(name, password);
-        ClientSocket::sendMessage(name);
-        ClientSocket::receiveMessage();
-        int result = (int)ClientSocket::recvBuff ;
-        if(result == -1 | result == -2){
-            cout<<"Credenciales incorrectos"<<endl;
-        } else{
-            Usuario::idUsing = result;
-            option = 1;
-            cout<<"Iniciado correctamente"<<endl;
+        cout << "Llego"<< endl;
+        char trial[5];
+        strcpy(trial, ClientSocket::recvBuff);
+        cout << "Llego strcpy"<< endl;
+        if (strcmp(trial, "ACK1")){
+            cout << "Recieved ack1"<<endl;
+            strcat(name, ";");
+            strcat(name, password);
+            ClientSocket::sendMessage(name);
+            ClientSocket::receiveMessage();
+            int result = (int)ClientSocket::recvBuff ;
+            if(result == -1 | result == -2){
+                cout<<"Credenciales incorrectos"<<endl;
+            } else{
+                Usuario::idUsing = result;
+                option = 1;
+                cout<<"Iniciado correctamente"<<endl;
+            }
+        } else {
+            cout << "ACK1--"<< ClientSocket::recvBuff<<".."<<endl;
+            cout << "falied ack1;"<<endl;
         }
-        
 
 
     }while(option!= 1);
