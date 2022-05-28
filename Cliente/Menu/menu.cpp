@@ -2,6 +2,7 @@
 #include "menu.h"
 #include "string.h"
 #include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -26,7 +27,7 @@ void menuInicial(){
         break;
    
    default:
-        exit();
+        exit(-1);
         break;
    }
     
