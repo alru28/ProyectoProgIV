@@ -140,15 +140,17 @@ void menuRegistrarse(){
     
     usuario.setPuntos(0);
 
-    introducirUsuario( &usuario) // -------------------
+    ClientSocket::sendMessage("nwusr");
+    ClientSocket::sendMessage(usuario.toString());
+    ClientSocket::receiveMessage();
+    int id = atoi(ClientSocket::recvBuff);;
+    if(id == -1 | id == 0){
+        menuInicial();
+    }else{
+        cout<<"Registrado y iniciado correctamente, id = "<<id<< endl;
+        menuPrincipal();
+    }
 
-    obtenerIdUsuario( db,  usuario.Nombre); ///------------ hacerlo todo en una funcion en el lado del server
-
-    introducirCartera(db);
-    
-    actualizarIdCarteraDeUsuario(db, obtenerIdCartera(db));
-
-    menuPrincipal(db);
 }
 
 
