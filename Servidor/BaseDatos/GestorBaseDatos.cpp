@@ -151,6 +151,112 @@ int GestorBD::introducirUsuario(char* texto){
 
 	cout << "Prepared statement finalized (INSERT)" << endl;
 
-	return SQLITE_OK;
+	// return SQLITE_OK;
 
+
+    //--------------------------------------------- -> obtiene el id del usuario insertado
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "select ID_Usuario from Usuario where Nombre= '%s' ", Nombre);
+    
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)\n" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    int idUser;
+
+    if(result == SQLITE_ROW){
+        
+        int idUser= sqlite3_column_int(stmt, 0);
+        
+    }else{
+        cout << "Error, usuario no encontrado" << endl;
+        return 0;
+    }
+
+    //return 1;
+
+    //--------------------------------------------- -> Crea una nueva cartera para el usuario
+
+    sqlite3_stmt *stmt;
+    char sql[200];
+    cout << "idUsing: " << idUser << endl;
+    sprintf(sql, "INSERT INTO Cartera (Saldo, ID_Usuario) VALUES (0, %i);", idUser);
+
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos , sql, strlen(sql) +1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)\n" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		return 0;
+	}
+
+    cout << "SQL query prepared (INSERT)\n" << endl;
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		cout << "Error inserting new data into Cartera table\n" << endl;
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		cout << "Error finalizing statement (INSERT)\n" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		//return result;
+	}
+
+	cout << "Prepared statement finalized (INSERT)\n" << endl;
+
+	//return SQLITE_OK;
+
+    //--------------------------------------------- -> obtiene el id de la cartera del usuario insertado
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "select ID_Cartera from Cartera where ID_Usuario= %i ", idUser);
+    
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)\n" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    int idCartera;
+
+    if(result == SQLITE_ROW){
+        
+        idCartera= sqlite3_column_int(stmt, 0);
+        
+    }else{
+        cout << "Error, usuario no encontrado" << endl;
+        return 0;
+    }
+
+    //--------------------------------------------- -> actualizar idCartera del Usuario en la tabla Usuario
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "UPDATE Usuario SET ID_Cartera= %i WHERE ID_Usuario= %i", idCartera, idUser);
+    
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+    
+    if (result != SQLITE_OK) {
+        cout << "Error preparing statement (SELECT)\n" << endl;
+        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        return 0;
+    }
+
+    result = sqlite3_step(stmt) ;
+
+    return idUser;
+    
 }
