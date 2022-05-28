@@ -91,7 +91,7 @@ void serverSocket::communicate(){
             int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
             if (bytes > 0) {
 
-                if (strcmp(ServerSocket::recvBuff, "vuser") == 0) {
+                if (strcmp(ServerSocket::recvBuff, "vfusr") == 0) {
                     strcpy(ServerSocket::sendBuff, "ACK1");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
                     bytes = 0;

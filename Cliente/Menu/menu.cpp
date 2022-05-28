@@ -1,4 +1,6 @@
+#include "../Socket/clientSocket.h"
 #include "menu.h"
+#include "string.h"
 #include <iostream>
 
 using namespace std;
@@ -44,11 +46,20 @@ void showLogin(){
         cin >> name;
         cout <<"Contrasenya:"<<endl;
         cin >> password;
+
+        ClientSocket::startSocket();
+        ClientSocket::sendMessage("vfusr");
+        ClientSocket::receiveMessage();
+        if (strcmp(ClientSocket::recvBuff, "ACK1")){
+            ClientSocket::sendMessage("vfusr");
+        }
         option = login(name , password); ////--------------------------------------------------
+        Client
+
 
     }while(option!= 1);
 
-    menuPrincipal(db);
+    menuPrincipal();
     
 }
 
