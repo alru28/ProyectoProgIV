@@ -312,3 +312,76 @@ char* GestorBD::mostrarLotesActivos(){
 	}
     return bruto;   
 }
+
+
+
+
+
+
+char* imprimirUsuario(char* idUsuario){ // devuelve un char* con todos los datos del usuario
+    sqlite3_stmt *stmt;
+
+    char* usuario = new char[500]; 
+
+    char sql[150];
+    sprintf(sql, "SELECT Contraseña,  Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta FROM Usuario WHERE ID_Usuario = %i", idUsuario);
+
+	int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
+    
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    if(result == SQLITE_ROW){
+
+        char contrasena[50];
+        strcpy(contrasena, (char *) sqlite3_column_text(stmt, 0));
+
+        char nombre[50];
+        strcpy(nombre, (char *) sqlite3_column_text(stmt, 1));
+
+        int tlf = sqlite3_column_int(stmt, 2);
+
+        char mail[50];
+        strcpy(mail, (char *) sqlite3_column_text(stmt, 3));
+
+        int puntos = sqlite3_column_int(stmt, 4);
+
+        int idCartera = sqlite3_column_int(stmt, 5);
+
+        char pais[100];
+        strcpy(pais, (char *) sqlite3_column_text(stmt, 6));
+
+        char ciudad[100];
+        strcpy(ciudad, (char *) sqlite3_column_text(stmt, 7));
+
+        char calle[100];
+        strcpy(calle, (char *) sqlite3_column_text(stmt, 8));
+        
+        char pisoPuerta[100];
+        strcpy(pisoPuerta, (char *) sqlite3_column_text(stmt, 9));
+
+        sprintf(usuario, "%s;%s;%i;%s;%i;%i;%s;%s;%s;%s;", contrasena, nombre, tlf, mail, puntos, idCartera, pais, ciudad, calle, pisoPuerta);
+
+        return usuario;
+
+    }else{
+        cout << "Error, no existe usuario con ese identificador." << endl;
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		cout << "Error finalizing statement (SELECT)" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		return 0;
+	}
+
+    return 0;
+}
+
+
+
