@@ -95,7 +95,7 @@ void ServerSocket::communicate(){
             if (bytes > 0) {
 
                 if (strcmp(ServerSocket::recvBuff, "vfusr") == 0) {
-                    strcpy(ServerSocket::sendBuff, "ACK1");
+                    strcpy(ServerSocket::sendBuff, "ACKvfusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
                     cout << "Mando ACK1" << endl;
                     
