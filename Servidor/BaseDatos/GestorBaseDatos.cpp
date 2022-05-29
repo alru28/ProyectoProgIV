@@ -315,7 +315,7 @@ char* GestorBD::mostrarLotesActivos(){
 
 
 
-
+/*
 
 
 char* imprimirUsuario(char* idUsuario){ // devuelve un char* con todos los datos del usuario
@@ -382,6 +382,6 @@ char* imprimirUsuario(char* idUsuario){ // devuelve un char* con todos los datos
 
     return 0;
 }
-
+*/
 
 

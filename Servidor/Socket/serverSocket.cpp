@@ -188,12 +188,15 @@ void ServerSocket::communicate(){
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "swusr") == 0) {
+                    /*
                     strcpy(ServerSocket::sendBuff, "ACKswusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
                     recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
                     char* usuario = GestorBD::imprimirUsuario(ServerSocket::recvBuff);
                     strcpy(ServerSocket::sendBuff, usuario);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
+                    */
+                   break;
                 }
 
                 else if (strcmp(ServerSocket::recvBuff, "Bye") == 0)
