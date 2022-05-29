@@ -462,6 +462,7 @@ namespace clases {
 		cout << "Contrasenya: " << this->Contrasenia << endl;
 		cout << "Nombre: " << this->Nombre << endl;
 		cout << "Tlf: " << this->Tlf << endl;
+		cout << "Mail: " << this->Mail << endl;
 		cout << "Puntos: " << this->Puntos << endl;
 		cout << "ID_Cartera: " << this->ID_Cartera << endl;
 		cout << "Pais: " << this->Pais << endl;
@@ -473,7 +474,7 @@ namespace clases {
 
 	char* Usuario::toString(){
 		char* cadena = new char[500];
-		sprintf(cadena, "%d;%s;%s;%d;%d;%d;%s;%s;%s;%s;%s", this->ID_Usuario, this->Contrasenia, this->Nombre, this->Tlf, this->Puntos, this->ID_Cartera, this->Pais, this->Ciudad, this->Calle, this->PisoPuerta);
+		sprintf(cadena, "%s;%s;%d;%s;%d;%s;%s;%s;%s", this->Contrasenia, this->Nombre, this->Tlf, this->Mail, this->Puntos, this->Pais, this->Ciudad, this->Calle, this->PisoPuerta);
 		return cadena;	
 
 	}
