@@ -413,7 +413,7 @@ void menuPrincipal(){
             //showTransactions(db);
             break;
         case 4:
-            
+            /*
             char* contrasenia = strtok(usuario, ";");
             char* nombre = strtok(NULL, ";");
             char* tlf = strtok(NULL, ";");
@@ -464,7 +464,7 @@ void menuPrincipal(){
             }else{
                 //editarUsuario(db, option);
                 
-            }
+            }*/
 
             break;
         case 5:
@@ -491,10 +491,7 @@ void mostrarLotes(){
     
     ClientSocket::sendMessage("swlte");
     ClientSocket::receiveMessage();
-    char idUser[5];
-    std::sprintf(idUser, "%d", Usuario::idUsing);
-    ClientSocket::sendMessage(idUser);
-
+    
     ClientSocket::receiveMessage();
 
     char bigString [500];
