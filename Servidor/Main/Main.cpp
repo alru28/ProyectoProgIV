@@ -11,10 +11,6 @@ int main() {
 	ServerSocket socket;
 
 	GestorBD::baseDatos = GestorBD::cargarBaseDatos("../BaseDatos/basedatos.db");
-
-	cout << GestorBD::mostrarLotesActivos() << endl;
-	cout << "MOSTRAR LOTES EJECUTADO" << endl;
-
 	socket.startSocket();
 	socket.communicate();
 
