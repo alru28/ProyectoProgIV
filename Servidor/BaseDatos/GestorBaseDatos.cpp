@@ -264,15 +264,16 @@ char* GestorBD::mostrarLotesActivos(){
     sqlite3_stmt *stmt;
     char* bruto = new char[500];
     
-    char sql[100];
+    char sql[200];
     sprintf(sql, "select ID_Lote, FechaCom, FechaFin, AvgPrecio from lote where Estado = 'En curso'");
     
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		cout << "Error preparing statement (SELECT)\n";
+		cout << sqlite3_errmsg(GestorBD::baseDatos);
 	}
-    printf("\nLotes activos actualmente :\n");
+    cout << "\nLotes activos actualmente:\n";
+
 
 	do {
 		result = sqlite3_step(stmt) ;
@@ -285,8 +286,8 @@ char* GestorBD::mostrarLotesActivos(){
             char fechaFinal[20];
 			strcpy(fechaFinal, (char *) sqlite3_column_text(stmt, 2));
 
-            float avgPrecio = (float) sqlite3_column_double(stmt, 3);
-            char* dolars;
+            float avgPrecio = (float)sqlite3_column_double(stmt, 3);
+            char dolars[10];
 
             if(avgPrecio<10.00){
                 strcpy(dolars,"$");
@@ -298,11 +299,11 @@ char* GestorBD::mostrarLotesActivos(){
                 strcpy(dolars,"$$$$");
             }
             char temp[300];
-            sprintf(temp, "%i;%s;%s;%.2f;%s;|", id, fechaInicio, fechaFinal, avgPrecio, dolars); //Concatenamos todos los atributos del lote actual
+
+            sprintf(temp, "%i;%s;%s;%s;|", id, fechaInicio, fechaFinal, dolars); //Concatenamos todos los atributos del lote actual
             strcat(bruto, temp); //Metemos el lote actual en el tocho
 		}
 	} while (result == SQLITE_ROW);
-
     strcat(bruto, "#");//Fin del bruto
 
     result = sqlite3_finalize(stmt);
