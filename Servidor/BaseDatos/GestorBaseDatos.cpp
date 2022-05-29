@@ -259,10 +259,10 @@ int GestorBD::introducirUsuario(char* texto){
 }
 
 
-/*
+
 char* GestorBD::mostrarLotesActivos(){
     sqlite3_stmt *stmt;
-    char bruto[1000];
+    char* bruto = new char[500];
     
     char sql[100];
     sprintf(sql, "select ID_Lote, FechaCom, FechaFin, AvgPrecio from lote where Estado = 'En curso'");
@@ -289,13 +289,13 @@ char* GestorBD::mostrarLotesActivos(){
             char* dolars;
 
             if(avgPrecio<10.00){
-                dolars = "$";
+                strcpy(dolars,"$");
             } else if(avgPrecio <30.00){
-                dolars = "$$";
+                strcpy(dolars,"$$");
             }else if(avgPrecio < 60.00){
-                dolars = "$$$";
+                strcpy(dolars,"$$$");
             }else{
-                dolars = "$$$$";
+                strcpy(dolars,"$$$$");
             }
             char temp[300];
             sprintf(temp, "%i;%s;%s;%.2f;%s;|", id, fechaInicio, fechaFinal, avgPrecio, dolars); //Concatenamos todos los atributos del lote actual
@@ -310,6 +310,6 @@ char* GestorBD::mostrarLotesActivos(){
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
 	}
-    
+
+    return bruto;   
 }
-*/
