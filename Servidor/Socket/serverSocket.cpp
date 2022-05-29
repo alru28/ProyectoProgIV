@@ -152,6 +152,17 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
 
                 }
+                else if (strcmp(ServerSocket::recvBuff, "swlte") == 0) {
+                    
+                    strcpy(ServerSocket::sendBuff, "ACKswlte");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+
+                    char* bruto = GestorBD::mostrarLotesActivos();
+                    strcpy(ServerSocket::sendBuff, bruto);
+
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
+
+                }
                 else if (strcmp(ServerSocket::recvBuff, "sprod") == 0) {
 
 
