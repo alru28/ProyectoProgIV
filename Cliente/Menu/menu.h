@@ -5,5 +5,6 @@ void menuInicial();
 void showLogin();
 void menuRegistrarse();
 void menuPrincipal();
+void mostrar();
 
 #endif
