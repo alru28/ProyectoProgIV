@@ -38,7 +38,7 @@ void escribirConfig(char* rutaConfig) {
 	//char** stringsConfig = cargarConfig("../Config/config.txt");
 	printf("\n");
 	printf("[CONFIG-RUTAS]\n");
-	printf("rutaBBDD=BaseDatos/basedatos.db\n");
+	printf("rutaBBDD=../Servidor/BaseDatos/basedatos.db\n");
 	printf("rutaTrans=Ficheros/transacciones.csv\n");
 	printf("rutaUsuarios=Ficheros/usuarios.csv\n");
 	printf("[CONFIG-RUTAS]\n");

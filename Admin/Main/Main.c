@@ -10,7 +10,7 @@
 
 int main(void)
 {
-    sqlite3 *db = cargarBaseDatos("../BaseDatos/basedatos.db");
+    sqlite3 *db = cargarBaseDatos("../../Servidor/BaseDatos/basedatos.db");
     sqlite3_stmt *stmt;
 
     menuInicial(db);
