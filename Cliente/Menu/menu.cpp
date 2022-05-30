@@ -258,6 +258,7 @@ void showTransactions(){
     strcpy(idUser, ClientSocket::recvBuff);
     ClientSocket::sendMessage(idUser);
     ClientSocket::receiveMessage();
+    cout << ClientSocket::recvBuff <<endl;
 }
 
 

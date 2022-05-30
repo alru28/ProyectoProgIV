@@ -14,6 +14,10 @@ class GestorBD {
 
 		static char* mostrarLotesActivos();
 		static char* imprimirUsuario(char* idUsuario);
+		static char* mostrarTransacciones(int idUsuario);
+		static int obtenerIdCartera(int idUsing);
+		static char * obtenerNombre(int idCartera);
+
 };
 
 #endif

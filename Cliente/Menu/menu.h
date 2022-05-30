@@ -7,5 +7,6 @@ void menuRegistrarse();
 void menuPrincipal();
 void mostrarLotes();
 void mostrarUsuario();
+void showTransactions();
 
 #endif
