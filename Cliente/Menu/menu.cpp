@@ -639,11 +639,13 @@ void mostrarSaldo(){
 
     float fSaldo = atof(saldo);
 
-    int option = scanf("%i", &option);
+    int option;
+    cin >> option;
+
     fflush(stdin);
     while(option<0 || option>1){
         cout << "Introduce un digito valido: ";
-        scanf("%i", &option);
+        cin >> option;
         fflush(stdin);
     }
 
