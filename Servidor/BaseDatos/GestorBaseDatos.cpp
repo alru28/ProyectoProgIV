@@ -636,7 +636,7 @@ int GestorBD::introducirObjeto(char* objeto) {
         return result;
     }
 
-    cout "Prepared statement finalized (INSERT)\n";
+    cout << "Prepared statement finalized (INSERT)\n";
 
     return SQLITE_OK;
 }
