@@ -445,43 +445,7 @@ void crearObjeto() {
     ClientSocket::receiveMessage();
 
     char objeto[250];
-    char categoria[20];
-
-    int option = -1;
-    cout << " --------------------" << endl;
-    cout << "Elige una categoria:" << endl;
-    cout << "1. Coleccionismo" << endl;
-    cout << "2. Electronica" << endl;
-    cout << "3. Deporte" << endl;
-    cout << "4. Casa y jardin" << endl;
-    cout << "5. Moda" << endl;
-    cin >> option;
-
-    switch (option)
-    {
-    case 1:
-        strcpy(categoria, "Coleccionismo");
-        break;
-    case 2:
-        strcpy(categoria, "Electronica");
-        break;
-    case 3:
-        strcpy(categoria, "Deporte");
-        break;
-    case 4:
-        strcpy(categoria, "Casa y jardin");
-        break;
-    case 5:
-        strcpy(categoria, "Moda");
-        break;
-
-    default:
-        break;
-    }
-
-    strcat(objeto, categoria);
-    strcat(objeto, ";");
-
+    strcpy(objeto, "");
     //ESTADO
 
     char estado[20];
@@ -522,6 +486,45 @@ void crearObjeto() {
     strcat(objeto, estado);
     strcat(objeto, ";");
 
+    // CATEGORIAS
+    char categoria[20];
+    strcpy(categoria, "");
+
+    int option = -1;
+    cout << " --------------------" << endl;
+    cout << "Elige una categoria:" << endl;
+    cout << "1. Coleccionismo" << endl;
+    cout << "2. Electronica" << endl;
+    cout << "3. Deporte" << endl;
+    cout << "4. Casa y jardin" << endl;
+    cout << "5. Moda" << endl;
+    cin >> option;
+
+    switch (option)
+    {
+    case 1:
+        strcpy(categoria, "Coleccionismo");
+        break;
+    case 2:
+        strcpy(categoria, "Electronica");
+        break;
+    case 3:
+        strcpy(categoria, "Deporte");
+        break;
+    case 4:
+        strcpy(categoria, "Casa y jardin");
+        break;
+    case 5:
+        strcpy(categoria, "Moda");
+        break;
+
+    default:
+        break;
+    }
+
+    strcat(objeto, categoria);
+    strcat(objeto, ";");
+
     //DESCRIPCION
     cout << "Introduce descripcion: " << endl;
 
@@ -551,7 +554,58 @@ void crearObjeto() {
 
     //LOTE
     cout << "Elige el lote al que pertenece: " << endl;
-    mostrarLotes();
+    ClientSocket::receiveMessage();
+
+    cout << "Buffer entrada: " << ClientSocket::recvBuff << endl << endl;
+
+    char bigString[500];
+    strcpy(bigString, ClientSocket::recvBuff);
+
+    int i = 0;
+
+    cout << "LOTES ACTIVOS:" << endl;
+
+    //Get first token de barras
+    char* tokenGrande = strtok(bigString, "|");
+    char atributo[20];
+    while (tokenGrande != NULL)
+    {
+        //cout << tokenGrande[1] << " " << tokenGrande[2] << " " << tokenGrande[3] << " " << tokenGrande[4] << endl;
+        //cout << "End" << endl;
+        i = 0;
+        for (int j = 0; j < 4; j++)
+        {
+
+            switch (j)
+            {
+            case 0:
+                strcpy(atributo, "ID: ");
+                break;
+            case 1:
+                strcpy(atributo, "- Fecha de inicio: ");
+                break;
+            case 2:
+                strcpy(atributo, "- Fecha de finalizacion: ");
+                break;
+            case 3:
+                strcpy(atributo, "- Precio: ");
+                break;
+            default:
+                break;
+            }
+            cout << " " << atributo;
+            //PRINTEAR CHARS HASTA LLEGAR A ;
+            while (tokenGrande[i] != ';')
+            {
+                cout << tokenGrande[i];
+                i++;
+            }
+            i++;
+        }
+        cout << endl;
+        //Siguiente token
+        tokenGrande = strtok(NULL, "|");
+    }
 
     int loteIn;
     cout << "Lote elegido: " << endl;

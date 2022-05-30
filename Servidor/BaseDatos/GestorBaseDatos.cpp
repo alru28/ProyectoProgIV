@@ -603,13 +603,14 @@ char * GestorBD::mostrarDia(){
 int GestorBD::introducirObjeto(char* objeto) {
     sqlite3_stmt* stmt;
     char sql[200];
-
     char* estado = strtok(objeto, ";");
     char* categoria = strtok(NULL, ";");
     char* descripcion = strtok(NULL, ";");
     char* precioSalida = strtok(NULL, ";");
     char* idSubast = strtok(NULL, ";");
     char* idLote = strtok(NULL, ";");
+
+
 
     sprintf(sql, "INSERT INTO objeto ( Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES ('%s', '%s', '%s', %.2f, %i, %i);", estado, categoria, descripcion, atof(precioSalida), atoi(idSubast), atoi(idLote));
 
