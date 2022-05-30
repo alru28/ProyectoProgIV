@@ -329,16 +329,21 @@ int showLote(int chosen){
             //Siguiente token
             tokenGrande = strtok(NULL, "|");
         }
+
+        int option = 0;
+        int objId = 0;
+        while (option != -1 || option != 1){
+            cout << "Introduce el id del objeto en caso de querer verlo, introduce -1 en caso de salir a dia"<<endl;
+            cin >> objId;
+            option = mostrarObjeto(objId);
+        }
+        
+
         return 1;
 
 
     }
     
-  
-
-
-
-
 }
 
 void mostrarLotes(){
