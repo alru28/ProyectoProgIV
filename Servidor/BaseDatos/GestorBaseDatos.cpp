@@ -639,3 +639,54 @@ int GestorBD::introducirObjeto(char* objeto) {
 
     return SQLITE_OK;
 }
+
+
+
+float GestorBD::getSaldo(char* idUsuario){
+
+    int idUsr = atoi(idUsuario);
+
+    sqlite3_stmt *stmt;
+
+    char sql[200];
+    float saldo;
+
+
+    sprintf(sql, "SELECT Saldo FROM Cartera WHERE ID_Usuario = %i", idUsr);
+
+    
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
+    
+    if (result != SQLITE_OK) {
+        cout << "Error preparing statement (SELECT)" << endl;
+        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        return 0;
+    }
+    
+    result = sqlite3_step(stmt);
+
+    if(result == SQLITE_ROW){
+
+        saldo = sqlite3_column_int(stmt, 0);
+        return saldo;
+    }else{
+        cout << "Error, no existe cartera con ese identificador." << endl;
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+
+    if (result != SQLITE_OK) {
+
+        cout << "Error finalizing statement (SELECT)" << endl;
+        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        return 0;
+    }
+
+    return 0;
+}
+
+
+
+
+
