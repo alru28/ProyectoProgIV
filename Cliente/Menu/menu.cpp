@@ -263,11 +263,11 @@ void showTransactions(){
 
 
 void mostrarUsuario(){
-
+    cout << Usuario::idUsing;
     ClientSocket::sendMessage("swusr");
-    
-    char* idU;
-    sprintf(idU, "%i" , Usuario::idUsing);
+    ClientSocket::receiveMessage();
+    char idU[5];
+    sprintf(idU, "%d" , Usuario::idUsing);
     cout << idU;
     ClientSocket::sendMessage(idU);
 
