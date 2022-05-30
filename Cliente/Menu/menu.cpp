@@ -191,7 +191,7 @@ void menuPrincipal(){
             //crearObjeto(db);
             break;
         case 3:
-            //showTransactions(db);
+            showTransactions(db);
             break;
         case 4:
             /*
@@ -299,3 +299,15 @@ void mostrarLotes(){
     }
 
 };
+
+showTransactions(){
+
+    ClientSocket::sendMessage("swlte");
+    ClientSocket::receiveMessage();
+
+    char idUser [5];
+    strcpy(idUser, ClientSocket::recvBuff);
+    ClientSocket::sendMessage(idUser);
+    ClientSocket::receiveMessage();
+
+}
