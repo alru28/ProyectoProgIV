@@ -29,8 +29,8 @@ int GestorBD::login(char* texto){    //devuelve el devuelve el id del usuario si
     char* username = strtok(texto, ";");
     char* password = strtok(NULL, ";");
 
-    cout << "Username: " << username << endl;
-    cout << "Password: " << password << endl;
+    //cout << "Username: " << username << endl;
+    //cout << "Password: " << password << endl;
 
     sqlite3_stmt *stmt;
     char sql[200];
@@ -78,29 +78,33 @@ int GestorBD::existeUsuario(char *usuario){
 
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     if (result != SQLITE_OK) {
-        cout << "Error preparing statement (SELECT)" << endl;
-        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return -1;
     }
 
-    cout << "SQL query prepared (SELECT)" << endl;
+    //cout << "SQL query prepared (SELECT)" << endl;
 
     do {
         result = sqlite3_step(stmt) ;
         if (result == SQLITE_ROW) {
-            cout << "Usuario existe" << endl;
+            Logger::logConsola("BASEDATOS", "El usuario comprobado existe");
+            Logger::logTxt("BASEDATOS", "El usuario comprobado existe");
             return 1;
         }
     } while (result == SQLITE_ROW);
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
-        cout << "Error finalizing statement (SELECT)" << endl;
-        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return -2;
     }
 
-    cout << "Prepared statement finalized (SELECT)" << endl;
+    //cout << "Prepared statement finalized (SELECT)" << endl;
+    Logger::logConsola("BASEDATOS", "Error SQL");
+    Logger::logTxt("BASEDATOS", "Error SQL");
+
 
     return 0;
 
@@ -132,27 +136,28 @@ int GestorBD::introducirUsuario(char* texto){
 
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, strlen(sql) +1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
-    cout << "SQL query prepared (INSERT)" << endl;
+    // cout << "SQL query prepared (INSERT)" << endl;
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-		cout << "Error inserting new data into country table" << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		cout << "Error finalizing statement (INSERT)" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return result;
 	}
 
-	cout << "Prepared statement finalized (INSERT)" << endl;
+	//cout << "Prepared statement finalized (INSERT)" << endl;
 
 	// return SQLITE_OK;
 
@@ -164,8 +169,8 @@ int GestorBD::introducirUsuario(char* texto){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)\n" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
@@ -177,7 +182,8 @@ int GestorBD::introducirUsuario(char* texto){
         int idUser= sqlite3_column_int(stmt, 0);
         
     }else{
-        cout << "Error, usuario no encontrado" << endl;
+        Logger::logConsola("BASEDATOS", "Usuario no encontrado");
+        Logger::logTxt("BASEDATOS", "Usuario no encontrado");
         return 0;
     }
 
@@ -186,32 +192,33 @@ int GestorBD::introducirUsuario(char* texto){
     //--------------------------------------------- -> Crea una nueva cartera para el usuario
 
     
-    cout << "idUsing: " << idUser << endl;
+    //cout << "idUsing: " << idUser << endl;
     sprintf(sql, "INSERT INTO Cartera (Saldo, ID_Usuario) VALUES (0, %i);", idUser);
 
     result = sqlite3_prepare_v2(GestorBD::baseDatos , sql, strlen(sql) +1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)\n" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
-    cout << "SQL query prepared (INSERT)\n" << endl;
+    //cout << "SQL query prepared (INSERT)\n" << endl;
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-		cout << "Error inserting new data into Cartera table\n" << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		cout << "Error finalizing statement (INSERT)\n" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		//return result;
 	}
 
-	cout << "Prepared statement finalized (INSERT)\n" << endl;
+	//cout << "Prepared statement finalized (INSERT)\n" << endl;
 
 	//return SQLITE_OK;
 
@@ -222,8 +229,8 @@ int GestorBD::introducirUsuario(char* texto){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)\n" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
@@ -235,7 +242,8 @@ int GestorBD::introducirUsuario(char* texto){
         idCartera= sqlite3_column_int(stmt, 0);
         
     }else{
-        cout << "Error, usuario no encontrado" << endl;
+        Logger::logConsola("BASEDATOS", "Error usuario no encontrado");
+        Logger::logTxt("BASEDATOS", "Error usuario no encontrado");
         return 0;
     }
 
@@ -247,12 +255,15 @@ int GestorBD::introducirUsuario(char* texto){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
     if (result != SQLITE_OK) {
-        cout << "Error preparing statement (SELECT)\n" << endl;
-        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return 0;
     }
 
     result = sqlite3_step(stmt) ;
+
+    Logger::logConsola("BASEDATOS", "Usuario introducido con exito");
+    Logger::logTxt("BASEDATOS", "Usuario introducido con exito");
 
     return idUser;
     
@@ -269,8 +280,8 @@ char* GestorBD::mostrarLotesActivos(){
     
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)\n";
-		cout << sqlite3_errmsg(GestorBD::baseDatos);
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 	}
 
 	do {
@@ -304,9 +315,13 @@ char* GestorBD::mostrarLotesActivos(){
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		cout << "Error finalizing statement (SELECT)\n";
-		cout << sqlite3_errmsg(GestorBD::baseDatos);
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 	}
+
+    Logger::logConsola("BASEDATOS", "Lotes enviados");
+    Logger::logTxt("BASEDATOS", "Lotes enviados");
+
     return bruto;   
 }
 
@@ -362,6 +377,10 @@ char* GestorBD::mostrarTransacciones(int idUsuario) {
 
 	} while (result == SQLITE_ROW);
 
+    Logger::logConsola("BASEDATOS", "Transacciones enviadas");
+    Logger::logTxt("BASEDATOS", "Transacciones enviadas");
+
+
     return bigString;
 }
 
@@ -375,8 +394,8 @@ char * GestorBD::obtenerNombre(int idCartera){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)\n";
-		cout << sqlite3_errmsg(GestorBD::baseDatos);
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
@@ -387,14 +406,16 @@ char * GestorBD::obtenerNombre(int idCartera){
         idUser= sqlite3_column_int(stmt, 0);
         
     }else{
-        cout << "Error, usuario no encontrado";
+        Logger::logConsola("BASEDATOS", "Usuario no encontrado");
+        Logger::logTxt("BASEDATOS", "Usuario no encontrado");
         return 0;
     }
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		cout << "Error finalizing statement (SELECT)\n";
-		cout << sqlite3_errmsg(GestorBD::baseDatos);
+
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
@@ -402,8 +423,8 @@ char * GestorBD::obtenerNombre(int idCartera){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
 
     if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)\n";
-		cout << sqlite3_errmsg(GestorBD::baseDatos);
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
@@ -413,17 +434,19 @@ char * GestorBD::obtenerNombre(int idCartera){
     if(result == SQLITE_ROW){        
         strcpy(nameUser,(char *) sqlite3_column_text(stmt, 0));  
     }else{
-        cout << "Error, usuario no encontrado";
+        Logger::logConsola("BASEDATOS", "Usuario no encontrado");
+        Logger::logTxt("BASEDATOS", "Usuario no encontrado");
         return 0;
     }
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		cout << "Error finalizing statement (SELECT)\n";
-		cout << sqlite3_errmsg(GestorBD::baseDatos);
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
-        
+    Logger::logConsola("BASEDATOS", "Nombre de usuario enviado");
+    Logger::logTxt("BASEDATOS", "Nombre de usuario enviado");
     return nameUser;
 }
 
@@ -438,8 +461,8 @@ int GestorBD::obtenerIdCartera(int idUsing){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)\n";
-		cout << "%s\n", sqlite3_errmsg(GestorBD::baseDatos);
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
@@ -451,10 +474,13 @@ int GestorBD::obtenerIdCartera(int idUsing){
         idCartera= sqlite3_column_int(stmt, 0);
         
     }else{
-        cout << "Error, usuario no encontrado";
+        Logger::logConsola("BASEDATOS", "Usuario no encontrado");
+        Logger::logTxt("BASEDATOS", "Usuario no encontrado");
         return 0;
     }
 
+    Logger::logConsola("BASEDATOS", "Cartera enviada");
+    Logger::logTxt("BASEDATOS", "Cartera enviada");
     return idCartera;
 }
 
@@ -470,8 +496,8 @@ char* GestorBD::imprimirUsuario(char* idUsuario){ // devuelve un char* con todos
 	int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
@@ -507,17 +533,21 @@ char* GestorBD::imprimirUsuario(char* idUsuario){ // devuelve un char* con todos
 
         sprintf(usuario, "%s;%s;%i;%s;%i;%i;%s;%s;%s;%s;", contrasena, nombre, tlf, mail, puntos, idCartera, pais, ciudad, calle, pisoPuerta);
 
+
+        Logger::logConsola("BASEDATOS", "Usuario enviado");
+        Logger::logTxt("BASEDATOS", "Usuario enviado");
         return usuario;
 
     }else{
-        cout << "Error, no existe usuario con ese identificador." << endl;
+        Logger::logConsola("BASEDATOS", "Usuario no encontrado");
+        Logger::logTxt("BASEDATOS", "Usuario no encontrado");
         return 0;
     }
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		cout << "Error finalizing statement (SELECT)" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
@@ -577,8 +607,8 @@ int GestorBD::editarUsuario(char* codigo){ //recive un codigo "opcion;cambio;idU
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
@@ -586,16 +616,14 @@ int GestorBD::editarUsuario(char* codigo){ //recive un codigo "opcion;cambio;idU
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		cout << "Error finalizing statement (SELECT)" << endl;
-		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
 		return 0;
 	}
 
-}
+    Logger::logConsola("BASEDATOS", "Usuario editado");
+    Logger::logTxt("BASEDATOS", "Usuario editado");
 
-char * GestorBD::mostrarDia(){
-
-    
 }
 
 int GestorBD::introducirObjeto(char* objeto) {
@@ -614,27 +642,27 @@ int GestorBD::introducirObjeto(char* objeto) {
 
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, strlen(sql) + 1, &stmt, NULL);
     if (result != SQLITE_OK) {
-        cout << "Error preparing statement (SELECT)" << endl;
-        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return 0;
     }
 
-    cout << "SQL query prepared (INSERT)" << endl;
-
     result = sqlite3_step(stmt);
     if (result != SQLITE_DONE) {
-        cout << "Error inserting new data into country table" << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return result;
     }
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
-        cout << "Error finalizing statement (INSERT)" << endl;
-        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return result;
     }
 
-    cout << "Prepared statement finalized (INSERT)\n";
+    Logger::logConsola("BASEDATOS", "Objeto creado");
+    Logger::logTxt("BASEDATOS", "Objeto creado");
 
     return SQLITE_OK;
 }
@@ -657,8 +685,8 @@ float GestorBD::getSaldo(char* idUsuario){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
     if (result != SQLITE_OK) {
-        cout << "Error preparing statement (SELECT)" << endl;
-        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return 0;
     }
     
@@ -667,10 +695,14 @@ float GestorBD::getSaldo(char* idUsuario){
     if(result == SQLITE_ROW){
         
         saldo = sqlite3_column_int(stmt, 0);
-        cout << "Saldo es :" << saldo <<endl;
+
+        Logger::logConsola("BASEDATOS", "Saldo enviado");
+        Logger::logTxt("BASEDATOS", "Saldo enviado");
+
         return saldo;
     }else{
-        cout << "Error, no existe cartera con ese identificador." << endl;
+        Logger::logConsola("BASEDATOS", "Cartera no encontrada");
+        Logger::logTxt("BASEDATOS", "Cartera no encontrada");
         return 0;
     }
 
@@ -678,8 +710,8 @@ float GestorBD::getSaldo(char* idUsuario){
 
     if (result != SQLITE_OK) {
 
-        cout << "Error finalizing statement (SELECT)" << endl;
-        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return 0;
     }
 
@@ -697,20 +729,18 @@ char* GestorBD::mostrarLote(int id){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");;
         strcpy(bruto,"-1");
         return bruto;
 	}
-
-    cout << "\nLote " << id << ":\n";
 
     sprintf(sql, "select ID_Objeto, Estado, Descripcion,  Categoria, PrecioSalida from objeto where %i = ID_Lote", id);
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-		cout << "Error preparing statement (SELECT)\n";
-		cout << sqlite3_errmsg(GestorBD::baseDatos);
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         strcpy(bruto,"-1");
         return bruto;
 	}
@@ -749,6 +779,10 @@ char* GestorBD::mostrarLote(int id){
 
     }while (mostrarObjeto(db ,idObj));
     */
+
+    Logger::logConsola("BASEDATOS", "Lote enviado");
+    Logger::logTxt("BASEDATOS", "Lote enviado");
+
    return bruto;
 }
 
@@ -769,8 +803,8 @@ int GestorBD::setSaldo(char* codigo){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
     if (result != SQLITE_OK) {
-        cout << "Error preparing statement (SELECT)\n";
-        cout << sqlite3_errmsg(GestorBD::baseDatos);
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return 0;
     }
 
@@ -778,10 +812,13 @@ int GestorBD::setSaldo(char* codigo){
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
-        cout << "Error finalizing statement (SELECT)\n";
-        cout << sqlite3_errmsg(GestorBD::baseDatos);
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
         return 0;
     }
+
+    Logger::logConsola("BASEDATOS", "Cartera actualizada");
+    Logger::logTxt("BASEDATOS", "Cartera actualizada");
 
 }
 
@@ -795,8 +832,8 @@ char* GestorBD::mostrarObjeto(int idObjeto) {
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
 
     if (result != SQLITE_OK) {
-        cout << "Error preparing statement (SELECT)" << endl;
-        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        Logger::logConsola("BASEDATOS", "Error SQL");
+        Logger::logTxt("BASEDATOS", "Error SQL");
     }
 
     int idLote;
@@ -812,19 +849,22 @@ char* GestorBD::mostrarObjeto(int idObjeto) {
         char Precio[50];
         strcpy(Precio, (char*)sqlite3_column_text(stmt, 4));
         idLote = sqlite3_column_int(stmt, 5);
-        cout << "LOTE CONSULTA: " << idLote << endl;
 
         char *bigString = new char[500];
         strcpy(bigString, "");
 
         sprintf(bigString, "%d;%s;%s;%s;%s;%i", id, Categoria, Descripcion, Estado, Precio, idLote);
-        cout << "BIG STRING CONSULTA: " << bigString << endl;
+
+        Logger::logConsola("BASEDATOS", "Objeto enviado");
+        Logger::logTxt("BASEDATOS", "Objeto enviado");
+
         return bigString;
 
 
     }
     else {
-        cout << "Error, no existe producto con ese codigo" << endl;
+        Logger::logConsola("BASEDATOS", "Objeto no encontrado");
+        Logger::logTxt("BASEDATOS", "Objeto no encontrado");
         return 0;
     }
 }
@@ -840,8 +880,6 @@ int GestorBD::crearPuja(char* stringPuja) {
     int idUserInt = atoi(idUser);
 
     int saldo = GestorBD::getSaldo(idUser);
-    cout << "SALDO EN CONSULTA: " << saldo << endl;
-    cout << "PUJA INT: " << pujaInt << endl;
     if (saldo < pujaInt) {
         return 0;
     }
@@ -854,25 +892,27 @@ int GestorBD::crearPuja(char* stringPuja) {
         int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
 
         if (result != SQLITE_OK) {
-            cout << "Error preparing statement (SELECT)" << endl;
-            cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+            Logger::logConsola("BASEDATOS", "Error SQL");
+            Logger::logTxt("BASEDATOS", "Error SQL");
             return 0;
         }
 
         result = sqlite3_step(stmt);
         if (result != SQLITE_DONE) {
-            cout << "Error inserting new data into puja" << endl;
+            Logger::logConsola("BASEDATOS", "Error SQL");
+            Logger::logTxt("BASEDATOS", "Error SQL");
             return 0;
         }
 
         result = sqlite3_finalize(stmt);
         if (result != SQLITE_OK) {
-            cout << "Error finalizing statement (INSERT)" << endl;
-            cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+            Logger::logConsola("BASEDATOS", "Error SQL");
+            Logger::logTxt("BASEDATOS", "Error SQL");
             return 0;
         }
 
-        cout << "Puja realizada correctamente" << endl;
+        Logger::logConsola("BASEDATOS", "Puja registrada");
+        Logger::logTxt("BASEDATOS", "Puja registrada");
         return 1;
     }
 }
