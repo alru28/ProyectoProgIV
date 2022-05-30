@@ -166,6 +166,18 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
 
                 }
+                //crearObjeto
+                else if (strcmp(ServerSocket::recvBuff, "crobj") == 0) {
+                    
+                    strcpy(ServerSocket::sendBuff, "ACKcrobj");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+
+                    char* bruto = GestorBD::mostrarLotesActivos();
+                    strcpy(ServerSocket::sendBuff, bruto);
+
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
+
+                }
                 else if (strcmp(ServerSocket::recvBuff, "sprod") == 0) {
 
 
@@ -192,10 +204,6 @@ void ServerSocket::communicate(){
 
                     strcpy(ServerSocket::sendBuff, bruto);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
-
-                }
-                else if (strcmp(ServerSocket::recvBuff, "gtrans") == 0) {
-
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "swusr") == 0) {
