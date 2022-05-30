@@ -187,7 +187,8 @@ void ServerSocket::communicate(){
                     
                     recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
                     int idLote = atoi(ServerSocket::recvBuff);
-                    
+                    cout <<"Llamando a mostrarlote con id:" << idLote << " buffer:" << ServerSocket::recvBuff <<endl;
+
                     char* lote = GestorBD::mostrarLote(idLote);
 
                     

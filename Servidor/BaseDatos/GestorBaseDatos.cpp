@@ -272,8 +272,6 @@ char* GestorBD::mostrarLotesActivos(){
 		cout << "Error preparing statement (SELECT)\n";
 		cout << sqlite3_errmsg(GestorBD::baseDatos);
 	}
-    cout << "\nLotes activos actualmente:\n";
-
 
 	do {
 		result = sqlite3_step(stmt) ;
