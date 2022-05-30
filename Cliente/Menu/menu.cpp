@@ -780,6 +780,8 @@ int mostrarObjeto(int idObjeto) {
         char *descripcion = strtok(NULL, ";");
         char *estado = strtok(NULL, ";");
         char* precio= strtok(NULL, ";");
+        char* idLote = strtok(NULL, ";");
+        int idLoteInt = atoi(idLote);
 
         cout << "[Objeto]" << endl;
         cout << "- ID: " << id << endl;
@@ -787,6 +789,7 @@ int mostrarObjeto(int idObjeto) {
         cout << "- Descripcion: " << descripcion << endl;
         cout << "- Estado: " << estado << endl;
         cout << "- Precio: " << precio << endl;
+        cout << "- ID Lote: " << idLoteInt << endl;
     }
     // Imprimir objeto parseado
 

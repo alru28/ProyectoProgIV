@@ -830,7 +830,7 @@ char* mostrarObjeto(int idObjeto) {
         char bigString[500];
         strcpy(bigString, "");
 
-        sprintf(bigString, "%d;%s;%s;%s;%d", id, Categoria, Descripcion, Estado, Precio);
+        sprintf(bigString, "%d;%s;%s;%s;%d;%d", id, Categoria, Descripcion, Estado, Precio, idLote);
 
         return bigString;
 
