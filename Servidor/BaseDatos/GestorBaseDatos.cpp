@@ -315,9 +315,152 @@ char* GestorBD::mostrarLotesActivos(){
 
 char* GestorBD::mostrarTransacciones(int idUsuario) {
 
+    sqlite3_stmt *stmt;
+
+    int idCartera = GestorBD::obtenerIdCartera(idUsuario);
+
+    char sql[200];
+    sprintf(sql, "select Cantidad, Fecha, ID_Cartera_Recibe, ID_Cartera_Envia from Transaccion where ID_Cartera_Recibe = %i or ID_Cartera_Envia = %i", idCartera, idCartera);
+    
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
+
+
+
+    char* bigString = new char[500];
+
+    do {
+		result = sqlite3_step(stmt) ;
+		if (result == SQLITE_ROW) {
+			float cant = sqlite3_column_double(stmt, 0);
+           
+            char fecha[20];
+			strcpy(fecha, (char *) sqlite3_column_text(stmt, 1));
+            
+            int idEnvia= sqlite3_column_int(stmt, 2);
+            int idRecibe= sqlite3_column_int(stmt,3);
+            char local[100];
+            sprintf(local, "Transaccion de %.2f$ realizada en %s ", cant, fecha);
+            strcat(bigString, local);
+
+
+            if(idCartera == idEnvia){
+                char nombre[20];
+                strcpy(nombre, obtenerNombre(idRecibe));
+                char temp[50];
+                sprintf(temp, "enviada a %s.\n", nombre);
+                strcat(local,temp);
+            } else {
+                char nombre[20];
+                strcpy(nombre, obtenerNombre(idEnvia));
+                char temp[50];
+                sprintf(local, "recibida de %s.\n", nombre);
+                strcat(local,temp);
+                
+
+            }
+
+            strcat(bigString, local);
+            strcat(bigString, ";");
+                                  
+		}
+
+	} while (result == SQLITE_ROW);
+
+    return bigString;
 }
 
 
+char * GestorBD::obtenerNombre(int idCartera){
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "select ID_Usuario from Cartera where ID_Cartera= %i ", idCartera);
+    
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    int idUser;
+    if(result == SQLITE_ROW){
+        
+        idUser= sqlite3_column_int(stmt, 0);
+        
+    }else{
+        printf("Error, usuario no encontrado");
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		return 0;
+	}
+
+    sprintf(sql, "select Nombre from Usuario where ID_Usuario = %i ", idUser);
+    result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+
+    if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    char * nameUser = new char[50];
+
+    if(result == SQLITE_ROW){        
+        strcpy(nameUser,(char *) sqlite3_column_text(stmt, 0));  
+    }else{
+        printf("Error, usuario no encontrado");
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		return 0;
+	}
+        
+    return nameUser;
+}
+
+
+
+int GestorBD::obtenerIdCartera(int idUsing){
+
+    sqlite3_stmt *stmt;
+    char sql[100];
+    sprintf(sql, "select ID_Cartera from Cartera where ID_Usuario= %i ", idUsing);
+    
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		return 0;
+	}
+
+    result = sqlite3_step(stmt) ;
+    int idCartera;
+
+    if(result == SQLITE_ROW){
+        
+        idCartera= sqlite3_column_int(stmt, 0);
+        
+    }else{
+        printf("Error, usuario no encontrado");
+        return 0;
+    }
+
+    return idCartera;
+}
 
 char* GestorBD::imprimirUsuario(char* idUsuario){ // devuelve un char* con todos los datos del usuario
     sqlite3_stmt *stmt;

@@ -191,7 +191,7 @@ void ServerSocket::communicate(){
                     char* bruto = GestorBD::mostrarTransacciones(atoi(ServerSocket::recvBuff));
 
                     strcpy(ServerSocket::sendBuff, bruto);
-                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0)
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "gtrans") == 0) {
