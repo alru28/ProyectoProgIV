@@ -19,6 +19,7 @@ class GestorBD {
 		static char * obtenerNombre(int idCartera);
 		static int editarUsuario(char* texto);
 
+		static char* mostrarDia();
 };
 
 #endif

@@ -537,35 +537,35 @@ int GestorBD::editarUsuario(char* codigo){ //recive un codigo "opcion;cambio;idU
     int idUsr = atoi(idUsuario);
     int option = atoi(opcion);
 
-    char* strRequest = "";
+    char* strRequest = (char*) "";
 
     switch (option) {
     case 1:
-        strRequest = "Contraseña";
+        strRequest = (char*) "Contraseña";
         break;
     
     case 2:
-        strRequest = "Tlf";
+        strRequest = (char*) "Tlf";
         break;
     
     case 3:
-        strRequest = "Mail";
+        strRequest = (char*) "Mail";
         break;
     
     case 4:
-        strRequest = "Pais";
+        strRequest = (char*) "Pais";
         break;
 
     case 5:
-        strRequest = "Ciudad";
+        strRequest = (char*) "Ciudad";
         break;
     
     case 6:
-        strRequest = "Calle";
+        strRequest = (char*) "Calle";
         break;
     
     case 7:
-        strRequest = "PisoPuerta";
+        strRequest = (char*) "PisoPuerta";
         break;
 
     default:
@@ -594,4 +594,9 @@ int GestorBD::editarUsuario(char* codigo){ //recive un codigo "opcion;cambio;idU
 		return 0;
 	}
 
+}
+
+char * GestorBD::mostrarDia(){
+
+    
 }
