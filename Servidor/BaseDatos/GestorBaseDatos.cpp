@@ -829,3 +829,49 @@ char* mostrarObjeto(int idObjeto) {
         return 0;
     }
 }
+
+int crearPuja(char* stringPuja) {
+
+    char* idObjeto = strtok(stringPuja, ";");
+    char* Puja = strtok(NULL, ";");
+    char* idUser = strtok(NULL, ";");
+
+    int pujaInt = atoi(Puja);
+    int idObjetoInt = atoi(idObjeto);
+    int idUserInt = atoi(idUser);
+
+    int saldo = GestorBD::getSaldo(idUser);
+    if (saldo < pujaInt) {
+        return 0;
+    }
+    else {
+        sqlite3_stmt* stmt;
+
+        char sql[100];
+        sprintf(sql, "insert into puja(Cantidad, ID_Usuario, ID_Objeto) values (%f , %i , %i)", pujaInt, idUserInt, idObjetoInt);
+
+        int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
+
+        if (result != SQLITE_OK) {
+            cout << "Error preparing statement (SELECT)" << endl;
+            cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+            return 0;
+        }
+
+        result = sqlite3_step(stmt);
+        if (result != SQLITE_DONE) {
+            cout << "Error inserting new data into puja" << endl;
+            return 0;
+        }
+
+        result = sqlite3_finalize(stmt);
+        if (result != SQLITE_OK) {
+            cout << "Error finalizing statement (INSERT)" << endl;
+            cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+            return 0;
+        }
+
+        cout << "Puja realizada correctamente" << endl;
+        return 1;
+    }
+}

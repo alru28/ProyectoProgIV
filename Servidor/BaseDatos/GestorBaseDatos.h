@@ -24,6 +24,7 @@ class GestorBD {
 		static char* mostrarLote(int idLote);
 		static char* mostrarDia();
 		static char* mostrarObjeto(int idObjeto);
+		static int crearPuja(char* stringPuja);
 };
 
 #endif

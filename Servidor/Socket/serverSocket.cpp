@@ -209,8 +209,18 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
                 }
-                else if (strcmp(ServerSocket::recvBuff, "gpuja") == 0) {
+                else if (strcmp(ServerSocket::recvBuff, "crpja") == 0) {
+                    strcpy(ServerSocket::sendBuff, "ACKcrpja");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+
+                    int result = GestorBD::crearPuja(ServerSocket::recvBuff);
+                    char* resultString;
+                    sprintf(resultString, "%d", result);
+
+                    strcpy(ServerSocket::sendBuff, resultString);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
                 }
                 // Mostrar transacciones

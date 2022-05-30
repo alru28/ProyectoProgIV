@@ -825,7 +825,7 @@ int mostrarObjeto(int idObjeto) {
     ClientSocket::receiveMessage();
     char bigString[500];
     strcpy(bigString, ClientSocket::recvBuff);
-    if (bigString == 0) {
+    if (strcmp(bigString, "0") == 0) {
         return 0;
     }
     else {
@@ -845,6 +845,52 @@ int mostrarObjeto(int idObjeto) {
         cout << "- Precio: " << precio << endl;
         cout << "- ID Lote: " << idLoteInt << endl;
     }
-    // Imprimir objeto parseado
 
+    int option = -1;
+
+    while (option != 0 || option != 1) {
+
+
+       cout << "Introduce 1 para pujar, 0 para volver al lote" << endl;
+       cin >> option;
+       if (option == 0) {
+
+           showLote(idLoteInt);
+
+       }else if (option == 1) {
+
+           crearPuja(idObjeto);
+
+       }
+
+    }
+
+    return 1;
+
+
+}
+
+void crearPuja(int idObjeto) {
+    ClientSocket::sendMessage("crpja");
+    ClientSocket::receiveMessage();
+
+    int puja;
+    cout << "Introduzca cuanto quiere pujar por el objeto:" << endl;
+    cin >> puja;
+
+    char* stringPuja;
+    strcpy(stringPuja, "");
+
+    sprintf(stringPuja, "%d;%d;%d", idObjeto, puja, Usuario::idUsing);
+
+    ClientSocket::sendMessage(stringPuja);
+    ClientSocket::receiveMessage();
+
+    int option = atoi(ClientSocket::recvBuff);
+    if (option == 1) {
+        cout << "Puja realizada correctamente" << endl;
+    }
+    else {
+        cout << "Se ha producido un error al realizar la puja" << endl;
+    }
 }
