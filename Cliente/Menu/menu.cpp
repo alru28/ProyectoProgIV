@@ -327,7 +327,7 @@ void mostrarUsuario(){
     fflush(stdin);
 
     if(option == 0){
-        menuPrincipal(db);
+        menuPrincipal();
     }else{
         editarUsuario(option);
         
@@ -339,7 +339,7 @@ void editarUsuario(int option){
     char valor[100];
     char valorInput[100];
 
-    switch (aEditar){
+    switch (option){
         case 1:
             printf("Introduce nueva contrasena: ");
             fgets(valorInput, 100, stdin);
