@@ -711,8 +711,8 @@ char* GestorBD::mostrarLote(int id){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		cout << "Error preparing statement (SELECT)\n";
+		cout << sqlite3_errmsg(GestorBD::baseDatos);
         strcpy(bruto,"-1");
         return bruto;
 	}
@@ -771,8 +771,8 @@ int GestorBD::setSaldo(char* codigo){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
     if (result != SQLITE_OK) {
-        printf("Error preparing statement (SELECT)\n");
-        printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+        cout << "Error preparing statement (SELECT)\n";
+        cout << sqlite3_errmsg(GestorBD::baseDatos);
         return 0;
     }
 
@@ -794,12 +794,11 @@ char* mostrarObjeto(int idObjeto) {
     sprintf(sql, "select ID_Objeto, Categoria, Estado, Descripcion, PrecioSalida, ID_Lote from Objeto where %i = ID_Objeto", id);
 
 
-    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
 
     if (result != SQLITE_OK) {
         cout << "Error preparing statement (SELECT)" << endl;
-        cout << "%s\n", sqlite3_errmsg(db) << endl;
-        return 0;
+        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
     }
 
     int idLote;
