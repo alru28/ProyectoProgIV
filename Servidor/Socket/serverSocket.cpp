@@ -93,7 +93,7 @@ void ServerSocket::communicate(){
         do {
             int bytes = recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
             if (bytes > 0) {
-
+                // Verificar usuario
                 if (strcmp(ServerSocket::recvBuff, "vfusr") == 0) {
                     strcpy(ServerSocket::sendBuff, "ACKvfusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
@@ -124,6 +124,7 @@ void ServerSocket::communicate(){
                     Logger::logTxt("LOGIN", "Login satisfactorio");
 
                 }
+                // Existe usuario
                 else if (strcmp(ServerSocket::recvBuff, "exusr") == 0) {
                     strcpy(ServerSocket::sendBuff, "ACKexusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
@@ -141,6 +142,7 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
                     
                 }
+                // Registro
                 else if (strcmp(ServerSocket::recvBuff, "nwusr") == 0) {
                     strcpy(ServerSocket::sendBuff, "ACKnwusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
@@ -152,6 +154,7 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
 
                 }
+                // Mostrar lote
                 else if (strcmp(ServerSocket::recvBuff, "swlte") == 0) {
                     
                     strcpy(ServerSocket::sendBuff, "ACKswlte");
@@ -179,8 +182,16 @@ void ServerSocket::communicate(){
 
 
                 }
-                else if (strcmp(ServerSocket::recvBuff, "strans") == 0) {
+                // Mostrar transacciones
+                else if (strcmp(ServerSocket::recvBuff, "swtrs") == 0) {
+                    strcpy(ServerSocket::sendBuff, "ACKswtrs");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    char* bruto = GestorBD::mostrarTransacciones(atoi(ServerSocket::recvBuff));
+
+                    strcpy(ServerSocket::sendBuff, bruto);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0)
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "gtrans") == 0) {
