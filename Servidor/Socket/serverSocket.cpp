@@ -180,9 +180,20 @@ void ServerSocket::communicate(){
                     GestorBD::introducirObjeto(ServerSocket::recvBuff);
                 }
 
-                else if (strcmp(ServerSocket::recvBuff, "gprod") == 0) {
+                else if (strcmp(ServerSocket::recvBuff, "swlot") == 0) {
+                    
+                    strcpy(ServerSocket::sendBuff, "ACKswlot");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+                    
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    int idLote = atoi(ServerSocket::recvBuff);
+                    
+                    char* lote = GestorBD::mostrarLote(idLote);
 
-
+                    
+                    strcpy(ServerSocket::sendBuff, lote);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
+                    
                 }
                 else if (strcmp(ServerSocket::recvBuff, "spuja") == 0) {
 

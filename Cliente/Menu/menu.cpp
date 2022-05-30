@@ -185,7 +185,7 @@ void menuPrincipal(){
         switch (option)
         {
         case 1:
-            mostrarLotes();
+            mostrarDia();
             break;
         case 2:
             crearObjeto();
@@ -208,6 +208,82 @@ void menuPrincipal(){
     }
 
 };
+
+int MostrarDia(){
+    ClientSocket::sendMessage("swlte");
+    ClientSocket::receiveMessage();
+
+    ClientSocket::receiveMessage();
+    char bigString [500];
+    strcpy(bigString, ClientSocket::recvBuff);
+
+    int i = 0;
+    char* tokenGrande = strtok(bigString, "|");
+    cout<<"Mostrando Lotes activos"<<endl;
+    char* tokenGrande = strtok(NULL, "|");
+    
+    char atributo[20];
+    while(tokenGrande != NULL)
+    {
+        i=0;
+        for(int j=0; j<4; j++)
+        {
+                        
+            switch (j)
+            {
+            case 0:
+                strcpy(atributo, "ID: ");
+                break;
+            case 1:
+                strcpy(atributo, "- Fecha de inicio: ");
+                break;
+            case 2:
+                strcpy(atributo, "- Fecha de finalizacion: ");
+                break;
+            case 3:
+                strcpy(atributo, "- Precio: ");
+                break;
+            default:
+                break;
+            }
+            cout << " " << atributo;
+            //PRINTEAR CHARS HASTA LLEGAR A ;
+            while(tokenGrande[i] != ';')
+            {
+                cout << tokenGrande[i];
+                i++;
+            }
+            i++;
+        }
+        cout<<endl;
+        //Siguiente token
+        tokenGrande = strtok(NULL, "|");
+    }
+    int chosen = 0;
+    int optionAux = 0:
+
+    while(optionux!= 1){
+        cout<<"Introduce el id del lote que quieras acceder"<<endl;
+        cin>>chosen;
+        optionAux = showLote(chosen);
+    }
+    
+    return 1;
+}
+
+int showLote(int chosen){
+
+    ClientSocket::sendMessage("swlot");
+    ClientSocket::receiveMessage();
+
+    ClientSocket::sendMessage(chosen);
+    ClientSocket::receiveMessage();
+
+    char bigString [500];
+    strcpy(bigString, ClientSocket::recvBuff);
+
+
+}
 
 void mostrarLotes(){
 
@@ -264,6 +340,8 @@ void mostrarLotes(){
         //Siguiente token
         tokenGrande = strtok(NULL, "|");
     }
+
+
 };
 
 

@@ -19,6 +19,7 @@ class ServerSocket {
         static int startSocket();
         static void communicate();
         static void closeSocket();
+        
 
 };
 

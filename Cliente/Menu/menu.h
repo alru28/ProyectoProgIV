@@ -13,5 +13,8 @@ void editarUsuario(int option);
 void crearObjeto();
 void mostrarSaldo();
 void aumentarSaldo(float saldo);
+int mostrarDia();
+int showLote();
+
 
 #endif

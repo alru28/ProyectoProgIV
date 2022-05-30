@@ -688,8 +688,85 @@ float GestorBD::getSaldo(char* idUsuario){
     return 0;
 }
 
-int GestorBD::setSaldo(char* codigo){
 
+char* GestorBD::mostrarLote(int id){
+
+    sqlite3_stmt *stmt;
+    
+    char sql[100];
+    sprintf(sql, "select ID_Lote, FechaCom, FechaFin from lote where %i = ID_Lote", id);
+    
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+  
+    
+    result = sqlite3_step(stmt) ;
+    if(result == SQLITE_ROW){
+        int id= sqlite3_column_int(stmt, 0);
+        char fechaInicio[20];
+		strcpy(fechaInicio, (char *) sqlite3_column_text(stmt, 1));
+        char fechaFinal[20];
+		strcpy(fechaFinal, (char *) sqlite3_column_text(stmt, 2));
+        printf("\n");
+        printf("Lote %i: (%s - %s) \n", id, fechaInicio, fechaFinal);
+    }else{
+        printf("Error, no existe lote con ese codigo, introduce otro.\n");
+        return 0;
+    }
+    
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    sprintf(sql, "select ID_Objeto, Estado, Descripcion,  Categoria, PrecioSalida from objeto where %i = ID_Lote", id);
+
+    result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+    do {
+		result = sqlite3_step(stmt) ;
+		if (result == SQLITE_ROW) {
+			int id= sqlite3_column_int(stmt, 0);
+            char Estado[20];
+			strcpy(Estado, (char *) sqlite3_column_text(stmt, 1));
+            char Descripcion[50];
+            strcpy(Descripcion, (char*) sqlite3_column_text(stmt, 2));
+            char Categoria[20];
+			strcpy(Categoria, (char *) sqlite3_column_text(stmt, 3));
+            float precio = (float) sqlite3_column_double(stmt, 4);
+            printf("Articulo %i: %s\t Estado: %s Precio: %.2f\n", id, Descripcion, Estado, precio);                       
+		}
+	} while (result == SQLITE_ROW);
+    
+    
+    int idObj =0;
+    do{
+        printf("\nIntroduce el id del objeto que desees ver.\n-1.  en caso de querer volver.");
+        scanf("%i", &idObj);
+        printf("ID objeto %i\n", idObj);
+        if(idObj==-1) mostrarDia(db, 0);       
+
+    }while (mostrarObjeto(db ,idObj));
+    return 1;
+
+}
+
+
+int GestorBD::setSaldo(char* codigo){
     char* idUsuario = strtok(codigo, ";");
     char* aum = strtok(NULL, ";");
 
