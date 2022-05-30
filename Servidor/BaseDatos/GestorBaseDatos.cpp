@@ -326,7 +326,7 @@ char* GestorBD::mostrarTransacciones(int idUsuario) {
 
 
 
-    char bigString[500];
+    char* bigString = new char[500];
 
     do {
 		result = sqlite3_step(stmt) ;
@@ -412,7 +412,7 @@ char * GestorBD::obtenerNombre(int idCartera){
 	}
 
     result = sqlite3_step(stmt) ;
-    char nameUser[50];
+    char * nameUser = new char[50];
 
     if(result == SQLITE_ROW){        
         strcpy(nameUser,(char *) sqlite3_column_text(stmt, 0));  

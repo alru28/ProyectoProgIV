@@ -192,7 +192,7 @@ void menuPrincipal(){
             //crearObjeto(db);
             break;
         case 3:
-            showTransactions(db);
+            showTransactions();
             break;
         case 4:
             mostrarUsuario();
@@ -251,7 +251,7 @@ void mostrarLotes(){
 
 void showTransactions(){
 
-    ClientSocket::sendMessage("swlte");
+    ClientSocket::sendMessage("swtrs");
     ClientSocket::receiveMessage();
 
     char idUser [5];
