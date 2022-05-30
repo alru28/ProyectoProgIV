@@ -12,6 +12,6 @@ void mostrarUsuario();
 void editarUsuario(int option);
 void crearObjeto();
 void mostrarSaldo();
-void aumentarSaldo();
+void aumentarSaldo(float saldo);
 
 #endif

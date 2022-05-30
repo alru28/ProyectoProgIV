@@ -676,7 +676,7 @@ void aumentarSaldo(float saldo){
     ClientSocket::receiveMessage();
     char codigo[5];
     sprintf(codigo, "%d;%f;" , Usuario::idUsing, aumento);
-    ClientSocket::sendMessage(aumento);
+    ClientSocket::sendMessage(codigo);
 
     mostrarSaldo();
 
