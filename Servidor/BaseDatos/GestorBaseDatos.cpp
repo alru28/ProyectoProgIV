@@ -667,8 +667,9 @@ float GestorBD::getSaldo(char* idUsuario){
     result = sqlite3_step(stmt);
 
     if(result == SQLITE_ROW){
-
+        
         saldo = sqlite3_column_int(stmt, 0);
+        cout << "Saldo es :" << saldo <<endl;
         return saldo;
     }else{
         cout << "Error, no existe cartera con ese identificador." << endl;

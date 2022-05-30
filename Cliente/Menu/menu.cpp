@@ -197,7 +197,7 @@ void menuPrincipal(){
             mostrarUsuario();
             break;
         case 5:
-            //saldo(db);
+            mostrarSaldo();
             break;
         case 6:
             repetir = 0;

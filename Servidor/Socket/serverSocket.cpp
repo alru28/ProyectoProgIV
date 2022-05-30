@@ -231,8 +231,12 @@ void ServerSocket::communicate(){
                     strcpy(ServerSocket::sendBuff, "ACKswsld");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
                     recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
-                    char* saldo = atof(GestorBD::getSaldo(ServerSocket::recvBuff));
-                    strcpy(ServerSocket::sendBuff, saldo);
+                    float saldo = GestorBD::getSaldo(ServerSocket::recvBuff);
+                    
+                    char mensaje[50];
+                    std::sprintf(mensaje, "%f", saldo);
+                    
+                    strcpy(ServerSocket::sendBuff, mensaje);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
                 }
 
