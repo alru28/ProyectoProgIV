@@ -701,7 +701,8 @@ char* GestorBD::mostrarLote(int id){
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
-        return "-1";
+        strcpy(bruto,"-1");
+        return bruto;
 	}
 
     cout << "\nLote " << id << ":\n";
@@ -712,7 +713,8 @@ char* GestorBD::mostrarLote(int id){
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
-        return "-1";
+        strcpy(bruto,"-1");
+        return bruto;
 	}
 
     do {
@@ -785,7 +787,6 @@ int GestorBD::setSaldo(char* codigo){
 
 }
 
-/*
 char* mostrarObjeto(int idObjeto) {
     sqlite3_stmt* stmt;
 
@@ -829,5 +830,3 @@ char* mostrarObjeto(int idObjeto) {
         return 0;
     }
 }
-
-*/
