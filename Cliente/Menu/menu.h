@@ -8,7 +8,11 @@ void menuPrincipal();
 void mostrarLotes();
 void mostrarUsuario();
 void showTransactions();
+<<<<<<< Updated upstream
 void mostrarUsuario(int option);
 void editarUsuario(int option);
+=======
+void crearObjeto();
+>>>>>>> Stashed changes
 
 #endif
