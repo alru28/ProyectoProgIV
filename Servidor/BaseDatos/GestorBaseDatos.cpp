@@ -785,6 +785,7 @@ int GestorBD::setSaldo(char* codigo){
 
 }
 
+/*
 char* mostrarObjeto(int idObjeto) {
     sqlite3_stmt* stmt;
 
@@ -829,4 +830,4 @@ char* mostrarObjeto(int idObjeto) {
     }
 }
 
-
+*/
