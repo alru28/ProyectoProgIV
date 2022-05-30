@@ -808,8 +808,8 @@ char* mostrarObjeto(int idObjeto) {
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
 
     if (result != SQLITE_OK) {
-        printf("Error preparing statement (SELECT)\n");
-        printf("%s\n", sqlite3_errmsg(db));
+        cout << "Error preparing statement (SELECT)" << endl;
+        cout << "%s\n", sqlite3_errmsg(db) << endl;
         return 0;
     }
 
@@ -827,19 +827,17 @@ char* mostrarObjeto(int idObjeto) {
         strcpy(Precio, (char*)sqlite3_column_text(stmt, 4));
         idLote = sqlite3_column_int(stmt, 5);
 
-        printf("\n__________________________________\n");
-        printf("Producto %i (%s): %s en un estado %s\nPrecio de salida de %.2f$", id, Categoria, Descripcion, Estado, Precio);
-        printf("\n__________________________________\n\n");
-
         char bigString[500];
         strcpy(bigString, "");
 
-        sprintf()
+        sprintf(bigString, "%d;%s;%s;%s;%d", id, Categoria, Descripcion, Estado, Precio);
+
+        return bigString;
 
 
     }
     else {
-        printf("Error, no existe producto con ese codigo");
+        cout << "Error, no existe producto con ese codigo" << endl;
         return 0;
     }
 }

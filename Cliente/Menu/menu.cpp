@@ -771,6 +771,23 @@ int mostrarObjeto(int idObjeto) {
     ClientSocket::receiveMessage();
     char bigString[500];
     strcpy(bigString, ClientSocket::recvBuff);
+    if (bigString == 0) {
+        return 0;
+    }
+    else {
+        char* id = strtok(bigString, ";");
+        char *categoria = strtok(NULL, ";");
+        char *descripcion = strtok(NULL, ";");
+        char *estado = strtok(NULL, ";");
+        char* precio= strtok(NULL, ";");
+
+        cout << "[Objeto]" << endl;
+        cout << "- ID: " << id << endl;
+        cout << "- Categoria: " << categoria << endl;
+        cout << "- Descripcion: " << descripcion << endl;
+        cout << "- Estado: " << estado << endl;
+        cout << "- Precio: " << precio << endl;
+    }
     // Imprimir objeto parseado
 
 }
