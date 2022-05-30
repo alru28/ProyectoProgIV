@@ -22,6 +22,7 @@ class GestorBD {
 		static float getSaldo(char* idUsuario);
 		static int setSaldo(char* codigo);
 		static char* mostrarLote(int idLote);
+		static char* mostrarDia();
 		static char* mostrarObjeto(int idObjeto);
 		static int crearPuja(char* stringPuja);
 };

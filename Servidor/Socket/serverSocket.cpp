@@ -23,24 +23,19 @@ int ServerSocket::startSocket(){
     cout<<"\nInitialising Winsock..."<<endl;
     if (WSAStartup(MAKEWORD(2, 2), &ServerSocket::wsaData) != 0) {
         cout<<"Failed. Error Code :" << (double)WSAGetLastError()<< endl;
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
         return -1;
     }
 
-    Logger::logConsola("SOCKET", "Inicializado");
-    Logger::logTxt("SOCKET", "Inicializado");
+    cout<<"Initialised.\n"<<endl;
 
     //SOCKET creation
     if ((ServerSocket::conn_socket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
+        cout <<"Could not create socket :"<< WSAGetLastError()<<endl;
         WSACleanup();
         return -1;
     }
 
-    Logger::logConsola("SOCKET", "Creado");
-    Logger::logTxt("SOCKET", "Creado");
+    cout<<"Socket created."<<endl;
 
     ServerSocket::server.sin_addr.s_addr = inet_addr(SERVER_IP);
     ServerSocket::server.sin_family = AF_INET;
@@ -49,41 +44,33 @@ int ServerSocket::startSocket(){
     //BIND (the IP/port with socket)
     if (bind(ServerSocket::conn_socket, (struct sockaddr*) &ServerSocket::server,
             sizeof(ServerSocket::server)) == SOCKET_ERROR) {
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
+        cout << "Bind failed with error code:"<< (double) WSAGetLastError()<<endl;
         closesocket(ServerSocket::conn_socket);
         WSACleanup();
         return -1;
     }
 
-    Logger::logConsola("SOCKET", "Binded");
-    Logger::logTxt("SOCKET", "Binded");
+    cout << "Bind done." << endl;
 
     //LISTEN to incoming connections (socket server moves to listening mode)
     if (listen(ServerSocket::conn_socket, 1) == SOCKET_ERROR) {
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
+        cout<<"Listen failed with error code: " << WSAGetLastError()<< endl;
         closesocket(ServerSocket::conn_socket);
         WSACleanup();
         return -1;
     }
 
     //ACCEPT incoming connections (server keeps waiting for them)
-    Logger::logConsola("SOCKET", "Esperando conexiones");
-    Logger::logTxt("SOCKET", "Esperando conexiones");
+    cout << "Waiting for incoming connections..."<<endl;
     int stsize = sizeof(struct sockaddr);
     ServerSocket::comm_socket = accept(ServerSocket::conn_socket, (struct sockaddr*) &ServerSocket::client, &stsize);
     // Using comm_socket is able to send/receive data to/from connected client
     if (ServerSocket::comm_socket == INVALID_SOCKET) {
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
+        cout << "accept failed with error code :"<<(double) WSAGetLastError() << endl;
         closesocket(ServerSocket::conn_socket);
         WSACleanup();
         return -1;
     }
-
-    Logger::logConsola("SOCKET", "Conexion establecida");
-    Logger::logTxt("SOCKET", "Conexion establecida");
     cout << "Incomming connection from:"<< inet_ntoa(ServerSocket::client.sin_addr)<< ntohs(ServerSocket::client.sin_port)<< endl;
 
     // Closing the listening sockets (is not going to be used anymore)
@@ -110,11 +97,15 @@ void ServerSocket::communicate(){
                 if (strcmp(ServerSocket::recvBuff, "vfusr") == 0) {
                     strcpy(ServerSocket::sendBuff, "ACKvfusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+                    cout << "Mando ACK1" << endl;
                     
                     
                     recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    cout << "Recibo usuario y contrasnya: " << ServerSocket::recvBuff << endl;
                   
+                    cout << "He pasado y empiezo login" << endl;
                     int idUser = GestorBD::login(ServerSocket::recvBuff);
+                    cout << "Acabo login" << endl;
 
                     if (idUser == -1) {
                         Logger::logConsola("ERROR", "Usuario no encontrado en la base de datos");
@@ -143,8 +134,10 @@ void ServerSocket::communicate(){
                                         
 
                     char mensaje[10];
+                    cout << "ver si exixte"<< endl;
                     int numero = GestorBD::existeUsuario(ServerSocket::recvBuff);
                     std::sprintf(mensaje, "%d", numero);
+                    cout << "exixsUser"<< mensaje << endl;
                     strcpy(ServerSocket::sendBuff, mensaje);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
                     
@@ -194,6 +187,7 @@ void ServerSocket::communicate(){
                     
                     recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
                     int idLote = atoi(ServerSocket::recvBuff);
+                    cout <<"Llamando a mostrarlote con id:" << idLote << " buffer:" << ServerSocket::recvBuff <<endl;
 
                     char* lote = GestorBD::mostrarLote(idLote);
 
@@ -287,8 +281,6 @@ void ServerSocket::communicate(){
                 }
 
                 else if (strcmp(ServerSocket::recvBuff, "bye") == 0)
-                Logger::logConsola("SOCKET", "Cerrando socket");
-                Logger::logTxt("SOCKET", "Cerrando socket");
                     break;
             }
         } while (1);

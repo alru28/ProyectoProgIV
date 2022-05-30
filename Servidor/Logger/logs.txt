@@ -392,18 +392,3 @@
 ]: select Contraseña, ID_Usuario from Usuario where Nombre= 'admin' 
 [Tue May 31 00:27:55 2022][TAG: LOGIN]: Login con exito
 [Tue May 31 00:27:55 2022][TAG: LOGIN]: Login satisfactorio
-[Tue May 31 00:57:47 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
-[Tue May 31 00:57:47 2022][TAG: SOCKET]: Inicializado
-[Tue May 31 00:57:47 2022][TAG: SOCKET]: Creado
-[Tue May 31 00:57:47 2022][TAG: SOCKET]: Binded
-[Tue May 31 00:57:47 2022][TAG: SOCKET]: Esperando conexiones
-[Tue May 31 00:58:23 2022][TAG: SOCKET]: Conexion establecida
-[Tue May 31 00:58:37 2022][TAG: Consulta sql: %s.
-]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
-[Tue May 31 00:58:37 2022][TAG: LOGIN]: Login con exito
-[Tue May 31 00:58:37 2022][TAG: LOGIN]: Login satisfactorio
-[Tue May 31 00:58:39 2022][TAG: BASEDATOS]: Lotes enviados
-[Tue May 31 00:58:42 2022][TAG: BASEDATOS]: Lote enviado
-[Tue May 31 00:58:43 2022][TAG: BASEDATOS]: Objeto enviado
-[Tue May 31 00:58:48 2022][TAG: BASEDATOS]: Saldo enviado
-[Tue May 31 00:58:48 2022][TAG: BASEDATOS]: Puja registrada
