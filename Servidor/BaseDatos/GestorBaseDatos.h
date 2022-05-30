@@ -23,6 +23,7 @@ class GestorBD {
 		static int setSaldo(char* codigo);
 		static char* mostrarLote(int idLote);
 		static char* mostrarDia();
+		static char* mostrarObjeto(int idObjeto);
 };
 
 #endif

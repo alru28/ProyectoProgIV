@@ -762,3 +762,15 @@ void aumentarSaldo(float saldo){
 
 
 }
+
+int mostrarObjeto(int idObjeto) {
+    ClientSocket::sendMessage("swobj");
+    ClientSocket::receiveMessage();
+
+    ClientSocket::sendMessage(idObjeto);
+    ClientSocket::receiveMessage();
+    char bigString[500];
+    strcpy(bigString, ClientSocket::recvBuff);
+    // Imprimir objeto parseado
+
+}

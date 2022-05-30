@@ -15,6 +15,7 @@ void mostrarSaldo();
 void aumentarSaldo(float saldo);
 int mostrarDia();
 int showLote();
+int mostrarObjeto(int idObjeto);
 
 
 #endif

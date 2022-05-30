@@ -195,8 +195,18 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
                     
                 }
-                else if (strcmp(ServerSocket::recvBuff, "spuja") == 0) {
+                else if (strcmp(ServerSocket::recvBuff, "swobj") == 0) {
+                    strcpy(ServerSocket::sendBuff, "ACKswobj");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    int idObjeto = atoi(ServerSocket::recvBuff);
+
+                    char* objeto = GestorBD::mostrarObjeto(idObjeto);
+
+
+                    strcpy(ServerSocket::sendBuff, objeto);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "gpuja") == 0) {

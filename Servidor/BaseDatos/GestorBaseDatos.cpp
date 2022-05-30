@@ -798,5 +798,50 @@ int GestorBD::setSaldo(char* codigo){
 
 }
 
+char* mostrarObjeto(int idObjeto) {
+    sqlite3_stmt* stmt;
+
+    char sql[300];
+    sprintf(sql, "select ID_Objeto, Categoria, Estado, Descripcion, PrecioSalida, ID_Lote from Objeto where %i = ID_Objeto", id);
+
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+
+    if (result != SQLITE_OK) {
+        printf("Error preparing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    int idLote;
+    result = sqlite3_step(stmt);
+    if (result == SQLITE_ROW) {
+        int id = sqlite3_column_int(stmt, 0);
+        char Categoria[20];
+        strcpy(Categoria, (char*)sqlite3_column_text(stmt, 1));
+        char Estado[20];
+        strcpy(Estado, (char*)sqlite3_column_text(stmt, 2));
+        char Descripcion[100];
+        strcpy(Descripcion, (char*)sqlite3_column_text(stmt, 3));
+        char Precio[50];
+        strcpy(Precio, (char*)sqlite3_column_text(stmt, 4));
+        idLote = sqlite3_column_int(stmt, 5);
+
+        printf("\n__________________________________\n");
+        printf("Producto %i (%s): %s en un estado %s\nPrecio de salida de %.2f$", id, Categoria, Descripcion, Estado, Precio);
+        printf("\n__________________________________\n\n");
+
+        char bigString[500];
+        strcpy(bigString, "");
+
+        sprintf()
+
+
+    }
+    else {
+        printf("Error, no existe producto con ese codigo");
+        return 0;
+    }
+}
 
 
