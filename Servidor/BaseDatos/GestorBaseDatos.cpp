@@ -313,6 +313,10 @@ char* GestorBD::mostrarLotesActivos(){
     return bruto;   
 }
 
+char* GestorBD::mostrarTransacciones(int idUsuario) {
+
+}
+
 
 
 /*
