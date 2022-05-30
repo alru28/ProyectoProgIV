@@ -219,26 +219,51 @@ void mostrarLotes(){
     char bigString [500];
     strcpy(bigString, ClientSocket::recvBuff);
 
-    
+    int i = 0;
+
     cout<<"LOTES ACTIVOS:"<<endl;
-    char *lote = strtok(bigString, "|");
-    char idLote [20];
-    char fechaIni [20];
-    char fechaFin[20];
-    char dollars[20];
 
-    
-    
-    while(strcmp(lote ,"#") !=0){
-
-        strcpy(idLote, strtok(lote, ";"));
-        strcpy(fechaIni , strtok(NULL, ";"));
-        strcpy(fechaFin , strtok(NULL, ";"));
-        strcpy(dollars , strtok(NULL, ";"));
-        cout <<"Lote "<< idLote << ". " <<fechaIni << " - " << fechaFin << ". Precio: " << dollars << endl;
-        lote = strtok(NULL, "|");
+    //Get first token de barras
+    char* tokenGrande = strtok(bigString, "|");
+    char atributo[20];
+    while(tokenGrande != NULL)
+    {
+        //cout << tokenGrande[1] << " " << tokenGrande[2] << " " << tokenGrande[3] << " " << tokenGrande[4] << endl;
+        //cout << "End" << endl;
+        i=0;
+        for(int j=0; j<4; j++)
+        {
+                        
+            switch (j)
+            {
+            case 0:
+                strcpy(atributo, "ID: ");
+                break;
+            case 1:
+                strcpy(atributo, "- Fecha de inicio: ");
+                break;
+            case 2:
+                strcpy(atributo, "- Fecha de finalizacion: ");
+                break;
+            case 3:
+                strcpy(atributo, "- Precio: ");
+                break;
+            default:
+                break;
+            }
+            cout << " " << atributo;
+            //PRINTEAR CHARS HASTA LLEGAR A ;
+            while(tokenGrande[i] != ';')
+            {
+                cout << tokenGrande[i];
+                i++;
+            }
+            i++;
+        }
+        cout<<endl;
+        //Siguiente token
+        tokenGrande = strtok(NULL, "|");
     }
-
 };
 
 
