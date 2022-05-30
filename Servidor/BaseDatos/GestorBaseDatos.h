@@ -18,6 +18,7 @@ class GestorBD {
 		static int obtenerIdCartera(int idUsing);
 		static char * obtenerNombre(int idCartera);
 		static int editarUsuario(char* texto);
+		static int introducirObjeto(char* objeto);
 
 		static char* mostrarDia();
 };

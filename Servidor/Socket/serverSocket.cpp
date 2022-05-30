@@ -172,11 +172,12 @@ void ServerSocket::communicate(){
                     strcpy(ServerSocket::sendBuff, "ACKcrobj");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
-                    char* bruto = GestorBD::mostrarLotesActivos();
-                    strcpy(ServerSocket::sendBuff, bruto);
-
+                    char* lotesActivos = GestorBD::mostrarLotesActivos();
+                    strcpy(ServerSocket::sendBuff, lotesActivos);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
 
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    GestorBD::introducirObjeto(ServerSocket::recvBuff);
                 }
 
                 else if (strcmp(ServerSocket::recvBuff, "gprod") == 0) {

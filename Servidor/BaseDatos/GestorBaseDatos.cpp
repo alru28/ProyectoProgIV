@@ -600,3 +600,43 @@ char * GestorBD::mostrarDia(){
 
     
 }
+
+int GestorBD::introducirObjeto(char* objeto) {
+    sqlite3_stmt* stmt;
+    char sql[200];
+
+    char* estado = strtok(objeto, ";");
+    char* categoria = strtok(NULL, ";");
+    char* descripcion = strtok(NULL, ";");
+    char* precioSalida = strtok(NULL, ";");
+    char* idSubast = strtok(NULL, ";");
+    char* idLote = strtok(NULL, ";");
+
+    sprintf(sql, "INSERT INTO objeto ( Estado, Categoria, Descripcion, PrecioSalida, ID_Subastador, ID_Lote) VALUES ('%s', '%s', '%s', %.2f, %i, %i);", estado, categoria, descripcion, atof(precioSalida), atoi(idSubast), atoi(idLote));
+
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, strlen(sql) + 1, &stmt, NULL);
+    if (result != SQLITE_OK) {
+        cout << "Error preparing statement (SELECT)" << endl;
+        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        return 0;
+    }
+
+    cout << "SQL query prepared (INSERT)" << endl;
+
+    result = sqlite3_step(stmt);
+    if (result != SQLITE_DONE) {
+        cout << "Error inserting new data into country table" << endl;
+        return result;
+    }
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+        cout << "Error finalizing statement (INSERT)" << endl;
+        cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+        return result;
+    }
+
+    printf("Prepared statement finalized (INSERT)\n");
+
+    return SQLITE_OK;
+}
