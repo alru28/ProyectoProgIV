@@ -14,7 +14,7 @@ void crearObjeto();
 void mostrarSaldo();
 void aumentarSaldo(float saldo);
 int mostrarDia();
-int showLote();
+int showLote(int chosen);
 int mostrarObjeto(int idObjeto);
 void crearPuja(int idObjeto);
 

@@ -787,7 +787,7 @@ int GestorBD::setSaldo(char* codigo){
 
 }
 
-char* mostrarObjeto(int idObjeto) {
+char* GestorBD::mostrarObjeto(int idObjeto) {
     sqlite3_stmt* stmt;
 
     char sql[300];
@@ -815,7 +815,7 @@ char* mostrarObjeto(int idObjeto) {
         strcpy(Precio, (char*)sqlite3_column_text(stmt, 4));
         idLote = sqlite3_column_int(stmt, 5);
 
-        char bigString[500];
+        char *bigString = new char[500];
         strcpy(bigString, "");
 
         sprintf(bigString, "%d;%s;%s;%s;%d;%d", id, Categoria, Descripcion, Estado, Precio, idLote);
@@ -830,7 +830,7 @@ char* mostrarObjeto(int idObjeto) {
     }
 }
 
-int crearPuja(char* stringPuja) {
+int GestorBD::crearPuja(char* stringPuja) {
 
     char* idObjeto = strtok(stringPuja, ";");
     char* Puja = strtok(NULL, ";");

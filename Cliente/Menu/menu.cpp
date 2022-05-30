@@ -209,7 +209,7 @@ void menuPrincipal(){
 
 };
 
-int MostrarDia(){
+int mostrarDia(){
     ClientSocket::sendMessage("swlte");
     ClientSocket::receiveMessage();
 
@@ -220,7 +220,7 @@ int MostrarDia(){
     int i = 0;
     char* tokenGrande = strtok(bigString, "|");
     cout<<"Mostrando Lotes activos"<<endl;
-    char* tokenGrande = strtok(NULL, "|");
+    tokenGrande = strtok(NULL, "|");
     
     char atributo[20];
     while(tokenGrande != NULL)
@@ -260,9 +260,9 @@ int MostrarDia(){
         tokenGrande = strtok(NULL, "|");
     }
     int chosen = 0;
-    int optionAux = 0:
+    int optionAux = 0;
 
-    while(optionux!= 1){
+    while(optionAux!= 1){
         cout<<"Introduce el id del lote que quieras acceder"<<endl;
         cin>>chosen;
         optionAux = showLote(chosen);
@@ -276,7 +276,11 @@ int showLote(int chosen){
     ClientSocket::sendMessage("swlot");
     ClientSocket::receiveMessage();
 
-    ClientSocket::sendMessage(chosen);
+    char* chosenId;
+    strcpy(chosenId, "");
+
+    sprintf(chosenId, "%d", chosen);
+    ClientSocket::sendMessage(chosenId);
     ClientSocket::receiveMessage();
 
     char bigString [500];
@@ -821,7 +825,11 @@ int mostrarObjeto(int idObjeto) {
     ClientSocket::sendMessage("swobj");
     ClientSocket::receiveMessage();
 
-    ClientSocket::sendMessage(idObjeto);
+    char* strIdObjeto;
+    strcpy(strIdObjeto, "");
+    sprintf(strIdObjeto, "%d", idObjeto);
+
+    ClientSocket::sendMessage(strIdObjeto);
     ClientSocket::receiveMessage();
     char bigString[500];
     strcpy(bigString, ClientSocket::recvBuff);
@@ -844,28 +852,31 @@ int mostrarObjeto(int idObjeto) {
         cout << "- Estado: " << estado << endl;
         cout << "- Precio: " << precio << endl;
         cout << "- ID Lote: " << idLoteInt << endl;
+
+        int option = -1;
+
+        while (option != 0 || option != 1) {
+
+
+            cout << "Introduce 1 para pujar, 0 para volver al lote" << endl;
+            cin >> option;
+            if (option == 0) {
+
+                showLote(idLoteInt);
+
+            }
+            else if (option == 1) {
+
+                crearPuja(idObjeto);
+
+            }
+
+        }
+
+        return 1;
     }
 
-    int option = -1;
-
-    while (option != 0 || option != 1) {
-
-
-       cout << "Introduce 1 para pujar, 0 para volver al lote" << endl;
-       cin >> option;
-       if (option == 0) {
-
-           showLote(idLoteInt);
-
-       }else if (option == 1) {
-
-           crearPuja(idObjeto);
-
-       }
-
-    }
-
-    return 1;
+    
 
 
 }
