@@ -220,8 +220,6 @@ int mostrarDia(){
     int i = 0;
     char* tokenGrande = strtok(bigString, "|");
     cout<<"Mostrando Lotes activos"<<endl;
-    tokenGrande = strtok(NULL, "|");
-    
     char atributo[20];
     while(tokenGrande != NULL)
     {
