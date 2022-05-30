@@ -208,11 +208,9 @@ void ServerSocket::communicate(){
                     char* usuario = GestorBD::imprimirUsuario(ServerSocket::recvBuff);
                     strcpy(ServerSocket::sendBuff, usuario);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
-                    
-                   break;
                 }
 
-                else if (strcmp(ServerSocket::recvBuff, "Bye") == 0)
+                else if (strcmp(ServerSocket::recvBuff, "bye") == 0)
                     break;
             }
         } while (1);

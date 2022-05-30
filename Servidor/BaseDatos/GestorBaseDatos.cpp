@@ -327,7 +327,7 @@ char* GestorBD::mostrarTransacciones(int idUsuario) {
 
 
     char* bigString = new char[500];
-
+    strcpy(bigString, "");
     do {
 		result = sqlite3_step(stmt) ;
 		if (result == SQLITE_ROW) {
@@ -340,20 +340,19 @@ char* GestorBD::mostrarTransacciones(int idUsuario) {
             int idRecibe= sqlite3_column_int(stmt,3);
             char local[100];
             sprintf(local, "Transaccion de %.2f$ realizada en %s ", cant, fecha);
-            strcat(bigString, local);
 
 
             if(idCartera == idEnvia){
                 char nombre[20];
                 strcpy(nombre, obtenerNombre(idRecibe));
                 char temp[50];
-                sprintf(temp, "enviada a %s.\n", nombre);
+                sprintf(temp, "enviada a %s.", nombre);
                 strcat(local,temp);
             } else {
                 char nombre[20];
                 strcpy(nombre, obtenerNombre(idEnvia));
                 char temp[50];
-                sprintf(local, "recibida de %s.\n", nombre);
+                sprintf(temp, "recibida de %s.", nombre);
                 strcat(local,temp);
                 
 

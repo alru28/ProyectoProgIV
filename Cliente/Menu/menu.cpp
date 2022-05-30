@@ -30,6 +30,7 @@ void menuInicial(){
        break;
    
    default:
+       ClientSocket::send("bye");
         exit(-1);
         break;
    }
@@ -255,10 +256,21 @@ void showTransactions(){
     ClientSocket::receiveMessage();
 
     char idUser [5];
-    strcpy(idUser, ClientSocket::recvBuff);
+    sprintf(idUser, "%d", Usuario::idUsing);
     ClientSocket::sendMessage(idUser);
     ClientSocket::receiveMessage();
-    cout << ClientSocket::recvBuff <<endl;
+
+    char transacciones[500];
+    strcpy(transacciones, ClientSocket::recvBuff);
+
+    cout << "[TRANSACCIONES]" << endl;
+
+    char* token = strtok(transacciones, ";");
+    
+    while (token != NULL) {
+        cout << "-" << token << endl;
+        token = strtok(NULL, ";");
+    }
 }
 
 
