@@ -270,7 +270,7 @@ void mostrarUsuario(){
     char* pisoPuerta = strtok(NULL, ";"); 
 
     cout << "\n-------------------------------";
-    cout << "\nPerfil de " << nombre << ":" << idUsing << endl;
+    cout << "\nPerfil de " << nombre << ":" << Usuario::idUsing << endl;
     cout << "ID de cartera: " << id_Cartera << endl;
     cout << "Numero de puntos: " << puntos << endl << endl;
 
