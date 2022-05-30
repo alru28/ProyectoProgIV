@@ -528,4 +528,70 @@ char* GestorBD::imprimirUsuario(char* idUsuario){ // devuelve un char* con todos
 }
 
 
+int GestorBD::editarUsuario(char* codigo){ //recive un codigo "opcion;cambio;idUsuario;"
 
+   char* opcion = strtok(codigo, ";");
+    char* valor = strtok(NULL, ";");
+    char* idUsuario = strtok(NULL, ";"); 
+
+    int idUsr = atoi(idUsuario);
+    int option = atoi(opcion);
+
+    char* strRequest = "";
+
+    switch (option) {
+    case 1:
+        strRequest = "Contraseña";
+        break;
+    
+    case 2:
+        strRequest = "Tlf";
+        break;
+    
+    case 3:
+        strRequest = "Mail";
+        break;
+    
+    case 4:
+        strRequest = "Pais";
+        break;
+
+    case 5:
+        strRequest = "Ciudad";
+        break;
+    
+    case 6:
+        strRequest = "Calle";
+        break;
+    
+    case 7:
+        strRequest = "PisoPuerta";
+        break;
+
+    default:
+        break;
+    }
+
+    sqlite3_stmt *stmt;
+
+    char sql[200];
+    sprintf(sql, "UPDATE Usuario SET %s = '%s' WHERE ID_Usuario = %i", strRequest, valor, idUsr);
+
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
+    
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (SELECT)" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		return 0;
+	}
+
+    result = sqlite3_step(stmt);
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		cout << "Error finalizing statement (SELECT)" << endl;
+		cout << sqlite3_errmsg(GestorBD::baseDatos) << endl;
+		return 0;
+	}
+
+}

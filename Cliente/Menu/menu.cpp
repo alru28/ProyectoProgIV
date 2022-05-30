@@ -178,9 +178,7 @@ void menuPrincipal(){
         cout << "3. Transacciones\n" << endl;
         cout << "4. Perfil de usuario\n" << endl;
         cout << "5. Anydir saldo\n" << endl;
-        cout << "6. Cambiar configuracion\n" << endl;
-        cout << "7. Exportar CSVs\n" << endl;
-        cout << "8. Cerrar sesion\n" << endl;
+        cout << "6. Cerrar sesion\n" << endl;
         cout << " --------------------\n" << endl;
         cin >> option;
 
@@ -190,7 +188,7 @@ void menuPrincipal(){
             mostrarLotes();
             break;
         case 2:
-            //crearObjeto(db);
+            crearObjeto();
             break;
         case 3:
             showTransactions();
@@ -202,16 +200,10 @@ void menuPrincipal(){
             //saldo(db);
             break;
         case 6:
-            //escribirConfig("../Config/config.txt");
-            break;
-        case 7:
-            //menuExportar();
-            break;
-        case 8:
             repetir = 0;
             //idUsing = -1;
             menuInicial();
-            break;
+            break;  
         }
     }
 
@@ -335,11 +327,214 @@ void mostrarUsuario(){
     fflush(stdin);
 
     if(option == 0){
-        //menuPrincipal(db);
+        menuPrincipal(db);
     }else{
-        //editarUsuario(db, option);
+        editarUsuario(option);
         
     }
+}
+
+void editarUsuario(int option){
+
+    char valor[100];
+    char valorInput[100];
+
+    switch (aEditar){
+        case 1:
+            printf("Introduce nueva contrasena: ");
+            fgets(valorInput, 100, stdin);
+            sscanf(valorInput, "%s", &valor);
+            fflush(stdin);
+            
+            break;
+
+        case 2:
+            do{
+                printf("Introduce nuevo numero de telefono: ");
+                fgets(valorInput, 100, stdin);
+
+            }while(strlen(valorInput) != 10);
+            sscanf(valorInput, "%s", &valor);
+            fflush(stdin);
+            
+            break;
+
+        case 3:
+            printf("Introduce nueva direccion de correo electronico: ");
+            fgets(valorInput, 100, stdin);
+            sscanf(valorInput, "%s", &valor);
+            fflush(stdin);
+            
+            break;
+
+        case 4:
+            printf("Introduce nuevo pais: ");
+            fgets(valorInput, 100, stdin);
+            sscanf(valorInput, "%s", &valor);
+            fflush(stdin);
+            
+            break;
+
+        case 5:
+            printf("Introduce nueva ciudad: ");
+            fgets(valorInput, 100, stdin);
+            sscanf(valorInput, "%s", &valor);
+            fflush(stdin);
+            
+            break;
+
+        case 6:
+            printf("Introduce nueva calle: ");
+            fgets(valorInput, 100, stdin);
+            sscanf(valorInput, "%s", &valor);
+            fflush(stdin);
+            
+            break;
+
+        case 7:
+            printf("Introduce nuevo piso/puerta: ");
+            fgets(valorInput, 100, stdin);
+            sscanf(valorInput, "%s", &valor);
+            fflush(stdin);
+
+            break;
+
+        default:
+            break;
+
+    }
+
+    ClientSocket::sendMessage("edusr");
+    ClientSocket::receiveMessage();
+    char codigo[50];
+    sprintf(codigo, "%d;%s;%d;" , option, valor, Usuario::idUsing);
+    cout << codigo;
+    ClientSocket::sendMessage(codigo);
 
 
+    ClientSocket::receiveMessage();
+
+void crearObjeto() {
+    ClientSocket::sendMessage("crobj");
+    ClientSocket::receiveMessage();
+
+    char objeto[250];
+    char categoria[20];
+
+    int option = -1;
+    cout << " --------------------" << endl;
+    cout << "Elige una categoria:" << endl;
+    cout << "1. Coleccionismo" << endl;
+    cout << "2. Electronica" << endl;
+    cout << "3. Deporte" << endl;
+    cout << "4. Casa y jardin" << endl;
+    cout << "5. Moda" << endl;
+    cin >> option;
+
+    switch (option)
+    {
+    case 1:
+        strcpy(categoria, "Coleccionismo");
+        break;
+    case 2:
+        strcpy(categoria, "Electronica");
+        break;
+    case 3:
+        strcpy(categoria, "Deporte");
+        break;
+    case 4:
+        strcpy(categoria, "Casa y jardin");
+        break;
+    case 5:
+        strcpy(categoria, "Moda");
+        break;
+
+    default:
+        break;
+    }
+
+    strcat(objeto, categoria);
+    strcat(objeto, ";");
+
+    //ESTADO
+
+    char estado[20];
+
+    int option2 = -1;
+    cout << " --------------------" << endl;
+    cout << "Elige el estado del objeto: " << endl;
+    cout << "1. Nuevo" << endl;
+    cout << "2. Casi nuevo" << endl;
+    cout << "3. Usado" << endl;
+    cout << "4. Muy usado" << endl;
+    cout << "5. Deplorable" << endl;
+    
+    cin >> option2;
+
+    switch (option2)
+    {
+    case 1:
+        strcpy(estado, "Nuevo");
+        break;
+    case 2:
+        strcpy(estado, "Casi nuevo");
+        break;
+    case 3:
+        strcpy(estado, "Usado");
+        break;
+    case 4:
+        strcpy(estado, "Muy usado");
+        break;
+    case 5:
+        strcpy(estado, "Deplorable");
+        break;
+
+    default:
+        break;
+    }
+
+    strcat(objeto, estado);
+    strcat(objeto, ";");
+
+    //DESCRIPCION
+    cout << "Introduce descripcion: " << endl;
+
+    char descripcion[100];
+    cin >> descripcion;
+
+    strcat(objeto, descripcion);
+    strcat(objeto, ";");
+
+    //PRECIO SALIDA
+    cout << "Introduce precio de salida: " << endl;
+
+    int precioSalida;
+    cin >> precioSalida;
+    char precio[10];
+
+    sprintf(precio, "%d", precioSalida);
+
+    strcat(objeto, precio);
+    strcat(objeto, ";");
+
+    char idUser[5];
+    sprintf(idUser, "%d", Usuario::idUsing);
+    
+    strcat(objeto, idUser);
+    strcat(objeto, ";");
+
+    //LOTE
+    cout << "Elige el lote al que pertenece: " << endl;
+    mostrarLotes();
+
+    int loteIn;
+    cout << "Lote elegido: " << endl;
+    cin >> loteIn;
+    char lote[10];
+
+    sprintf(lote, "%d", loteIn);
+
+    strcat(objeto, lote);
+
+    ClientSocket::sendMessage(objeto);
 }

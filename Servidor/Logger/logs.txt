@@ -210,3 +210,28 @@
 ]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
 [Mon May 30 18:15:49 2022][TAG: LOGIN]: Login con exito
 [Mon May 30 18:15:49 2022][TAG: LOGIN]: Login satisfactorio
+[Mon May 30 18:43:11 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Mon May 30 18:43:19 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Mon May 30 18:43:19 2022][TAG: LOGIN]: Login con exito
+[Mon May 30 18:43:19 2022][TAG: LOGIN]: Login satisfactorio
+[Mon May 30 18:45:09 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Mon May 30 18:45:40 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Mon May 30 18:45:40 2022][TAG: LOGIN]: Login con exito
+[Mon May 30 18:45:40 2022][TAG: LOGIN]: Login satisfactorio
+[Mon May 30 18:46:07 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Mon May 30 18:46:18 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Mon May 30 18:46:18 2022][TAG: LOGIN]: Login con exito
+[Mon May 30 18:46:18 2022][TAG: LOGIN]: Login satisfactorio
+[Mon May 30 18:48:00 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Mon May 30 18:48:10 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Mon May 30 18:48:10 2022][TAG: LOGIN]: Login con exito
+[Mon May 30 18:48:10 2022][TAG: LOGIN]: Login satisfactorio
+[Mon May 30 18:48:52 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Mon May 30 18:49:05 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'admin' 
+[Mon May 30 18:49:05 2022][TAG: LOGIN]: Login con exito
+[Mon May 30 18:49:05 2022][TAG: LOGIN]: Login satisfactorio
