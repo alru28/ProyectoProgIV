@@ -8,8 +8,9 @@ void menuPrincipal();
 void mostrarLotes();
 void mostrarUsuario();
 void showTransactions();
-void mostrarUsuario(int option);
+void mostrarUsuario();
 void editarUsuario(int option);
 void crearObjeto();
+void mostrarSaldo();
 
 #endif

@@ -220,11 +220,19 @@ void ServerSocket::communicate(){
                     
                     strcpy(ServerSocket::sendBuff, "ACKswusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
-                    cout << "p1" << endl;
                     recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
-                    cout << ServerSocket::recvBuff << endl;
                     char* usuario = GestorBD::imprimirUsuario(ServerSocket::recvBuff);
                     strcpy(ServerSocket::sendBuff, usuario);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
+                }
+
+                else if (strcmp(ServerSocket::recvBuff, "swsld") == 0) {
+                    
+                    strcpy(ServerSocket::sendBuff, "ACKswsld");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    char* saldo = atof(GestorBD::getSaldo(ServerSocket::recvBuff));
+                    strcpy(ServerSocket::sendBuff, saldo);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
                 }
 

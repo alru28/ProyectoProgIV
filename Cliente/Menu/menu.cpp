@@ -564,3 +564,22 @@ void crearObjeto() {
 
     ClientSocket::sendMessage(objeto);
 }
+
+void mostrarSaldo(){
+    ClientSocket::sendMessage("swsld");
+    ClientSocket::receiveMessage();
+    char idU[5];
+    sprintf(idU, "%d" , Usuario::idUsing);
+    cout << idU;
+    ClientSocket::sendMessage(idU);
+
+    ClientSocket::receiveMessage();
+
+    char saldo [500];
+    strcpy(saldo, ClientSocket::recvBuff); 
+
+    cout << "Saldo disponible: " << saldo << endl;
+
+    
+
+}
