@@ -334,7 +334,6 @@ void mostrarUsuario(){
     }
 }
 
-<<<<<<< Updated upstream
 void editarUsuario(int option){
 
     char valor[100];
@@ -414,7 +413,7 @@ void editarUsuario(int option){
 
 
     ClientSocket::receiveMessage();
-=======
+
 void crearObjeto() {
     ClientSocket::sendMessage("crobj");
     ClientSocket::receiveMessage();
@@ -536,7 +535,6 @@ void crearObjeto() {
     sprintf(lote, "%d", loteIn);
 
     strcat(objeto, lote);
->>>>>>> Stashed changes
 
     ClientSocket::sendMessage(objeto);
 }

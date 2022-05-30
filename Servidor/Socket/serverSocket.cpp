@@ -166,7 +166,6 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
 
                 }
-<<<<<<< Updated upstream
                 //crearObjeto
                 else if (strcmp(ServerSocket::recvBuff, "crobj") == 0) {
                     
@@ -179,16 +178,7 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
 
                 }
-                else if (strcmp(ServerSocket::recvBuff, "sprod") == 0) {
-=======
-                else if (strcmp(ServerSocket::recvBuff, "crobj") == 0) {
-                    strcpy(ServerSocket::sendBuff, "ACKcrobj");
-                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
->>>>>>> Stashed changes
 
-                    cout << ServerSocket::recvBuff << endl;
-
-                }
                 else if (strcmp(ServerSocket::recvBuff, "gprod") == 0) {
 
 
