@@ -221,12 +221,6 @@ void mostrarLotes(){
     
     ClientSocket::sendMessage("swlte");
     ClientSocket::receiveMessage();
-    cout << ClientSocket::receiveMessage << endl;
-    char* idU;
-    sprintf(idU, "%i" , Usuario::idUsing);
-    cout << "p1" <<endl;
-    ClientSocket::sendMessage(idU);
-    cout << "p2" <<endl;
     ClientSocket::receiveMessage();
 
     char bigString [500];
