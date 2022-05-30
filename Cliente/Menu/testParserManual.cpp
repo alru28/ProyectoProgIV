@@ -10,7 +10,7 @@ using namespace std;
 int main(){
 
     char bigString [500];
-    strcpy(bigString, "1;2020-12-12;2021-11-11;$$$|2;2020-12-12;2021-11-11;$$$|#");
+    strcpy(bigString, "1;2020-12-12;2021-11-11;$$$;|2;2020-12-12;2021-11-11;$$$;|");
     int i = 0;
 
     cout<<"LOTES ACTIVOS:"<<endl;
@@ -19,13 +19,24 @@ int main(){
     char* tokenGrande = strtok(bigString, "|");
     while(tokenGrande != NULL)
     {
-        while(tokenGrande[i] != ';'){
-            cout<<tokenGrande[i];
+        //cout << tokenGrande[1] << " " << tokenGrande[2] << " " << tokenGrande[3] << " " << tokenGrande[4] << endl;
+        //cout << "End" << endl;
+        i=0;
+        for(int j=0; j<4; j++)
+        {
+            while(tokenGrande[i] != ';')
+            {
+                cout << tokenGrande[i];
+                i++;
+            }
+            cout<<endl;
             i++;
         }
-
+        cout<<endl<<endl<<endl;
+        
         //Siguiente token
         tokenGrande = strtok(NULL, "|");
+        cout << tokenGrande;
     }
     
 }
