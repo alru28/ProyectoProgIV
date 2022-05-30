@@ -335,7 +335,11 @@ int showLote(int chosen){
         while (option != -1 || option != 1){
             cout << "Introduce el id del objeto en caso de querer verlo, introduce -1 en caso de salir a dia"<<endl;
             cin >> objId;
-            option = mostrarObjeto(objId);
+            if(option == -1){
+                break;
+            } else{
+                option = mostrarObjeto(objId);
+            }
         }
         
 
