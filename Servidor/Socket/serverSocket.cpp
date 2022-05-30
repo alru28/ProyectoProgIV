@@ -206,6 +206,17 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
                 }
+                else if (strcmp(ServerSocket::recvBuff, "edusr") == 0) {
+                    strcpy(ServerSocket::sendBuff, "ACKedusr");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    int ret = GestorBD::editarUsuario(atoi(ServerSocket::recvBuff));
+
+                    strcpy(ServerSocket::sendBuff, ret);
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+
+                }
                 else if (strcmp(ServerSocket::recvBuff, "swusr") == 0) {
                     
                     strcpy(ServerSocket::sendBuff, "ACKswusr");

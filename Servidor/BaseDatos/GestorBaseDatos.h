@@ -17,6 +17,7 @@ class GestorBD {
 		static char* mostrarTransacciones(int idUsuario);
 		static int obtenerIdCartera(int idUsing);
 		static char * obtenerNombre(int idCartera);
+		static int editarUsuario(char* texto);
 
 };
 
