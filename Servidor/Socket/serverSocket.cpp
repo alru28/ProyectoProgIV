@@ -166,6 +166,18 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
 
                 }
+                //crearObjeto
+                else if (strcmp(ServerSocket::recvBuff, "crobj") == 0) {
+                    
+                    strcpy(ServerSocket::sendBuff, "ACKcrobj");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+
+                    char* bruto = GestorBD::mostrarLotesActivos();
+                    strcpy(ServerSocket::sendBuff, bruto);
+
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
+
+                }
                 else if (strcmp(ServerSocket::recvBuff, "sprod") == 0) {
 
 
@@ -191,11 +203,7 @@ void ServerSocket::communicate(){
                     char* bruto = GestorBD::mostrarTransacciones(atoi(ServerSocket::recvBuff));
 
                     strcpy(ServerSocket::sendBuff, bruto);
-                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0)
-
-                }
-                else if (strcmp(ServerSocket::recvBuff, "gtrans") == 0) {
-
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
 
                 }
                 else if (strcmp(ServerSocket::recvBuff, "swusr") == 0) {
@@ -208,11 +216,9 @@ void ServerSocket::communicate(){
                     char* usuario = GestorBD::imprimirUsuario(ServerSocket::recvBuff);
                     strcpy(ServerSocket::sendBuff, usuario);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
-                    
-                   break;
                 }
 
-                else if (strcmp(ServerSocket::recvBuff, "Bye") == 0)
+                else if (strcmp(ServerSocket::recvBuff, "bye") == 0)
                     break;
             }
         } while (1);

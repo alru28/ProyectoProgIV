@@ -30,6 +30,7 @@ void menuInicial(){
        break;
    
    default:
+       ClientSocket::sendMessage("bye");
         exit(-1);
         break;
    }
@@ -61,7 +62,7 @@ void showLogin(){
         cout<<"Mando mensaje"<<endl;
         ClientSocket::receiveMessage();
         int result = atoi(ClientSocket::recvBuff );
-        if(result == -1 | result == -2 | result ==0){
+        if(result == -1 || result == -2 || result ==0){
             cout<<"Credenciales incorrectos"<<endl;
         } else{
             Usuario::idUsing = result;
@@ -192,7 +193,7 @@ void menuPrincipal(){
             //crearObjeto(db);
             break;
         case 3:
-            showTransactions(db);
+            showTransactions();
             break;
         case 4:
             mostrarUsuario();
@@ -221,12 +222,6 @@ void mostrarLotes(){
     
     ClientSocket::sendMessage("swlte");
     ClientSocket::receiveMessage();
-    cout << ClientSocket::receiveMessage << endl;
-    char* idU;
-    sprintf(idU, "%i" , Usuario::idUsing);
-    cout << "p1" <<endl;
-    ClientSocket::sendMessage(idU);
-    cout << "p2" <<endl;
     ClientSocket::receiveMessage();
 
     char bigString [500];
@@ -257,21 +252,38 @@ void mostrarLotes(){
 
 void showTransactions(){
 
-    ClientSocket::sendMessage("swlte");
+    ClientSocket::sendMessage("swtrs");
     ClientSocket::receiveMessage();
 
     char idUser [5];
-    strcpy(idUser, ClientSocket::recvBuff);
+    sprintf(idUser, "%d", Usuario::idUsing);
     ClientSocket::sendMessage(idUser);
     ClientSocket::receiveMessage();
+
+    char transacciones[500];
+    strcpy(transacciones, ClientSocket::recvBuff);
+
+    cout << "[TRANSACCIONES]" << endl;
+
+    char* token = strtok(transacciones, ";");
+    
+    while (token != NULL) {
+        cout << "-" << token << endl;
+        token = strtok(NULL, ";");
+    }
 }
 
 
 void mostrarUsuario(){
-
+    cout << Usuario::idUsing;
     ClientSocket::sendMessage("swusr");
     ClientSocket::receiveMessage();
-    
+    char idU[5];
+    sprintf(idU, "%d" , Usuario::idUsing);
+    cout << idU;
+    ClientSocket::sendMessage(idU);
+
+
     ClientSocket::receiveMessage();
 
     char usuario [500];
