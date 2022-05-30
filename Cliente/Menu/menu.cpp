@@ -334,85 +334,86 @@ void mostrarUsuario(){
     }
 }
 
-void editarUsuario(int option){
+void editarUsuario(int option) {
 
     char valor[100];
     char valorInput[100];
 
-    switch (option){
-        case 1:
-            printf("Introduce nueva contrasena: ");
+    switch (option) {
+    case 1:
+        printf("Introduce nueva contrasena: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
+
+        break;
+
+    case 2:
+        do {
+            printf("Introduce nuevo numero de telefono: ");
             fgets(valorInput, 100, stdin);
-            sscanf(valorInput, "%s", &valor);
-            fflush(stdin);
-            
-            break;
 
-        case 2:
-            do{
-                printf("Introduce nuevo numero de telefono: ");
-                fgets(valorInput, 100, stdin);
+        } while (strlen(valorInput) != 10);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
 
-            }while(strlen(valorInput) != 10);
-            sscanf(valorInput, "%s", &valor);
-            fflush(stdin);
-            
-            break;
+        break;
 
-        case 3:
-            printf("Introduce nueva direccion de correo electronico: ");
-            fgets(valorInput, 100, stdin);
-            sscanf(valorInput, "%s", &valor);
-            fflush(stdin);
-            
-            break;
+    case 3:
+        printf("Introduce nueva direccion de correo electronico: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
 
-        case 4:
-            printf("Introduce nuevo pais: ");
-            fgets(valorInput, 100, stdin);
-            sscanf(valorInput, "%s", &valor);
-            fflush(stdin);
-            
-            break;
+        break;
 
-        case 5:
-            printf("Introduce nueva ciudad: ");
-            fgets(valorInput, 100, stdin);
-            sscanf(valorInput, "%s", &valor);
-            fflush(stdin);
-            
-            break;
+    case 4:
+        printf("Introduce nuevo pais: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
 
-        case 6:
-            printf("Introduce nueva calle: ");
-            fgets(valorInput, 100, stdin);
-            sscanf(valorInput, "%s", &valor);
-            fflush(stdin);
-            
-            break;
+        break;
 
-        case 7:
-            printf("Introduce nuevo piso/puerta: ");
-            fgets(valorInput, 100, stdin);
-            sscanf(valorInput, "%s", &valor);
-            fflush(stdin);
+    case 5:
+        printf("Introduce nueva ciudad: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
 
-            break;
+        break;
 
-        default:
-            break;
+    case 6:
+        printf("Introduce nueva calle: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
+
+        break;
+
+    case 7:
+        printf("Introduce nuevo piso/puerta: ");
+        fgets(valorInput, 100, stdin);
+        sscanf(valorInput, "%s", &valor);
+        fflush(stdin);
+
+        break;
+
+    default:
+        break;
 
     }
 
     ClientSocket::sendMessage("edusr");
     ClientSocket::receiveMessage();
     char codigo[50];
-    sprintf(codigo, "%d;%s;%d;" , option, valor, Usuario::idUsing);
+    sprintf(codigo, "%d;%s;%d;", option, valor, Usuario::idUsing);
     cout << codigo;
     ClientSocket::sendMessage(codigo);
 
 
     ClientSocket::receiveMessage();
+}
 
 void crearObjeto() {
     ClientSocket::sendMessage("crobj");
