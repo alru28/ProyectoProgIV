@@ -217,7 +217,7 @@ void ServerSocket::communicate(){
                     recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
 
                     int result = GestorBD::crearPuja(ServerSocket::recvBuff);
-                    char* resultString;
+                    char resultString[50];
                     sprintf(resultString, "%d", result);
 
                     strcpy(ServerSocket::sendBuff, resultString);

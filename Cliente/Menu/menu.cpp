@@ -202,6 +202,7 @@ void menuPrincipal(){
         case 6:
             repetir = 0;
             //idUsing = -1;
+            cout << "Llego" << std::endl;
             menuInicial();
             break;  
         }
@@ -273,8 +274,7 @@ int showLote(int chosen){
 
     ClientSocket::sendMessage("swlot");
     ClientSocket::receiveMessage();
-
-    char* chosenId;
+    char chosenId[10];
     strcpy(chosenId, "");
 
     sprintf(chosenId, "%d", chosen);
@@ -335,7 +335,7 @@ int showLote(int chosen){
         while (option != -1 || option != 1){
             cout << "Introduce el id del objeto en caso de querer verlo, introduce -1 en caso de salir a dia"<<endl;
             cin >> objId;
-            if(option == -1){
+            if(objId == -1){
                 break;
             } else{
                 option = mostrarObjeto(objId);
@@ -832,7 +832,7 @@ int mostrarObjeto(int idObjeto) {
     ClientSocket::sendMessage("swobj");
     ClientSocket::receiveMessage();
 
-    char* strIdObjeto;
+    char strIdObjeto[10];
     strcpy(strIdObjeto, "");
     sprintf(strIdObjeto, "%d", idObjeto);
 
@@ -857,7 +857,7 @@ int mostrarObjeto(int idObjeto) {
         cout << "- Categoria: " << categoria << endl;
         cout << "- Descripcion: " << descripcion << endl;
         cout << "- Estado: " << estado << endl;
-        cout << "- Precio: " << precio << endl;
+        cout << "- Precio: " << atof(precio) << endl;
         cout << "- ID Lote: " << idLoteInt << endl;
 
         int option = -1;
@@ -896,7 +896,7 @@ void crearPuja(int idObjeto) {
     cout << "Introduzca cuanto quiere pujar por el objeto:" << endl;
     cin >> puja;
 
-    char* stringPuja;
+    char stringPuja[60];
     strcpy(stringPuja, "");
 
     sprintf(stringPuja, "%d;%d;%d", idObjeto, puja, Usuario::idUsing);
@@ -910,5 +910,7 @@ void crearPuja(int idObjeto) {
     }
     else {
         cout << "Se ha producido un error al realizar la puja" << endl;
+
     }
+    menuPrincipal();
 }

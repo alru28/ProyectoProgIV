@@ -812,12 +812,13 @@ char* GestorBD::mostrarObjeto(int idObjeto) {
         char Precio[50];
         strcpy(Precio, (char*)sqlite3_column_text(stmt, 4));
         idLote = sqlite3_column_int(stmt, 5);
+        cout << "LOTE CONSULTA: " << idLote << endl;
 
         char *bigString = new char[500];
         strcpy(bigString, "");
 
-        sprintf(bigString, "%d;%s;%s;%s;%d;%d", id, Categoria, Descripcion, Estado, Precio, idLote);
-
+        sprintf(bigString, "%d;%s;%s;%s;%s;%i", id, Categoria, Descripcion, Estado, Precio, idLote);
+        cout << "BIG STRING CONSULTA: " << bigString << endl;
         return bigString;
 
 
@@ -839,14 +840,16 @@ int GestorBD::crearPuja(char* stringPuja) {
     int idUserInt = atoi(idUser);
 
     int saldo = GestorBD::getSaldo(idUser);
+    cout << "SALDO EN CONSULTA: " << saldo << endl;
+    cout << "PUJA INT: " << pujaInt << endl;
     if (saldo < pujaInt) {
         return 0;
     }
     else {
         sqlite3_stmt* stmt;
 
-        char sql[100];
-        sprintf(sql, "insert into puja(Cantidad, ID_Usuario, ID_Objeto) values (%f , %i , %i)", pujaInt, idUserInt, idObjetoInt);
+        char sql[150];
+        sprintf(sql, "insert into puja(Cantidad, ID_Usuario, ID_Objeto) values (%i , %i , %i)", pujaInt, idUserInt, idObjetoInt);
 
         int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
 
