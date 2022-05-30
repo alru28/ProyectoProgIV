@@ -306,8 +306,8 @@ char* GestorBD::mostrarLotesActivos(){
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		printf("Error finalizing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		cout << "Error finalizing statement (SELECT)\n";
+		cout << sqlite3_errmsg(GestorBD::baseDatos);
 	}
     return bruto;   
 }
@@ -377,8 +377,8 @@ char * GestorBD::obtenerNombre(int idCartera){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		cout << "Error preparing statement (SELECT)\n";
+		cout << sqlite3_errmsg(GestorBD::baseDatos);
 		return 0;
 	}
 
@@ -389,14 +389,14 @@ char * GestorBD::obtenerNombre(int idCartera){
         idUser= sqlite3_column_int(stmt, 0);
         
     }else{
-        printf("Error, usuario no encontrado");
+        cout << "Error, usuario no encontrado";
         return 0;
     }
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		printf("Error finalizing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		cout << "Error finalizing statement (SELECT)\n";
+		cout << sqlite3_errmsg(GestorBD::baseDatos);
 		return 0;
 	}
 
@@ -404,8 +404,8 @@ char * GestorBD::obtenerNombre(int idCartera){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
 
     if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		cout << "Error preparing statement (SELECT)\n";
+		cout << sqlite3_errmsg(GestorBD::baseDatos);
 		return 0;
 	}
 
@@ -415,14 +415,14 @@ char * GestorBD::obtenerNombre(int idCartera){
     if(result == SQLITE_ROW){        
         strcpy(nameUser,(char *) sqlite3_column_text(stmt, 0));  
     }else{
-        printf("Error, usuario no encontrado");
+        cout << "Error, usuario no encontrado";
         return 0;
     }
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		printf("Error finalizing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		cout << "Error finalizing statement (SELECT)\n";
+		cout << sqlite3_errmsg(GestorBD::baseDatos);
 		return 0;
 	}
         
@@ -440,8 +440,8 @@ int GestorBD::obtenerIdCartera(int idUsing){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+		cout << "Error preparing statement (SELECT)\n";
+		cout << "%s\n", sqlite3_errmsg(GestorBD::baseDatos);
 		return 0;
 	}
 
@@ -453,7 +453,7 @@ int GestorBD::obtenerIdCartera(int idUsing){
         idCartera= sqlite3_column_int(stmt, 0);
         
     }else{
-        printf("Error, usuario no encontrado");
+        cout << "Error, usuario no encontrado";
         return 0;
     }
 
@@ -636,7 +636,7 @@ int GestorBD::introducirObjeto(char* objeto) {
         return result;
     }
 
-    printf("Prepared statement finalized (INSERT)\n");
+    cout "Prepared statement finalized (INSERT)\n";
 
     return SQLITE_OK;
 }
@@ -780,8 +780,8 @@ int GestorBD::setSaldo(char* codigo){
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
-        printf("Error finalizing statement (SELECT)\n");
-        printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+        cout << "Error finalizing statement (SELECT)\n";
+        cout << sqlite3_errmsg(GestorBD::baseDatos);
         return 0;
     }
 
@@ -791,7 +791,7 @@ char* mostrarObjeto(int idObjeto) {
     sqlite3_stmt* stmt;
 
     char sql[300];
-    sprintf(sql, "select ID_Objeto, Categoria, Estado, Descripcion, PrecioSalida, ID_Lote from Objeto where %i = ID_Objeto", id);
+    sprintf(sql, "select ID_Objeto, Categoria, Estado, Descripcion, PrecioSalida, ID_Lote from Objeto where %i = ID_Objeto", idObjeto);
 
 
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
