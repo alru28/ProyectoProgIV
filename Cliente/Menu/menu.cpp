@@ -271,9 +271,10 @@ void mostrarUsuario(){
     char* idU;
     sprintf(idU, "%i" , Usuario::idUsing);
     cout << "p1" <<endl;
+    cout << idU;
     ClientSocket::sendMessage(idU);
     cout << "p2" <<endl;
-    
+
     ClientSocket::receiveMessage();
 
     char usuario [500];
