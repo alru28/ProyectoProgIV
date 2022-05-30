@@ -303,7 +303,6 @@ char* GestorBD::mostrarLotesActivos(){
             strcat(bruto, temp); //Metemos el lote actual en el tocho
 		}
 	} while (result == SQLITE_ROW);
-    strcat(bruto, "#");//Fin del bruto
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
