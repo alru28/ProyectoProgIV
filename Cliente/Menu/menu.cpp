@@ -282,6 +282,60 @@ int showLote(int chosen){
     char bigString [500];
     strcpy(bigString, ClientSocket::recvBuff);
 
+    if(strcmp(bigString, "-1") == 0){
+        
+        cout<<"No existe el lote"<<endl;
+        return 0;
+
+    }else{
+
+          int i = 0;
+
+        char* tokenGrande = strtok(bigString, "|");
+        char atributo[20];
+        while(tokenGrande != NULL){
+            i=0;
+            for(int j=0; j<4; j++){
+                            
+                switch (j)
+                {
+                case 0:
+                    strcpy(atributo, "ID: ");
+                    break;
+                case 1:
+                    strcpy(atributo, "- Descripcion: ");
+                    break;
+                case 2:
+                    strcpy(atributo, "- Estado: ");
+                    break;
+                case 3:
+                    strcpy(atributo, "- Precio: ");
+                    break;
+                default:
+                    break;
+                }
+                cout << " " << atributo;
+                //PRINTEAR CHARS HASTA LLEGAR A ;
+                while(tokenGrande[i] != ';')
+                {
+                    cout << tokenGrande[i];
+                    i++;
+                }
+                i++;
+            }
+            cout<<endl;
+            //Siguiente token
+            tokenGrande = strtok(NULL, "|");
+        }
+        return 1;
+
+
+    }
+    
+  
+
+
+
 
 }
 
