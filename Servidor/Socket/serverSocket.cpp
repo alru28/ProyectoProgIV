@@ -240,6 +240,14 @@ void ServerSocket::communicate(){
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
                 }
 
+                else if (strcmp(ServerSocket::recvBuff, "ansal") == 0) {
+                    
+                    strcpy(ServerSocket::sendBuff, "ACKansal");
+                    send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+                    recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    GestorBD::setSaldo(ServerSocket::recvBuff);
+                }
+
                 else if (strcmp(ServerSocket::recvBuff, "bye") == 0)
                     break;
             }

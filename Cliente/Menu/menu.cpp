@@ -634,6 +634,51 @@ void mostrarSaldo(){
 
     cout << "Saldo disponible: " << saldo << endl;
 
+    cout << "\n\n1: Aumentar saldo" << endl;
+    cout << "0: Salir" << endl;
+
+    float fSaldo = atof(saldo);
+
+    int option = scanf("%i", &option);
+    fflush(stdin);
+    while(option<0 || option>1){
+        cout << "Introduce un digito valido: ";
+        scanf("%i", &option);
+        fflush(stdin);
+    }
+
+    if(option == 0){
+        menuPrincipal();
+    }else{
+        aumentarSaldo(fSaldo);
+    }
+
+    menuPrincipal(); 
+
+}
+
+void aumentarSaldo(float saldo){
+
+    cout << "Introduce cantidad a aumentar: ";
+    float cantidad;
+    cin >> cantidad;
+    fflush(stdin);
     
+    while(cantidad<0){
+        cout << "Introduce una cantidad valida: ";
+        cin >> cantidad;
+        fflush(stdin);
+    }
+
+    float aumento = saldo + cantidad;
+
+    ClientSocket::sendMessage("ansal");
+    ClientSocket::receiveMessage();
+    char codigo[5];
+    sprintf(codigo, "%d;%f;" , Usuario::idUsing, aumento);
+    ClientSocket::sendMessage(aumento);
+
+    mostrarSaldo();
+
 
 }

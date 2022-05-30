@@ -688,7 +688,38 @@ float GestorBD::getSaldo(char* idUsuario){
     return 0;
 }
 
+int GestorBD::setSaldo(char* codigo){
 
+    char* idUsuario = strtok(codigo, ";");
+    char* aum = strtok(NULL, ";");
+
+    int idUsr = atoi(idUsuario);
+    float aumento = atof(aum);
+
+    sqlite3_stmt *stmt;
+
+    char sql[200];
+
+    sprintf(sql, "UPDATE Cartera SET Saldo = %f WHERE ID_Usuario = %i", aumento,  idUsr);
+
+    int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
+    
+    if (result != SQLITE_OK) {
+        printf("Error preparing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+        return 0;
+    }
+
+    result = sqlite3_step(stmt);
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+        printf("Error finalizing statement (SELECT)\n");
+        printf("%s\n", sqlite3_errmsg(GestorBD::baseDatos));
+        return 0;
+    }
+
+}
 
 
 

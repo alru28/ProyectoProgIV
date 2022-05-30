@@ -20,7 +20,7 @@ class GestorBD {
 		static int editarUsuario(char* texto);
 		static int introducirObjeto(char* objeto);
 		static float getSaldo(char* idUsuario);
-
+		static int setSaldo(char* codigo);
 		static char* mostrarDia();
 };
 
