@@ -30,7 +30,7 @@ void menuInicial(){
        break;
    
    default:
-       ClientSocket::send("bye");
+       ClientSocket::sendMessage("bye");
         exit(-1);
         break;
    }
@@ -62,7 +62,7 @@ void showLogin(){
         cout<<"Mando mensaje"<<endl;
         ClientSocket::receiveMessage();
         int result = atoi(ClientSocket::recvBuff );
-        if(result == -1 | result == -2 | result ==0){
+        if(result == -1 || result == -2 || result ==0){
             cout<<"Credenciales incorrectos"<<endl;
         } else{
             Usuario::idUsing = result;
