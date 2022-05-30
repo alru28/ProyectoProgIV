@@ -325,7 +325,8 @@ char* GestorBD::imprimirUsuario(char* idUsuario){ // devuelve un char* con todos
     char* usuario = new char[500]; 
 
     char sql[150];
-    sprintf(sql, "SELECT Contraseña,  Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta FROM Usuario WHERE ID_Usuario = %i", idUsuario);
+    int idUsr = atoi(idUsuario);
+    sprintf(sql, "SELECT Contraseña,  Nombre, Tlf, Mail, Puntos, ID_Cartera, Pais, Ciudad, Calle, PisoPuerta FROM Usuario WHERE ID_Usuario = %i", idUsr);
 
 	int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
