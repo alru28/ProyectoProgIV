@@ -194,59 +194,7 @@ void menuPrincipal(){
             //showTransactions(db);
             break;
         case 4:
-            /*
-            char* contrasenia = strtok(usuario, ";");
-            char* nombre = strtok(NULL, ";");
-            char* tlf = strtok(NULL, ";");
-            char* mail = strtok(NULL, ";");
-            char* puntos = strtok(NULL, ";");
-            char* id_Cartera = strtok(NULL, ";");
-            char* pais = strtok(NULL, ";");
-            char* ciudad = strtok(NULL, ";");
-            char* calle = strtok(NULL, ";");
-            char* pisoPuerta = strtok(NULL, ";"); 
-
-            cout << "\n-------------------------------";
-            cout << "\nPerfil de " << nombre << ":" << idUsing << endl;
-            cout << "ID de cartera: " << id_Cartera << endl;
-            cout << "Numero de puntos: " << puntos << endl << endl;
-
-            cout << "1. Contrasena: ";
-
-            for(int i=0; i<strlen(contrasenia); i++){ //para imprimir tantos * como caracteres tenga la contrasenia
-            cout << "*";
-            }
-
-            cout << "\n";
-
-            cout << "2. Telefono: " << tlf << endl;
-            cout << "3. Correo: " << mail << endl;
-            cout << "4. Pais: " << pais << endl;
-            cout << "5. Ciudad: " << ciudad << endl;
-            cout << "6. Calle: " << calle << endl;
-            cout << "7. Piso/puerta: " << pisoPuerta << endl;
-
-            cout << "\n\n1-7: Editar valor correspondiente" << endl;
-            cout << "\n0: Salir\n";
-
-            int option;
-            scanf("%i", &option);
-            cout << "\n";
-
-            while(option<0 || option>7){
-                cout << "Introduce un digito valido: ";
-                scanf("%i", &option);
-                cout << "\n";
-            }
-            fflush(stdin);
-
-            if(option == 0){
-                //menuPrincipal(db);
-            }else{
-                //editarUsuario(db, option);
-                
-            }*/
-
+            mostrarUsuario();
             break;
         case 5:
             //saldo(db);
@@ -299,3 +247,67 @@ void mostrarLotes(){
     }
 
 };
+
+void mostrarUsuario(){
+
+    ClientSocket::sendMessage("swusr");
+    ClientSocket::receiveMessage();
+    
+    ClientSocket::receiveMessage();
+
+    char usuario [500];
+    strcpy(usuario, ClientSocket::recvBuff);
+
+    char* contrasenia = strtok(usuario, ";");
+    char* nombre = strtok(NULL, ";");
+    char* tlf = strtok(NULL, ";");
+    char* mail = strtok(NULL, ";");
+    char* puntos = strtok(NULL, ";");
+    char* id_Cartera = strtok(NULL, ";");
+    char* pais = strtok(NULL, ";");
+    char* ciudad = strtok(NULL, ";");
+    char* calle = strtok(NULL, ";");
+    char* pisoPuerta = strtok(NULL, ";"); 
+
+    cout << "\n-------------------------------";
+    cout << "\nPerfil de " << nombre << ":" << Usuario::idUsing << endl;
+    cout << "ID de cartera: " << id_Cartera << endl;
+    cout << "Numero de puntos: " << puntos << endl << endl;
+
+    cout << "1. Contrasena: ";
+
+    for(int i=0; i<strlen(contrasenia); i++){ //para imprimir tantos * como caracteres tenga la contrasenia
+    cout << "*";
+    }
+
+    cout << "\n";
+
+    cout << "2. Telefono: " << tlf << endl;
+    cout << "3. Correo: " << mail << endl;
+    cout << "4. Pais: " << pais << endl;
+    cout << "5. Ciudad: " << ciudad << endl;
+    cout << "6. Calle: " << calle << endl;
+    cout << "7. Piso/puerta: " << pisoPuerta << endl;
+
+    cout << "\n\n1-7: Editar valor correspondiente" << endl;
+    cout << "\n0: Salir\n";
+
+    int option;
+    scanf("%i", &option);
+    cout << "\n";
+
+    while(option<0 || option>7){
+        cout << "Introduce un digito valido: ";
+        scanf("%i", &option);
+        cout << "\n";
+    }
+    fflush(stdin);
+
+    if(option == 0){
+        //menuPrincipal(db);
+    }else{
+        //editarUsuario(db, option);
+        
+    }
+
+}
