@@ -315,10 +315,7 @@ char* GestorBD::mostrarLotesActivos(){
 
 
 
-/*
-
-
-char* imprimirUsuario(char* idUsuario){ // devuelve un char* con todos los datos del usuario
+char* GestorBD::imprimirUsuario(char* idUsuario){ // devuelve un char* con todos los datos del usuario
     sqlite3_stmt *stmt;
 
     char* usuario = new char[500]; 
@@ -382,6 +379,6 @@ char* imprimirUsuario(char* idUsuario){ // devuelve un char* con todos los datos
 
     return 0;
 }
-*/
+
 
 

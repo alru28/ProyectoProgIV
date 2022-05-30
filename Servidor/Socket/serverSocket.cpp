@@ -191,7 +191,9 @@ void ServerSocket::communicate(){
                     
                     strcpy(ServerSocket::sendBuff, "ACKswusr");
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
+                    cout << "p1" << endl;
                     recv(ServerSocket::comm_socket, ServerSocket::recvBuff, sizeof(ServerSocket::recvBuff), 0);
+                    cout << ServerSocket::recvBuff << endl;
                     char* usuario = GestorBD::imprimirUsuario(ServerSocket::recvBuff);
                     strcpy(ServerSocket::sendBuff, usuario);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0); 
