@@ -6,5 +6,6 @@ void showLogin();
 void menuRegistrarse();
 void menuPrincipal();
 void mostrarLotes();
+void mostrarUsuario();
 
 #endif
