@@ -313,6 +313,10 @@ char* GestorBD::mostrarLotesActivos(){
     return bruto;   
 }
 
+char* GestorBD::mostrarTransacciones(int idUsuario) {
+
+}
+
 
 
 char* GestorBD::imprimirUsuario(char* idUsuario){ // devuelve un char* con todos los datos del usuario
