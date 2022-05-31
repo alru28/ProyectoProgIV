@@ -23,24 +23,46 @@ int ServerSocket::startSocket(){
     cout<<"\nInitialising Winsock..."<<endl;
     if (WSAStartup(MAKEWORD(2, 2), &ServerSocket::wsaData) != 0) {
         cout<<"Failed. Error Code :" << (double)WSAGetLastError()<< endl;
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
+
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Creacion de socket fallida");
+        strcpy(tag, "ERROR-SOCKET");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return -1;
     }
 
-    Logger::logConsola("SOCKET", "Inicializado");
-    Logger::logTxt("SOCKET", "Inicializado");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Inicializado");
+    strcpy(tag, "SOCKET");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+
 
     //SOCKET creation
     if ((ServerSocket::conn_socket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Creacion de socket fallida");
+        strcpy(tag, "ERROR-SOCKET");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         WSACleanup();
         return -1;
     }
 
-    Logger::logConsola("SOCKET", "Creado");
-    Logger::logTxt("SOCKET", "Creado");
+
+    strcpy(log, "Creado");
+    strcpy(tag, "SOCKET");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+
 
     ServerSocket::server.sin_addr.s_addr = inet_addr(SERVER_IP);
     ServerSocket::server.sin_family = AF_INET;
@@ -49,41 +71,69 @@ int ServerSocket::startSocket(){
     //BIND (the IP/port with socket)
     if (bind(ServerSocket::conn_socket, (struct sockaddr*) &ServerSocket::server,
             sizeof(ServerSocket::server)) == SOCKET_ERROR) {
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Creacion de socket fallida");
+        strcpy(tag, "ERROR-SOCKET");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         closesocket(ServerSocket::conn_socket);
         WSACleanup();
         return -1;
     }
 
-    Logger::logConsola("SOCKET", "Binded");
-    Logger::logTxt("SOCKET", "Binded");
+    strcpy(log, "Binded");
+    strcpy(tag, "SOCKET");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+
 
     //LISTEN to incoming connections (socket server moves to listening mode)
     if (listen(ServerSocket::conn_socket, 1) == SOCKET_ERROR) {
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Creacion de socket fallida");
+        strcpy(tag, "ERROR-SOCKET");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         closesocket(ServerSocket::conn_socket);
         WSACleanup();
         return -1;
     }
 
     //ACCEPT incoming connections (server keeps waiting for them)
-    Logger::logConsola("SOCKET", "Esperando conexiones");
-    Logger::logTxt("SOCKET", "Esperando conexiones");
+ 
+    strcpy(log, "Esperando conexiones");
+    strcpy(tag, "SOCKET");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
     int stsize = sizeof(struct sockaddr);
     ServerSocket::comm_socket = accept(ServerSocket::conn_socket, (struct sockaddr*) &ServerSocket::client, &stsize);
     // Using comm_socket is able to send/receive data to/from connected client
     if (ServerSocket::comm_socket == INVALID_SOCKET) {
-        Logger::logConsola("SOCKET", "Error al crear socket");
-        Logger::logTxt("SOCKET", "Error al crear socket");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Creacion de socket fallida");
+        strcpy(tag, "ERROR-SOCKET");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         closesocket(ServerSocket::conn_socket);
         WSACleanup();
         return -1;
     }
 
-    Logger::logConsola("SOCKET", "Conexion establecida");
-    Logger::logTxt("SOCKET", "Conexion establecida");
+    strcpy(log, "Esperando conexiones");
+    strcpy(tag, "SOCKET");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
     cout << "Incomming connection from:"<< inet_ntoa(ServerSocket::client.sin_addr)<< ntohs(ServerSocket::client.sin_port)<< endl;
 
     // Closing the listening sockets (is not going to be used anymore)
@@ -117,20 +167,30 @@ void ServerSocket::communicate(){
                     int idUser = GestorBD::login(ServerSocket::recvBuff);
 
                     if (idUser == -1) {
-                        Logger::logConsola("ERROR", "Usuario no encontrado en la base de datos");
-                        Logger::logTxt("ERROR", "Usuario no encontrado en la base de datos");
+                        char* log = new char[100];
+                        char* tag = new char[20];
+                        strcpy(log, "Usuario no encontrado");
+                        strcpy(tag, "ERROR-BD");
+                        Logger::logConsola(tag, log);
+                        Logger::logTxt(tag, log);
+                        delete[] log;
+                        delete[] tag;
                     }
                     else if (idUser == -2) {
-                        Logger::logConsola("ERROR", "Contrasenya de usuario incorrecta");
-                        Logger::logTxt("ERROR", "Contrasenya de usuario incorrecta");
+                        char* log = new char[100];
+                        char* tag = new char[20];
+                        strcpy(log, "Contrasenya incorrecta");
+                        strcpy(tag, "ERROR-BD");
+                        Logger::logConsola(tag, log);
+                        Logger::logTxt(tag, log);
+                        delete[] log;
+                        delete[] tag;
                     }
 
                     char mensaje[10];
                     std::sprintf(mensaje, "%d", idUser);
                     strcpy(ServerSocket::sendBuff, mensaje);
                     send(ServerSocket::comm_socket, ServerSocket::sendBuff, sizeof(ServerSocket::sendBuff), 0);
-                    Logger::logConsola("LOGIN", "Login satisfactorio");
-                    Logger::logTxt("LOGIN", "Login satisfactorio");
 
                 }
                 // Existe usuario
@@ -286,10 +346,18 @@ void ServerSocket::communicate(){
                     GestorBD::setSaldo(ServerSocket::recvBuff);
                 }
 
-                else if (strcmp(ServerSocket::recvBuff, "bye") == 0)
-                Logger::logConsola("SOCKET", "Cerrando socket");
-                Logger::logTxt("SOCKET", "Cerrando socket");
+                else if (strcmp(ServerSocket::recvBuff, "bye") == 0) {
+
+                    char* log = new char[100];
+                    char* tag = new char[20];
+                    strcpy(log, "Cerrando socket");
+                    strcpy(tag, "SOCKET");
+                    Logger::logConsola(tag, log);
+                    Logger::logTxt(tag, log);
+                    delete[] log;
+                    delete[] tag;
                     break;
+                }
             }
         } while (1);
     }

@@ -407,3 +407,85 @@
 [Tue May 31 00:58:43 2022][TAG: BASEDATOS]: Objeto enviado
 [Tue May 31 00:58:48 2022][TAG: BASEDATOS]: Saldo enviado
 [Tue May 31 00:58:48 2022][TAG: BASEDATOS]: Puja registrada
+[Tue May 31 08:04:42 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Tue May 31 08:04:42 2022][TAG: SOCKET]: Inicializado
+[Tue May 31 08:04:42 2022][TAG: SOCKET]: Creado
+[Tue May 31 08:04:42 2022][TAG: SOCKET]: Binded
+[Tue May 31 08:04:42 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:04:53 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:05:07 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Tue May 31 08:05:07 2022][TAG: BASE-DATOS]: Login satisfactorio
+[Tue May 31 08:05:09 2022][TAG: BASE-DATOS]: Lotes enviados
+[Tue May 31 08:05:11 2022][TAG: ERROR-BD]: Error al realizar la consulta
+[Tue May 31 08:05:17 2022][TAG: ERROR-BD]: Error al realizar la consulta
+[Tue May 31 08:05:17 2022][TAG: ERROR-BD]: Error al realizar la consulta
+[Tue May 31 08:05:24 2022][TAG: ERROR-BD]: Error al realizar la consulta
+[Tue May 31 08:07:13 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Tue May 31 08:07:13 2022][TAG: SOCKET]: Inicializado
+[Tue May 31 08:07:13 2022][TAG: SOCKET]: Creado
+[Tue May 31 08:07:13 2022][TAG: SOCKET]: Binded
+[Tue May 31 08:07:13 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:07:16 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:07:24 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Tue May 31 08:07:24 2022][TAG: BASE-DATOS]: Login satisfactorio
+[Tue May 31 08:07:26 2022][TAG: BASE-DATOS]: Lotes enviados
+[Tue May 31 08:07:27 2022][TAG: ERROR-BD]: Error al realizar la consulta
+[Tue May 31 08:09:19 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Tue May 31 08:09:19 2022][TAG: SOCKET]: Inicializado
+[Tue May 31 08:09:19 2022][TAG: SOCKET]: Creado
+[Tue May 31 08:09:19 2022][TAG: SOCKET]: Binded
+[Tue May 31 08:09:19 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:09:22 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:09:29 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Tue May 31 08:09:29 2022][TAG: BASE-DATOS]: Login satisfactorio
+[Tue May 31 08:09:30 2022][TAG: BASE-DATOS]: Lotes enviados
+[Tue May 31 08:09:31 2022][TAG: ERROR-BD]: Error al realizar la consulta
+[Tue May 31 08:09:42 2022][TAG: ERROR-BD]: Error al realizar la consulta
+[Tue May 31 08:10:18 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Tue May 31 08:10:18 2022][TAG: SOCKET]: Inicializado
+[Tue May 31 08:10:18 2022][TAG: SOCKET]: Creado
+[Tue May 31 08:10:18 2022][TAG: SOCKET]: Binded
+[Tue May 31 08:10:18 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:10:20 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:10:28 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Tue May 31 08:10:28 2022][TAG: BASE-DATOS]: Login satisfactorio
+[Tue May 31 08:10:28 2022][TAG: BASE-DATOS]: Lotes enviados
+[Tue May 31 08:10:29 2022][TAG: ERROR-BD]: Error al realizar la consulta
+[Tue May 31 08:11:45 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Tue May 31 08:11:45 2022][TAG: SOCKET]: Inicializado
+[Tue May 31 08:11:45 2022][TAG: SOCKET]: Creado
+[Tue May 31 08:11:45 2022][TAG: SOCKET]: Binded
+[Tue May 31 08:11:45 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:11:47 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:11:53 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Tue May 31 08:11:53 2022][TAG: BASE-DATOS]: Login satisfactorio
+[Tue May 31 08:11:54 2022][TAG: BASE-DATOS]: Lotes enviados
+[Tue May 31 08:11:54 2022][TAG: ERROR-BD]: Error al realizar la consulta
+[Tue May 31 08:12:56 2022][TAG: BASE DE DATOS]: Se ha abierto la base de datos
+[Tue May 31 08:12:56 2022][TAG: SOCKET]: Inicializado
+[Tue May 31 08:12:56 2022][TAG: SOCKET]: Creado
+[Tue May 31 08:12:56 2022][TAG: SOCKET]: Binded
+[Tue May 31 08:12:56 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:12:57 2022][TAG: SOCKET]: Esperando conexiones
+[Tue May 31 08:13:03 2022][TAG: Consulta sql: %s.
+]: select Contraseña, ID_Usuario from Usuario where Nombre= 'jaime_col' 
+[Tue May 31 08:13:03 2022][TAG: BASE-DATOS]: Login satisfactorio
+[Tue May 31 08:13:04 2022][TAG: BASE-DATOS]: Lotes enviados
+[Tue May 31 08:13:05 2022][TAG: BASE-DATOS]: Lote enviado
+[Tue May 31 08:13:08 2022][TAG: BASE-DATOS]: Objeto enviado
+[Tue May 31 08:13:20 2022][TAG: BASE-DATOS]: Saldo enviado
+[Tue May 31 08:13:20 2022][TAG: BASE-DATOS]: Puja registrada
+[Tue May 31 08:13:25 2022][TAG: BASE-DATOS]: Cartera enviada
+[Tue May 31 08:13:25 2022][TAG: BASE-DATOS]: Nombre de usuario enviado
+[Tue May 31 08:13:25 2022][TAG: BASE-DATOS]: Nombre de usuario enviado
+[Tue May 31 08:13:25 2022][TAG: BASE-DATOS]: Transacciones enviadas
+[Tue May 31 08:13:31 2022][TAG: BASE-DATOS]: Usuario enviado
+[Tue May 31 08:13:37 2022][TAG: BASE-DATOS]: Saldo enviado
+[Tue May 31 08:13:43 2022][TAG: BASE-DATOS]: Cartera actualizada
+[Tue May 31 08:13:43 2022][TAG: BASE-DATOS]: Saldo enviado
+[Tue May 31 08:13:45 2022][TAG: SOCKET]: Cerrando socket

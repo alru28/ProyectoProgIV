@@ -14,12 +14,24 @@ sqlite3* GestorBD::cargarBaseDatos(const char* rutaBaseDatos) {
 
     int result = sqlite3_open(rutaBaseDatos, &db); // Falta incluir para cargarla con la config
     if (result != SQLITE_OK) {
-        Logger::logConsola("BaseDatos", "Error abriendo base de datos");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Apertura de BD fallida");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return db;
     }
-
-    Logger::logTxt("BASE DE DATOS", "Se ha abierto la base de datos");
-    Logger::logConsola("BASE DE DATOS", "Se ha abierto la base de datos");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Se ha abierto la base de datos");
+    strcpy(tag, "BASE DE DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
     return db;
 }
 
@@ -39,7 +51,14 @@ int GestorBD::login(char* texto){    //devuelve el devuelve el id del usuario si
     Logger::logTxt("Consulta sql: %s.\n", sql);
     
 	if (result != SQLITE_OK) {
-		Logger::logTxt("ERROR", "Error durante la consulta");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -55,16 +74,37 @@ int GestorBD::login(char* texto){    //devuelve el devuelve el id del usuario si
         
     }else{
 
-        Logger::logTxt("ERROR", "Usuario no encontrado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Usuario no encontrado");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return -1;
     }
 
     if(strcmp(Contrasenya,password) ==0){
 
-        Logger::logTxt("LOGIN", "Login con exito");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Login satisfactorio");
+        strcpy(tag, "BASE-DATOS");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return idUser;
     }else {
-        Logger::logTxt("LOGIN", "Error en la contraseña");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Contrasenya incorrecta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return -2;
     }
 }
@@ -78,8 +118,14 @@ int GestorBD::existeUsuario(char *usuario){
 
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return -1;
     }
 
@@ -88,23 +134,40 @@ int GestorBD::existeUsuario(char *usuario){
     do {
         result = sqlite3_step(stmt) ;
         if (result == SQLITE_ROW) {
-            Logger::logConsola("BASEDATOS", "El usuario comprobado existe");
-            Logger::logTxt("BASEDATOS", "El usuario comprobado existe");
+            char* log = new char[100];
+            char* tag = new char[20];
+            strcpy(log, "El usuario comprobado existe");
+            strcpy(tag, "BASE-DATOS");
+            Logger::logConsola(tag, log);
+            Logger::logTxt(tag, log);
+            delete[] log;
+            delete[] tag;
             return 1;
         }
     } while (result == SQLITE_ROW);
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return -2;
     }
 
     //cout << "Prepared statement finalized (SELECT)" << endl;
-    Logger::logConsola("BASEDATOS", "Error SQL");
-    Logger::logTxt("BASEDATOS", "Error SQL");
-
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Error al realizar la consulta");
+    strcpy(tag, "ERROR-BD");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
 
     return 0;
 
@@ -136,8 +199,14 @@ int GestorBD::introducirUsuario(char* texto){
 
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, strlen(sql) +1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -145,15 +214,27 @@ int GestorBD::introducirUsuario(char* texto){
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return result;
 	}
 
@@ -169,8 +250,14 @@ int GestorBD::introducirUsuario(char* texto){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -182,8 +269,14 @@ int GestorBD::introducirUsuario(char* texto){
         int idUser= sqlite3_column_int(stmt, 0);
         
     }else{
-        Logger::logConsola("BASEDATOS", "Usuario no encontrado");
-        Logger::logTxt("BASEDATOS", "Usuario no encontrado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Usuario no encontrado");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
@@ -197,8 +290,14 @@ int GestorBD::introducirUsuario(char* texto){
 
     result = sqlite3_prepare_v2(GestorBD::baseDatos , sql, strlen(sql) +1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -206,15 +305,27 @@ int GestorBD::introducirUsuario(char* texto){
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		//return result;
 	}
 
@@ -229,8 +340,14 @@ int GestorBD::introducirUsuario(char* texto){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -242,8 +359,14 @@ int GestorBD::introducirUsuario(char* texto){
         idCartera= sqlite3_column_int(stmt, 0);
         
     }else{
-        Logger::logConsola("BASEDATOS", "Error usuario no encontrado");
-        Logger::logTxt("BASEDATOS", "Error usuario no encontrado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Usuario no encontrado");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
@@ -255,15 +378,27 @@ int GestorBD::introducirUsuario(char* texto){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
     result = sqlite3_step(stmt) ;
 
-    Logger::logConsola("BASEDATOS", "Usuario introducido con exito");
-    Logger::logTxt("BASEDATOS", "Usuario introducido con exito");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Usuario registrado");
+    strcpy(tag, "BASE-DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
 
     return idUser;
     
@@ -280,8 +415,14 @@ char* GestorBD::mostrarLotesActivos(){
     
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 	}
 
 	do {
@@ -315,12 +456,24 @@ char* GestorBD::mostrarLotesActivos(){
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 	}
 
-    Logger::logConsola("BASEDATOS", "Lotes enviados");
-    Logger::logTxt("BASEDATOS", "Lotes enviados");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Lotes enviados");
+    strcpy(tag, "BASE-DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
 
     return bruto;   
 }
@@ -377,8 +530,14 @@ char* GestorBD::mostrarTransacciones(int idUsuario) {
 
 	} while (result == SQLITE_ROW);
 
-    Logger::logConsola("BASEDATOS", "Transacciones enviadas");
-    Logger::logTxt("BASEDATOS", "Transacciones enviadas");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Transacciones enviadas");
+    strcpy(tag, "BASE-DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
 
 
     return bigString;
@@ -394,8 +553,14 @@ char * GestorBD::obtenerNombre(int idCartera){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -406,16 +571,28 @@ char * GestorBD::obtenerNombre(int idCartera){
         idUser= sqlite3_column_int(stmt, 0);
         
     }else{
-        Logger::logConsola("BASEDATOS", "Usuario no encontrado");
-        Logger::logTxt("BASEDATOS", "Usuario no encontrado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Usuario no encontrado");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -423,8 +600,14 @@ char * GestorBD::obtenerNombre(int idCartera){
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
 
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -441,12 +624,24 @@ char * GestorBD::obtenerNombre(int idCartera){
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
-    Logger::logConsola("BASEDATOS", "Nombre de usuario enviado");
-    Logger::logTxt("BASEDATOS", "Nombre de usuario enviado");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Nombre de usuario enviado");
+    strcpy(tag, "BASE-DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
     return nameUser;
 }
 
@@ -461,8 +656,14 @@ int GestorBD::obtenerIdCartera(int idUsing){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -474,13 +675,25 @@ int GestorBD::obtenerIdCartera(int idUsing){
         idCartera= sqlite3_column_int(stmt, 0);
         
     }else{
-        Logger::logConsola("BASEDATOS", "Usuario no encontrado");
-        Logger::logTxt("BASEDATOS", "Usuario no encontrado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Usuario no encontrado");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
-    Logger::logConsola("BASEDATOS", "Cartera enviada");
-    Logger::logTxt("BASEDATOS", "Cartera enviada");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Cartera enviada");
+    strcpy(tag, "BASE-DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
     return idCartera;
 }
 
@@ -496,8 +709,14 @@ char* GestorBD::imprimirUsuario(char* idUsuario){ // devuelve un char* con todos
 	int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -534,20 +753,38 @@ char* GestorBD::imprimirUsuario(char* idUsuario){ // devuelve un char* con todos
         sprintf(usuario, "%s;%s;%i;%s;%i;%i;%s;%s;%s;%s;", contrasena, nombre, tlf, mail, puntos, idCartera, pais, ciudad, calle, pisoPuerta);
 
 
-        Logger::logConsola("BASEDATOS", "Usuario enviado");
-        Logger::logTxt("BASEDATOS", "Usuario enviado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Usuario enviado");
+        strcpy(tag, "BASE-DATOS");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return usuario;
 
     }else{
-        Logger::logConsola("BASEDATOS", "Usuario no encontrado");
-        Logger::logTxt("BASEDATOS", "Usuario no encontrado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Usuario no encontrado");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -607,8 +844,14 @@ int GestorBD::editarUsuario(char* codigo){ //recive un codigo "opcion;cambio;idU
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
@@ -616,13 +859,25 @@ int GestorBD::editarUsuario(char* codigo){ //recive un codigo "opcion;cambio;idU
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 		return 0;
 	}
 
-    Logger::logConsola("BASEDATOS", "Usuario editado");
-    Logger::logTxt("BASEDATOS", "Usuario editado");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Usuario editado");
+    strcpy(tag, "BASE-DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
 
 }
 
@@ -642,27 +897,51 @@ int GestorBD::introducirObjeto(char* objeto) {
 
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, strlen(sql) + 1, &stmt, NULL);
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
     result = sqlite3_step(stmt);
     if (result != SQLITE_DONE) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return result;
     }
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return result;
     }
 
-    Logger::logConsola("BASEDATOS", "Objeto creado");
-    Logger::logTxt("BASEDATOS", "Objeto creado");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Objeto creado");
+    strcpy(tag, "BASE-DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
 
     return SQLITE_OK;
 }
@@ -685,8 +964,14 @@ float GestorBD::getSaldo(char* idUsuario){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
     
@@ -696,13 +981,25 @@ float GestorBD::getSaldo(char* idUsuario){
         
         saldo = sqlite3_column_int(stmt, 0);
 
-        Logger::logConsola("BASEDATOS", "Saldo enviado");
-        Logger::logTxt("BASEDATOS", "Saldo enviado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Saldo enviado");
+        strcpy(tag, "BASE-DATOS");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 
         return saldo;
     }else{
-        Logger::logConsola("BASEDATOS", "Cartera no encontrada");
-        Logger::logTxt("BASEDATOS", "Cartera no encontrada");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Cartera no encontrada");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
@@ -710,8 +1007,14 @@ float GestorBD::getSaldo(char* idUsuario){
 
     if (result != SQLITE_OK) {
 
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
@@ -723,24 +1026,23 @@ char* GestorBD::mostrarLote(int id){
 
     sqlite3_stmt *stmt;
     char* bruto = new char[500];
-    sprintf(bruto, "");
+    strcpy(bruto, "");
     
-    char sql[100];    
+    char sql[150];    
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
-    
-	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");;
-        strcpy(bruto,"-1");
-        return bruto;
-	}
 
     sprintf(sql, "select ID_Objeto, Estado, Descripcion,  Categoria, PrecioSalida from objeto where %i = ID_Lote", id);
     result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL) ;
     
 	if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         strcpy(bruto,"-1");
         return bruto;
 	}
@@ -780,8 +1082,14 @@ char* GestorBD::mostrarLote(int id){
     }while (mostrarObjeto(db ,idObj));
     */
 
-    Logger::logConsola("BASEDATOS", "Lote enviado");
-    Logger::logTxt("BASEDATOS", "Lote enviado");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Lote enviado");
+    strcpy(tag, "BASE-DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
 
    return bruto;
 }
@@ -803,8 +1111,14 @@ int GestorBD::setSaldo(char* codigo){
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
     
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
@@ -812,13 +1126,25 @@ int GestorBD::setSaldo(char* codigo){
 
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 
-    Logger::logConsola("BASEDATOS", "Cartera actualizada");
-    Logger::logTxt("BASEDATOS", "Cartera actualizada");
+    char* log = new char[100];
+    char* tag = new char[20];
+    strcpy(log, "Cartera actualizada");
+    strcpy(tag, "BASE-DATOS");
+    Logger::logConsola(tag, log);
+    Logger::logTxt(tag, log);
+    delete[] log;
+    delete[] tag;
 
 }
 
@@ -832,8 +1158,14 @@ char* GestorBD::mostrarObjeto(int idObjeto) {
     int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
 
     if (result != SQLITE_OK) {
-        Logger::logConsola("BASEDATOS", "Error SQL");
-        Logger::logTxt("BASEDATOS", "Error SQL");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Error al realizar la consulta");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
     }
 
     int idLote;
@@ -855,16 +1187,28 @@ char* GestorBD::mostrarObjeto(int idObjeto) {
 
         sprintf(bigString, "%d;%s;%s;%s;%s;%i", id, Categoria, Descripcion, Estado, Precio, idLote);
 
-        Logger::logConsola("BASEDATOS", "Objeto enviado");
-        Logger::logTxt("BASEDATOS", "Objeto enviado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Objeto enviado");
+        strcpy(tag, "BASE-DATOS");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
 
         return bigString;
 
 
     }
     else {
-        Logger::logConsola("BASEDATOS", "Objeto no encontrado");
-        Logger::logTxt("BASEDATOS", "Objeto no encontrado");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Objeto no encontrado");
+        strcpy(tag, "ERROR-BD");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 0;
     }
 }
@@ -892,27 +1236,51 @@ int GestorBD::crearPuja(char* stringPuja) {
         int result = sqlite3_prepare_v2(GestorBD::baseDatos, sql, -1, &stmt, NULL);
 
         if (result != SQLITE_OK) {
-            Logger::logConsola("BASEDATOS", "Error SQL");
-            Logger::logTxt("BASEDATOS", "Error SQL");
+            char* log = new char[100];
+            char* tag = new char[20];
+            strcpy(log, "Error al realizar la consulta");
+            strcpy(tag, "ERROR-BD");
+            Logger::logConsola(tag, log);
+            Logger::logTxt(tag, log);
+            delete[] log;
+            delete[] tag;
             return 0;
         }
 
         result = sqlite3_step(stmt);
         if (result != SQLITE_DONE) {
-            Logger::logConsola("BASEDATOS", "Error SQL");
-            Logger::logTxt("BASEDATOS", "Error SQL");
+            char* log = new char[100];
+            char* tag = new char[20];
+            strcpy(log, "Error al realizar la consulta");
+            strcpy(tag, "ERROR-BD");
+            Logger::logConsola(tag, log);
+            Logger::logTxt(tag, log);
+            delete[] log;
+            delete[] tag;
             return 0;
         }
 
         result = sqlite3_finalize(stmt);
         if (result != SQLITE_OK) {
-            Logger::logConsola("BASEDATOS", "Error SQL");
-            Logger::logTxt("BASEDATOS", "Error SQL");
+            char* log = new char[100];
+            char* tag = new char[20];
+            strcpy(log, "Error al realizar la consulta");
+            strcpy(tag, "ERROR-BD");
+            Logger::logConsola(tag, log);
+            Logger::logTxt(tag, log);
+            delete[] log;
+            delete[] tag;
             return 0;
         }
 
-        Logger::logConsola("BASEDATOS", "Puja registrada");
-        Logger::logTxt("BASEDATOS", "Puja registrada");
+        char* log = new char[100];
+        char* tag = new char[20];
+        strcpy(log, "Puja registrada");
+        strcpy(tag, "BASE-DATOS");
+        Logger::logConsola(tag, log);
+        Logger::logTxt(tag, log);
+        delete[] log;
+        delete[] tag;
         return 1;
     }
 }
